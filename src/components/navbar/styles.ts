@@ -4,30 +4,49 @@ export const Nav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #DDD;
+  
+  background-color: var(--white);
+  box-shadow: 0 .2rem 2rem var(--gray);
+  color: var(--tertiary);
 
   width: 100%;
   height: 10vh;
   
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+`
+
+export const NavContent = styled.div`
+  width: 70%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a, a:active, a:visited {
+    text-decoration: none;
+    color: inherit;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
 `
 
 export const Title = styled.h1`
-  font-size: 20px;
+  font-size: 3rem;
 `
 
 export const Menu = styled.ul`
-  font-size: 12px;
   display: flex;
 
   li {
     list-style-type: none;
-    margin: 0 1rem;
-
-    a {
-      text-decoration: none;
-    }
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 2rem;
   }
 `
