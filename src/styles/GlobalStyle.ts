@@ -13,7 +13,8 @@ export default createGlobalStyle`
 
   body {
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
+    margin-top: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
