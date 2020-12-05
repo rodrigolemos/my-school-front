@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import api from '../services/api'
+import Navbar from '../components/navbar'
 
 interface ICourse {
   id: string
@@ -18,6 +19,7 @@ export default function CourseList({ error, courses }) {
   const router = useRouter()
   return (
     <>
+      <Navbar />
       <h1>Cursos</h1>
       <p>{error}</p>
       <ul>

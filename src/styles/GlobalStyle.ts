@@ -8,6 +8,7 @@ export default createGlobalStyle`
 
   html {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
   }
 
   body {
