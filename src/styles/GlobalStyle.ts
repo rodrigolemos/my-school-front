@@ -20,4 +20,12 @@ export default createGlobalStyle`
     align-items: center;
     justify-content: center;
   }
+
+  :root {
+    --primary: #0F9B8E;
+    --secondary: #03719C;
+    --tertiary: #343837;
+    --white: #FFF;
+    --gray: #DDD;
+  }
 `
