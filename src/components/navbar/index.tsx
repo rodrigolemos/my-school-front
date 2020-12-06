@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { FiMoon } from 'react-icons/fi'
 import { Nav, NavContent, Title, Menu } from './styles'
 
 const Navbar = () => {
@@ -30,6 +31,9 @@ const Navbar = () => {
             <Link href="/about">
               Sobre
             </Link>
+          </li>
+          <li>
+            <FiMoon />
           </li>
         </Menu>
       </NavContent>

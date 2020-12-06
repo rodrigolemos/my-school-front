@@ -5,8 +5,8 @@ export const Nav = styled.nav`
   top: 0;
   left: 0;
   
-  background-color: var(--white);
-  box-shadow: 0 .2rem 2rem var(--gray);
+  background-color: var(--background);
+  box-shadow: 0 .2rem 2rem var(--shadow);
   color: var(--tertiary);
 
   width: 100%;
