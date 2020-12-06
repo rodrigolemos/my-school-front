@@ -14,11 +14,30 @@ export default createGlobalStyle`
 
   body {
     width: 100vw;
-    height: 90vh;
+    min-height: 90vh;
     margin-top: 10vh;
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: .8rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F1F1F1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #AAA;
+    border-radius: .2rem;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888; 
   }
 
   :root {
