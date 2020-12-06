@@ -5,8 +5,6 @@ import { DesktopNav, NavContent, Title, MobileMenu, Menu, OpenMobileNav, CloseMo
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false)
-
-
   return (
     <>
       <DesktopNav isMobile={isMobile}>
