@@ -21,6 +21,7 @@ export default createGlobalStyle`
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   ::-webkit-scrollbar {
