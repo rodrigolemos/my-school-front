@@ -1,12 +1,17 @@
 import Navbar from '../components/navbar'
-import { Section } from '../styles/pages/home'
+import { Section, Title, Subtitle } from '../styles/pages/home'
 
 const Home = () => {
   return (
     <>
       <Navbar />
-      <Section className="title">
-        <h1>Identidade Visual, título, marca, etc.</h1>
+      <Section className="presentantion">
+        <div className="content">
+          <span>Olá, nós somos a</span>
+          <Title>My School.</Title>
+          <Subtitle>Nós te ajudamos a aprender.</Subtitle>
+          <p>Entendemos a importância do ensino e fazemos com que "distância" seja somente uma palavra.</p>
+        </div>
       </Section>
       <Section>
         <h2>Motivação do projeto</h2>
