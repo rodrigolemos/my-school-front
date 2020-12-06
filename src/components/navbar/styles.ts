@@ -59,6 +59,12 @@ export const NavContent = styled.div`
 
 export const Title = styled.h1`
   font-size: 3rem;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 1rem;
+  }
   
   a, a:active, a:visited {
     color: inherit;

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { FiMoon } from 'react-icons/fi'
+import { GoMortarBoard } from 'react-icons/go'
 import { DesktopNav, NavContent, Title, MobileMenu, Menu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
 
 const Navbar = () => {
@@ -10,6 +11,7 @@ const Navbar = () => {
       <DesktopNav isMobile={isMobile}>
         <NavContent>
           <Title>
+            <GoMortarBoard />
             <Link href="/">
               My School
             </Link>
