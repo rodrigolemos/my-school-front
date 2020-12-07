@@ -101,7 +101,7 @@ export const Menu = styled.ul`
 
   li {
     list-style-type: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin: 0 2rem;
   }
