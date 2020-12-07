@@ -53,7 +53,7 @@ export const Section = styled.section`
 
   &.presentantion {
     background:
-      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+      linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
       url("${backgroundImage}");
     background-size: cover;
   }
