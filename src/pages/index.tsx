@@ -1,12 +1,12 @@
 import Navbar from '../components/navbar'
-import { Section, Title, Subtitle } from '../styles/pages/home'
+import { Section, AnimatedBanner, Presentation, Title, Subtitle } from '../styles/pages/home'
 
 const Home = () => {
   return (
     <>
       <Navbar />
-      <Section className="presentation">
-        <div className="content">
+      <Presentation>
+        <AnimatedBanner>
           <span>Olá, nós somos a</span>
           <Title>My School.</Title>
           <Subtitle>Nós te ajudamos a aprender.</Subtitle>
@@ -16,11 +16,13 @@ const Home = () => {
               Conheça nossa motivação
             </a>
           </div>
-        </div>
-      </Section>
+        </AnimatedBanner>
+      </Presentation>
       <Section>
         <a id="motivation" className="navigation" />
-        <h2>Motivação do projeto</h2>
+        <div className="centered-content">
+          <h2>Motivação do projeto</h2>
+        </div>
       </Section>
       <Section>
         <a id="information" className="navigation" />

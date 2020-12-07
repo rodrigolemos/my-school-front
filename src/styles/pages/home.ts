@@ -22,8 +22,8 @@ export const Section = styled.section`
   align-items: center;
   justify-content: center;
 
-  background-color: var(--secondary);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--secondary);
 
   a.navigation {
     position: absolute;
@@ -33,63 +33,64 @@ export const Section = styled.section`
   h2 {
     font-size: 2.2rem;
   }
+`
 
-  div.content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    animation: ${showFromLeft} .8s ease-in-out;
+export const AnimatedBanner = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  animation: ${showFromLeft} .8s ease-in-out;
 
-    width: 70%;
-    height: 100%;
+  width: 70%;
+  height: 100%;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 2rem;
+  }
+`
 
-    span {
-      font-size: 2.2rem;
-    }
+export const Presentation = styled(Section)`
+  color: var(--white);
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
+    url("${backgroundImage}");
+  background-size: cover;
 
-    p {
-      font-size: 1.8rem;
-      width: 50%;
-      margin-bottom: 2rem;
+  span {
+    font-size: 2.2rem;
+  }
 
-      @media (max-width: 768px) {
-        width: 100%;
-      }
-    }
+  p {
+    font-size: 1.8rem;
+    width: 50%;
+    margin-bottom: 2rem;
 
-    div.link {
-      margin-top: 2rem;
-      display: block;
-      width: auto;
-
-      a {
-        text-decoration: none;
-        font-size: 1.8rem;
-        padding: 1.2rem;
-
-        color: inherit;
-        border: 1px solid var(--white);
-        border-radius: 4px;
-        transition: .2s ease-in-out;
-
-        &:hover {
-          background-color: var(--white);
-          color: var(--secondary);
-        }
-      }
-    }
-    
     @media (max-width: 768px) {
       width: 100%;
-      padding: 0 2rem;
     }
   }
 
-  &.presentation {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-      url("${backgroundImage}");
-    background-size: cover;
+  div.link {
+    margin-top: 2rem;
+    display: block;
+    width: auto;
+
+    a {
+      text-decoration: none;
+      font-size: 1.8rem;
+      padding: 1.2rem;
+
+      color: inherit;
+      border: 1px solid var(--white);
+      border-radius: 4px;
+      transition: .2s ease-in-out;
+
+      &:hover {
+        background-color: var(--white);
+        color: var(--secondary);
+      }
+    }
   }
 `
 
