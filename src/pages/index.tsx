@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Section className="presentantion">
+      <Section className="presentation">
         <div className="content">
           <span>Olá, nós somos a</span>
           <Title>My School.</Title>

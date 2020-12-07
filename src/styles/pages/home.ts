@@ -85,7 +85,7 @@ export const Section = styled.section`
     }
   }
 
-  &.presentantion {
+  &.presentation {
     background:
       linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
       url("${backgroundImage}");
