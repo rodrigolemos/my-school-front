@@ -15,15 +15,15 @@ const showFromLeft = keyframes`
 
 export const Section = styled.section`
   width: 100vw;
-  min-height: 90vh;
+  height: 90vh;
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: var(--secondary);
-  background-color: var(--white);
+  background-color: var(--secondary);
+  color: var(--white);
 
   a.navigation {
     position: absolute;
@@ -34,15 +34,7 @@ export const Section = styled.section`
     font-size: 2.2rem;
   }
 
-  &.presentation {
-    color: var(--white);
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-      url("${backgroundImage}");
-    background-size: cover;
-  }
-
-  div.presentation-content {
+  div.content {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -92,25 +84,12 @@ export const Section = styled.section`
       padding: 0 2rem;
     }
   }
-  
-  &.motivation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
 
-    width: 100%;
-    height: 100%;
-
-    h2 {
-      font-size: 3.5rem;
-      margin-bottom: 4rem;
-    }
-
-    @media (max-width: 768px) {
-      width: 100%;
-      padding: 0 2rem;
-    }
+  &.presentation {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
+      url("${backgroundImage}");
+    background-size: cover;
   }
 `
 
@@ -130,32 +109,5 @@ export const Subtitle = styled.h1`
 
   @media (max-width: 375px) {
     font-size: 4.2rem;
-  }
-`
-
-export const CardWrapper = styled.div`
-  width: 100%;
-  height: 75%;
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-bottom: 3rem;
-
-  @media (max-width: 1221px) {
-    flex-direction: column;
-  }
-`
-
-export const Card = styled.div`
-  width: 350px;
-  height: 500px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  margin: 1.2rem;
-
-  @media (max-width: 375px) {
-    width: 90vw;
   }
 `
