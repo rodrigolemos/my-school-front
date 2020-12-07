@@ -1,5 +1,5 @@
 import Navbar from '../components/navbar'
-import { Section, AnimatedBanner, Presentation, Title, Subtitle } from '../styles/pages/home'
+import { Section, SectionName, AnimatedBanner, CardsWrapper, Card, Presentation, Motivation, Title, Subtitle } from '../styles/pages/home'
 
 const Home = () => {
   return (
@@ -18,12 +18,15 @@ const Home = () => {
           </div>
         </AnimatedBanner>
       </Presentation>
-      <Section>
+      <Motivation>
         <a id="motivation" className="navigation" />
-        <div className="centered-content">
-          <h2>Motivação do projeto</h2>
-        </div>
-      </Section>
+        <SectionName>Motivação do Projeto</SectionName>
+        <CardsWrapper>
+          <Card />
+          <Card />
+          <Card />
+        </CardsWrapper>
+      </Motivation>
       <Section>
         <a id="information" className="navigation" />
         <h2>Informações sobre EAD</h2>

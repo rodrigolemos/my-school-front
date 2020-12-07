@@ -33,6 +33,12 @@ export const Section = styled.section`
   h2 {
     font-size: 2.2rem;
   }
+
+  @media (max-width: 768px) {
+    min-height: 90vh;
+    height: auto;
+    padding: 3rem 0;
+  }
 `
 
 export const AnimatedBanner = styled.div`
@@ -47,6 +53,39 @@ export const AnimatedBanner = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     padding: 0 2rem;
+  }
+`
+
+export const Title = styled.h1`
+  font-size: 7rem;
+  margin-top: 1rem;
+  
+  @media (max-width: 375px) {
+    font-size: 5.5rem;
+  }
+`
+export const SectionName = styled.h2`
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem !important;
+  
+  @media (max-width: 768px) {
+    font-size: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+  }
+`
+
+export const Subtitle = styled.h1`
+  font-size: 5.7rem;
+  margin-bottom: 1rem;
+  color: var(--white);
+
+  @media (max-width: 375px) {
+    font-size: 4.2rem;
   }
 `
 
@@ -94,21 +133,30 @@ export const Presentation = styled(Section)`
   }
 `
 
-export const Title = styled.h1`
-  font-size: 7rem;
-  margin-top: 1rem;
-  
-  @media (max-width: 375px) {
-    font-size: 5.5rem;
+export const Motivation = styled(Section)`
+  flex-direction: column;
+  justify-content: flex-start;
+`
+
+export const CardsWrapper = styled.div`
+  width: 100%;
+  height: 60%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    flex-direction: column;
   }
 `
 
-export const Subtitle = styled.h1`
-  font-size: 5.7rem;
-  margin-bottom: 1rem;
-  color: var(--white);
-
-  @media (max-width: 375px) {
-    font-size: 4.2rem;
-  }
+export const Card = styled.div`
+  border: 2px solid var(--secondary);
+  border-radius: 5px;
+  width: 340px;
+  height: 420px;
+  margin: 1.5rem;
+  flex-shrink: 0;
 `
