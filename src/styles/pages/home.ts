@@ -16,12 +16,23 @@ const showFromLeft = keyframes`
 export const Section = styled.section`
   width: 100vw;
   height: 90vh;
+  position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  background-color: var(--secondary);
   color: var(--white);
+
+  a.navigation {
+    position: absolute;
+    top: -10vh;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
 
   div.content {
     display: flex;
@@ -39,9 +50,32 @@ export const Section = styled.section`
     p {
       font-size: 1.8rem;
       width: 50%;
+      margin-bottom: 2rem;
 
       @media (max-width: 768px) {
         width: 100%;
+      }
+    }
+
+    div.link {
+      margin-top: 2rem;
+      display: block;
+      width: auto;
+
+      a {
+        text-decoration: none;
+        font-size: 1.8rem;
+        padding: 1.2rem;
+
+        color: inherit;
+        border: 1px solid var(--white);
+        border-radius: 4px;
+        transition: .2s ease-in-out;
+
+        &:hover {
+          background-color: var(--white);
+          color: var(--secondary);
+        }
       }
     }
     

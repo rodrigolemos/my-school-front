@@ -10,13 +10,20 @@ const Home = () => {
           <span>Olá, nós somos a</span>
           <Title>My School.</Title>
           <Subtitle>Nós te ajudamos a aprender.</Subtitle>
-          <p>Entendemos a importância do ensino e fazemos com que "distância" seja somente uma palavra.</p>
+          <p>Entendemos a importância do ensino e fazemos com que distância seja somente uma palavra.</p>
+          <div className="link">
+            <a href="#motivation">
+              Conheça nossa motivação
+            </a>
+          </div>
         </div>
       </Section>
       <Section>
+        <a id="motivation" className="navigation" />
         <h2>Motivação do projeto</h2>
       </Section>
       <Section>
+        <a id="information" className="navigation" />
         <h2>Informações sobre EAD</h2>
       </Section>
       <Section>
