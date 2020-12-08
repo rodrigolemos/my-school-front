@@ -1,6 +1,10 @@
 import styled, { keyframes } from 'styled-components'
 
 const backgroundImage = require('../../../public/images/bookshelf-1.jpg')
+const cardImage1 = require('../../../public/images/studying-1.jpg')
+const cardImage2 = require('../../../public/images/working-1.jpg')
+const cardImage3 = require('../../../public/images/strategy-1.jpg')
+const cardImage4 = require('../../../public/images/collaboration-1.jpg')
 
 const showFromLeft = keyframes`
   from {
@@ -27,7 +31,7 @@ export const Section = styled.section`
 
   a.navigation {
     position: absolute;
-    top: -10vh;
+    top: -9vh;
   }
 
   h2 {
@@ -81,13 +85,21 @@ export const SectionName = styled.h2`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 1rem 0;
   font-size: 3.5rem !important;
+  text-align: center;
   
   @media (max-width: 768px) {
-    font-size: 3rem;
+    font-size: 2.8rem !important;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
   }
+`
+
+export const SectionAdditional = styled.h2`
+  margin-top: 3rem;
+  font-size: 2.5rem !important;
+  text-align: center;
 `
 
 export const Presentation = styled(Section)`
@@ -137,6 +149,7 @@ export const Presentation = styled(Section)`
 export const Motivation = styled(Section)`
   flex-direction: column;
   justify-content: flex-start;
+  background: linear-gradient(to top, var(--white), var(--background));
 `
 
 export const Information = styled(Section)`
@@ -159,10 +172,95 @@ export const CardsWrapper = styled.div`
 `
 
 export const Card = styled.div`
-  border: 1px solid var(--secondary);
+  position: relative;
   border-radius: 5px;
-  width: 280px;
-  height: 380px;
+  width: 310px;
+  height: 420px;
   margin: 1.5rem;
   flex-shrink: 0;
+  transition: all .1s ease-in-out;
+  cursor: default;
+  background-color: var(--background);
+  box-shadow: 0rem .4rem .5rem #DDD;
+
+  &:hover {
+    transform: translateY(-1rem);
+    box-shadow: 0px 1rem .5rem #DDD;
+  }
+
+  div.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+
+    &.first {
+      background:
+        linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+          url("${cardImage1}");
+      background-size: cover;
+    }
+
+    &.second {
+      background:
+        linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+          url("${cardImage2}");
+      background-size: cover;
+    }
+
+    &.third {
+      background:
+        linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+          url("${cardImage3}");
+      background-size: cover;
+    }
+
+    &.fourth {
+      background:
+        linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+          url("${cardImage4}");
+      background-size: cover;
+    }
+  }
+
+  div.content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+
+    p {
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 2rem;
+    }
+  }
+
+  div.title {
+    position: absolute;
+    top: -4.1rem;
+    right: 0;
+    padding: 1.1rem;
+    background-color: #FFF;
+    color: var(--tertirary);
+    background: linear-gradient(to top right, var(--white), var(--background));
+    font-size: 1.8rem;
+    text-transform: capitalize;
+  }
 `
