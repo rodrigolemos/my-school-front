@@ -1,4 +1,5 @@
 import Navbar from '../components/navbar'
+import Footer from '../components/footer'
 import { Section, SectionName, AnimatedBanner, CardsWrapper, Card, Presentation, Motivation, Information } from '../styles/pages/home'
 
 const Home = () => {
@@ -36,6 +37,7 @@ const Home = () => {
         <a id="technologies" className="navigation" />
         <h2>Tecnologias</h2>
       </Section>
+      <Footer />
     </>
   )
 }
