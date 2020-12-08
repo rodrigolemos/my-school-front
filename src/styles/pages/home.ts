@@ -38,7 +38,7 @@ export const Section = styled.section`
     font-size: 2.2rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     min-height: 90vh;
     height: auto;
     padding: 3rem 0;
@@ -97,7 +97,7 @@ export const SectionName = styled.h2`
 `
 
 export const SectionAdditional = styled.h2`
-  margin-top: 3rem;
+  margin-top: 4rem;
   font-size: 2.5rem !important;
   text-align: center;
 `
@@ -165,7 +165,7 @@ export const CardsWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     justify-content: flex-start;
     flex-direction: column;
   }
@@ -174,8 +174,8 @@ export const CardsWrapper = styled.div`
 export const Card = styled.div`
   position: relative;
   border-radius: 5px;
-  width: 310px;
-  height: 420px;
+  width: 18vw;
+  height: 390px;
   margin: 1.5rem;
   flex-shrink: 0;
   transition: all .1s ease-in-out;
@@ -262,5 +262,13 @@ export const Card = styled.div`
     background: linear-gradient(to top right, var(--white), var(--background));
     font-size: 1.8rem;
     text-transform: capitalize;
+  }
+
+  @media (max-width: 1100px) {
+    width: 380px;
+  }
+
+  @media (max-width: 375px) {
+    width: 85vw;
   }
 `
