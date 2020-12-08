@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { GoMortarBoard } from 'react-icons/go'
 import { DesktopNav, NavContent, Title, MobileMenu, Menu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false)
   return (
     <>
