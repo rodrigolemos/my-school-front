@@ -49,6 +49,25 @@ export const AnimatedBanner = styled.div`
 
   width: 70%;
   height: 100%;
+
+  h1 {
+    font-size: 7rem;
+    margin-top: 1rem;
+    
+    @media (max-width: 375px) {
+      font-size: 5.5rem;
+    }
+  }
+
+  h2 {
+    font-size: 5.7rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+
+    @media (max-width: 375px) {
+      font-size: 4.2rem;
+    }
+  }
   
   @media (max-width: 768px) {
     width: 100%;
@@ -56,14 +75,6 @@ export const AnimatedBanner = styled.div`
   }
 `
 
-export const Title = styled.h1`
-  font-size: 7rem;
-  margin-top: 1rem;
-  
-  @media (max-width: 375px) {
-    font-size: 5.5rem;
-  }
-`
 export const SectionName = styled.h2`
   width: 100%;
   height: 15%;
@@ -76,16 +87,6 @@ export const SectionName = styled.h2`
     font-size: 3rem;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
-  }
-`
-
-export const Subtitle = styled.h1`
-  font-size: 5.7rem;
-  margin-bottom: 1rem;
-  color: var(--white);
-
-  @media (max-width: 375px) {
-    font-size: 4.2rem;
   }
 `
 
@@ -138,6 +139,11 @@ export const Motivation = styled(Section)`
   justify-content: flex-start;
 `
 
+export const Information = styled(Section)`
+  background-color: var(--secondary);
+  color: var(--white);
+`
+
 export const CardsWrapper = styled.div`
   width: 100%;
   height: 60%;
@@ -153,10 +159,10 @@ export const CardsWrapper = styled.div`
 `
 
 export const Card = styled.div`
-  border: 2px solid var(--secondary);
+  border: 1px solid var(--secondary);
   border-radius: 5px;
-  width: 340px;
-  height: 420px;
+  width: 280px;
+  height: 380px;
   margin: 1.5rem;
   flex-shrink: 0;
 `
