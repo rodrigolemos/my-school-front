@@ -2,8 +2,9 @@ import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import {
   AnimatedBanner,
-  ContentWrapper,
   Card,
+  Container,
+  ContentWrapper,
   Motivation,
   Presentation,
   SectionAdditional,
@@ -12,7 +13,7 @@ import {
 
 const Home = () => {
   return (
-    <>
+    <Container>
       <Navbar />
       <Presentation>
         <AnimatedBanner>
@@ -66,7 +67,7 @@ const Home = () => {
         </SectionAdditional>
       </Motivation>
       <Footer />
-    </>
+    </Container>
   )
 }
 

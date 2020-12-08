@@ -16,6 +16,10 @@ const showFromLeft = keyframes`
     opacity: 1;
   }
 `
+export const Container = styled.section`
+  min-height: 90vh;
+  margin-top: 10vh;
+`
 
 export const Section = styled.section`
   width: 100vw;
