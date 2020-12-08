@@ -152,12 +152,7 @@ export const Motivation = styled(Section)`
   background: linear-gradient(to top, var(--white), var(--background));
 `
 
-export const Information = styled(Section)`
-  background-color: var(--secondary);
-  color: var(--white);
-`
-
-export const CardsWrapper = styled.div`
+export const ContentWrapper = styled.div`
   width: 100%;
   height: 60%;
 
@@ -168,6 +163,45 @@ export const CardsWrapper = styled.div`
   @media (max-width: 1100px) {
     justify-content: flex-start;
     flex-direction: column;
+  }
+`
+
+export const Technologies = styled(Section)`
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--secondary);
+  color: var(--white);
+`
+
+export const Panel = styled.div`
+  width: 45%;
+  height: 100%;
+  margin: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  li {
+    list-style-type: none;
+    margin: 2rem 0;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 2rem;
+    }
+
+    @media (max-width: 375px) {
+      font-size: 3rem;
+    }
   }
 `
 

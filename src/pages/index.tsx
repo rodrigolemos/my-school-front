@@ -1,6 +1,7 @@
+import { SiNextDotJs, SiReact, SiStyledComponents, SiNodeDotJs, SiTypescript, SiPostgresql } from 'react-icons/si'
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
-import { Section, SectionName, SectionAdditional, AnimatedBanner, CardsWrapper, Card, Presentation, Motivation, Information } from '../styles/pages/home'
+import { Section, SectionName, SectionAdditional, AnimatedBanner, ContentWrapper, Panel, Card, Presentation, Motivation, Technologies } from '../styles/pages/home'
 
 const Home = () => {
   return (
@@ -22,7 +23,7 @@ const Home = () => {
       <Motivation>
         <a id="motivation" className="navigation" />
         <SectionName>A sala de aula fora da sala</SectionName>
-        <CardsWrapper>
+        <ContentWrapper>
           <Card>
             <div className="image first"></div>
             <div className="content">
@@ -52,19 +53,31 @@ const Home = () => {
               <p>Crie posts interativos, pesquisas e atividades para tornar seu curso mais atrativo e divertido para o público. Quanto maior sua comunidade, mais bem avaliado seus cursos serão.</p>
             </div>
           </Card>
-        </CardsWrapper>
+        </ContentWrapper>
         <SectionAdditional>
           Além disso, contamos com o engajamento de pessoas incríveis como você.
         </SectionAdditional>
       </Motivation>
-      <Information>
-        <a id="information" className="navigation" />
-        <h2>Como o EAD está transformando a sociedade</h2>
-      </Information>
-      <Section>
+      <Technologies>
         <a id="technologies" className="navigation" />
-        <h2>Tecnologias</h2>
-      </Section>
+        <SectionName>Tecnologias Utilizadas</SectionName>
+        <ContentWrapper>
+          <Panel>
+            <ul>
+              <li><SiNextDotJs />Next.js</li>
+              <li><SiReact />React.js</li>
+              <li><SiStyledComponents />Styled-Components</li>
+            </ul>
+          </Panel>
+          <Panel>
+            <ul>
+              <li><SiNodeDotJs />Node.js</li>
+              <li><SiTypescript />TypeScript</li>
+              <li><SiPostgresql />PostgreSQL</li>
+            </ul>
+          </Panel>
+        </ContentWrapper>
+      </Technologies>
       <Footer />
     </>
   )
