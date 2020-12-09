@@ -1,14 +1,37 @@
 import { useRouter } from 'next/router'
-import Navbar from '../components/navbar'
+import { GoMortarBoard } from 'react-icons/go'
+import { IoIosArrowBack } from 'react-icons/io'
+import { Container, DesktopPanel, FormPanel, BackButton } from '../styles/pages/create-profile'
 
 const CreateProfile = () => {
   const router = useRouter()
   return (
-    <>
-      <Navbar />
-      <h1>Criar Perfil</h1>
-      <span onClick={() => router.back()}>Voltar</span>
-    </>
+    <Container>
+      <DesktopPanel>
+        <div className="overlay" />
+      </DesktopPanel>
+      <FormPanel>
+        <BackButton onClick={() => router.back()}>
+          <IoIosArrowBack /> Voltar
+        </BackButton>
+        <form>
+          <h1><GoMortarBoard />My School</h1>
+          <label>
+            Nome <input autoFocus />
+          </label>
+          <label>
+            E-mail <input />
+          </label>
+          <label>
+            Nascimento <input />
+          </label>
+          <label>
+            Senha <input />
+          </label>
+          <button>CRIAR CONTA</button>
+        </form>
+      </FormPanel>
+    </Container>
   )
 }
 
