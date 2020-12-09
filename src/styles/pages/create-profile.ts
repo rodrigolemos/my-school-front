@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { showFromLeft } from '../animations'
 
 const backgroundImage = require('../../../public/images/typing-1.jpg')
 
@@ -12,6 +13,9 @@ export const DesktopPanel = styled.div`
   width: 55vw;
   height: 100vh;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--secondary);
 
   background:
@@ -25,6 +29,38 @@ export const DesktopPanel = styled.div`
     height: 100%;
     background-color: var(--secondary);
     opacity: .7;
+  }
+
+  div.brand {
+    z-index: 2;
+    opacity: .9;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--white);
+
+    h2 {
+      display: flex;
+      align-items: center;
+      font-size: 3.8rem;
+      margin-bottom: 2rem;
+
+      svg {
+        margin-right: 1rem;
+      }
+    }
+
+    svg.desktop {
+      font-size: 30rem;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
   }
 
   @media (max-width: 998px) {
@@ -68,6 +104,7 @@ export const FormPanel = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    animation: ${showFromLeft} .5s ease-in-out;
 
     width: 60%;
     height: 50%;
