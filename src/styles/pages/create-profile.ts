@@ -107,7 +107,7 @@ export const FormPanel = styled.div`
     animation: ${showFromLeft} .5s ease-in-out;
 
     width: 60%;
-    height: 50%;
+    min-height: 50%;
 
     @media (max-width: 998px) {
       width: 50vw;
@@ -162,6 +162,13 @@ export const FormPanel = styled.div`
       }
     }
 
+    p.error {
+      font-weight: normal;
+      font-size: 1.2rem;
+      color: #E00;
+      margin: .5rem 0;
+    }
+
     button {
       width: 100%;
       margin-top: 2rem;
@@ -169,13 +176,26 @@ export const FormPanel = styled.div`
       outline: none;
       border-radius: 5px;
       height: 4rem;
+      cursor: pointer;
+      transition: all .2s ease-in-out;
       
       font-weight: bold;
       background-color: var(--secondary);
       color: var(--white);
 
-      &:focus {
-        
+      &:focus, &:hover {
+        background-color: var(--secondary-light);
+      }
+    }
+
+    div.loading {
+      width: 100%;
+      text-align: center;
+      margin-top: 2rem;
+      height: 4rem;
+      
+      svg {
+        color: var(--secondary);
       }
     }
   }
