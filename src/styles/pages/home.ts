@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
+import { showFromLeft } from '../animations'
 
 const backgroundImage = require('../../../public/images/bookshelf-1.jpg')
 const cardImage1 = require('../../../public/images/studying-1.jpg')
@@ -6,16 +7,6 @@ const cardImage2 = require('../../../public/images/working-1.jpg')
 const cardImage3 = require('../../../public/images/strategy-1.jpg')
 const cardImage4 = require('../../../public/images/collaboration-1.jpg')
 
-const showFromLeft = keyframes`
-  from {
-    transform: translateX(-2.5rem);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`
 export const Container = styled.section`
   min-height: 90vh;
   margin-top: 10vh;
