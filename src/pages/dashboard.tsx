@@ -1,12 +1,23 @@
-import withPrivateRoute from '../components/withPrivateRouter'
+import { GetServerSideProps } from 'next'
+import { checkAuth } from '../services/auth'
 
-const Dashboard = () => {
-  return <div>Dashboard logado.</div>
+export default function Dashboard() {
+  return <h1>Dashboard logado.</h1>
 }
 
-Dashboard.getInitialProps = async (props: any) => {
-  console.info('Private route valid', props)
-  return {}
+export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
+  try {
+    checkAuth(context.req.cookies['@my-school:token'])
+    return {
+      props: {}
+    }
+  } catch (err) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    }
+  }
 }
-
-export default withPrivateRoute(Dashboard)

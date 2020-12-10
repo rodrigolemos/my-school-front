@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Cookies } from 'react-cookie'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,6 +10,7 @@ import { GoMortarBoard } from 'react-icons/go'
 import { IoIosArrowBack } from 'react-icons/io'
 import { VscUnlock } from 'react-icons/vsc'
 import { Container, DesktopPanel, FormPanel, BackButton } from '../styles/pages/login'
+import { checkAuth } from '../services/auth'
 import api from '../services/api'
 import Toast from '../components/toast'
 
@@ -21,7 +24,7 @@ const schema = yup.object().shape({
   password: yup.string().required().min(6),
 })
 
-const Login: React.FC = () => {
+export default function Login() {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>()
   const router = useRouter()
@@ -35,8 +38,14 @@ const Login: React.FC = () => {
     setLoading(true)
     setError('')
     try {
-      const response = await api.post('/users/create', data)
+      const response = await api.post('/sessions/create', data)
       if (response.status === 201) {
+        const { email, token } = response.data
+        const cookies = new Cookies()
+
+        cookies.set('@my-school:email', email)
+        cookies.set('@my-school:token', token)
+
         router.push('/dashboard')
       }
     } catch (error) {
@@ -113,4 +122,19 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
+  try {
+    checkAuth(context.req.cookies['@my-school:token'])
+    return {
+      props: {},
+      redirect: {
+        destination: '/dashboard',
+        permanent: false
+      }
+    }
+  } catch (err) {
+    return {
+      props: {},
+    }
+  }
+}
