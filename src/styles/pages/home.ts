@@ -44,6 +44,7 @@ export const AnimatedBanner = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  backface-visibility: hidden;
   animation: ${showFromLeft} .8s ease-in-out;
 
   width: 70%;
@@ -207,14 +208,14 @@ export const Card = styled.div`
   height: 390px;
   margin: 1.5rem;
   flex-shrink: 0;
-  transition: all .1s ease-in-out;
+  backface-visibility: hidden;
+  transition: all .1s ease-out;
   cursor: default;
   background-color: var(--background);
-  box-shadow: 0rem .4rem .5rem #DDD;
+  box-shadow: 0 0 .5rem #DDD;
 
   &:hover {
-    transform: translateY(-1rem);
-    box-shadow: 0px 1rem .5rem #DDD;
+    box-shadow: 0 0 1.3rem #BBB;
   }
 
   div.image {
