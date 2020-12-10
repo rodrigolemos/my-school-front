@@ -1,7 +1,15 @@
 import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
 import api from '../services/api'
 import Navbar from '../components/navbar'
+import Footer from '../components/footer'
+import {
+  Banner,
+  Card,
+  Container,
+  ContentWrapper,
+  Presentation,
+  Title,
+} from '../styles/pages/course-list'
 
 interface ICourse {
   id: string
@@ -16,19 +24,30 @@ interface CourseListProps {
 }
 
 export default function CourseList({ error, courses }) {
-  const router = useRouter()
   return (
-    <>
+    <Container>
       <Navbar />
-      <h1>Cursos</h1>
-      <p>{error}</p>
-      <ul>
-        {courses.map((course: ICourse) => (
-          <li key={course.id}>{course.name} - {course.description}</li>
-        ))}
-      </ul>
-      <span onClick={() => router.back()}>Voltar</span>
-    </>
+      <Presentation>
+        <Banner>
+          <Title>
+            <h1>Cursos</h1>
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur recusandae laboriosam placeat et</h2>
+          </Title>
+          <p>{error}</p>
+          <ContentWrapper>
+            {courses.map((course: ICourse) => (
+              <Card key={course.id}>
+                <div className="content">
+                  <div className="title">{course.name}</div>
+                  <p>{course.description}</p>
+                </div>
+              </Card>
+            ))}
+          </ContentWrapper>
+        </Banner>
+      </Presentation>
+      <Footer />
+    </Container>
   )
 }
 
