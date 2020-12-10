@@ -198,5 +198,25 @@ export const FormPanel = styled.div`
         color: var(--secondary);
       }
     }
+
+    div.controls {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+
+      a, a:active, a:visited {
+        text-decoration: none;
+        color: inherit;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+          color: var(--primary);
+        }
+      }
+    }
   }
 `

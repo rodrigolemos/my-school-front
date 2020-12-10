@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Cookies } from 'react-cookie'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -108,6 +109,10 @@ export default function Login() {
                 <CircularProgress />
               </div>
             )}
+          <div className="controls">
+            <Link href="/login">Esqueci minha senha</Link>
+            <Link href="/create-profile">Criar Perfil</Link>
+          </div>
         </form>
       </FormPanel>
       <DesktopPanel>

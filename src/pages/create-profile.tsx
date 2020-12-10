@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -120,6 +121,9 @@ const CreateProfile: React.FC = () => {
                 <CircularProgress />
               </div>
             )}
+          <div className="controls">
+            <Link href="/login">Efetuar Login</Link>
+          </div>
         </form>
       </FormPanel>
     </Container>
