@@ -1,13 +1,23 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { List } from '@material-ui/core'
 
-export const Container = styled.aside`
+interface IContainer {
+  customTheme: string
+}
+
+export const Container = styled.aside<IContainer>`
   z-index: 2;
   height: 100vh;
   width: 17%;
   
-  background-color: var(--logged);
-  color: var(--white);
+  transition: all .2s ease-in-out;
+  ${({ customTheme }) => customTheme === 'dark' ? css`
+    background-color: var(--logged);
+    color: var(--white);
+  ` : css`
+    background-color: var(--white);
+    color: var(--logged);
+  `}
 
   @media (max-width: 1110px) {
     display: none;
@@ -45,7 +55,6 @@ export const LevelsList = styled(List)`
   }
 
   div svg {
-    color: var(--logged-font) !important;
     font-size: 2.6rem;
   }
 `

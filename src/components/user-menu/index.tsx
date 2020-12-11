@@ -2,12 +2,14 @@ import { BsCardChecklist } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
+import { useTheme } from '../../hooks/theme'
 import { Container, Title, Content, LevelsList } from './styles'
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 
 const UserMenu: React.FC = () => {
+  const { theme } = useTheme()
   return (
-    <Container>
+    <Container customTheme={theme}>
       <Title>
         <GoMortarBoard />My School
       </Title>

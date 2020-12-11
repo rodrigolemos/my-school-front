@@ -1,14 +1,24 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+interface IContainer {
+  customTheme: string
+}
+
+export const Container = styled.div<IContainer>`
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background-color: var(--logged-dark);
-  color: var(--white);
+  transition: all .2s ease-in-out;
+  ${({ customTheme }) => customTheme === 'dark' ? css`
+    background-color: var(--logged-dark);
+    color: var(--white);
+  ` : css`
+    background-color: var(--white);
+    color: var(--logged);
+  `}
 `
 
 export const Main = styled.main`

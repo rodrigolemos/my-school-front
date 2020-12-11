@@ -2,11 +2,13 @@ import { GetServerSideProps } from 'next'
 import { checkAuth } from '../services/auth'
 import UserMenu from '../components/user-menu'
 import UserNavBar from '../components/user-navbar'
+import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper } from '../styles/pages/dashboard'
 
 export default function Dashboard() {
+  const { theme } = useTheme()
   return (
-    <Container>
+    <Container customTheme={theme}>
       <UserMenu />
       <Main>
         <UserNavBar title="Dashboard" />

@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Cookies } from 'react-cookie'
 import { useRouter } from 'next/router'
+import { BiMoon } from 'react-icons/bi'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BsPower } from 'react-icons/bs'
+import { useTheme } from '../../hooks/theme'
 import { DesktopNav, NavContent, Title, MobileMenu, Menu, OpenMobileMenu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
 
 interface IUserNavbarProps {
@@ -11,6 +13,7 @@ interface IUserNavbarProps {
 }
 
 const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
+  const { theme, changeTheme } = useTheme()
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
 
@@ -25,7 +28,7 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
 
   return (
     <>
-      <DesktopNav isMobile={isMobile}>
+      <DesktopNav isMobile={isMobile} customTheme={theme}>
         <NavContent>
           <div>
             <OpenMobileMenu />
@@ -34,6 +37,9 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
             <h1>{title}</h1>
           </Title>
           <Menu>
+            <li>
+              <BiMoon onClick={changeTheme} />
+            </li>
             <li>
               <IoMdNotificationsOutline />
             </li>
@@ -46,7 +52,7 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
           </OpenMobileNav>
         </NavContent>
       </DesktopNav>
-      <MobileNav isMobile={isMobile}>
+      <MobileNav isMobile={isMobile} customTheme={theme}>
         <CloseMobileNav onClick={() => setIsMobile(false)} />
         <MobileMenu>
           <li>
