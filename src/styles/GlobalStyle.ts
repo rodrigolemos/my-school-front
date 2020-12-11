@@ -51,5 +51,9 @@ export default createGlobalStyle`
     --shadow: #DDDDDD;
     --white: #F5F5F5;
     --light: #DEE4F0;
+
+    --logged-dark: #1B2635;
+    --logged: #233044;
+    --logged-font: #888F99;
   }
 `
