@@ -31,9 +31,12 @@ export default function CourseList({ error, courses }) {
         <Banner>
           <Title>
             <h1>Cursos</h1>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur recusandae laboriosam placeat et</h2>
+            {error ? (
+              <h2>{error}</h2>
+            ) : (
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur recusandae laboriosam placeat et</h2>
+              )}
           </Title>
-          <p>{error}</p>
           <ContentWrapper>
             {courses.map((course: ICourse) => (
               <Card key={course.id}>
@@ -70,7 +73,7 @@ export const getServerSideProps: GetServerSideProps<any> = async () => {
     return {
       props: {
         courses: [],
-        error: 'Não foi possível consultar os cursos.'
+        error: 'Não foi possível consultar os cursos no momento. Tente novamente mais tarde.'
       }
     }
   }
