@@ -10,7 +10,7 @@ interface IThemeContext {
 const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 
 const ThemeContextProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = useState<ThemeProp>('light')
+  const [theme, setTheme] = useState<ThemeProp>('dark')
 
   const changeTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
