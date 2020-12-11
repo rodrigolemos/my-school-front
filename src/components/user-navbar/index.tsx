@@ -4,10 +4,13 @@ import { useRouter } from 'next/router'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BsPower } from 'react-icons/bs'
-import { MdChatBubbleOutline } from 'react-icons/md'
 import { DesktopNav, NavContent, Title, MobileMenu, Menu, OpenMobileMenu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
 
-const UserNavbar: React.FC = () => {
+interface IUserNavbarProps {
+  title: string
+}
+
+const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
 
@@ -28,12 +31,9 @@ const UserNavbar: React.FC = () => {
             <OpenMobileMenu />
           </div>
           <Title>
-            <h1>Título</h1>
+            <h1>{title}</h1>
           </Title>
           <Menu>
-            <li>
-              <MdChatBubbleOutline />
-            </li>
             <li>
               <IoMdNotificationsOutline />
             </li>
@@ -60,7 +60,7 @@ const UserNavbar: React.FC = () => {
             </span>
           </li>
           <li>
-            <span>
+            <span onClick={logOut}>
               Sair
             </span>
           </li>

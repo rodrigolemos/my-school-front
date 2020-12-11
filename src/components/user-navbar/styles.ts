@@ -12,8 +12,8 @@ export const DesktopNav = styled.nav<NavProps>`
   top: 0;
   left: 0;
   
-  background-color: #DDD;
-  color: var(--tertiary);
+  background-color: var(--logged-dark);
+  color: var(--white);
 
   width: 100%;
   height: 10vh;
@@ -37,7 +37,8 @@ export const MobileNav = styled.div<NavProps>`
   width: 100%;
   height: 100vh;
 
-  background-color: var(--white);
+  background-color: var(--logged-dark);
+  color: var(--white);
 
   ${({ isMobile }) => isMobile && css`
     display: flex;

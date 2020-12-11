@@ -9,7 +9,7 @@ export default function Dashboard() {
     <Container>
       <UserMenu />
       <Main>
-        <UserNavBar />
+        <UserNavBar title="Dashboard" />
         <ContentWrapper>
           <h1>Conteúdo do dashboard logado.</h1>
         </ContentWrapper>

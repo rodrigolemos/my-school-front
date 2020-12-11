@@ -1,10 +1,13 @@
 import styled from 'styled-components'
+import { List } from '@material-ui/core'
 
 export const Container = styled.aside`
   z-index: 2;
   height: 100vh;
   width: 17%;
-  background-color: #CCC;
+  
+  background-color: var(--logged);
+  color: var(--white);
 
   @media (max-width: 1110px) {
     display: none;
@@ -19,7 +22,6 @@ export const Title = styled.div`
   justify-content: center;
   width: 100%;
   height: 10vh;
-  background-color: #AAA;
 
   svg {
     margin-right: 1rem;
@@ -28,5 +30,22 @@ export const Title = styled.div`
   a, a:active, a:visited {
     color: inherit;
     text-decoration: none !important;
+  }
+`
+
+export const Content = styled.div`
+  width: 100%;
+  height: 90vh;
+  padding: 2rem;
+`
+
+export const LevelsList = styled(List)`
+  span {
+    font-size: 1.8rem;
+  }
+
+  div svg {
+    color: var(--logged-font) !important;
+    font-size: 2.6rem;
   }
 `
