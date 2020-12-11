@@ -6,7 +6,7 @@ import { useTheme } from '../../hooks/theme'
 import { Container, Title, Content, LevelsList } from './styles'
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 
-const UserMenu: React.FC = () => {
+const SidebarMenu: React.FC = () => {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -37,4 +37,4 @@ const UserMenu: React.FC = () => {
   )
 }
 
-export default UserMenu
+export default SidebarMenu

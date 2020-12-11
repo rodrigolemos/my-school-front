@@ -15,7 +15,7 @@ export const Container = styled.aside<IContainer>`
     background-color: var(--logged);
     color: var(--white);
   ` : css`
-    background-color: var(--white);
+    background-color: var(--shadow);
     color: var(--logged);
   `}
 
@@ -54,7 +54,8 @@ export const LevelsList = styled(List)`
     font-size: 1.8rem;
   }
 
-  div svg {
+  svg {
     font-size: 2.6rem;
+    color: var(--logged-font);
   }
 `
