@@ -128,9 +128,9 @@ export const Menu = styled.ul`
 
   li {
     list-style-type: none;
-    font-size: 3rem;
+    font-size: 2.2rem;
     font-weight: bold;
-    margin: 0 2rem;
+    margin: 0 1.2rem;
     
     cursor: pointer;
     transition: all .2s ease-in-out;

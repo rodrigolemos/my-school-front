@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Cookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import { BiMoon } from 'react-icons/bi'
+import { RiChat4Line } from 'react-icons/ri'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BsPower } from 'react-icons/bs'
@@ -39,6 +40,9 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
           <Menu>
             <li>
               <BiMoon onClick={changeTheme} />
+            </li>
+            <li>
+              <RiChat4Line />
             </li>
             <li>
               <IoMdNotificationsOutline />
