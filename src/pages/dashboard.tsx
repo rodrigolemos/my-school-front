@@ -1,8 +1,21 @@
 import { GetServerSideProps } from 'next'
 import { checkAuth } from '../services/auth'
+import UserMenu from '../components/user-menu'
+import UserNavBar from '../components/user-navbar'
+import { Container, Main, ContentWrapper } from '../styles/pages/dashboard'
 
 export default function Dashboard() {
-  return <h1>Dashboard logado.</h1>
+  return (
+    <Container>
+      <UserMenu />
+      <Main>
+        <UserNavBar />
+        <ContentWrapper>
+          <h1>Conteúdo do dashboard logado.</h1>
+        </ContentWrapper>
+      </Main>
+    </Container>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
