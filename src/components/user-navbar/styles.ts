@@ -17,9 +17,12 @@ export const DesktopNav = styled.nav<NavProps>`
   ${({ customTheme }) => customTheme === 'dark' ? css`
     background-color: var(--logged-dark);
     color: var(--white);
+    border-bottom: 1px solid var(--logged);
   ` : css`
     background-color: var(--white);
     color: var(--logged);
+    border-bottom: 1px solid var(--white);
+    box-shadow: 0 0 1.3rem var(--shadow);
   `}
 
   width: 100%;
