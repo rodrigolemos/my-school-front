@@ -69,7 +69,7 @@ export const Header = styled.div`
 
     @media (max-width: 375px) {
       text-align: center;
-      margin-bottom: 2rem;
+      margin: 2rem 0;
     }
   }
 

@@ -33,10 +33,9 @@ export default function Dashboard({ date }) {
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token'])
-    const date = new Date().toLocaleDateString('pt-br')
     return {
       props: {
-        date
+        date: new Date().toLocaleDateString('pt-br')
       }
     }
   } catch (err) {
