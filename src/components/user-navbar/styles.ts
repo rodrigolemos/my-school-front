@@ -131,17 +131,26 @@ export const Menu = styled.ul`
 
   li {
     list-style-type: none;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin: 0 1.2rem;
+    transition: all .1s ease-in-out;
     
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-    
+    &:not(:last-child) {
+      margin: 0 1rem;
+    }
+
     &:hover {
       color: var(--primary);
     }
+
+    * {
+      color: inherit;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
   }
+`
+
+export const CustomTooltip = styled.span`
+  font-size: 1.1rem;
 `
 
 export const MobileMenu = styled.ul`

@@ -6,8 +6,9 @@ import { RiChat4Line } from 'react-icons/ri'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BsPower } from 'react-icons/bs'
+import { IconButton, Tooltip } from '@material-ui/core'
 import { useTheme } from '../../hooks/theme'
-import { DesktopNav, NavContent, Title, MobileMenu, Menu, OpenMobileMenu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
+import { DesktopNav, NavContent, Title, MobileMenu, Menu, CustomTooltip, OpenMobileMenu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
 
 interface IUserNavbarProps {
   title: string
@@ -39,16 +40,32 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
           </Title>
           <Menu>
             <li>
-              <BiMoon onClick={changeTheme} />
+              <Tooltip title={<CustomTooltip>Tema</CustomTooltip>}>
+                <IconButton onClick={changeTheme}>
+                  <BiMoon />
+                </IconButton>
+              </Tooltip>
             </li>
             <li>
-              <RiChat4Line />
+              <Tooltip title={<CustomTooltip>Mensagens</CustomTooltip>}>
+                <IconButton onClick={changeTheme}>
+                  <RiChat4Line />
+                </IconButton>
+              </Tooltip>
             </li>
             <li>
-              <IoMdNotificationsOutline />
+              <Tooltip title={<CustomTooltip>Notificações</CustomTooltip>}>
+                <IconButton onClick={changeTheme}>
+                  <IoMdNotificationsOutline />
+                </IconButton>
+              </Tooltip>
             </li>
             <li>
-              <BsPower onClick={logOut} />
+              <Tooltip title={<CustomTooltip>Sair</CustomTooltip>}>
+                <IconButton onClick={logOut}>
+                  <BsPower />
+                </IconButton>
+              </Tooltip>
             </li>
           </Menu>
           <OpenMobileNav>
