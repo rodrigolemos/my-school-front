@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 
-const Course = () => {
+const CourseDetail = () => {
   const router = useRouter()
   return (
     <>
-      <h1>Course {router.query.slug}</h1>
+      <h1>CourseDetail {router.query.slug}</h1>
       <span onClick={() => router.back()}>Voltar</span>
     </>
   )
 }
 
-export default Course
+export default CourseDetail
