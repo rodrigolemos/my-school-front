@@ -22,7 +22,7 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
   const logOut = () => {
     const cookies = new Cookies()
 
-    cookies.remove('@my-school:email')
+    cookies.remove('@my-school:user')
     cookies.remove('@my-school:token')
 
     router.push('/login')
