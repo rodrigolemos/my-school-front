@@ -41,10 +41,10 @@ export default function Login() {
     try {
       const response = await api.post('/sessions/create', data)
       if (response.status === 201) {
-        const { id, token } = response.data
+        const { id, name, token } = response.data
         const cookies = new Cookies()
 
-        cookies.set('@my-school:user', id)
+        cookies.set('@my-school:user', JSON.stringify({ id, name }))
         cookies.set('@my-school:token', token)
 
         router.push('/dashboard')
