@@ -37,7 +37,7 @@ export const Main = styled.main`
 export const ContentWrapper = styled.div`
   width: 100%;
   height: 90vh;
-  margin-top: 15vh;
+  margin-top: 10vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -45,7 +45,7 @@ export const ContentWrapper = styled.div`
 
 export const Header = styled.div`
   width: 95%;
-  min-height: 10%;
+  min-height: 15%;
   display: flex;
   align-items: center;
   justify-content: space-between;
