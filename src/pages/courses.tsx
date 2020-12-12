@@ -7,7 +7,7 @@ import { BiRefresh } from 'react-icons/bi'
 import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header } from '../styles/pages/dashboard'
 
-export default function Courses({ isAdmin }) {
+export default function Courses({ name, isAdmin }) {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -17,7 +17,7 @@ export default function Courses({ isAdmin }) {
         <ContentWrapper>
           <Header>
             <div className="greeting">
-              <h2>Bem vindo novamente!</h2>
+              <h2>Bem vindo novamente, {name}!</h2>
               <h3>Esses são os cursos com o seu perfil 📚</h3>
             </div>
             <div className="date">
@@ -34,12 +34,14 @@ export default function Courses({ isAdmin }) {
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token'])
+    const { id, name } = JSON.parse(context.req.cookies['@my-school:user'])
     const isAdmin = await checkPermission(
       context.req.cookies['@my-school:token'],
-      context.req.cookies['@my-school:user']
+      id
     )
     return {
       props: {
+        name,
         isAdmin
       }
     }
