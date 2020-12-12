@@ -8,7 +8,11 @@ import { useTheme } from '../../hooks/theme'
 import { Container, Title, Content, LevelsList } from './styles'
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 
-const SidebarMenu: React.FC = () => {
+interface ISidebarMenu {
+  isAdmin: boolean
+}
+
+const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }) => {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -23,22 +27,16 @@ const SidebarMenu: React.FC = () => {
               <ListItemText primary="Dashboard" />
             </ListItem>
           </Link>
-          <Link href="/courses">
-            <ListItem button>
-              <ListItemIcon><IoIosList /></ListItemIcon>
-              <ListItemText primary="Cursos" />
-            </ListItem>
-          </Link>
-          <Link href="/enrollments">
-            <ListItem button>
-              <ListItemIcon><BsCardChecklist /></ListItemIcon>
-              <ListItemText primary="Matrículas" />
-            </ListItem>
-          </Link>
           <Link href="/me">
             <ListItem button>
               <ListItemIcon><FaUserEdit /></ListItemIcon>
               <ListItemText primary="Perfil" />
+            </ListItem>
+          </Link>
+          <Link href="/courses">
+            <ListItem button>
+              <ListItemIcon><IoIosList /></ListItemIcon>
+              <ListItemText primary="Cursos" />
             </ListItem>
           </Link>
           <Link href="/classes">
@@ -47,6 +45,22 @@ const SidebarMenu: React.FC = () => {
               <ListItemText primary="Aulas" />
             </ListItem>
           </Link>
+          {isAdmin && (
+            <>
+              <Link href="/users">
+                <ListItem button>
+                  <ListItemIcon><BsCardChecklist /></ListItemIcon>
+                  <ListItemText primary="Usuários" />
+                </ListItem>
+              </Link>
+              <Link href="/enrollments">
+                <ListItem button>
+                  <ListItemIcon><BsCardChecklist /></ListItemIcon>
+                  <ListItemText primary="Matrículas" />
+                </ListItem>
+              </Link>
+            </>
+          )}
         </LevelsList>
       </Content>
     </Container>
