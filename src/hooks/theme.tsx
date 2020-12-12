@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { Cookies } from 'react-cookie'
 
 type ThemeProp = 'light' | 'dark'
 
@@ -12,8 +13,22 @@ const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 const ThemeContextProvider: React.FC = ({ children }) => {
   const [theme, setTheme] = useState<ThemeProp>('dark')
 
+  useEffect(() => {
+    fetchPrevious()
+  }, [])
+
+  const fetchPrevious = (): void => {
+    const cookies = new Cookies()
+    let previousTheme: ThemeProp = cookies.get('@my-school:theme')
+    previousTheme = !previousTheme ? 'dark' : previousTheme
+    setTheme(previousTheme)
+  }
+
   const changeTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    const cookies = new Cookies()
+    setTheme(newTheme)
+    cookies.set('@my-school:theme', newTheme)
   }
 
   return (
