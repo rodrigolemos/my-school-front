@@ -37,8 +37,54 @@ export const Main = styled.main`
 export const ContentWrapper = styled.div`
   width: 100%;
   height: 90vh;
-  margin-top: 10vh;
+  margin-top: 15vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+`
+
+export const Header = styled.div`
+  width: 95%;
+  min-height: 10%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
+
+  div.greeting {
+    h2 {
+      font-size: 2.6rem;
+      font-weight: normal;
+      margin-bottom: .8rem;
+    }
+
+    h3 {
+      font-size: 2.1rem;
+      font-weight: normal;
+    }
+
+    @media (max-width: 375px) {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  }
+
+  div.date {
+    display: flex;
+    align-items: center;
+    
+    span {
+      font-size: 2rem;
+      font-weight: normal;
+    }
+
+    svg {
+      font-size: 3.1rem;
+      margin-right: 1.1rem;
+    }
+  }
 `
