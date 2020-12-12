@@ -1,4 +1,5 @@
 import { BsCardChecklist } from 'react-icons/bs'
+import { BsPieChartFill } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
@@ -15,6 +16,10 @@ const SidebarMenu: React.FC = () => {
       </Title>
       <Content>
         <LevelsList>
+          <ListItem button>
+            <ListItemIcon><BsPieChartFill /></ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
           <ListItem button>
             <ListItemIcon><IoIosList /></ListItemIcon>
             <ListItemText primary="Cursos" />
