@@ -5,14 +5,27 @@ import { checkPermission } from '../services/permission'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import { useTheme } from '../hooks/theme'
-import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/users'
+import { Button } from '@material-ui/core'
+import {
+  Container,
+  Main,
+  ContentWrapper,
+  Header,
+  Content,
+  ProfileColumn,
+  ProfileAbout,
+  ProfileDetails,
+  StatsColumn,
+  StatsDetails,
+  Controls
+} from '../styles/pages/profile'
 
-interface IUsers {
+interface IProfile {
   name: string
   isAdmin: boolean
 }
 
-export default function Users({ name, isAdmin }: IUsers): ReactElement {
+export default function Profile({ name, isAdmin }: IProfile): ReactElement {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -23,11 +36,21 @@ export default function Users({ name, isAdmin }: IUsers): ReactElement {
           <Header>
             <div className="greeting">
               <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Esses são nossos usuários 🤖</h3>
             </div>
             <div className="date"></div>
           </Header>
-          <Content></Content>
+          <Content>
+            <ProfileColumn>
+              <ProfileDetails>Profile details</ProfileDetails>
+              <ProfileAbout>Profile about</ProfileAbout>
+            </ProfileColumn>
+            <StatsColumn>
+              <StatsDetails>Stats details</StatsDetails>
+              <Controls>
+                <Button variant="contained" color="primary" size="large">Atualizar</Button>
+              </Controls>
+            </StatsColumn>
+          </Content>
         </ContentWrapper>
       </Main>
     </Container>
@@ -43,9 +66,6 @@ export const getServerSideProps: GetServerSideProps<any> = async (context: any) 
       context.req.cookies['@my-school:token'],
       id
     )
-    if (!isAdmin)
-      throw new Error()
-
     return {
       props: {
         name,
