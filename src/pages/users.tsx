@@ -28,6 +28,7 @@ export default function Users({ name, isAdmin }: IUsers): ReactElement {
             <div className="date"></div>
           </Header>
           <Content>
+            Teste
           </Content>
         </ContentWrapper>
       </Main>

@@ -38,9 +38,11 @@ export const ContentWrapper = styled.div`
   width: 100%;
   height: 90vh;
   margin-top: 10vh;
+
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 `
 
 export const Header = styled.div`
