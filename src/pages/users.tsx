@@ -4,7 +4,7 @@ import { checkPermission } from '../services/permission'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import { useTheme } from '../hooks/theme'
-import { Container, Main, ContentWrapper, Header } from '../styles/pages/dashboard'
+import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/users'
 
 export default function Users({ name, isAdmin }) {
   const { theme } = useTheme()
@@ -21,6 +21,8 @@ export default function Users({ name, isAdmin }) {
             </div>
             <div className="date"></div>
           </Header>
+          <Content>
+          </Content>
         </ContentWrapper>
       </Main>
     </Container>

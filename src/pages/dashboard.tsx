@@ -6,7 +6,7 @@ import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import { BiRefresh } from 'react-icons/bi'
 import { useTheme } from '../hooks/theme'
-import { Container, Main, ContentWrapper, Header } from '../styles/pages/dashboard'
+import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/dashboard'
 
 export default function Dashboard({ date, name, isAdmin }) {
   const { theme } = useTheme()
@@ -26,6 +26,8 @@ export default function Dashboard({ date, name, isAdmin }) {
               <span>{formatLog(date)}</span>
             </div>
           </Header>
+          <Content>
+          </Content>
         </ContentWrapper>
       </Main>
     </Container>
