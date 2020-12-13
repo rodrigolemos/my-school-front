@@ -1,8 +1,9 @@
+import React, { ReactElement } from 'react'
 import { AiFillLinkedin, AiFillGithub, AiFillTwitterCircle } from 'react-icons/ai'
 import { GoMortarBoard } from 'react-icons/go'
 import { DesktopFooter, FooterContent, BrandBox, ContactBox, Copyright } from './styles'
 
-const Footer: React.FC = () => {
+const Footer: React.FC = (): ReactElement => {
   return (
     <DesktopFooter>
       <FooterContent>

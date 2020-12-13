@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   password: yup.string().required().min(6),
 })
 
-const CreateProfile: React.FC = () => {
+export default function CreateProfile(): ReactElement {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>()
   const router = useRouter()
@@ -117,10 +117,10 @@ const CreateProfile: React.FC = () => {
           {!loading ? (
             <button>CRIAR CONTA</button>
           ) : (
-              <div className="loading">
-                <CircularProgress />
-              </div>
-            )}
+            <div className="loading">
+              <CircularProgress />
+            </div>
+          )}
           <div className="controls">
             <Link href="/login">Efetuar Login</Link>
           </div>
@@ -129,5 +129,3 @@ const CreateProfile: React.FC = () => {
     </Container>
   )
 }
-
-export default CreateProfile

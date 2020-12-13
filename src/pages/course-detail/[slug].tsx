@@ -1,6 +1,7 @@
+import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
-const CourseDetail = () => {
+const CourseDetail: React.FC = (): ReactElement => {
   const router = useRouter()
   return (
     <>

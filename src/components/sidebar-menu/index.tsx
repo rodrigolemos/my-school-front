@@ -1,7 +1,7 @@
+import React, { ReactElement } from 'react'
 import Link from 'next/link'
 import { AiOutlineUsergroupAdd } from 'react-icons/ai'
-import { BsCardChecklist } from 'react-icons/bs'
-import { BsPieChartFill } from 'react-icons/bs'
+import { BsCardChecklist, BsPieChartFill } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
@@ -13,7 +13,7 @@ interface ISidebarMenu {
   isAdmin: boolean
 }
 
-const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }) => {
+const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactElement => {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>

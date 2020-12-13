@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { Cookies } from 'react-cookie'
 
 type ThemeProp = 'light' | 'dark'
@@ -10,7 +10,11 @@ interface IThemeContext {
 
 const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 
-const ThemeContextProvider: React.FC = ({ children }) => {
+interface IThemeContextProvider {
+  children: JSX.Element[] | JSX.Element
+}
+
+const ThemeContextProvider: React.FC = ({ children }: IThemeContextProvider) => {
   const [theme, setTheme] = useState<ThemeProp>('dark')
 
   useEffect(() => {
@@ -38,6 +42,7 @@ const ThemeContextProvider: React.FC = ({ children }) => {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const useTheme = () => {
   const context = useContext(ThemeContext)
   if (!context)

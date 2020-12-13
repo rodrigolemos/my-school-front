@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import Link from 'next/link'
 import { GoMortarBoard } from 'react-icons/go'
 import { DesktopNav, NavContent, Title, MobileMenu, Menu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
 
-const Navbar: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false)
+type typeTsMobile = boolean
+
+const Navbar: React.FC = (): ReactElement => {
+  const [isMobile, setIsMobile] = useState<typeTsMobile>(false)
   return (
     <>
       <DesktopNav isMobile={isMobile}>

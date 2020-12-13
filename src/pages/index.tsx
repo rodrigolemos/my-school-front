@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react'
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import {
@@ -11,7 +12,7 @@ import {
   SectionName
 } from '../styles/pages/home'
 
-const Home = () => {
+export default function Home(): ReactElement {
   return (
     <Container>
       <Navbar />
@@ -70,5 +71,3 @@ const Home = () => {
     </Container>
   )
 }
-
-export default Home

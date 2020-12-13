@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react'
 import { GetServerSideProps } from 'next'
 import api from '../services/api'
 import Navbar from '../components/navbar'
@@ -21,9 +22,10 @@ interface ICourse {
 
 interface CourseListProps {
   courses: ICourse[]
+  error?: string
 }
 
-export default function CourseList({ error, courses }) {
+export default function CourseList({ error, courses }: CourseListProps): ReactElement {
   return (
     <Container>
       <Navbar />
@@ -34,8 +36,8 @@ export default function CourseList({ error, courses }) {
             {error ? (
               <h2>{error}</h2>
             ) : (
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur recusandae laboriosam placeat et</h2>
-              )}
+              <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur recusandae laboriosam placeat et</h2>
+            )}
           </Title>
           <ContentWrapper>
             {courses.map((course: ICourse) => (
@@ -54,7 +56,7 @@ export default function CourseList({ error, courses }) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<any> = async () => {
+export const getServerSideProps: GetServerSideProps<unknown> = async () => {
   try {
     const response = await api.get<CourseListProps>('/courses')
 

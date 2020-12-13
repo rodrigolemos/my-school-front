@@ -1,7 +1,8 @@
+import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import Navbar from '../components/navbar'
 
-const About = () => {
+export default function About(): ReactElement {
   const router = useRouter()
   return (
     <>
@@ -11,5 +12,3 @@ const About = () => {
     </>
   )
 }
-
-export default About

@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react'
 import { GetServerSideProps } from 'next'
 import { formatLog } from '../utils/date'
 import { checkAuth } from '../services/auth'
@@ -8,7 +9,13 @@ import { BiRefresh } from 'react-icons/bi'
 import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/dashboard'
 
-export default function Dashboard({ date, name, isAdmin }) {
+interface IDashboard {
+  date: string
+  name: string
+  isAdmin: boolean
+}
+
+export default function Dashboard({ date, name, isAdmin }: IDashboard): ReactElement {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -34,6 +41,7 @@ export default function Dashboard({ date, name, isAdmin }) {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token'])

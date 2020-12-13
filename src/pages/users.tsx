@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react'
 import { GetServerSideProps } from 'next'
 import { checkAuth } from '../services/auth'
 import { checkPermission } from '../services/permission'
@@ -6,7 +7,12 @@ import UserNavBar from '../components/user-navbar'
 import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/users'
 
-export default function Users({ name, isAdmin }) {
+interface IUsers {
+  name: string
+  isAdmin: boolean
+}
+
+export default function Users({ name, isAdmin }: IUsers): ReactElement {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -29,6 +35,7 @@ export default function Users({ name, isAdmin }) {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token'])

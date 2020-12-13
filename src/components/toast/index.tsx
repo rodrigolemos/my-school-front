@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import React, { useState, SyntheticEvent } from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
 import { AlertProps } from '@material-ui/lab/Alert'
 import { StyledAlert } from './styles'
 
 const Alert = (props: AlertProps) => {
-  return <StyledAlert elevation={6} variant="filled" {...props} />;
+  return <StyledAlert elevation={6} variant="filled" {...props} />
 }
 
 interface IToast {
@@ -13,9 +13,9 @@ interface IToast {
 }
 
 const Toast: React.FC<IToast> = ({ type, message }: IToast) => {
-  const [open, setOpen] = useState<boolean>(message ? true : false);
+  const [open, setOpen] = useState<boolean>(message ? true : false)
 
-  const handleClose = (_?: React.SyntheticEvent, reason?: string) => {
+  const handleClose = (_?: SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return
     }

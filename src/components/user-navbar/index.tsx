@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { Cookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import { BiMoon } from 'react-icons/bi'
@@ -14,10 +14,12 @@ interface IUserNavbarProps {
   title: string
 }
 
-const UserNavbar: React.FC<IUserNavbarProps> = ({ title }) => {
+type typeIsMobile = boolean
+
+const UserNavbar: React.FC<IUserNavbarProps> = ({ title }: IUserNavbarProps): ReactElement => {
   const { theme, changeTheme } = useTheme()
   const router = useRouter()
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState<typeIsMobile>(false)
 
   const logOut = () => {
     const cookies = new Cookies()

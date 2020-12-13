@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState, ReactElement } from 'react'
 import { Cookies } from 'react-cookie'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
@@ -25,7 +25,7 @@ const schema = yup.object().shape({
   password: yup.string().required().min(6),
 })
 
-export default function Login() {
+export default function Login(): ReactElement {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>()
   const router = useRouter()
@@ -105,10 +105,10 @@ export default function Login() {
           {!loading ? (
             <button>ENTRAR</button>
           ) : (
-              <div className="loading">
-                <CircularProgress />
-              </div>
-            )}
+            <div className="loading">
+              <CircularProgress />
+            </div>
+          )}
           <div className="controls">
             <Link href="/login">Esqueci minha senha</Link>
             <Link href="/create-profile">Criar Perfil</Link>
@@ -127,6 +127,7 @@ export default function Login() {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token'])
