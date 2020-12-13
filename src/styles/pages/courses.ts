@@ -38,9 +38,11 @@ export const ContentWrapper = styled.div`
   width: 100%;
   height: 90vh;
   margin-top: 10vh;
+
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 `
 
 export const Header = styled.div`
@@ -87,4 +89,14 @@ export const Header = styled.div`
       margin-right: 1.1rem;
     }
   }
+`
+
+export const Content = styled.div`
+  width: 95%;
+  min-height: 85%;
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 `

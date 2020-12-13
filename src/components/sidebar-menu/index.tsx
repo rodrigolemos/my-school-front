@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { AiOutlineUsergroupAdd } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { BsPieChartFill } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
@@ -27,7 +28,7 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }) => {
               <ListItemText primary="Dashboard" />
             </ListItem>
           </Link>
-          <Link href="/me">
+          <Link href="/profile">
             <ListItem button>
               <ListItemIcon><FaUserEdit /></ListItemIcon>
               <ListItemText primary="Perfil" />
@@ -49,7 +50,7 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }) => {
             <>
               <Link href="/users">
                 <ListItem button>
-                  <ListItemIcon><BsCardChecklist /></ListItemIcon>
+                  <ListItemIcon><AiOutlineUsergroupAdd /></ListItemIcon>
                   <ListItemText primary="Usuários" />
                 </ListItem>
               </Link>
