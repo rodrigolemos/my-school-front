@@ -6,7 +6,7 @@ interface IContainer {
 
 export const Container = styled.div<IContainer>`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,6 +43,10 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+
+  @media (max-width: 375px) {
+    height: auto;
+  }
 `
 
 export const Header = styled.div`
@@ -133,10 +137,12 @@ export const InnerProfile = styled.div`
 
 export const ProfileDetails = styled(InnerProfile)`
   height: 55%;
+  min-height: 340px;
 `
 
 export const ProfileAbout = styled(InnerProfile)`
   height: 45%;
+  min-height: 278px;
 `
 
 export const StatsColumn = styled.div`
@@ -152,6 +158,7 @@ export const StatsColumn = styled.div`
 export const StatsDetails = styled.div`
   width: 100%;
   height: 85%;
+  min-height: 536px;
   border: 1px solid var(--logged);
   border-radius: 1rem;
   display: flex;
@@ -169,6 +176,7 @@ export const Controls = styled.div`
 
   @media (max-width: 375px) {
     justify-content: center;
+    margin-top: 2rem;
 
     button {
       width: 100%;
