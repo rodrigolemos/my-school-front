@@ -49,8 +49,10 @@ export default createGlobalStyle`
     --tertiary-light: #565A59;
     --background: #FFFFFF;
     --shadow: #DDDDDD;
-    --white: #F5F5F5;
+    
+    --white: #F7F9FC;
     --light: #DEE4F0;
+    --lighter: #DEE4F0;
 
     --logged-dark: #1B2635;
     --logged: #233044;
