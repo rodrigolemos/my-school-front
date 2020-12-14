@@ -50,8 +50,8 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
   const { theme } = useTheme()
 
   const methods = useForm()
-  const { handleSubmit, control, reset } = methods
-  const onSubmit = data => console.log(data)
+  const { handleSubmit, control} = methods
+  const onSubmit = (data: IUser) => console.log(data)
   
   return (
     <Container customTheme={theme}>
