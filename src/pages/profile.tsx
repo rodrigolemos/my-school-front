@@ -1,7 +1,11 @@
 import React, { ReactElement } from 'react'
 import { GetServerSideProps } from 'next'
+import { AiFillHome } from 'react-icons/ai'
+import { BsChatSquareQuote } from 'react-icons/bs'
+import { FaTwitter } from 'react-icons/fa'
+import { formatDate } from '../utils/date'
 import { checkAuth } from '../services/auth'
-import { checkPermission } from '../services/permission'
+import api from '../services/api'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import { useTheme } from '../hooks/theme'
@@ -17,15 +21,28 @@ import {
   ProfileDetails,
   StatsColumn,
   StatsDetails,
-  Controls
+  Controls,
+  Avatar,
+  Personal,
+  About
 } from '../styles/pages/profile'
 
-interface IProfile {
+interface IUser {
+  id: string
   name: string
-  isAdmin: boolean
+  email: string
+  role: string
+  created_by?: string
+  created_at?: Date
+  updated_at?: Date
 }
 
-export default function Profile({ name, isAdmin }: IProfile): ReactElement {
+interface IProfile {
+  isAdmin: boolean
+  user: IUser
+}
+
+export default function Profile({ isAdmin, user }: IProfile): ReactElement {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -35,17 +52,37 @@ export default function Profile({ name, isAdmin }: IProfile): ReactElement {
         <ContentWrapper>
           <Header>
             <div className="greeting">
-              <h2>Bem vindo novamente, {name}!</h2>
+              <h2>Bem vindo novamente, {user.name}!</h2>
             </div>
             <div className="date"></div>
           </Header>
           <Content>
             <ProfileColumn>
-              <ProfileDetails>Profile details</ProfileDetails>
-              <ProfileAbout>Profile about</ProfileAbout>
+              <ProfileDetails>
+                <Avatar />
+                <Personal>
+                  <span>{user.name}</span>
+                  <span>{user.role}</span>
+                  <span>{user.email}</span>
+                </Personal>
+              </ProfileDetails>
+              <ProfileAbout>
+                <About>
+                  <span>Sobre</span>
+                  <label>
+                    <AiFillHome />Perfil criado {formatDate(user.created_at)}
+                  </label>
+                  <label>
+                    <BsChatSquareQuote />Bio: Aqui haverá uma citação!
+                  </label>
+                  <label>
+                    <FaTwitter />Twitter: @contato
+                  </label>
+                </About>
+              </ProfileAbout>
             </ProfileColumn>
             <StatsColumn>
-              <StatsDetails>Stats details</StatsDetails>
+              <StatsDetails></StatsDetails>
               <Controls>
                 <Button variant="contained" color="primary" size="large">Atualizar</Button>
               </Controls>
@@ -61,15 +98,25 @@ export default function Profile({ name, isAdmin }: IProfile): ReactElement {
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token'])
-    const { id, name } = JSON.parse(context.req.cookies['@my-school:user'])
-    const isAdmin = await checkPermission(
-      context.req.cookies['@my-school:token'],
-      id
-    )
+    const { id } = JSON.parse(context.req.cookies['@my-school:user'])
+
+    const response = await api.get<IUser>(`/users/about/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${context.req.cookies['@my-school:token']}`
+      }
+    })
+
+    if (response.status !== 200)
+      throw new Error('Not allowed')
+    
+    const user: IUser = response.data[0]
+    
+    const isAdmin = user.role === 'admin' ? true : false
+    
     return {
       props: {
-        name,
-        isAdmin
+        isAdmin,
+        user
       }
     }
   } catch (err) {
