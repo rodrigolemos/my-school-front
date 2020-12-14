@@ -1,23 +1,15 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { List } from '@material-ui/core'
 
-interface IContainer {
-  customTheme: string
-}
 
-export const Container = styled.aside<IContainer>`
+export const Container = styled.aside`
   z-index: 2;
   height: 100vh;
   width: 17%;
   
   transition: all .2s ease-in-out;
-  ${({ customTheme }) => customTheme === 'dark' ? css`
-    background-color: var(--logged);
-    color: var(--white);
-  ` : css`
-    background-color: var(--shadow);
-    color: var(--logged);
-  `}
+  background-color: var(--logged);
+  color: var(--white);
 
   @media (max-width: 1110px) {
     display: none;

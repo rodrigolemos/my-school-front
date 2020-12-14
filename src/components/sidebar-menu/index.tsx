@@ -5,7 +5,6 @@ import { BsCardChecklist, BsPieChartFill } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
-import { useTheme } from '../../hooks/theme'
 import { Container, Title, Content, LevelsList } from './styles'
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 
@@ -14,9 +13,8 @@ interface ISidebarMenu {
 }
 
 const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactElement => {
-  const { theme } = useTheme()
   return (
-    <Container customTheme={theme}>
+    <Container>
       <Title>
         <GoMortarBoard />My School
       </Title>
