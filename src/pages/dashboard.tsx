@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react'
 import { GetServerSideProps } from 'next'
-import { formatLog } from '../utils/date'
 import { checkAuth } from '../services/auth'
 import { checkPermission } from '../services/permission'
 import SidebarMenu from '../components/sidebar-menu'
@@ -10,12 +9,11 @@ import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/dashboard'
 
 interface IDashboard {
-  date: string
   name: string
   isAdmin: boolean
 }
 
-export default function Dashboard({ date, name, isAdmin }: IDashboard): ReactElement {
+export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
   const { theme } = useTheme()
   return (
     <Container customTheme={theme}>
@@ -30,7 +28,6 @@ export default function Dashboard({ date, name, isAdmin }: IDashboard): ReactEle
             </div>
             <div className="date">
               <BiRefresh />
-              <span>{formatLog(date)}</span>
             </div>
           </Header>
           <Content>
@@ -52,7 +49,6 @@ export const getServerSideProps: GetServerSideProps<any> = async (context: any) 
     )
     return {
       props: {
-        date: new Date().toLocaleString('pt-br'),
         name,
         isAdmin
       }
