@@ -19,13 +19,17 @@ import {
   ProfileColumn,
   ProfileAbout,
   ProfileDetails,
-  StatsColumn,
-  StatsDetails,
+  FormColumn,
+  FormArea,
+  Form,
   Controls,
   Avatar,
   Personal,
-  About
+  About,
+  CustomInput
 } from '../styles/pages/profile'
+
+import { useForm, Controller } from 'react-hook-form'
 
 interface IUser {
   id: string
@@ -33,8 +37,8 @@ interface IUser {
   email: string
   role: string
   created_by?: string
-  created_at?: Date
-  updated_at?: Date
+  created_at: Date
+  updated_at: Date
 }
 
 interface IProfile {
@@ -44,11 +48,16 @@ interface IProfile {
 
 export default function Profile({ isAdmin, user }: IProfile): ReactElement {
   const { theme } = useTheme()
+
+  const methods = useForm()
+  const { handleSubmit, control, reset } = methods
+  const onSubmit = data => console.log(data)
+  
   return (
     <Container customTheme={theme}>
       <SidebarMenu isAdmin={isAdmin} />
       <Main>
-        <UserNavBar title="Usuários" />
+        <UserNavBar title="Perfil" />
         <ContentWrapper>
           <Header>
             <div className="greeting">
@@ -57,9 +66,9 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
             <div className="date"></div>
           </Header>
           <Content>
-            <ProfileColumn>
+            <ProfileColumn >
               <ProfileDetails>
-                <Avatar />
+                <Avatar customTheme={theme} />
                 <Personal>
                   <span>{user.name}</span>
                   <span>{user.role}</span>
@@ -67,7 +76,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                 </Personal>
               </ProfileDetails>
               <ProfileAbout>
-                <About>
+                <About customTheme={theme}>
                   <span>Sobre</span>
                   <label>
                     <AiFillHome />Perfil criado {formatDate(user.created_at)}
@@ -81,12 +90,40 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                 </About>
               </ProfileAbout>
             </ProfileColumn>
-            <StatsColumn>
-              <StatsDetails></StatsDetails>
+            <FormColumn>
+              <FormArea>
+                <Form onSubmit={handleSubmit(onSubmit)} customTheme={theme}>
+                  <h3>Minhas informações</h3>
+                  <Controller
+                    name="name"
+                    control={control}
+                    defaultValue={user.name}
+                    as={<CustomInput label="Nome" variant="filled" />}
+                  />
+                  <Controller
+                    name="email"
+                    control={control}
+                    defaultValue={user.email}
+                    as={<CustomInput label="E-mail" variant="filled" />}
+                  />
+                  <Controller
+                    name="password"
+                    control={control}
+                    defaultValue=""
+                    as={<CustomInput label="Senha" variant="filled" />}
+                  />
+                  <Controller
+                    name="bio"
+                    control={control}
+                    defaultValue=""
+                    as={<CustomInput label="Sobre mim" variant="filled" multiline rows={5} />}
+                  />
+                </Form>
+              </FormArea>
               <Controls>
                 <Button variant="contained" color="primary" size="large">Atualizar</Button>
               </Controls>
-            </StatsColumn>
+            </FormColumn>
           </Content>
         </ContentWrapper>
       </Main>

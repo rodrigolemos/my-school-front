@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { TextField } from '@material-ui/core'
 
 interface IContainer {
   customTheme: string
@@ -44,7 +45,7 @@ export const ContentWrapper = styled.div`
   justify-content: flex-start;
   flex-direction: column;
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     height: auto;
   }
 `
@@ -57,7 +58,7 @@ export const Header = styled.div`
   justify-content: space-between;
   padding: 0 1rem;
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 
@@ -73,7 +74,7 @@ export const Header = styled.div`
       font-weight: normal;
     }
 
-    @media (max-width: 375px) {
+    @media (max-width: 768px) {
       text-align: center;
       margin: 2rem 0;
     }
@@ -104,27 +105,27 @@ export const Content = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 `
 
 export const ProfileColumn = styled.div`
   height: 100%;
-  width: 30%;
+  width: 35%;
   padding: 1rem;
 
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     width: 100%;
   }
 `
 
 export const InnerProfile = styled.div`
   width: 100%;
-  border: 1px solid var(--logged);
+  /* border: 1px solid var(--logged); */
   border-radius: 1rem;
   display: flex;
   align-items: center;
@@ -141,12 +142,19 @@ export const ProfileDetails = styled(InnerProfile)`
   flex-direction: column;
 `
 
-export const Avatar = styled.div`
+export const Avatar = styled.div<IContainer>`
   width: 200px;
   height: 200px;
   margin-bottom: 2rem;
   border-radius: 50%;
-  background-color: var(--logged);
+  
+  ${({ customTheme }) => customTheme === 'dark' ? css`
+    background-color: var(--logged);
+    color: var(--white);
+  ` : css`
+    background-color: var(--lighter);
+    color: var(--logged);
+  `}
 `
 
 export const Personal = styled.div`
@@ -161,18 +169,26 @@ export const Personal = styled.div`
   }
 `
 
-export const About = styled.div`
+export const About = styled.div<IContainer>`
   font-size: 1.4rem;
   width: 80%;
   height: 75%;
   border-radius: 5px;
-  padding: 1.4rem;
-  background-color: var(--logged);
+  padding: 1.6rem;
 
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+
+  transition: all .2s ease-in-out;
+  ${({ customTheme }) => customTheme === 'dark' ? css`
+    background-color: var(--logged);
+    color: var(--white);
+  ` : css`
+    background-color: var(--lighter);
+    color: var(--logged);
+  `}
 
   @media (max-width: 375px) {
     width: 95%;
@@ -199,25 +215,50 @@ export const ProfileAbout = styled(InnerProfile)`
   min-height: 278px;
 `
 
-export const StatsColumn = styled.div`
+export const FormColumn = styled.div`
   height: 100%;
-  width: 70%;
+  width: 65%;
   padding: 1rem;
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     width: 100%;
   }
 `
 
-export const StatsDetails = styled.div`
+export const FormArea = styled.div`
   width: 100%;
   height: 85%;
   min-height: 536px;
-  border: 1px solid var(--logged);
+  /* border: 1px solid var(--logged); */
+  padding: 1rem;
   border-radius: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+`
+
+export const Form = styled.form<IContainer>`
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  border-radius: 5px;
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  transition: all .2s ease-in-out;
+  ${({ customTheme }) => customTheme === 'dark' ? css`
+    background-color: var(--logged);
+    * {
+      color: var(--white);
+    }
+  ` : css`
+    background-color: var(--lighter);
+    * {
+      color: var(--logged);
+    }
+  `}
 `
 
 export const Controls = styled.div`
@@ -232,12 +273,22 @@ export const Controls = styled.div`
     font-size: 1.2rem;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     justify-content: center;
     margin-top: 2rem;
 
     button {
       width: 100%;
     }
+  }
+`
+
+export const CustomInput = styled(TextField)`
+  margin: 2rem 0 !important;
+  width: 100%;
+  * {
+    font-size: 1.6rem !important;
+    padding-top: .6rem;
+    color: inherit !important;
   }
 `
