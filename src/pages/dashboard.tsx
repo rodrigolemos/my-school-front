@@ -1,10 +1,12 @@
 import React, { ReactElement } from 'react'
 import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { checkAuth } from '../services/auth'
 import { checkPermission } from '../services/permission'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import { BiRefresh } from 'react-icons/bi'
+import Toast from '../components/toast'
 import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/dashboard'
 
 interface IDashboard {
@@ -13,10 +15,13 @@ interface IDashboard {
 }
 
 export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
+  const router = useRouter()
+  const { user } = router.query
   return (
     <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
       <Main>
+        {user && <Toast type="success" message="Perfil atualizado com sucesso!" />}
         <UserNavBar title="Dashboard" />
         <ContentWrapper>
           <Header>
