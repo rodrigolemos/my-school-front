@@ -8,7 +8,6 @@ import { checkAuth } from '../services/auth'
 import api from '../services/api'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
-import { useTheme } from '../hooks/theme'
 import { Button } from '@material-ui/core'
 import {
   Container,
@@ -47,14 +46,12 @@ interface IProfile {
 }
 
 export default function Profile({ isAdmin, user }: IProfile): ReactElement {
-  const { theme } = useTheme()
-
   const methods = useForm()
   const { handleSubmit, control} = methods
   const onSubmit = (data: IUser) => console.log(data)
   
   return (
-    <Container customTheme={theme}>
+    <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
       <Main>
         <UserNavBar title="Perfil" />
@@ -68,7 +65,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
           <Content>
             <ProfileColumn >
               <ProfileDetails>
-                <Avatar customTheme={theme} />
+                <Avatar className="themed-aux" />
                 <Personal>
                   <span>{user.name}</span>
                   <span>{user.role}</span>
@@ -76,7 +73,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                 </Personal>
               </ProfileDetails>
               <ProfileAbout>
-                <About customTheme={theme}>
+                <About className="themed-aux">
                   <span>Sobre</span>
                   <label>
                     <AiFillHome />Perfil criado {formatDate(user.created_at)}
@@ -92,7 +89,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
             </ProfileColumn>
             <FormColumn>
               <FormArea>
-                <Form onSubmit={handleSubmit(onSubmit)} customTheme={theme}>
+                <Form onSubmit={handleSubmit(onSubmit)} className="themed-aux">
                   <h3>Minhas informações</h3>
                   <Controller
                     name="name"

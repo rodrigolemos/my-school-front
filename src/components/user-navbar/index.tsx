@@ -17,7 +17,7 @@ interface IUserNavbarProps {
 type typeIsMobile = boolean
 
 const UserNavbar: React.FC<IUserNavbarProps> = ({ title }: IUserNavbarProps): ReactElement => {
-  const { theme, changeTheme } = useTheme()
+  const { changeTheme } = useTheme()
   const router = useRouter()
   const [isMobile, setIsMobile] = useState<typeIsMobile>(false)
 
@@ -32,7 +32,7 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }: IUserNavbarProps): Re
 
   return (
     <>
-      <DesktopNav isMobile={isMobile} customTheme={theme}>
+      <DesktopNav isMobile={isMobile} className="themed">
         <NavContent>
           <div>
             <OpenMobileMenu />
@@ -75,7 +75,7 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }: IUserNavbarProps): Re
           </OpenMobileNav>
         </NavContent>
       </DesktopNav>
-      <MobileNav isMobile={isMobile} customTheme={theme}>
+      <MobileNav isMobile={isMobile} className="themed">
         <CloseMobileNav onClick={() => setIsMobile(false)} />
         <MobileMenu>
           <li>

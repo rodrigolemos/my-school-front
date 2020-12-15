@@ -5,7 +5,6 @@ import { checkPermission } from '../services/permission'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import { BiRefresh } from 'react-icons/bi'
-import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/dashboard'
 
 interface IDashboard {
@@ -14,9 +13,8 @@ interface IDashboard {
 }
 
 export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
-  const { theme } = useTheme()
   return (
-    <Container customTheme={theme}>
+    <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
       <Main>
         <UserNavBar title="Dashboard" />

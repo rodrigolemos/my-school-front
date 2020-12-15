@@ -4,7 +4,6 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 interface NavProps {
   isMobile: boolean
-  customTheme: string
 }
 
 export const DesktopNav = styled.nav<NavProps>`
@@ -12,18 +11,6 @@ export const DesktopNav = styled.nav<NavProps>`
   position: absolute;
   top: 0;
   left: 0;
-  
-  transition: all .2s ease-in-out;
-  ${({ customTheme }) => customTheme === 'dark' ? css`
-    background-color: var(--logged-dark);
-    color: var(--white);
-    border-bottom: 1px solid var(--logged);
-  ` : css`
-    background-color: var(--white);
-    color: var(--logged);
-    border-bottom: 1px solid var(--white);
-    box-shadow: 0 0 1.3rem var(--shadow);
-  `}
 
   width: 100%;
   height: 10vh;
@@ -46,15 +33,6 @@ export const MobileNav = styled.div<NavProps>`
 
   width: 100%;
   height: 100vh;
-
-  transition: all .2s ease-in-out;
-  ${({ customTheme }) => customTheme === 'dark' ? css`
-    background-color: var(--logged-dark);
-    color: var(--white);
-  ` : css`
-    background-color: var(--white);
-    color: var(--logged);
-  `}
 
   ${({ isMobile }) => isMobile && css`
     display: flex;

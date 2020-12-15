@@ -4,7 +4,6 @@ import { checkAuth } from '../services/auth'
 import { checkPermission } from '../services/permission'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
-import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/users'
 
 interface IUsers {
@@ -13,9 +12,8 @@ interface IUsers {
 }
 
 export default function Users({ name, isAdmin }: IUsers): ReactElement {
-  const { theme } = useTheme()
   return (
-    <Container customTheme={theme}>
+    <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
       <Main>
         <UserNavBar title="Usuários" />

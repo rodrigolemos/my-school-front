@@ -1,25 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { TextField } from '@material-ui/core'
 
-interface IContainer {
-  customTheme: string
-}
-
-export const Container = styled.div<IContainer>`
+export const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: all .2s ease-in-out;
-  ${({ customTheme }) => customTheme === 'dark' ? css`
-    background-color: var(--logged-dark);
-    color: var(--white);
-  ` : css`
-    background-color: var(--white);
-    color: var(--logged);
-  `}
 `
 
 export const Main = styled.main`
@@ -142,19 +129,11 @@ export const ProfileDetails = styled(InnerProfile)`
   flex-direction: column;
 `
 
-export const Avatar = styled.div<IContainer>`
+export const Avatar = styled.div`
   width: 200px;
   height: 200px;
   margin-bottom: 2rem;
   border-radius: 50%;
-  
-  ${({ customTheme }) => customTheme === 'dark' ? css`
-    background-color: var(--logged);
-    color: var(--white);
-  ` : css`
-    background-color: var(--lighter);
-    color: var(--logged);
-  `}
 `
 
 export const Personal = styled.div`
@@ -169,7 +148,7 @@ export const Personal = styled.div`
   }
 `
 
-export const About = styled.div<IContainer>`
+export const About = styled.div`
   font-size: 1.4rem;
   width: 80%;
   height: 75%;
@@ -180,15 +159,6 @@ export const About = styled.div<IContainer>`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-
-  transition: all .2s ease-in-out;
-  ${({ customTheme }) => customTheme === 'dark' ? css`
-    background-color: var(--logged);
-    color: var(--white);
-  ` : css`
-    background-color: var(--lighter);
-    color: var(--logged);
-  `}
 
   @media (max-width: 375px) {
     width: 95%;
@@ -237,7 +207,7 @@ export const FormArea = styled.div`
   justify-content: flex-start;
 `
 
-export const Form = styled.form<IContainer>`
+export const Form = styled.form`
   width: 100%;
   height: 100%;
   padding: 2rem;
@@ -246,19 +216,6 @@ export const Form = styled.form<IContainer>`
   h3 {
     font-size: 2rem;
   }
-
-  transition: all .2s ease-in-out;
-  ${({ customTheme }) => customTheme === 'dark' ? css`
-    background-color: var(--logged);
-    * {
-      color: var(--white);
-    }
-  ` : css`
-    background-color: var(--lighter);
-    * {
-      color: var(--logged);
-    }
-  `}
 `
 
 export const Controls = styled.div`
