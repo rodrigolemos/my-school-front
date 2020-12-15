@@ -134,6 +134,10 @@ export const Avatar = styled.div`
   height: 200px;
   margin-bottom: 2rem;
   border-radius: 50%;
+  font-size: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const Personal = styled.div`
@@ -197,9 +201,8 @@ export const FormColumn = styled.div`
 
 export const FormArea = styled.div`
   width: 100%;
-  height: 85%;
+  height: 100%;
   min-height: 536px;
-  /* border: 1px solid var(--logged); */
   padding: 1rem;
   border-radius: 1rem;
   display: flex;
