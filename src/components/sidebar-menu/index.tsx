@@ -5,8 +5,8 @@ import { BsCardChecklist, BsPieChartFill } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
-import { Container, Title, Content, LevelsList } from './styles'
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import { Container, Title, Content, LevelsList, ListIcon } from './styles'
+import { ListItem, ListItemText } from '@material-ui/core'
 
 interface ISidebarMenu {
   isAdmin: boolean
@@ -22,25 +22,25 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
         <LevelsList>
           <Link href="/dashboard">
             <ListItem button>
-              <ListItemIcon><BsPieChartFill /></ListItemIcon>
+              <ListIcon><BsPieChartFill /></ListIcon>
               <ListItemText primary="Dashboard" />
             </ListItem>
           </Link>
           <Link href="/profile">
             <ListItem button>
-              <ListItemIcon><FaUserEdit /></ListItemIcon>
+              <ListIcon><FaUserEdit /></ListIcon>
               <ListItemText primary="Perfil" />
             </ListItem>
           </Link>
           <Link href="/courses">
             <ListItem button>
-              <ListItemIcon><IoIosList /></ListItemIcon>
+              <ListIcon><IoIosList /></ListIcon>
               <ListItemText primary="Cursos" />
             </ListItem>
           </Link>
           <Link href="/classes">
             <ListItem button>
-              <ListItemIcon><GoMortarBoard /></ListItemIcon>
+              <ListIcon><GoMortarBoard /></ListIcon>
               <ListItemText primary="Aulas" />
             </ListItem>
           </Link>
@@ -48,13 +48,13 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
             <>
               <Link href="/users">
                 <ListItem button>
-                  <ListItemIcon><AiOutlineUsergroupAdd /></ListItemIcon>
+                  <ListIcon><AiOutlineUsergroupAdd /></ListIcon>
                   <ListItemText primary="Usuários" />
                 </ListItem>
               </Link>
               <Link href="/enrollments">
                 <ListItem button>
-                  <ListItemIcon><BsCardChecklist /></ListItemIcon>
+                  <ListIcon><BsCardChecklist /></ListIcon>
                   <ListItemText primary="Matrículas" />
                 </ListItem>
               </Link>

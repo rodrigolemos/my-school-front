@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { List } from '@material-ui/core'
-
+import { List, ListItemIcon } from '@material-ui/core'
 
 export const Container = styled.aside`
   z-index: 2;
@@ -43,11 +42,16 @@ export const Content = styled.div`
 
 export const LevelsList = styled(List)`
   span {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
   }
 
   svg {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     color: var(--logged-font);
   }
+`
+
+export const ListIcon = styled(ListItemIcon)`
+  min-width: 35px !important;
+  text-align: center;
 `
