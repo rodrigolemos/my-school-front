@@ -116,3 +116,10 @@ export const StatsArea = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 `
+
+export const DashboardArea = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  border-radius: 5px;
+`

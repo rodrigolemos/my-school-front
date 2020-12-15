@@ -15,7 +15,8 @@ import {
   Header,
   Content,
   StatsColumn,
-  StatsArea
+  StatsArea,
+  DashboardArea
 } from '../styles/pages/dashboard'
 
 interface IUser {
@@ -58,7 +59,9 @@ export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactEle
           <Content>
             <ProfileContainer {...user} />
             <StatsColumn>
-              <StatsArea></StatsArea>
+              <StatsArea>
+                <DashboardArea className="themed-aux" />
+              </StatsArea>
             </StatsColumn>
           </Content>
         </ContentWrapper>
