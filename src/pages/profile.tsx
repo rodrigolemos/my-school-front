@@ -39,6 +39,8 @@ interface IUser {
   name: string
   email: string
   role: string
+  contact: string
+  bio: string
   created_by?: string
   created_at: Date
   updated_at: Date
@@ -54,15 +56,16 @@ interface IFormInput {
   name: string
   email: string
   password: string
-  bio: string
   contact?: string
+  bio?: string
 }
 
 const schema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required().min(6),
-  bio: yup.string().required().min(6),
+  contact: yup.string(),
+  bio: yup.string(),
 })
 
 export default function Profile({ isAdmin, user }: IProfile): ReactElement {
@@ -97,7 +100,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
       }
     } catch (error) {
       if (error.response) {
-        if (error.response.status == 400 || error.response.status == 401) {
+        if (error.response.status == 400 || error.response.status == 401 || error.response.status == 403) {
           setError('Ops, não foi possível atualizar o seu perfil. Por favor, confira suas informações e tente novamente.')
         } else {
           setError('Ops, não foi possível atualizar o seu perfil. Por favor, tente novamente mais tarde.')
@@ -133,10 +136,10 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                     <AiFillHome />Perfil criado {formatDate(user.created_at)}
                   </label>
                   <label>
-                    <FaTwitter />Twitter: @contato
+                    <FaTwitter />Contato: {user.contact ? user.contact : 'Adicione um contato!'}
                   </label>
                   <label>
-                    <BsChatSquareQuote />Bio: Aqui haverá uma citação!
+                    <BsChatSquareQuote />Bio: {user.bio ? user.bio : 'Adicione uma bio!'}
                   </label>
                 </About>
               </ProfileAbout>
@@ -175,8 +178,8 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                   <Controller
                     name="contact"
                     control={control}
-                    defaultValue=""
-                    as={<CustomInput label="Contato" variant="filled" required ref={register} />}
+                    defaultValue={user.contact ? user.contact : ''}
+                    as={<CustomInput label="Contato" variant="filled" ref={register} />}
                   />
                   {errors.password && (
                     <p className="error">Preencha corretamente a senha</p>
@@ -184,8 +187,8 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                   <Controller
                     name="bio"
                     control={control}
-                    defaultValue=""
-                    as={<CustomInput label="Bio" variant="filled" required ref={register} multiline rows={5} />}
+                    defaultValue={user.bio ? user.bio : ''}
+                    as={<CustomInput label="Bio" variant="filled" ref={register} multiline rows={5} />}
                   />
                   {errors.bio && (
                     <p className="error">Preencha corretamente a bio</p>
