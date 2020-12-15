@@ -90,3 +90,15 @@ export const ProfileAbout = styled(InnerProfile)`
   height: 45%;
   min-height: 278px;
 `
+
+export const CustomRoleDescription = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 5px;
+
+  svg {
+    margin-right: 1rem;
+  }
+`
