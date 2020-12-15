@@ -1,13 +1,17 @@
-import React, { ReactElement } from 'react'
+import React, { useState, ReactElement } from 'react'
+import { Cookies } from 'react-cookie'
+import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { AiFillHome } from 'react-icons/ai'
 import { BsChatSquareQuote } from 'react-icons/bs'
 import { FaTwitter } from 'react-icons/fa'
 import { formatDate } from '../utils/date'
 import { checkAuth } from '../services/auth'
+import { CircularProgress } from '@material-ui/core'
 import api from '../services/api'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
+import Toast from '../components/toast'
 import { Button } from '@material-ui/core'
 import {
   Container,
@@ -27,8 +31,9 @@ import {
   About,
   CustomInput
 } from '../styles/pages/profile'
-
 import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 interface IUser {
   id: string
@@ -45,10 +50,64 @@ interface IProfile {
   user: IUser
 }
 
+interface IFormInput {
+  id: string
+  name: string
+  email: string
+  password: string
+  bio: string
+}
+
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required().min(6),
+  bio: yup.string().required().min(6),
+})
+
 export default function Profile({ isAdmin, user }: IProfile): ReactElement {
-  const methods = useForm()
-  const { handleSubmit, control} = methods
-  const onSubmit = (data: IUser) => console.log(data)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>()
+  const router = useRouter()
+  const { register, control, handleSubmit, errors } = useForm<IFormInput>({
+    resolver: yupResolver(schema)
+  })
+
+  const onSubmit = async (data: IFormInput) => {
+    setLoading(true)
+    setError('')
+    try {
+      const cookies = new Cookies()
+
+      const token = cookies.get('@my-school:token')
+      const { id } = cookies.get('@my-school:user')
+
+      data.id = id
+
+      const response = await api.put('/users', data, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'client_id': id
+        }
+      })
+
+      if (response.status === 200) {
+        cookies.set('@my-school:user', JSON.stringify({ id, name: data.name }))
+        router.push('/dashboard?user=updated')
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 400 || error.response.status == 401) {
+          setError('Ops, não foi possível atualizar o seu perfil. Por favor, confira suas informações e tente novamente.')
+        } else {
+          setError('Ops, não foi possível atualizar o seu perfil. Por favor, tente novamente mais tarde.')
+        }
+      } else {
+        setError('Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.')
+      }
+    }
+    setLoading(false)
+  }
   
   return (
     <Container className="themed">
@@ -63,9 +122,10 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
             <div className="date"></div>
           </Header>
           <Content>
+            {error && <Toast type="error" message={error} />}
             <ProfileColumn >
               <ProfileDetails>
-                <Avatar className="themed-aux" />
+                <Avatar className="themed-aux">{user.name.substr(0, 1)}</Avatar>
                 <Personal>
                   <span>{user.name}</span>
                   <span>{user.role}</span>
@@ -95,31 +155,47 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                     name="name"
                     control={control}
                     defaultValue={user.name}
-                    as={<CustomInput label="Nome" variant="filled" />}
+                    as={<CustomInput label="Nome" variant="filled" required ref={register} />}
                   />
+                  {errors.name && (
+                    <p className="error">Preencha corretamente o nome</p>
+                  )}
                   <Controller
                     name="email"
                     control={control}
                     defaultValue={user.email}
-                    as={<CustomInput label="E-mail" variant="filled" />}
+                    as={<CustomInput label="E-mail" variant="filled" required ref={register} />}
                   />
+                  {errors.email && (
+                    <p className="error">Preencha corretamente o email</p>
+                  )}
                   <Controller
                     name="password"
                     control={control}
                     defaultValue=""
-                    as={<CustomInput label="Senha" variant="filled" />}
+                    as={<CustomInput label="Senha" variant="filled" required ref={register} />}
                   />
+                  {errors.password && (
+                    <p className="error">Preencha corretamente a senha</p>
+                  )}
                   <Controller
                     name="bio"
                     control={control}
                     defaultValue=""
-                    as={<CustomInput label="Sobre mim" variant="filled" multiline rows={5} />}
+                    as={<CustomInput label="Sobre mim" variant="filled" required ref={register} multiline rows={5} />}
                   />
+                  {errors.bio && (
+                    <p className="error">Preencha corretamente a bio</p>
+                  )}
+                  <Controls>
+                    {!loading ? (
+                      <Button type="submit" variant="contained" color="primary" size="large">Atualizar</Button>
+                    ) : (
+                      <CircularProgress />
+                    )}
+                  </Controls>
                 </Form>
               </FormArea>
-              <Controls>
-                <Button variant="contained" color="primary" size="large">Atualizar</Button>
-              </Controls>
             </FormColumn>
           </Content>
         </ContentWrapper>
