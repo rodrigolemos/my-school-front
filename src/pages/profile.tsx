@@ -17,7 +17,6 @@ import {
   Container,
   Main,
   ContentWrapper,
-  Header,
   Content,
   ProfileColumn,
   ProfileAbout,
@@ -56,6 +55,7 @@ interface IFormInput {
   email: string
   password: string
   bio: string
+  contact?: string
 }
 
 const schema = yup.object().shape({
@@ -115,12 +115,6 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
       <Main>
         <UserNavBar title="Perfil" />
         <ContentWrapper>
-          <Header>
-            <div className="greeting">
-              <h2>Bem vindo novamente, {user.name}!</h2>
-            </div>
-            <div className="date"></div>
-          </Header>
           <Content>
             {error && <Toast type="error" message={error} />}
             <ProfileColumn >
@@ -139,10 +133,10 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                     <AiFillHome />Perfil criado {formatDate(user.created_at)}
                   </label>
                   <label>
-                    <BsChatSquareQuote />Bio: Aqui haverá uma citação!
+                    <FaTwitter />Twitter: @contato
                   </label>
                   <label>
-                    <FaTwitter />Twitter: @contato
+                    <BsChatSquareQuote />Bio: Aqui haverá uma citação!
                   </label>
                 </About>
               </ProfileAbout>
@@ -173,7 +167,16 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                     name="password"
                     control={control}
                     defaultValue=""
-                    as={<CustomInput label="Senha" variant="filled" required ref={register} />}
+                    as={<CustomInput type="password" label="Nova Senha" variant="filled" required ref={register} />}
+                  />
+                  {errors.password && (
+                    <p className="error">Preencha corretamente a senha</p>
+                  )}
+                  <Controller
+                    name="contact"
+                    control={control}
+                    defaultValue=""
+                    as={<CustomInput label="Contato" variant="filled" required ref={register} />}
                   />
                   {errors.password && (
                     <p className="error">Preencha corretamente a senha</p>
@@ -182,7 +185,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                     name="bio"
                     control={control}
                     defaultValue=""
-                    as={<CustomInput label="Sobre mim" variant="filled" required ref={register} multiline rows={5} />}
+                    as={<CustomInput label="Bio" variant="filled" required ref={register} multiline rows={5} />}
                   />
                   {errors.bio && (
                     <p className="error">Preencha corretamente a bio</p>
