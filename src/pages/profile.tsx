@@ -2,15 +2,12 @@ import React, { useState, ReactElement } from 'react'
 import { Cookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
-import { AiFillHome } from 'react-icons/ai'
-import { BsChatSquareQuote } from 'react-icons/bs'
-import { FaTwitter } from 'react-icons/fa'
-import { formatDate } from '../utils/date'
 import { checkAuth } from '../services/auth'
 import { CircularProgress } from '@material-ui/core'
 import api from '../services/api'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
+import ProfileContainer from '../components/profile-container'
 import Toast from '../components/toast'
 import { Button } from '@material-ui/core'
 import {
@@ -18,16 +15,10 @@ import {
   Main,
   ContentWrapper,
   Content,
-  ProfileColumn,
-  ProfileAbout,
-  ProfileDetails,
   FormColumn,
   FormArea,
   Form,
   Controls,
-  Avatar,
-  Personal,
-  About,
   CustomInput
 } from '../styles/pages/profile'
 import { useForm, Controller } from 'react-hook-form'
@@ -96,7 +87,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
 
       if (response.status === 200) {
         cookies.set('@my-school:user', JSON.stringify({ id, name: data.name }))
-        router.push('/dashboard?user=updated')
+        router.push('/dashboard?updated=true')
       }
     } catch (error) {
       if (error.response) {
@@ -120,30 +111,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
         <ContentWrapper>
           <Content>
             {error && <Toast type="error" message={error} />}
-            <ProfileColumn >
-              <ProfileDetails>
-                <Avatar className="themed-aux">{user.name.substr(0, 1)}</Avatar>
-                <Personal>
-                  <span>{user.name}</span>
-                  <span>{user.role}</span>
-                  <span>{user.email}</span>
-                </Personal>
-              </ProfileDetails>
-              <ProfileAbout>
-                <About className="themed-aux">
-                  <span>Sobre</span>
-                  <label>
-                    <AiFillHome />Perfil criado {formatDate(user.created_at)}
-                  </label>
-                  <label>
-                    <FaTwitter />Contato: {user.contact ? user.contact : 'Adicione um contato!'}
-                  </label>
-                  <label>
-                    <BsChatSquareQuote />Bio: {user.bio ? user.bio : 'Adicione uma bio!'}
-                  </label>
-                </About>
-              </ProfileAbout>
-            </ProfileColumn>
+            <ProfileContainer {...user} />
             <FormColumn>
               <FormArea>
                 <Form onSubmit={handleSubmit(onSubmit)} className="themed-aux">
@@ -170,7 +138,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                     name="password"
                     control={control}
                     defaultValue=""
-                    as={<CustomInput type="password" label="Nova Senha" variant="filled" required ref={register} />}
+                    as={<CustomInput type="password" label="Nova Senha" variant="filled" required ref={register} autoComplete="" />}
                   />
                   {errors.password && (
                     <p className="error">Preencha corretamente a senha</p>
@@ -181,8 +149,8 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
                     defaultValue={user.contact ? user.contact : ''}
                     as={<CustomInput label="Contato" variant="filled" ref={register} />}
                   />
-                  {errors.password && (
-                    <p className="error">Preencha corretamente a senha</p>
+                  {errors.contact && (
+                    <p className="error">Preencha corretamente o contato</p>
                   )}
                   <Controller
                     name="bio"

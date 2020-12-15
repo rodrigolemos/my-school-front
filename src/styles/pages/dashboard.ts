@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +30,10 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `
 
 export const Header = styled.div`
@@ -81,9 +85,34 @@ export const Header = styled.div`
 export const Content = styled.div`
   width: 95%;
   min-height: 85%;
-  padding: 0 1rem;
+  padding: 1rem;
 
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+
+export const StatsColumn = styled.div`
+  height: 100%;
+  width: 65%;
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+
+export const StatsArea = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 536px;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 `
