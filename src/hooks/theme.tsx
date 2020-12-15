@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import styled, { css } from 'styled-components'
 import { Cookies } from 'react-cookie'
 
 type ThemeProp = 'light' | 'dark'
@@ -13,6 +14,34 @@ const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 interface IThemeContextProvider {
   children: JSX.Element[] | JSX.Element
 }
+
+interface IContainer {
+  customTheme: string
+}
+
+const StyledTheme = styled.div<IContainer>`
+  .themed {
+    transition: all .2s ease-in-out;
+    ${({ customTheme }) => customTheme === 'dark' ? css`
+      background-color: var(--logged-dark);
+      color: var(--white);
+    ` : css`
+      background-color: var(--white);
+      color: var(--logged);
+    `}
+  }
+
+  .themed-aux {
+    transition: all .2s ease-in-out;
+    ${({ customTheme }) => customTheme === 'dark' ? css`
+      background-color: var(--logged);
+      color: var(--white);
+    ` : css`
+      background-color: var(--lighter);
+      color: var(--logged);
+    `}
+  }
+`
 
 const ThemeContextProvider: React.FC = ({ children }: IThemeContextProvider) => {
   const [theme, setTheme] = useState<ThemeProp>('dark')
@@ -37,7 +66,9 @@ const ThemeContextProvider: React.FC = ({ children }: IThemeContextProvider) => 
 
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
-      {children}
+      <StyledTheme customTheme={theme}>
+        {children}
+      </StyledTheme>
     </ThemeContext.Provider>
   )
 }
