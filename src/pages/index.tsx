@@ -21,7 +21,7 @@ export default function Home(): ReactElement {
           <span>Olá, nós somos a</span>
           <h1>My School.</h1>
           <h2>Aprendemos com você como ensinar melhor.</h2>
-          <p>Entendemos a importância da participação de todos no processo de aprendizado e transformamos cada feedback recebido em novas oportunidades de ensino.</p>
+          <p>Uma aplicação fictícia para simular o controle de usuários em um sistema educacional feita com Node, Typescript e NextJS.</p>
           <div className="link">
             <a href="#motivation">
               Conheça o projeto
@@ -64,7 +64,7 @@ export default function Home(): ReactElement {
           </Card>
         </ContentWrapper>
         <SectionAdditional>
-          Além disso, contamos com o engajamento de pessoas incríveis como você.
+          Uma plataforma educacional para quem usa e para quem desenvolve.
         </SectionAdditional>
       </Motivation>
       <Footer />
