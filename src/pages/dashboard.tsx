@@ -6,6 +6,7 @@ import api from '../services/api'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import ProfileContainer from '../components/profile-container'
+import StudentChart from '../components/student-chart'
 import Toast from '../components/toast'
 import {
   Container,
@@ -59,7 +60,9 @@ export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactEle
                 <DashboardArea className="themed">
                   <div className="themed-aux col">Teste 1</div>
                   <div className="themed-aux col">Teste 2</div>
-                  <div className="themed-aux col full">Teste 3</div>
+                  <div className="themed-aux col full">
+                    <StudentChart />
+                  </div>
                 </DashboardArea>
               </StatsArea>
             </StatsColumn>

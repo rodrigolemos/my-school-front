@@ -112,19 +112,33 @@ export const DashboardArea = styled.div`
 
   .col {
     min-height: 276px;
-    font-size: 3rem;
+    font-size: 2rem;
     margin: 1rem;
+    padding: 1.5rem;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     @media (max-width: 768px) {
       grid-column: 1/3;
     }
+
+    h4 {
+      width: 100%;
+      height: 20%;
+    }
+
+    div {
+      width: 100%;
+      height: 80%;
+    }
   }
 
   .full {
+    align-items: flex-start;
+    justify-content: flex-start;
     grid-column: 1/3;
   }
 `
