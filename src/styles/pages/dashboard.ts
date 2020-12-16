@@ -65,21 +65,6 @@ export const Header = styled.div`
       margin: 2rem 0;
     }
   }
-
-  div.date {
-    display: flex;
-    align-items: center;
-    
-    span {
-      font-size: 2rem;
-      font-weight: normal;
-    }
-
-    svg {
-      font-size: 3.1rem;
-      margin-right: 1.1rem;
-    }
-  }
 `
 
 export const Content = styled.div`
@@ -120,6 +105,26 @@ export const StatsArea = styled.div`
 export const DashboardArea = styled.div`
   width: 100%;
   height: 100%;
-  padding: 2rem;
   border-radius: 5px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
+
+  .col {
+    min-height: 276px;
+    font-size: 3rem;
+    margin: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      grid-column: 1/3;
+    }
+  }
+
+  .full {
+    grid-column: 1/3;
+  }
 `

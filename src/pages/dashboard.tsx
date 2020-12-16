@@ -5,7 +5,6 @@ import { checkAuth } from '../services/auth'
 import api from '../services/api'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
-import { BiRefresh } from 'react-icons/bi'
 import ProfileContainer from '../components/profile-container'
 import Toast from '../components/toast'
 import {
@@ -52,15 +51,16 @@ export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactEle
               <h2>Bem vindo novamente, {name}!</h2>
               <h3>Esta é sua área logada 💻</h3>
             </div>
-            <div className="date">
-              <BiRefresh />
-            </div>
           </Header>
           <Content>
             <ProfileContainer {...user} />
             <StatsColumn>
               <StatsArea>
-                <DashboardArea className="themed-aux" />
+                <DashboardArea className="themed">
+                  <div className="themed-aux col">Teste 1</div>
+                  <div className="themed-aux col">Teste 2</div>
+                  <div className="themed-aux col full">Teste 3</div>
+                </DashboardArea>
               </StatsArea>
             </StatsColumn>
           </Content>
