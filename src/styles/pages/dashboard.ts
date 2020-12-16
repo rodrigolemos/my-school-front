@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { showFromTop } from '../animations'
 
 export const Container = styled.div`
   width: 100vw;
@@ -120,7 +121,14 @@ export const DashboardArea = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    backface-visibility: hidden;
+    animation: ${showFromTop} .5s ease-in-out;
+    transition: transform .2s ease-in-out;
 
+    &:hover {
+      transform: scale(1.03);
+    }
+    
     @media (max-width: 768px) {
       grid-column: 1/3;
     }
