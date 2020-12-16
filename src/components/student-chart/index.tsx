@@ -1,15 +1,21 @@
 import React, { ReactElement } from 'react'
 import { Bar } from 'react-chartjs-2'
+import { useTheme } from '../../hooks/theme'
 
 const StudentChart: React.FC = (): ReactElement => {
+
+  const { theme } = useTheme()
+
+  let fontColor = '#233044'
+  if (theme === 'dark') {
+    fontColor = '#F7F9FC'
+  }
 
   const config = {
     labels: ['Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro'],
     datasets: [
       {
         backgroundColor: '#2593BE',
-        borderColor: '#03719C',
-        borderWidth: 1,
         data: [55, 59, 65, 67, 61, 69]
       }
     ]
@@ -23,10 +29,29 @@ const StudentChart: React.FC = (): ReactElement => {
           title:{
             display: true,
             text: 'Últimos acessos',
-            fontSize: 22
+            fontSize: 22,
+            fontColor,
           },
-          legend:{
-            display: false
+          legend: {
+            display: false,
+            labels: {
+              fontColor,
+            },
+          },
+          scales: {
+            xAxes: [{
+              gridLines: {
+                color: 'rgba(0, 0, 0, 0)',
+              },
+              ticks: {
+                fontColor
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                fontColor
+              }
+            }]
           },
           responsive: true,
           maintainAspectRatio: false
