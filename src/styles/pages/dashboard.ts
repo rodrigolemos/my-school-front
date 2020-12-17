@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { showFromTop, heartBeat } from '../animations'
+import { heartBeat } from '../animations'
 
 export const Container = styled.div`
   width: 100vw;
@@ -122,7 +122,6 @@ export const DashboardArea = styled.div`
     justify-content: center;
     flex-direction: column;
     backface-visibility: hidden;
-    animation: ${showFromTop} .5s ease-in-out;
     transition: transform .2s ease-in-out;
 
     &:hover {
