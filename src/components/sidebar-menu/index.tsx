@@ -6,7 +6,7 @@ import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
 import { Container, Title, Content, LevelsList, ListIcon } from './styles'
-import { ListItem, ListItemText } from '@material-ui/core'
+import { Divider, ListItem, ListItemText } from '@material-ui/core'
 
 interface ISidebarMenu {
   isAdmin: boolean
@@ -46,6 +46,7 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
           </Link>
           {isAdmin && (
             <>
+              <Divider />
               <Link href="/users">
                 <ListItem button>
                   <ListIcon><AiOutlineUsergroupAdd /></ListIcon>
