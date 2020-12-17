@@ -33,7 +33,7 @@ const PerformanceChart: React.FC = (): ReactElement => {
         options={{
           title:{
             display: true,
-            text: 'Situação dos cursos',
+            text: 'Meus cursos',
             fontSize: 22,
             fontColor,
           },

@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
+import { FaMedal } from 'react-icons/fa'
 import { checkAuth } from '../services/auth'
 import api from '../services/api'
 import SidebarMenu from '../components/sidebar-menu'
@@ -59,7 +60,12 @@ export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactEle
             <StatsColumn>
               <StatsArea>
                 <DashboardArea className="themed">
-                  <div className="themed-aux col">Teste 1</div>
+                  <div className="themed-aux col">
+                    <div>
+                      <FaMedal />
+                    </div>
+                    <h4>Beta Tester</h4>
+                  </div>
                   <div className="themed-aux col">
                     <PerformanceChart />
                   </div>

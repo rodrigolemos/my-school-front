@@ -20,3 +20,24 @@ export const showFromTop = keyframes`
     opacity: 1;
   }
 `
+
+export const heartBeat = keyframes`
+  0% {
+    transform: scale(1.25);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+`

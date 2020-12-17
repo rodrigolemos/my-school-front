@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { showFromTop } from '../animations'
+import { showFromTop, heartBeat } from '../animations'
 
 export const Container = styled.div`
   width: 100vw;
@@ -136,11 +136,23 @@ export const DashboardArea = styled.div`
     h4 {
       width: 100%;
       height: 20%;
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     div {
       width: 100%;
       height: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        animation: ${heartBeat} 1s ease-in-out;
+        font-size: 8rem;
+      }
     }
   }
 
