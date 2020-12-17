@@ -37,6 +37,7 @@ export const Avatar = styled.div`
   margin-bottom: 2rem;
   border-radius: 50%;
   font-size: 10rem;
+  cursor: default;
   display: flex;
   align-items: center;
   justify-content: center;
