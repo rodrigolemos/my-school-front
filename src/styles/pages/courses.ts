@@ -3,7 +3,7 @@ import { showFromTop } from '../animations'
 import { TableRow } from '@material-ui/core'
 
 interface IContainer {
-  customTheme: string
+  customtheme: string
 }
 
 export const Container = styled.div`
@@ -99,7 +99,7 @@ export const Content = styled.div`
 
 export const MyTableRow = styled(TableRow)<IContainer>`
   transition: all .2s ease-in-out;
-  ${({ customTheme }) => customTheme === 'dark' ? css`
+  ${({ customtheme }) => customtheme === 'dark' ? css`
     th, td, svg {
       border-bottom: 1px solid var(--logged-dark) !important;
       background-color: var(--logged);

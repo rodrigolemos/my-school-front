@@ -197,7 +197,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
           <Header>
             <div className="greeting">
               <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Esses são os cursos com o seu perfil 📚</h3>
+              <h3>Esses são os cursos disponíveis atualmente 📚</h3>
             </div>
             <div className="date"></div>
           </Header>
@@ -224,7 +224,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                       ? courses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       : courses
                     ).map((course) => (
-                      <StyledTableRow key={course.id} customTheme={theme}>
+                      <StyledTableRow key={course.id} customtheme={theme}>
                         <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
                           {course.name}
                         </StyledTableCell>
@@ -249,13 +249,13 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                       </StyledTableRow>
                     ))}
                     {emptyRows > 0 && (
-                      <StyledTableRow style={{ height: 53 * emptyRows }} customTheme={theme}>
+                      <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
                         <StyledTableCell colSpan={7} />
                       </StyledTableRow>
                     )}
                   </TableBody>
                   <TableFooter>
-                    <StyledTableRow customTheme={theme}>
+                    <StyledTableRow customtheme={theme}>
                       <TablePagination
                         rowsPerPageOptions={[5, 10]}
                         colSpan={7}
