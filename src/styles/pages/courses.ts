@@ -1,5 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { showFromTop } from '../animations'
+import { TableRow } from '@material-ui/core'
 
+interface IContainer {
+  customTheme: string
+}
 
 export const Container = styled.div`
   width: 100vw;
@@ -87,4 +92,24 @@ export const Content = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+
+  animation: ${showFromTop} .5s ease-in-out;
+`
+
+
+export const MyTableRow = styled(TableRow)<IContainer>`
+  transition: all .2s ease-in-out;
+  ${({ customTheme }) => customTheme === 'dark' ? css`
+    th, td, svg {
+      border-bottom: 1px solid var(--logged-dark) !important;
+      background-color: var(--logged);
+      color: var(--white) !important;
+    }
+  ` : css`
+    th, td, svg {
+      border-bottom: 1px solid var(--light) !important;
+      background-color: var(--white);
+      color: var(--logged) !important;
+    }
+  `}
 `

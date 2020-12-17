@@ -3,12 +3,15 @@ import { GetServerSideProps } from 'next'
 import { checkAuth } from '../services/auth'
 import api from '../services/api'
 import { checkPermission } from '../services/permission'
+import { formatDate } from '../utils/date'
+import { formatDescription, formatPeriod } from '../utils/courses'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import Toast from '../components/toast'
-import { Container, Main, ContentWrapper, Header, Content } from '../styles/pages/courses'
-import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi'
-import { withStyles, useTheme, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
+import { useTheme } from '../hooks/theme'
+import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/courses'
+import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight, FiEdit3 } from 'react-icons/fi'
+import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import {
   Table,
   TableBody,
@@ -38,15 +41,9 @@ const StyledTableCell = withStyles((theme: Theme) =>
   }),
 )(TableCell)
 
-const StyledTableRow = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }),
-)(TableRow)
+const StyledTableRow = withStyles(() =>
+  createStyles({}),
+)(MyTableRow)
 
 const useStyles = makeStyles({
   table: {
@@ -73,7 +70,6 @@ interface TablePaginationActionsProps {
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const classes = useStyles1()
-  const theme = useTheme()
   const { count, page, rowsPerPage, onChangePage } = props
 
   const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -99,24 +95,24 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <FiChevronsRight /> : <FiChevronsLeft />}
+        <FiChevronsLeft />
       </IconButton>
       <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        {theme.direction === 'rtl' ? <FiChevronRight /> : <FiChevronLeft />}
+        <FiChevronLeft />
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <FiChevronLeft /> : <FiChevronRight />}
+        <FiChevronRight />
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FiChevronsLeft /> : <FiChevronsRight />}
+        <FiChevronsRight />
       </IconButton>
     </div>
   )
@@ -147,6 +143,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
   const [courses, setCourses] = useState<ICourses[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>()
+  const { theme } = useTheme()
   
   const classes = useStyles()
   const [page, setPage] = React.useState(0)
@@ -215,7 +212,11 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                     <TableRow>
                       <StyledTableCell>Nome</StyledTableCell>
                       <StyledTableCell>Descrição</StyledTableCell>
-                      <StyledTableCell>Criação</StyledTableCell>
+                      <StyledTableCell>Período</StyledTableCell>
+                      <StyledTableCell>Criado por</StyledTableCell>
+                      <StyledTableCell align="center">Criado em</StyledTableCell>
+                      <StyledTableCell align="center">Atualizado em</StyledTableCell>
+                      <StyledTableCell align="center">Editar</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -223,29 +224,41 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                       ? courses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       : courses
                     ).map((course) => (
-                      <StyledTableRow key={course.name}>
-                        <StyledTableCell component="th" scope="row">
+                      <StyledTableRow key={course.id} customTheme={theme}>
+                        <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
                           {course.name}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {course.description}
+                        <StyledTableCell align="left" style={{ width: 350 }}>
+                          {formatDescription(course.description)}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {course.created_at}
+                        <StyledTableCell align="left" style={{ width: 100 }}>
+                          {formatPeriod(course.period)}
+                        </StyledTableCell>
+                        <StyledTableCell align="left" style={{ width: 200 }}>
+                          {course.created_by.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="center" style={{ width: 200 }}>
+                          {formatDate(course.created_at)}
+                        </StyledTableCell>
+                        <StyledTableCell align="center" style={{ width: 200 }}>
+                          {formatDate(course.updated_at)}
+                        </StyledTableCell>
+                        <StyledTableCell align="center" style={{ width: 50 }}>
+                          <FiEdit3 />
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
                     {emptyRows > 0 && (
-                      <StyledTableRow style={{ height: 53 * emptyRows }}>
-                        <StyledTableCell colSpan={6} />
+                      <StyledTableRow style={{ height: 53 * emptyRows }} customTheme={theme}>
+                        <StyledTableCell colSpan={7} />
                       </StyledTableRow>
                     )}
                   </TableBody>
                   <TableFooter>
-                    <TableRow>
+                    <StyledTableRow customTheme={theme}>
                       <TablePagination
                         rowsPerPageOptions={[5, 10]}
-                        colSpan={3}
+                        colSpan={7}
                         count={courses.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
@@ -258,7 +271,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                         onChangeRowsPerPage={handleChangeRowsPerPage}
                         ActionsComponent={TablePaginationActions}
                       />
-                    </TableRow>
+                    </StyledTableRow>
                   </TableFooter>
                 </Table>
               </TableContainer>
