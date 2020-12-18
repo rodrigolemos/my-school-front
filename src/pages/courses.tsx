@@ -14,6 +14,7 @@ import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '..
 import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight, FiEdit3 } from 'react-icons/fi'
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -130,7 +131,7 @@ interface ICreatedBy {
   email: string
 }
 
-interface ICourses {
+interface ICourse {
   id: string
   name: string
   description: string
@@ -141,15 +142,16 @@ interface ICourses {
 }
 
 export default function Courses({ name, isAdmin }: IServerCourses): ReactElement {
-  const [courses, setCourses] = useState<ICourses[]>([])
+  const [courses, setCourses] = useState<ICourse[]>([])
+  const [courseToEdit, setCourseToEdit] = useState<ICourse>({} as ICourse || null)
   const [loading, setLoading] = useState<boolean>(false)
   const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [error, setError] = useState<string>()
   const { theme } = useTheme()
   
   const classes = useStyles()
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, courses.length - page * rowsPerPage)
 
@@ -164,6 +166,16 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
     setPage(0)
   }
 
+  const openEditDialog = (course: ICourse): void => {
+    setCourseToEdit(course)
+    setOpenDialog(true)
+  }
+
+  const openAddDialog = (): void => {
+    setCourseToEdit(null)
+    setOpenDialog(true)
+  }
+
   useEffect(() => {
     fetchCourses()
   }, [])
@@ -172,7 +184,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
     setLoading(true)
     setError('')
     try {
-      const response = await api.get<ICourses[]>('/courses')
+      const response = await api.get<ICourse[]>('/courses')
       if (response.status !== 200)
         throw new Error()
 
@@ -199,10 +211,12 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
               <h2>Bem vindo novamente, {name}!</h2>
               <h3>Esses são os cursos disponíveis atualmente 📚</h3>
             </div>
-            <div className="date"></div>
+            <div className="add">
+              <Button onClick={openAddDialog} color="primary" variant="contained" size="large">Incluir</Button>
+            </div>
           </Header>
           <Content>
-            <CourseDialog open={openDialog} handleDialog={setOpenDialog} />
+            <CourseDialog open={openDialog} handleDialog={setOpenDialog} courseToEdit={courseToEdit} />
             {error && <Toast type="error" message={error} />}
             {loading ? (
               <CircularProgress />
@@ -245,7 +259,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                           {formatDate(course.updated_at)}
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
-                          <FiEdit3 onClick={() => setOpenDialog(true)} />
+                          <FiEdit3 onClick={() => openEditDialog(course)} style={{ cursor: 'pointer' }} />
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}

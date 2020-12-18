@@ -68,18 +68,12 @@ export const Header = styled.div`
     }
   }
 
-  div.date {
+  div.add {
     display: flex;
     align-items: center;
     
     span {
-      font-size: 2rem;
-      font-weight: normal;
-    }
-
-    svg {
-      font-size: 3.1rem;
-      margin-right: 1.1rem;
+      font-size: 1.2rem;
     }
   }
 `
