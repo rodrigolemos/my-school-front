@@ -7,6 +7,7 @@ import { formatDate } from '../utils/date'
 import { formatDescription, formatPeriod } from '../utils/courses'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
+import CourseDialog from '../components/course-dialog'
 import Toast from '../components/toast'
 import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/courses'
@@ -142,6 +143,7 @@ interface ICourses {
 export default function Courses({ name, isAdmin }: IServerCourses): ReactElement {
   const [courses, setCourses] = useState<ICourses[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [error, setError] = useState<string>()
   const { theme } = useTheme()
   
@@ -202,6 +204,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
             <div className="date"></div>
           </Header>
           <Content>
+            <CourseDialog open={openDialog} handleDialog={setOpenDialog} />
             {error && <Toast type="error" message={error} />}
             {loading ? (
               <CircularProgress />
@@ -244,7 +247,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                           {formatDate(course.updated_at)}
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
-                          <FiEdit3 />
+                          <FiEdit3 onClick={() => setOpenDialog(true)} />
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
