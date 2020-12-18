@@ -147,6 +147,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
   const [loading, setLoading] = useState<boolean>(false)
   const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [error, setError] = useState<string>()
+  const [successDialog, setSuccessDialog] = useState<string>()
   const { theme } = useTheme()
   
   const classes = useStyles()
@@ -216,8 +217,16 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
             </div>
           </Header>
           <Content>
-            <CourseDialog open={openDialog} handleDialog={setOpenDialog} courseToEdit={courseToEdit} />
+            <CourseDialog
+              open={openDialog}
+              handleDialog={setOpenDialog}
+              courseToEdit={courseToEdit}
+              courses={courses}
+              setCourses={setCourses}
+              setSuccessDialog={setSuccessDialog}
+            />
             {error && <Toast type="error" message={error} />}
+            {successDialog && <Toast type="success" message={successDialog} />}
             {loading ? (
               <CircularProgress />
             ) : (

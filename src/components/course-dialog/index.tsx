@@ -1,5 +1,9 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useTheme } from '../../hooks/theme'
+import { Cookies } from 'react-cookie'
+import api from '../../services/api'
+import Toast from '../toast'
+import { CircularProgress } from '@material-ui/core'
 import {
   Button,
   Dialog,
@@ -32,6 +36,9 @@ interface ICourseDialog {
   open: boolean
   handleDialog(open: boolean): void
   courseToEdit?: ICourse
+  courses?: ICourse[]
+  setCourses(courses: ICourse[]): void
+  setSuccessDialog(message: string): void
 }
 
 interface IFormInput {
@@ -47,8 +54,17 @@ const schema = yup.object().shape({
   period: yup.string().required().min(1).max(1)
 })
 
-export default function CourseDialog({ open, handleDialog, courseToEdit }: ICourseDialog): ReactElement {
+export default function CourseDialog({
+  open,
+  handleDialog,
+  courseToEdit,
+  courses,
+  setCourses,
+  setSuccessDialog
+}: ICourseDialog): ReactElement {
   const { theme } = useTheme()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>()
 
   const { register, control, handleSubmit, errors } = useForm<IFormInput>({
     resolver: yupResolver(schema)
@@ -58,6 +74,42 @@ export default function CourseDialog({ open, handleDialog, courseToEdit }: ICour
     handleDialog(false)
   }
 
+  const deleteCourse = async (): Promise<void> => {
+    setLoading(true)
+    setError('')
+    try {
+      const cookies = new Cookies()
+      const token = cookies.get('@my-school:token')
+
+      const response = await api.delete(`/courses/${courseToEdit.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+
+      if (response.status !== 204)
+        throw new Error()
+
+      setCourses(courses.filter(course => course.id !== courseToEdit.id))
+
+      setSuccessDialog('Curso excluído com sucesso!')
+
+      handleClose()
+
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 400) {
+          setError('Atenção, existem alunos/professores matriculados nesse curso. Exclua as matrículas antes de prosseguir.')
+        } else {
+          setError('Ops, não foi possível excluir o curso. Por favor, tente novamente mais tarde.')
+        }
+      } else {
+        setError('Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.')
+      }
+    }
+    setLoading(false)
+  }
+
   const onSubmit = async (data: IFormInput) => {
     console.log(data)
   }
@@ -65,6 +117,7 @@ export default function CourseDialog({ open, handleDialog, courseToEdit }: ICour
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth={true} maxWidth="sm">
       <CustomDialogContent customtheme={theme}>
+        {error && <Toast type="error" message={error} />}
         <Form onSubmit={handleSubmit(onSubmit)}>
           <h1>{courseToEdit?.name ? 'Editar Curso' : 'Incluir Curso'}</h1>
           <Controller
@@ -110,17 +163,21 @@ export default function CourseDialog({ open, handleDialog, courseToEdit }: ICour
           {errors.description && (
             <p className="error">Preencha corretamente a descrição</p>
           )}
-          <DialogActions>
-            {courseToEdit?.name ? (
-              <>
-                <Button type="submit" variant="contained" color="primary" size="large">Atualizar</Button>
-                <Button type="submit" variant="contained" color="secondary" size="large">Excluir</Button>
-              </>
-            ) : (
-              <Button type="submit" variant="contained" color="primary" size="large">Incluir</Button>
-            )}
-            <Button onClick={handleClose} variant="contained" size="large">Cancelar</Button>
-          </DialogActions>
+          {!loading ? (
+            <DialogActions>
+              {courseToEdit?.name ? (
+                <>
+                  <Button type="submit" variant="contained" color="primary" size="large">Atualizar</Button>
+                  <Button onClick={deleteCourse} variant="contained" color="secondary" size="large">Excluir</Button>
+                </>
+              ) : (
+                <Button type="submit" variant="contained" color="primary" size="large">Incluir</Button>
+              )}
+              <Button onClick={handleClose} variant="contained" size="large">Cancelar</Button>
+            </DialogActions>
+          ) : (
+            <CircularProgress />
+          )}
         </Form>
       </CustomDialogContent>
     </Dialog>
