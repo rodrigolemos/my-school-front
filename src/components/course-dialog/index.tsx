@@ -46,6 +46,7 @@ interface IFormInput {
   name: string
   description: string
   period: string
+  created_by: string
 }
 
 const schema = yup.object().shape({
@@ -111,7 +112,61 @@ export default function CourseDialog({
   }
 
   const onSubmit = async (data: IFormInput) => {
-    console.log(data)
+    setLoading(true)
+    setError('')
+    try {
+      const cookies = new Cookies()
+      const token = cookies.get('@my-school:token')
+      const { id } = cookies.get('@my-school:user')
+
+      data.created_by = id
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let response = {} as any
+      if (courseToEdit?.name) {
+        data.id = courseToEdit.id
+        response = await api.put('/courses', data, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+      } else {
+        response = await api.post('/courses/create', data, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+      }
+
+      if (response.status !== 200 && response.status !== 201)
+        throw new Error()
+      
+      if (courseToEdit?.name) {
+        setCourses(courses.map(course => {
+          if (course.id === courseToEdit.id)
+            return response.data
+          return course
+        }))
+        setSuccessDialog('Curso atualizado com sucesso!')
+      } else {
+        setCourses([...courses, response.data])
+        setSuccessDialog('Curso incluido com sucesso!')
+      }
+  
+      handleClose()
+
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 400) {
+          setError('Ops, não foi possível incluir o curso. Por favor, verifique o nome e o período e tente novamente.')
+        } else {
+          setError('Ops, não foi possível incluir o curso. Por favor, tente novamente mais tarde.')
+        }
+      } else {
+        setError('Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.')
+      }
+    }
+    setLoading(false)
   }
 
   return (
@@ -123,7 +178,7 @@ export default function CourseDialog({
           <Controller
             name="name"
             control={control}
-            defaultValue={courseToEdit?.name}
+            defaultValue={courseToEdit?.name || ''}
             as={<CustomInput label="Nome" variant="filled" required ref={register} />}
           />
           {errors.name && (
@@ -134,13 +189,13 @@ export default function CourseDialog({
             <Controller
               name="period"
               control={control}
-              defaultValue={courseToEdit?.period}
+              defaultValue={courseToEdit?.period || ''}
               as={
                 <CustomSelect
                   customtheme={theme}
                   labelId="period-input"
                   id="demo-simple-select"
-                  defaultValue={courseToEdit?.period}
+                  defaultValue={courseToEdit?.period || ''}
                   required
                   ref={register}
                 >
@@ -157,7 +212,7 @@ export default function CourseDialog({
           <Controller
             name="description"
             control={control}
-            defaultValue={courseToEdit?.description}
+            defaultValue={courseToEdit?.description || ''}
             as={<CustomInput label="Descrição" variant="filled" required ref={register} multiline rows={6} />}
           />
           {errors.description && (
@@ -176,7 +231,9 @@ export default function CourseDialog({
               <Button onClick={handleClose} variant="contained" size="large">Cancelar</Button>
             </DialogActions>
           ) : (
-            <CircularProgress />
+            <DialogActions>
+              <CircularProgress />
+            </DialogActions>
           )}
         </Form>
       </CustomDialogContent>
