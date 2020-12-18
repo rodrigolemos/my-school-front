@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { showFromLeft } from '../animations'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const backgroundImage = require('../../../public/images/typing-1.jpg')
 
 export const Container = styled.div`

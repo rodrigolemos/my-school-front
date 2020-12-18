@@ -178,8 +178,6 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
 
       setCourses(response.data)
 
-      console.log(response.data)
-
     } catch (error) {
       if (error.response) {
         setError('Ops, não foi possível listar os cursos. Por favor, tente novamente mais tarde.')

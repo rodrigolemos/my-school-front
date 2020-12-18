@@ -96,7 +96,6 @@ export const Content = styled.div`
   animation: ${showFromTop} .5s ease-in-out;
 `
 
-
 export const MyTableRow = styled(TableRow)<IContainer>`
   transition: all .2s ease-in-out;
   ${({ customtheme }) => customtheme === 'dark' ? css`
