@@ -33,11 +33,6 @@ const Navbar: React.FC = (): ReactElement => {
                 Login
               </Link>
             </li>
-            <li>
-              <Link href="/about">
-                Sobre
-              </Link>
-            </li>
           </Menu>
           <OpenMobileNav onClick={() => setIsMobile(true)} />
         </NavContent>
@@ -63,11 +58,6 @@ const Navbar: React.FC = (): ReactElement => {
           <li>
             <Link href="/login">
               Login
-            </Link>
-          </li>
-          <li>
-            <Link href="/about">
-              Sobre
             </Link>
           </li>
         </MobileMenu>
