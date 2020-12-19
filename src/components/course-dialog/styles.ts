@@ -60,4 +60,8 @@ export const Form = styled.form`
   span {
     font-size: 1.2rem;
   }
+  div.log {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 `

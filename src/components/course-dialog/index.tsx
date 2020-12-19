@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from 'react'
 import { useTheme } from '../../hooks/theme'
 import { Cookies } from 'react-cookie'
 import api from '../../services/api'
+import { formatDate } from '../../utils/date'
 import Toast from '../toast'
 import { CircularProgress } from '@material-ui/core'
 import {
@@ -217,6 +218,11 @@ export default function CourseDialog({
           />
           {errors.description && (
             <p className="error">Preencha corretamente a descrição</p>
+          )}
+          {courseToEdit?.name && (
+            <div className="log">
+              <span>Criado em {formatDate(courseToEdit.created_at)} por {courseToEdit.created_by.name}</span>
+            </div>
           )}
           {!loading ? (
             <DialogActions>
