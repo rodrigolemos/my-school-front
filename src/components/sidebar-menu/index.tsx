@@ -32,21 +32,15 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
               <ListItemText primary="Perfil" />
             </ListItem>
           </Link>
-          <Link href="/courses">
-            <ListItem button>
-              <ListIcon><IoIosList /></ListIcon>
-              <ListItemText primary="Cursos" />
-            </ListItem>
-          </Link>
-          <Link href="/classes">
-            <ListItem button>
-              <ListIcon><GoMortarBoard /></ListIcon>
-              <ListItemText primary="Aulas" />
-            </ListItem>
-          </Link>
-          {isAdmin && (
+          {isAdmin ? (
             <>
               <Divider />
+              <Link href="/courses">
+                <ListItem button>
+                  <ListIcon><IoIosList /></ListIcon>
+                  <ListItemText primary="Cursos" />
+                </ListItem>
+              </Link>
               <Link href="/users">
                 <ListItem button>
                   <ListIcon><AiOutlineUsergroupAdd /></ListIcon>
@@ -57,6 +51,21 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
                 <ListItem button>
                   <ListIcon><BsCardChecklist /></ListIcon>
                   <ListItemText primary="Matrículas" />
+                </ListItem>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/course-list">
+                <ListItem button>
+                  <ListIcon><IoIosList /></ListIcon>
+                  <ListItemText primary="Cursos" />
+                </ListItem>
+              </Link>
+              <Link href="/classes">
+                <ListItem button>
+                  <ListIcon><GoMortarBoard /></ListIcon>
+                  <ListItemText primary="Aulas" />
                 </ListItem>
               </Link>
             </>
