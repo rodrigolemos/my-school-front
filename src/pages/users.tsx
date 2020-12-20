@@ -5,10 +5,10 @@ import { checkAuth } from '../services/auth'
 import api from '../services/api'
 import { checkPermission } from '../services/permission'
 import { formatDate } from '../utils/date'
-// import { formatDescription, formatPeriod } from '../utils/courses'
 import SidebarMenu from '../components/sidebar-menu'
 import UserNavBar from '../components/user-navbar'
 import ConfirmationDialog from '../components/confirmation-dialog'
+import UserDialog from '../components/user-dialog'
 import Toast from '../components/toast'
 import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/courses'
@@ -149,6 +149,7 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
   const [userToDelete, setUserToDelete] = useState<IUser>({} as IUser || null)
   const [loading, setLoading] = useState<boolean>(false)
   const [openDialog, setOpenDialog] = useState<boolean>(false)
+  const [openAddDialog, setOpenAddDialog] = useState<boolean>(false)
   const [error, setError] = useState<string>()
   const [successDialog, setSuccessDialog] = useState<string>()
   const { theme } = useTheme()
@@ -174,11 +175,6 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
     setUserToDelete(user)
     setOpenDialog(true)
   }
-
-  // const openAddDialog = (): void => {
-  //   setCourseToEdit(null)
-  //   setOpenDialog(true)
-  // }
 
   useEffect(() => {
     fetchUsers()
@@ -216,7 +212,7 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
     <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
       <Main>
-        <UserNavBar title="Cursos" />
+        <UserNavBar title="Usuários" />
         <ContentWrapper>
           <Header>
             <div className="greeting">
@@ -224,10 +220,24 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
               <h3>Esses são os usuários cadastrados 🤖</h3>
             </div>
             <div className="add">
-              <Button color="primary" variant="contained" size="large">Incluir</Button>
+              <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                onClick={() => setOpenAddDialog(true)}
+              >
+                  Incluir
+              </Button>
             </div>
           </Header>
           <Content>
+            <UserDialog
+              open={openAddDialog}
+              handleDialog={setOpenAddDialog}
+              users={users}
+              setUsers={setUsers}
+              setSuccessDialog={setSuccessDialog}
+            />
             <ConfirmationDialog
               open={openDialog}
               handleDialog={setOpenDialog}

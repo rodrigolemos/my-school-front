@@ -37,7 +37,6 @@ interface ICourseDialog {
   setSuccessDialog(message: string): void
 }
 
-
 export default function ConfirmationDialog({
   open,
   handleDialog,
@@ -79,7 +78,7 @@ export default function ConfirmationDialog({
     } catch (error) {
       if (error.response) {
         if (error.response.status == 400) {
-          setError('Atenção, este usuário está matriculado em um ou mais cursos. Exclua as matrículas antes de prosseguir.')
+          setError('Atenção, este usuário está vinculado a um ou mais cursos. Exclua as matrículas/cursos antes de prosseguir.')
         } else {
           setError('Ops, não foi possível excluir o usuário. Por favor, tente novamente mais tarde.')
         }
