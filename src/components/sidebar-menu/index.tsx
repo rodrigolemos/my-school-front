@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import Link from 'next/link'
 import { AiOutlineUsergroupAdd } from 'react-icons/ai'
-import { BsCardChecklist, BsPieChartFill } from 'react-icons/bs'
+import { BsPieChartFill } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
@@ -45,12 +45,6 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
                 <ListItem button>
                   <ListIcon><AiOutlineUsergroupAdd /></ListIcon>
                   <ListItemText primary="Usuários" />
-                </ListItem>
-              </Link>
-              <Link href="/enrollments">
-                <ListItem button>
-                  <ListIcon><BsCardChecklist /></ListIcon>
-                  <ListItemText primary="Matrículas" />
                 </ListItem>
               </Link>
             </>

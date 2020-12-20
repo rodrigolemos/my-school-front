@@ -14,6 +14,7 @@ import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/courses'
 import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi'
 import { AiOutlineUserDelete } from 'react-icons/ai'
+import { BsCardChecklist } from 'react-icons/bs'
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import {
   Button,
@@ -261,6 +262,7 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
                       <StyledTableCell>Contato</StyledTableCell>
                       <StyledTableCell align="center">Criado em</StyledTableCell>
                       <StyledTableCell align="center">Atualizado em</StyledTableCell>
+                      <StyledTableCell align="center">Matrículas</StyledTableCell>
                       <StyledTableCell align="center">Excluir</StyledTableCell>
                     </TableRow>
                   </TableHead>
@@ -289,13 +291,16 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
                           {formatDate(user.updated_at)}
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
-                          {<AiOutlineUserDelete onClick={() => openDeleteDialog(user)} style={{ cursor: 'pointer' }}/>}
+                          <BsCardChecklist onClick={() => openDeleteDialog(user)} style={{ cursor: 'pointer' }}/>
+                        </StyledTableCell>
+                        <StyledTableCell align="center" style={{ width: 50 }}>
+                          <AiOutlineUserDelete onClick={() => openDeleteDialog(user)} style={{ cursor: 'pointer' }}/>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
                     {emptyRows > 0 && (
                       <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                        <StyledTableCell colSpan={8} />
+                        <StyledTableCell colSpan={9} />
                       </StyledTableRow>
                     )}
                   </TableBody>
@@ -303,7 +308,7 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
                     <StyledTableRow customtheme={theme}>
                       <TablePagination
                         rowsPerPageOptions={[5, 10]}
-                        colSpan={8}
+                        colSpan={9}
                         count={users.length}
                         rowsPerPage={rowsPerPage}
                         page={page}

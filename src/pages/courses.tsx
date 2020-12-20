@@ -12,6 +12,7 @@ import Toast from '../components/toast'
 import { useTheme } from '../hooks/theme'
 import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/courses'
 import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight, FiEdit3 } from 'react-icons/fi'
+import { BsCardChecklist } from 'react-icons/bs'
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import {
   Button,
@@ -237,9 +238,10 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                       <StyledTableCell>Nome</StyledTableCell>
                       <StyledTableCell>Descrição</StyledTableCell>
                       <StyledTableCell>Período</StyledTableCell>
-                      <StyledTableCell>Criado por</StyledTableCell>
+                      <StyledTableCell align="center">Criado por</StyledTableCell>
                       <StyledTableCell align="center">Criado em</StyledTableCell>
                       <StyledTableCell align="center">Atualizado em</StyledTableCell>
+                      <StyledTableCell align="center">Matrículas</StyledTableCell>
                       <StyledTableCell align="center">Editar</StyledTableCell>
                     </TableRow>
                   </TableHead>
@@ -258,7 +260,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                         <StyledTableCell align="left" style={{ width: 100 }}>
                           {formatPeriod(course.period)}
                         </StyledTableCell>
-                        <StyledTableCell align="left" style={{ width: 200 }}>
+                        <StyledTableCell align="center" style={{ width: 150 }}>
                           {course.created_by.name}
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 200 }}>
@@ -268,13 +270,16 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                           {formatDate(course.updated_at)}
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
+                          <BsCardChecklist onClick={() => openEditDialog(course)} style={{ cursor: 'pointer' }} />
+                        </StyledTableCell>
+                        <StyledTableCell align="center" style={{ width: 50 }}>
                           <FiEdit3 onClick={() => openEditDialog(course)} style={{ cursor: 'pointer' }} />
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
                     {emptyRows > 0 && (
                       <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                        <StyledTableCell colSpan={7} />
+                        <StyledTableCell colSpan={8} />
                       </StyledTableRow>
                     )}
                   </TableBody>
@@ -282,7 +287,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                     <StyledTableRow customtheme={theme}>
                       <TablePagination
                         rowsPerPageOptions={[5, 10]}
-                        colSpan={7}
+                        colSpan={8}
                         count={courses.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
