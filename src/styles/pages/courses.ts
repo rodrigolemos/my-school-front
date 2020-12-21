@@ -8,7 +8,7 @@ interface IContainer {
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,6 +36,10 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `
 
 export const Header = styled.div`
