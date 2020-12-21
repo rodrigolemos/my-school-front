@@ -202,6 +202,11 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
     setLoading(false)
   }
 
+  const filterTable = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const strFilter = event.target.value
+    console.log(courses.filter(course => course.name.match(new RegExp(strFilter, 'g'))))
+  }
+
   return (
     <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
@@ -214,6 +219,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
               <h3>Esses são os cursos disponíveis atualmente 📚</h3>
             </div>
             <div className="add">
+              <input type="text" placeholder="Filtrar..." onBlur={filterTable}/>
               <Button onClick={openAddDialog} color="primary" variant="contained" size="large">Incluir</Button>
             </div>
           </Header>
