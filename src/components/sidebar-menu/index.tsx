@@ -5,6 +5,7 @@ import { BsPieChartFill } from 'react-icons/bs'
 import { IoIosList } from 'react-icons/io'
 import { GoMortarBoard } from 'react-icons/go'
 import { FaUserEdit } from 'react-icons/fa'
+import { BsCardChecklist } from 'react-icons/bs'
 import { Container, Title, Content, LevelsList, ListIcon } from './styles'
 import { Divider, ListItem, ListItemText } from '@material-ui/core'
 
@@ -45,6 +46,12 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
                 <ListItem button>
                   <ListIcon><AiOutlineUsergroupAdd /></ListIcon>
                   <ListItemText primary="Usuários" />
+                </ListItem>
+              </Link>
+              <Link href="/enrollments">
+                <ListItem button>
+                  <ListIcon><BsCardChecklist /></ListIcon>
+                  <ListItemText primary="Matrículas" />
                 </ListItem>
               </Link>
             </>

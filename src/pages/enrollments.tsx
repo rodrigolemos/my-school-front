@@ -10,7 +10,7 @@ import UserNavBar from '../components/user-navbar'
 import CourseDialog from '../components/course-dialog'
 import Toast from '../components/toast'
 import { useTheme } from '../hooks/theme'
-import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/courses'
+import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/enrollments'
 import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight, FiEdit3 } from 'react-icons/fi'
 import { BsCardChecklist } from 'react-icons/bs'
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
@@ -142,7 +142,7 @@ interface ICourse {
   updated_at: Date
 }
 
-export default function Courses({ name, isAdmin }: IServerCourses): ReactElement {
+export default function Enrollments({ name, isAdmin }: IServerCourses): ReactElement {
   const [courses, setCourses] = useState<ICourse[]>([])
   const [courseToEdit, setCourseToEdit] = useState<ICourse>({} as ICourse || null)
   const [loading, setLoading] = useState<boolean>(false)
@@ -206,12 +206,12 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
     <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
       <Main>
-        <UserNavBar title="Cursos" />
+        <UserNavBar title="Matrículas" />
         <ContentWrapper>
           <Header>
             <div className="greeting">
               <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Esses são os cursos disponíveis atualmente 📚</h3>
+              <h3>Aqui você gerencia as matrículas na plataforma! 📚</h3>
             </div>
             <div className="add">
               <Button onClick={openAddDialog} color="primary" variant="contained" size="large">Incluir</Button>
