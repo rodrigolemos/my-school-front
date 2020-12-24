@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
@@ -31,7 +31,7 @@ export default function CreateProfile(): ReactElement {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = async (data: IFormInput) => {
+  const onSubmit = useCallback(async (data: IFormInput) => {
     setLoading(true)
     setError('')
     try {
@@ -51,7 +51,7 @@ export default function CreateProfile(): ReactElement {
       }
     }
     setLoading(false)
-  }
+  }, [])
 
   return (
     <Container>
