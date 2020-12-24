@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from 'react'
+import React, { ReactElement, useCallback, useState, useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import { checkAuth } from '../services/auth'
 import api from '../services/api'
@@ -157,32 +157,32 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, courses.length - page * rowsPerPage)
 
-  const handleChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = useCallback((_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage)
-  }
+  }, [])
 
-  const handleChangeRowsPerPage = (
+  const handleChangeRowsPerPage = useCallback((
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
-  }
+  }, [])
 
-  const openEditDialog = (course: ICourse): void => {
+  const openEditDialog = useCallback((course: ICourse): void => {
     setCourseToEdit(course)
     setOpenDialog(true)
-  }
+  }, [])
 
-  const openAddDialog = (): void => {
+  const openAddDialog = useCallback((): void => {
     setCourseToEdit(null)
     setOpenDialog(true)
-  }
+  }, [])
 
   useEffect(() => {
     fetchCourses()
   }, [])
 
-  const fetchCourses = async (): Promise<void> => {
+  const fetchCourses = useCallback(async (): Promise<void> => {
     setLoading(true)
     setError('')
     try {
@@ -200,7 +200,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
       }
     }
     setLoading(false)
-  }
+  }, [])
 
   return (
     <Container className="themed">
