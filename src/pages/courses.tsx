@@ -137,6 +137,7 @@ interface ICourse {
   name: string
   description: string
   period: string
+  positions: number
   created_by: ICreatedBy
   created_at: Date
   updated_at: Date
@@ -238,6 +239,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                       <StyledTableCell>Nome</StyledTableCell>
                       <StyledTableCell>Descrição</StyledTableCell>
                       <StyledTableCell>Período</StyledTableCell>
+                      <StyledTableCell align="center">Vagas</StyledTableCell>
                       <StyledTableCell align="center">Criado por</StyledTableCell>
                       <StyledTableCell align="center">Criado em</StyledTableCell>
                       <StyledTableCell align="center">Atualizado em</StyledTableCell>
@@ -260,6 +262,9 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                         <StyledTableCell align="left" style={{ width: 100 }}>
                           {formatPeriod(course.period)}
                         </StyledTableCell>
+                        <StyledTableCell align="center" style={{ width: 100 }}>
+                          {course.positions}
+                        </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 150 }}>
                           {course.created_by.name}
                         </StyledTableCell>
@@ -279,7 +284,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                     ))}
                     {emptyRows > 0 && (
                       <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                        <StyledTableCell colSpan={8} />
+                        <StyledTableCell colSpan={9} />
                       </StyledTableRow>
                     )}
                   </TableBody>
@@ -287,7 +292,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                     <StyledTableRow customtheme={theme}>
                       <TablePagination
                         rowsPerPageOptions={[5, 10]}
-                        colSpan={8}
+                        colSpan={9}
                         count={courses.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
