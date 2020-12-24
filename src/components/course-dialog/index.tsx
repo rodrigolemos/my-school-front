@@ -28,6 +28,7 @@ interface ICourse {
   name: string
   description: string
   period: string
+  positions: number
   created_by: ICreatedBy
   created_at: Date
   updated_at: Date
@@ -47,13 +48,15 @@ interface IFormInput {
   name: string
   description: string
   period: string
+  positions: number
   created_by: string
 }
 
 const schema = yup.object().shape({
   name: yup.string().required().min(6),
   description: yup.string().required().min(6),
-  period: yup.string().required().min(1).max(1)
+  period: yup.string().required().min(1).max(1),
+  positions: yup.number().required().positive().integer()
 })
 
 export default function CourseDialog({
@@ -209,6 +212,15 @@ export default function CourseDialog({
           </FormControl>
           {errors.period && (
             <p className="error">Preencha corretamente o período</p>
+          )}
+          <Controller
+            name="positions"
+            control={control}
+            defaultValue={courseToEdit?.positions || ''}
+            as={<CustomInput type="number" label="Vagas" variant="filled" required ref={register} />}
+          />
+          {errors.positions && (
+            <p className="error">Preencha corretamente as vagas</p>
           )}
           <Controller
             name="description"
