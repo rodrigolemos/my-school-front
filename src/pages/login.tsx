@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from 'react'
+import React, { useCallback, useState, ReactElement } from 'react'
 import { Cookies } from 'react-cookie'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
@@ -35,7 +35,7 @@ export default function Login(): ReactElement {
 
   const { user } = router.query
 
-  const onSubmit = async (data: IFormInput) => {
+  const onSubmit = useCallback(async (data: IFormInput) => {
     setLoading(true)
     setError('')
     try {
@@ -61,7 +61,7 @@ export default function Login(): ReactElement {
       }
     }
     setLoading(false)
-  }
+  }, [])
 
   return (
     <Container>

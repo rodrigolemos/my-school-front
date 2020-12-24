@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from 'react'
+import React, { useCallback, useState, ReactElement } from 'react'
 import { Cookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
@@ -67,7 +67,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = async (data: IFormInput) => {
+  const onSubmit = useCallback(async (data: IFormInput) => {
     setLoading(true)
     setError('')
     try {
@@ -101,7 +101,7 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
       }
     }
     setLoading(false)
-  }
+  }, [])
   
   return (
     <Container className="themed">

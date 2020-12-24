@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from 'react'
+import React, { useCallback, ReactElement, useState, useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import { Cookies } from 'react-cookie'
 import { checkAuth } from '../services/auth'
@@ -161,27 +161,27 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage)
 
-  const handleChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = useCallback((_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage)
-  }
+  }, [])
 
-  const handleChangeRowsPerPage = (
+  const handleChangeRowsPerPage = useCallback((
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
-  }
+  }, [])
 
-  const openDeleteDialog = (user: IUser): void => {
+  const openDeleteDialog = useCallback((user: IUser): void => {
     setUserToDelete(user)
     setOpenDialog(true)
-  }
+  }, [])
 
   useEffect(() => {
     fetchUsers()
   }, [])
 
-  const fetchUsers = async (): Promise<void> => {
+  const fetchUsers = useCallback(async (): Promise<void> => {
     setLoading(true)
     setError('')
     try {
@@ -207,7 +207,7 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
       }
     }
     setLoading(false)
-  }
+  }, [])
 
   return (
     <Container className="themed">
