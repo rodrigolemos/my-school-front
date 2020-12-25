@@ -1,14 +1,14 @@
-import styled from 'styled-components'
-import { showFromLeft } from '../animations'
+import styled from 'styled-components';
+import { showFromLeft } from '../animations';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const backgroundImage = require('../../../public/images/typing-1.jpg')
+const backgroundImage = require('../../../public/images/typing-1.jpg');
 
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-`
+`;
 
 export const DesktopPanel = styled.div`
   width: 55vw;
@@ -19,9 +19,7 @@ export const DesktopPanel = styled.div`
   justify-content: center;
   background-color: var(--secondary);
 
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-    url("${backgroundImage}");
+  background: linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url('${backgroundImage}');
   background-size: cover;
 
   div.overlay {
@@ -29,12 +27,12 @@ export const DesktopPanel = styled.div`
     width: 100%;
     height: 100%;
     background-color: var(--secondary);
-    opacity: .7;
+    opacity: 0.7;
   }
 
   div.brand {
     z-index: 2;
-    opacity: .9;
+    opacity: 0.9;
     width: 50%;
     height: 50%;
     display: flex;
@@ -67,7 +65,7 @@ export const DesktopPanel = styled.div`
   @media (max-width: 998px) {
     display: none;
   }
-`
+`;
 
 export const BackButton = styled.div`
   position: absolute;
@@ -83,7 +81,7 @@ export const BackButton = styled.div`
     margin-right: 1rem;
     font-size: 1.7rem;
   }
-`
+`;
 
 export const FormPanel = styled.div`
   position: relative;
@@ -105,7 +103,7 @@ export const FormPanel = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    animation: ${showFromLeft} .5s ease-in-out;
+    animation: ${showFromLeft} 0.5s ease-in-out;
 
     width: 60%;
     min-height: 50%;
@@ -113,7 +111,7 @@ export const FormPanel = styled.div`
     @media (max-width: 998px) {
       width: 50vw;
     }
-    
+
     @media (max-width: 500px) {
       width: 90vw;
       height: 100%;
@@ -136,26 +134,26 @@ export const FormPanel = styled.div`
       flex-direction: column;
 
       width: 100%;
-      margin: .7rem 0;
+      margin: 0.7rem 0;
       font-size: 1.5rem;
       font-weight: bold;
     }
 
     input {
       height: 4rem;
-      padding: .5rem;
+      padding: 0.5rem;
       font-size: 1.5rem;
       border: 2px solid var(--shadow);
       outline: none;
       border-radius: 5px;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       color: var(--tertiary-light);
       font-weight: bold;
-      transition: all .2s ease-in-out;
+      transition: all 0.2s ease-in-out;
 
       ::placeholder {
         font-weight: bold;
-        color: #CCC;
+        color: #ccc;
       }
 
       &:focus {
@@ -166,8 +164,8 @@ export const FormPanel = styled.div`
     p.error {
       font-weight: normal;
       font-size: 1.2rem;
-      color: #E00;
-      margin: .5rem 0;
+      color: #e00;
+      margin: 0.5rem 0;
     }
 
     button {
@@ -178,13 +176,14 @@ export const FormPanel = styled.div`
       border-radius: 5px;
       height: 4rem;
       cursor: pointer;
-      transition: all .2s ease-in-out;
-      
+      transition: all 0.2s ease-in-out;
+
       font-weight: bold;
       background-color: var(--secondary);
       color: var(--white);
 
-      &:focus, &:hover {
+      &:focus,
+      &:hover {
         background-color: var(--secondary-light);
       }
     }
@@ -194,7 +193,7 @@ export const FormPanel = styled.div`
       text-align: center;
       margin-top: 2rem;
       height: 4rem;
-      
+
       svg {
         color: var(--secondary);
       }
@@ -209,10 +208,12 @@ export const FormPanel = styled.div`
       font-size: 1.3rem;
       font-weight: bold;
 
-      a, a:active, a:visited {
+      a,
+      a:active,
+      a:visited {
         text-decoration: none;
         color: inherit;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
 
         &:hover {
           color: var(--primary);
@@ -220,4 +221,4 @@ export const FormPanel = styled.div`
       }
     }
   }
-`
+`;

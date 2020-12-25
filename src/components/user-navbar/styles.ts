@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { AiOutlineClose } from 'react-icons/ai'
+import styled, { css } from 'styled-components';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface NavProps {
-  isMobile: boolean
+  isMobile: boolean;
 }
 
 export const DesktopNav = styled.nav<NavProps>`
@@ -14,7 +14,7 @@ export const DesktopNav = styled.nav<NavProps>`
 
   width: 100%;
   height: 10vh;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@ export const DesktopNav = styled.nav<NavProps>`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 export const MobileNav = styled.div<NavProps>`
   display: none;
@@ -34,12 +34,14 @@ export const MobileNav = styled.div<NavProps>`
   width: 100%;
   height: 100vh;
 
-  ${({ isMobile }) => isMobile && css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `}
-`
+  ${({ isMobile }) =>
+    isMobile &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `}
+`;
 
 export const NavContent = styled.div`
   display: flex;
@@ -59,14 +61,14 @@ export const NavContent = styled.div`
     width: 100%;
     padding: 0 2rem;
   }
-`
+`;
 
 export const Title = styled.div`
   font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const OpenMobileMenu = styled(GiHamburgerMenu)`
   display: none;
@@ -75,7 +77,7 @@ export const OpenMobileMenu = styled(GiHamburgerMenu)`
   @media (max-width: 1100px) {
     display: block;
   }
-`
+`;
 
 export const OpenMobileNav = styled.div`
   display: none;
@@ -85,7 +87,7 @@ export const OpenMobileNav = styled.div`
   @media (max-width: 768px) {
     display: block;
   }
-`
+`;
 
 export const CloseMobileNav = styled(AiOutlineClose)`
   position: fixed;
@@ -96,7 +98,7 @@ export const CloseMobileNav = styled(AiOutlineClose)`
   @media (min-width: 768px) {
     display: block;
   }
-`
+`;
 
 export const Menu = styled.ul`
   display: flex;
@@ -109,8 +111,8 @@ export const Menu = styled.ul`
 
   li {
     list-style-type: none;
-    transition: all .1s ease-in-out;
-    
+    transition: all 0.1s ease-in-out;
+
     &:not(:last-child) {
       margin: 0 1rem;
     }
@@ -125,11 +127,11 @@ export const Menu = styled.ul`
       font-weight: bold;
     }
   }
-`
+`;
 
 export const CustomTooltip = styled.span`
   font-size: 1.1rem;
-`
+`;
 
 export const MobileMenu = styled.ul`
   display: flex;
@@ -147,13 +149,15 @@ export const MobileMenu = styled.ul`
     margin: 0 2rem;
   }
 
-  a, a:active, a:visited {
+  a,
+  a:active,
+  a:visited {
     text-decoration: none;
     color: inherit;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       color: var(--primary);
     }
   }
-`
+`;

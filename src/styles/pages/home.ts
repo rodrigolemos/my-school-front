@@ -1,16 +1,17 @@
-import styled from 'styled-components'
-import { showFromLeft } from '../animations'
+/* eslint-disable @typescript-eslint/no-var-requires */
+import styled from 'styled-components';
+import { showFromLeft } from '../animations';
 
-const backgroundImage = require('../../../public/images/bookshelf-1.jpg')
-const cardImage1 = require('../../../public/images/studying-1.jpg')
-const cardImage2 = require('../../../public/images/working-1.jpg')
-const cardImage3 = require('../../../public/images/strategy-1.jpg')
-const cardImage4 = require('../../../public/images/collaboration-1.jpg')
+const backgroundImage = require('../../../public/images/bookshelf-1.jpg');
+const cardImage1 = require('../../../public/images/studying-1.jpg');
+const cardImage2 = require('../../../public/images/working-1.jpg');
+const cardImage3 = require('../../../public/images/strategy-1.jpg');
+const cardImage4 = require('../../../public/images/collaboration-1.jpg');
 
 export const Container = styled.section`
   min-height: 90vh;
   margin-top: 10vh;
-`
+`;
 
 export const Section = styled.section`
   width: 100vw;
@@ -38,14 +39,14 @@ export const Section = styled.section`
     height: auto;
     padding: 3rem 0;
   }
-`
+`;
 
 export const AnimatedBanner = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
   backface-visibility: hidden;
-  animation: ${showFromLeft} .8s ease-in-out;
+  animation: ${showFromLeft} 0.8s ease-in-out;
 
   width: 70%;
   height: 100%;
@@ -53,7 +54,7 @@ export const AnimatedBanner = styled.div`
   h1 {
     font-size: 7rem;
     margin-top: 1rem;
-    
+
     @media (max-width: 375px) {
       font-size: 5.5rem;
     }
@@ -68,12 +69,12 @@ export const AnimatedBanner = styled.div`
       font-size: 4.2rem;
     }
   }
-  
+
   @media (max-width: 768px) {
     width: 100%;
     padding: 0 2rem;
   }
-`
+`;
 
 export const SectionName = styled.h2`
   width: 100%;
@@ -84,25 +85,23 @@ export const SectionName = styled.h2`
   margin: 1rem 0;
   font-size: 3.5rem !important;
   text-align: center;
-  
+
   @media (max-width: 768px) {
     font-size: 2.8rem !important;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
   }
-`
+`;
 
 export const SectionAdditional = styled.h2`
   margin-top: 4rem;
   font-size: 2.5rem !important;
   text-align: center;
-`
+`;
 
 export const Presentation = styled(Section)`
   color: var(--white);
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-    url("${backgroundImage}");
+  background: linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url('${backgroundImage}');
   background-size: cover;
 
   span {
@@ -132,7 +131,7 @@ export const Presentation = styled(Section)`
       color: inherit;
       border: 1px solid var(--white);
       border-radius: 4px;
-      transition: .2s ease-in-out;
+      transition: 0.2s ease-in-out;
 
       &:hover {
         background-color: var(--white);
@@ -140,13 +139,13 @@ export const Presentation = styled(Section)`
       }
     }
   }
-`
+`;
 
 export const Motivation = styled(Section)`
   flex-direction: column;
   justify-content: flex-start;
   background: linear-gradient(to top, var(--white), var(--background));
-`
+`;
 
 export const ContentWrapper = styled.div`
   width: 100%;
@@ -160,14 +159,14 @@ export const ContentWrapper = styled.div`
     justify-content: flex-start;
     flex-direction: column;
   }
-`
+`;
 
 export const Technologies = styled(Section)`
   flex-direction: column;
   justify-content: flex-start;
   background-color: var(--secondary);
   color: var(--white);
-`
+`;
 
 export const Panel = styled.div`
   width: 45%;
@@ -199,7 +198,7 @@ export const Panel = styled.div`
       font-size: 3rem;
     }
   }
-`
+`;
 
 export const Card = styled.div`
   position: relative;
@@ -209,13 +208,13 @@ export const Card = styled.div`
   margin: 1.5rem;
   flex-shrink: 0;
   backface-visibility: hidden;
-  transition: all .1s ease-out;
+  transition: all 0.1s ease-out;
   cursor: default;
   background-color: var(--background);
-  box-shadow: 0 0 .5rem #DDD;
+  box-shadow: 0 0 0.5rem #ddd;
 
   &:hover {
-    box-shadow: 0 0 1.3rem #BBB;
+    box-shadow: 0 0 1.3rem #bbb;
   }
 
   div.image {
@@ -229,38 +228,26 @@ export const Card = styled.div`
     clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
 
     &.first {
-      background:
-        linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-          url("${cardImage1}");
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+        url('${cardImage1}');
       background-size: cover;
     }
 
     &.second {
-      background:
-        linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-          url("${cardImage2}");
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+        url('${cardImage2}');
       background-size: cover;
     }
 
     &.third {
-      background:
-        linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-          url("${cardImage3}");
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+        url('${cardImage3}');
       background-size: cover;
     }
 
     &.fourth {
-      background:
-        linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-          url("${cardImage4}");
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+        url('${cardImage4}');
       background-size: cover;
     }
   }
@@ -287,7 +274,7 @@ export const Card = styled.div`
     top: -4.1rem;
     right: 0;
     padding: 1.1rem;
-    background-color: #FFF;
+    background-color: #fff;
     color: var(--tertirary);
     background: linear-gradient(to top right, var(--white), var(--background));
     font-size: 1.8rem;
@@ -301,4 +288,4 @@ export const Card = styled.div`
   @media (max-width: 375px) {
     width: 85vw;
   }
-`
+`;

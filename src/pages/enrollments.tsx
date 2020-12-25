@@ -1,19 +1,32 @@
-import React, { ReactElement, useState, useEffect } from 'react'
-import { GetServerSideProps } from 'next'
-import { checkAuth } from '../services/auth'
-import api from '../services/api'
-import { checkPermission } from '../services/permission'
-import { formatDate } from '../utils/date'
-import { formatDescription, formatPeriod } from '../utils/courses'
-import SidebarMenu from '../components/sidebar-menu'
-import UserNavBar from '../components/user-navbar'
-import CourseDialog from '../components/course-dialog'
-import Toast from '../components/toast'
-import { useTheme } from '../hooks/theme'
-import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/enrollments'
-import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight, FiEdit3 } from 'react-icons/fi'
-import { BsCardChecklist } from 'react-icons/bs'
-import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
+import React, { ReactElement, useState, useEffect } from 'react';
+import { GetServerSideProps } from 'next';
+import { checkAuth } from '../services/auth';
+import api from '../services/api';
+import { checkPermission } from '../services/permission';
+import { formatDate } from '../utils/date';
+import { formatDescription, formatPeriod } from '../utils/courses';
+import SidebarMenu from '../components/sidebar-menu';
+import UserNavBar from '../components/user-navbar';
+import CourseDialog from '../components/course-dialog';
+import Toast from '../components/toast';
+import { useTheme } from '../hooks/theme';
+import {
+  Container,
+  Main,
+  ContentWrapper,
+  Header,
+  Content,
+  MyTableRow
+} from '../styles/pages/enrollments';
+import {
+  FiChevronLeft,
+  FiChevronsLeft,
+  FiChevronRight,
+  FiChevronsRight,
+  FiEdit3
+} from 'react-icons/fi';
+import { BsCardChecklist } from 'react-icons/bs';
+import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Table,
@@ -27,42 +40,40 @@ import {
   CircularProgress,
   Paper,
   IconButton
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      fontSize: 15,
+      fontSize: 15
     },
     head: {
       backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      color: theme.palette.common.white
     },
     body: {
-      fontSize: 14,
-    },
-  }),
-)(TableCell)
+      fontSize: 14
+    }
+  })
+)(TableCell);
 
-const StyledTableRow = withStyles(() =>
-  createStyles({}),
-)(MyTableRow)
+const StyledTableRow = withStyles(() => createStyles({}))(MyTableRow);
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
-  },
-})
+    minWidth: 700
+  }
+});
 
 const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexShrink: 0,
       marginLeft: theme.spacing(2.5),
-      fontSize: 14,
-    },
-  }),
-)
+      fontSize: 14
+    }
+  })
+);
 
 interface TablePaginationActionsProps {
   count: number;
@@ -72,32 +83,31 @@ interface TablePaginationActionsProps {
 }
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
-  const classes = useStyles1()
-  const { count, page, rowsPerPage, onChangePage } = props
+  const classes = useStyles1();
+  const { count, page, rowsPerPage, onChangePage } = props;
 
   const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, 0)
-  }
+    onChangePage(event, 0);
+  };
 
   const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, page - 1)
-  }
+    onChangePage(event, page - 1);
+  };
 
   const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, page + 1)
-  }
+    onChangePage(event, page + 1);
+  };
 
   const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
-  }
+    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
 
   return (
     <div className={classes.root}>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
-        aria-label="first page"
-      >
+        aria-label="first page">
         <FiChevronsLeft />
       </IconButton>
       <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
@@ -106,101 +116,100 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
+        aria-label="next page">
         <FiChevronRight />
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
+        aria-label="last page">
         <FiChevronsRight />
       </IconButton>
     </div>
-  )
+  );
 }
 
 interface IServerCourses {
-  name: string
-  isAdmin: boolean
+  name: string;
+  isAdmin: boolean;
 }
 
 interface ICreatedBy {
-  id: string
-  name: string
-  email: string
+  id: string;
+  name: string;
+  email: string;
 }
 
 interface ICourse {
-  id: string
-  name: string
-  description: string
-  period: string
-  created_by: ICreatedBy
-  created_at: Date
-  updated_at: Date
+  id: string;
+  name: string;
+  description: string;
+  period: string;
+  positions: number;
+  created_by: ICreatedBy;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export default function Enrollments({ name, isAdmin }: IServerCourses): ReactElement {
-  const [courses, setCourses] = useState<ICourse[]>([])
-  const [courseToEdit, setCourseToEdit] = useState<ICourse>({} as ICourse || null)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [openDialog, setOpenDialog] = useState<boolean>(false)
-  const [error, setError] = useState<string>()
-  const [successDialog, setSuccessDialog] = useState<string>()
-  const { theme } = useTheme()
-  
-  const classes = useStyles()
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [courses, setCourses] = useState<ICourse[]>([]);
+  const [courseToEdit, setCourseToEdit] = useState<ICourse>(({} as ICourse) || null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
+  const [successDialog, setSuccessDialog] = useState<string>();
+  const { theme } = useTheme();
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, courses.length - page * rowsPerPage)
+  const classes = useStyles();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, courses.length - page * rowsPerPage);
 
   const handleChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
-  }
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const openEditDialog = (course: ICourse): void => {
-    setCourseToEdit(course)
-    setOpenDialog(true)
-  }
+    setCourseToEdit(course);
+    setOpenDialog(true);
+  };
 
   const openAddDialog = (): void => {
-    setCourseToEdit(null)
-    setOpenDialog(true)
-  }
+    setCourseToEdit(null);
+    setOpenDialog(true);
+  };
 
   useEffect(() => {
-    fetchCourses()
-  }, [])
+    fetchCourses();
+  }, []);
 
   const fetchCourses = async (): Promise<void> => {
-    setLoading(true)
-    setError('')
+    setLoading(true);
+    setError('');
     try {
-      const response = await api.get<ICourse[]>('/courses')
-      if (response.status !== 200)
-        throw new Error()
+      const response = await api.get<ICourse[]>('/courses');
+      if (response.status !== 200) throw new Error();
 
-      setCourses(response.data)
-
+      setCourses(response.data);
     } catch (error) {
       if (error.response) {
-        setError('Ops, não foi possível listar os cursos. Por favor, tente novamente mais tarde.')
+        setError('Ops, não foi possível listar os cursos. Por favor, tente novamente mais tarde.');
       } else {
-        setError('Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.')
+        setError(
+          'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
+        );
       }
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
     <Container className="themed">
@@ -211,10 +220,12 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
           <Header>
             <div className="greeting">
               <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Aqui você gerencia as matrículas na plataforma! 📚</h3>
+              <h3>Aqui você gerencia as matrículas na plataforma!</h3>
             </div>
             <div className="add">
-              <Button onClick={openAddDialog} color="primary" variant="contained" size="large">Incluir</Button>
+              <Button onClick={openAddDialog} color="primary" variant="contained" size="large">
+                Incluir
+              </Button>
             </div>
           </Header>
           <Content>
@@ -270,10 +281,16 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
                           {formatDate(course.updated_at)}
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
-                          <BsCardChecklist onClick={() => openEditDialog(course)} style={{ cursor: 'pointer' }} />
+                          <BsCardChecklist
+                            onClick={() => openEditDialog(course)}
+                            style={{ cursor: 'pointer' }}
+                          />
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
-                          <FiEdit3 onClick={() => openEditDialog(course)} style={{ cursor: 'pointer' }} />
+                          <FiEdit3
+                            onClick={() => openEditDialog(course)}
+                            style={{ cursor: 'pointer' }}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -293,7 +310,7 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
                         page={page}
                         SelectProps={{
                           inputProps: { 'aria-label': 'linhas por página' },
-                          native: true,
+                          native: true
                         }}
                         labelRowsPerPage="Linhas por página"
                         onChangePage={handleChangePage}
@@ -309,24 +326,21 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
         </ContentWrapper>
       </Main>
     </Container>
-  )
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServerSideProps: GetServerSideProps<IServerCourses> = async (context: any) => {
   try {
-    checkAuth(context.req.cookies['@my-school:token'])
-    const { id, name } = JSON.parse(context.req.cookies['@my-school:user'])
-    const isAdmin = await checkPermission(
-      context.req.cookies['@my-school:token'],
-      id
-    )
+    checkAuth(context.req.cookies['@my-school:token']);
+    const { id, name } = JSON.parse(context.req.cookies['@my-school:user']);
+    const isAdmin = await checkPermission(context.req.cookies['@my-school:token'], id);
     return {
       props: {
         name,
         isAdmin
       }
-    }
+    };
   } catch (err) {
     return {
       props: {},
@@ -334,6 +348,6 @@ export const getServerSideProps: GetServerSideProps<IServerCourses> = async (con
         destination: '/login',
         permanent: false
       }
-    }
+    };
   }
-}
+};

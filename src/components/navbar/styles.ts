@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { AiOutlineClose } from 'react-icons/ai'
+import styled, { css } from 'styled-components';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface NavProps {
-  isMobile: boolean
+  isMobile: boolean;
 }
 
 export const DesktopNav = styled.nav<NavProps>`
@@ -11,17 +11,17 @@ export const DesktopNav = styled.nav<NavProps>`
   position: fixed;
   top: 0;
   left: 0;
-  
+
   background-color: var(--background);
   color: var(--tertiary);
 
   width: 100%;
   height: 10vh;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const MobileNav = styled.div<NavProps>`
   display: none;
@@ -35,12 +35,14 @@ export const MobileNav = styled.div<NavProps>`
 
   background-color: var(--white);
 
-  ${({ isMobile }) => isMobile && css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `}
-`
+  ${({ isMobile }) =>
+    isMobile &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `}
+`;
 
 export const NavContent = styled.div`
   display: flex;
@@ -55,7 +57,7 @@ export const NavContent = styled.div`
     width: 100%;
     padding: 0 2rem;
   }
-`
+`;
 
 export const Title = styled.h1`
   font-size: 3rem;
@@ -65,12 +67,14 @@ export const Title = styled.h1`
   svg {
     margin-right: 1rem;
   }
-  
-  a, a:active, a:visited {
+
+  a,
+  a:active,
+  a:visited {
     color: inherit;
     text-decoration: none !important;
   }
-`
+`;
 
 export const OpenMobileNav = styled(GiHamburgerMenu)`
   display: none;
@@ -79,7 +83,7 @@ export const OpenMobileNav = styled(GiHamburgerMenu)`
   @media (max-width: 768px) {
     display: block;
   }
-`
+`;
 
 export const CloseMobileNav = styled(AiOutlineClose)`
   position: fixed;
@@ -90,7 +94,7 @@ export const CloseMobileNav = styled(AiOutlineClose)`
   @media (min-width: 768px) {
     display: block;
   }
-`
+`;
 
 export const Menu = styled.ul`
   display: flex;
@@ -106,16 +110,18 @@ export const Menu = styled.ul`
     margin: 0 2rem;
   }
 
-  a, a:active, a:visited {
+  a,
+  a:active,
+  a:visited {
     text-decoration: none;
     color: inherit;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       color: var(--primary);
     }
   }
-`
+`;
 
 export const MobileMenu = styled.ul`
   display: flex;
@@ -133,13 +139,15 @@ export const MobileMenu = styled.ul`
     margin: 0 2rem;
   }
 
-  a, a:active, a:visited {
+  a,
+  a:active,
+  a:visited {
     text-decoration: none;
     color: inherit;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       color: var(--primary);
     }
   }
-`
+`;

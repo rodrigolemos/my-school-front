@@ -1,15 +1,15 @@
-import React, { ReactElement } from 'react'
-import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
-import { FaMedal } from 'react-icons/fa'
-import { checkAuth } from '../services/auth'
-import api from '../services/api'
-import SidebarMenu from '../components/sidebar-menu'
-import UserNavBar from '../components/user-navbar'
-import ProfileContainer from '../components/profile-container'
-import PerformanceChart from '../components/performance-chart'
-import FrequencyChart from '../components/frequency-chart'
-import Toast from '../components/toast'
+import React, { ReactElement } from 'react';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { FaMedal } from 'react-icons/fa';
+import { checkAuth } from '../services/auth';
+import api from '../services/api';
+import SidebarMenu from '../components/sidebar-menu';
+import UserNavBar from '../components/user-navbar';
+import ProfileContainer from '../components/profile-container';
+import PerformanceChart from '../components/performance-chart';
+import FrequencyChart from '../components/frequency-chart';
+import Toast from '../components/toast';
 import {
   Container,
   Main,
@@ -19,29 +19,29 @@ import {
   StatsColumn,
   StatsArea,
   DashboardArea
-} from '../styles/pages/dashboard'
+} from '../styles/pages/dashboard';
 
 interface IUser {
-  id: string
-  name: string
-  email: string
-  role: string
-  contact: string
-  bio: string
-  created_by?: string
-  created_at: Date
-  updated_at: Date
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  contact: string;
+  bio: string;
+  created_by?: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 interface IDashboard {
-  name: string
-  isAdmin: boolean
-  user: IUser
+  name: string;
+  isAdmin: boolean;
+  user: IUser;
 }
 
 export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactElement {
-  const router = useRouter()
-  const { updated } = router.query
+  const router = useRouter();
+  const { updated } = router.query;
   return (
     <Container className="themed">
       <SidebarMenu isAdmin={isAdmin} />
@@ -52,7 +52,7 @@ export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactEle
           <Header>
             <div className="greeting">
               <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Esta é sua área logada 💻</h3>
+              <h3>Esta é sua área logada</h3>
             </div>
           </Header>
           <Content>
@@ -79,27 +79,26 @@ export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactEle
         </ContentWrapper>
       </Main>
     </Container>
-  )
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
   try {
-    checkAuth(context.req.cookies['@my-school:token'])
-    const { id, name } = JSON.parse(context.req.cookies['@my-school:user'])
+    checkAuth(context.req.cookies['@my-school:token']);
+    const { id, name } = JSON.parse(context.req.cookies['@my-school:user']);
 
     const response = await api.get<IUser>(`/users/about/${id}`, {
       headers: {
-        'Authorization': `Bearer ${context.req.cookies['@my-school:token']}`
+        Authorization: `Bearer ${context.req.cookies['@my-school:token']}`
       }
-    })
+    });
 
-    if (response.status !== 200)
-      throw new Error('Not allowed')
-    
-    const user: IUser = response.data[0]
-    
-    const isAdmin = user.role === 'admin' ? true : false
+    if (response.status !== 200) throw new Error('Not allowed');
+
+    const user: IUser = response.data[0];
+
+    const isAdmin = user.role === 'admin' ? true : false;
 
     return {
       props: {
@@ -107,7 +106,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context: any) 
         isAdmin,
         user
       }
-    }
+    };
   } catch (err) {
     return {
       props: {},
@@ -115,6 +114,6 @@ export const getServerSideProps: GetServerSideProps<any> = async (context: any) 
         destination: '/login',
         permanent: false
       }
-    }
+    };
   }
-}
+};

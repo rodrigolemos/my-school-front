@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.section`
   min-height: 90vh;
   margin-top: 10vh;
-`
+`;
 
 export const Section = styled.section`
   width: 100vw;
@@ -28,7 +28,7 @@ export const Section = styled.section`
     height: auto;
     padding: 3rem 0;
   }
-`
+`;
 
 export const Title = styled.div`
   width: 100%;
@@ -49,18 +49,18 @@ export const Title = styled.div`
     font-size: 3rem !important;
     font-weight: normal;
   }
-  
+
   @media (max-width: 768px) {
     margin-top: 1.5rem;
     margin-bottom: 3rem;
   }
-`
+`;
 
 export const SectionAdditional = styled.h2`
   margin-top: 4rem;
   font-size: 2.5rem !important;
   text-align: center;
-`
+`;
 
 export const Presentation = styled(Section)`
   background-color: var(--secondary);
@@ -93,7 +93,7 @@ export const Presentation = styled(Section)`
       color: inherit;
       border: 1px solid var(--white);
       border-radius: 4px;
-      transition: .2s ease-in-out;
+      transition: 0.2s ease-in-out;
 
       &:hover {
         background-color: var(--white);
@@ -101,7 +101,7 @@ export const Presentation = styled(Section)`
       }
     }
   }
-`
+`;
 
 export const Banner = styled.div`
   display: flex;
@@ -115,7 +115,7 @@ export const Banner = styled.div`
   h1 {
     font-size: 7rem;
     margin-top: 1rem;
-    
+
     @media (max-width: 375px) {
       font-size: 5.5rem;
     }
@@ -130,12 +130,12 @@ export const Banner = styled.div`
       font-size: 4.2rem;
     }
   }
-  
+
   @media (max-width: 768px) {
     width: 100%;
     padding: 0 2rem;
   }
-`
+`;
 
 export const ContentWrapper = styled.div`
   width: 100%;
@@ -155,7 +155,7 @@ export const ContentWrapper = styled.div`
   @media (max-width: 1100px) {
     flex-wrap: nowrap;
   }
-`
+`;
 
 export const Card = styled.div`
   position: relative;
@@ -165,7 +165,7 @@ export const Card = styled.div`
   margin: 1.5rem;
   flex-shrink: 0;
   backface-visibility: hidden;
-  transition: all .1s ease-out;
+  transition: all 0.1s ease-out;
   cursor: default;
   background-color: var(--background);
   color: var(--secondary);
@@ -193,7 +193,7 @@ export const Card = styled.div`
     left: 0;
     padding: 1.1rem;
     border-top-left-radius: 15px;
-    background-color: #FFF;
+    background-color: #fff;
     color: var(--tertirary);
     background: linear-gradient(to top right, var(--white), var(--background));
     font-size: 2.8rem;
@@ -207,4 +207,4 @@ export const Card = styled.div`
   @media (max-width: 375px) {
     width: 100%;
   }
-`
+`;

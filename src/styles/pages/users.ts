@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
@@ -7,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Main = styled.main`
   position: relative;
@@ -20,7 +19,7 @@ export const Main = styled.main`
   @media (max-width: 1110px) {
     width: 100%;
   }
-`
+`;
 
 export const ContentWrapper = styled.div`
   width: 100%;
@@ -31,7 +30,7 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-`
+`;
 
 export const Header = styled.div`
   width: 95%;
@@ -49,7 +48,7 @@ export const Header = styled.div`
     h2 {
       font-size: 2.6rem;
       font-weight: normal;
-      margin-bottom: .8rem;
+      margin-bottom: 0.8rem;
     }
 
     h3 {
@@ -66,7 +65,7 @@ export const Header = styled.div`
   div.date {
     display: flex;
     align-items: center;
-    
+
     span {
       font-size: 2rem;
       font-weight: normal;
@@ -77,7 +76,7 @@ export const Header = styled.div`
       margin-right: 1.1rem;
     }
   }
-`
+`;
 
 export const Content = styled.div`
   width: 95%;
@@ -87,4 +86,4 @@ export const Content = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-`
+`;

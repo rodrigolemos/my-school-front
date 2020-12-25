@@ -1,26 +1,29 @@
-import styled, { css } from 'styled-components'
-import { DialogContent } from '@material-ui/core'
+import styled, { css } from 'styled-components';
+import { DialogContent } from '@material-ui/core';
 
 interface IContainer {
-  customtheme: string
+  customtheme: string;
 }
 
 export const CustomDialogContent = styled(DialogContent)<IContainer>`
-  transition: all .2s ease-in-out;
-  ${({ customtheme }) => customtheme === 'dark' ? css`
-    background-color: var(--logged);
-    color: var(--white) !important;
-    label {
-      color: var(--white) !important;
-    }
-  ` : css`
-    background-color: var(--white);
-    color: var(--logged) !important;
-    label {
-      color: var(--logged) !important;
-    }
-  `}
-`
+  transition: all 0.2s ease-in-out;
+  ${({ customtheme }) =>
+    customtheme === 'dark'
+      ? css`
+          background-color: var(--logged);
+          color: var(--white) !important;
+          label {
+            color: var(--white) !important;
+          }
+        `
+      : css`
+          background-color: var(--white);
+          color: var(--logged) !important;
+          label {
+            color: var(--logged) !important;
+          }
+        `}
+`;
 
 export const Form = styled.form`
   div.alert {
@@ -38,4 +41,4 @@ export const Form = styled.form`
     margin-bottom: 1rem;
     text-align: center;
   }
-`
+`;

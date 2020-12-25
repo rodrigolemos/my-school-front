@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { heartBeat } from '../animations'
+import styled from 'styled-components';
+import { heartBeat } from '../animations';
 
 export const Container = styled.div`
   width: 100vw;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Main = styled.main`
   position: relative;
@@ -20,7 +20,7 @@ export const Main = styled.main`
   @media (max-width: 1110px) {
     width: 100%;
   }
-`
+`;
 
 export const ContentWrapper = styled.div`
   width: 100%;
@@ -35,7 +35,7 @@ export const ContentWrapper = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
-`
+`;
 
 export const Header = styled.div`
   width: 95%;
@@ -53,7 +53,7 @@ export const Header = styled.div`
     h2 {
       font-size: 2.6rem;
       font-weight: normal;
-      margin-bottom: .8rem;
+      margin-bottom: 0.8rem;
     }
 
     h3 {
@@ -66,7 +66,7 @@ export const Header = styled.div`
       margin: 2rem 0;
     }
   }
-`
+`;
 
 export const Content = styled.div`
   width: 95%;
@@ -80,7 +80,7 @@ export const Content = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-`
+`;
 
 export const StatsColumn = styled.div`
   height: 100%;
@@ -90,7 +90,7 @@ export const StatsColumn = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 export const StatsArea = styled.div`
   width: 100%;
@@ -101,7 +101,7 @@ export const StatsArea = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-`
+`;
 
 export const DashboardArea = styled.div`
   width: 100%;
@@ -122,12 +122,12 @@ export const DashboardArea = styled.div`
     justify-content: center;
     flex-direction: column;
     backface-visibility: hidden;
-    transition: transform .2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 
     &:hover {
       transform: scale(1.03);
     }
-    
+
     @media (max-width: 768px) {
       grid-column: 1/3;
     }
@@ -160,4 +160,4 @@ export const DashboardArea = styled.div`
     justify-content: flex-start;
     grid-column: 1/3;
   }
-`
+`;

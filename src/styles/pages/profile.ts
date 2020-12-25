@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { TextField } from '@material-ui/core'
+import styled from 'styled-components';
+import { TextField } from '@material-ui/core';
 
 export const Container = styled.div`
   width: 100vw;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Main = styled.main`
   position: relative;
@@ -20,7 +20,7 @@ export const Main = styled.main`
   @media (max-width: 1110px) {
     width: 100%;
   }
-`
+`;
 
 export const ContentWrapper = styled.div`
   width: 100%;
@@ -35,7 +35,7 @@ export const ContentWrapper = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
-`
+`;
 
 export const Content = styled.div`
   width: 95%;
@@ -49,7 +49,7 @@ export const Content = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-`
+`;
 
 export const FormColumn = styled.div`
   height: 100%;
@@ -59,7 +59,7 @@ export const FormColumn = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 export const FormArea = styled.div`
   width: 100%;
@@ -70,7 +70,7 @@ export const FormArea = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-`
+`;
 
 export const Form = styled.form`
   width: 100%;
@@ -81,7 +81,7 @@ export const Form = styled.form`
   h3 {
     font-size: 2rem;
   }
-`
+`;
 
 export const Controls = styled.div`
   width: 100%;
@@ -103,14 +103,14 @@ export const Controls = styled.div`
       width: 100%;
     }
   }
-`
+`;
 
 export const CustomInput = styled(TextField)`
   margin: 1.8rem 0 !important;
   width: 100%;
   * {
     font-size: 1.6rem !important;
-    padding-top: .6rem;
+    padding-top: 0.6rem;
     color: inherit !important;
   }
-`
+`;

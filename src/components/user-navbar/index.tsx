@@ -1,33 +1,44 @@
-import React, { ReactElement, useState } from 'react'
-import { Cookies } from 'react-cookie'
-import { useRouter } from 'next/router'
-import { BiMoon } from 'react-icons/bi'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { IoMdNotificationsOutline } from 'react-icons/io'
-import { BsPower } from 'react-icons/bs'
-import { IconButton, Tooltip } from '@material-ui/core'
-import { useTheme } from '../../hooks/theme'
-import { DesktopNav, NavContent, Title, MobileMenu, Menu, CustomTooltip, OpenMobileMenu, OpenMobileNav, CloseMobileNav, MobileNav } from './styles'
+import React, { ReactElement, useState } from 'react';
+import { Cookies } from 'react-cookie';
+import { useRouter } from 'next/router';
+import { BiMoon } from 'react-icons/bi';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import { BsPower } from 'react-icons/bs';
+import { IconButton, Tooltip } from '@material-ui/core';
+import { useTheme } from '../../hooks/theme';
+import {
+  DesktopNav,
+  NavContent,
+  Title,
+  MobileMenu,
+  Menu,
+  CustomTooltip,
+  OpenMobileMenu,
+  OpenMobileNav,
+  CloseMobileNav,
+  MobileNav
+} from './styles';
 
 interface IUserNavbarProps {
-  title: string
+  title: string;
 }
 
-type typeIsMobile = boolean
+type typeIsMobile = boolean;
 
 const UserNavbar: React.FC<IUserNavbarProps> = ({ title }: IUserNavbarProps): ReactElement => {
-  const { changeTheme } = useTheme()
-  const router = useRouter()
-  const [isMobile, setIsMobile] = useState<typeIsMobile>(false)
+  const { changeTheme } = useTheme();
+  const router = useRouter();
+  const [isMobile, setIsMobile] = useState<typeIsMobile>(false);
 
   const logOut = () => {
-    const cookies = new Cookies()
+    const cookies = new Cookies();
 
-    cookies.remove('@my-school:user')
-    cookies.remove('@my-school:token')
+    cookies.remove('@my-school:user');
+    cookies.remove('@my-school:token');
 
-    router.push('/login')
-  }
+    router.push('/login');
+  };
 
   return (
     <>
@@ -71,24 +82,20 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }: IUserNavbarProps): Re
         <CloseMobileNav onClick={() => setIsMobile(false)} />
         <MobileMenu>
           <li>
-            <span>
-              Mensagens
-            </span>
+            <span>Mensagens</span>
           </li>
           <li>
-            <span>
-              Notificações
-            </span>
+            <span>Notificações</span>
           </li>
           <li>
-            <span onClick={logOut}>
+            <span onClick={logOut} onKeyPress={logOut} role="button" tabIndex={0}>
               Sair
             </span>
           </li>
         </MobileMenu>
       </MobileNav>
     </>
-  )
-}
+  );
+};
 
-export default UserNavbar
+export default UserNavbar;

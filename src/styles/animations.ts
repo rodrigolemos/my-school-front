@@ -1,4 +1,4 @@
-import { keyframes } from 'styled-components'
+import { keyframes } from 'styled-components';
 
 export const showFromLeft = keyframes`
   from {
@@ -9,7 +9,7 @@ export const showFromLeft = keyframes`
     transform: translateX(0);
     opacity: 1;
   }
-`
+`;
 export const showFromTop = keyframes`
   from {
     transform: translateY(-1rem);
@@ -19,7 +19,7 @@ export const showFromTop = keyframes`
     transform: translateX(0);
     opacity: 1;
   }
-`
+`;
 
 export const heartBeat = keyframes`
   0% {
@@ -40,4 +40,4 @@ export const heartBeat = keyframes`
   100% {
     transform: scale(1);
   }
-`
+`;

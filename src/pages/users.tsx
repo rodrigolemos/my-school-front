@@ -1,21 +1,28 @@
-import React, { useCallback, ReactElement, useState, useEffect } from 'react'
-import { GetServerSideProps } from 'next'
-import { Cookies } from 'react-cookie'
-import { checkAuth } from '../services/auth'
-import api from '../services/api'
-import { checkPermission } from '../services/permission'
-import { formatDate } from '../utils/date'
-import SidebarMenu from '../components/sidebar-menu'
-import UserNavBar from '../components/user-navbar'
-import ConfirmationDialog from '../components/confirmation-dialog'
-import UserDialog from '../components/user-dialog'
-import Toast from '../components/toast'
-import { useTheme } from '../hooks/theme'
-import { Container, Main, ContentWrapper, Header, Content, MyTableRow } from '../styles/pages/courses'
-import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi'
-import { AiOutlineUserDelete } from 'react-icons/ai'
-import { BsCardChecklist } from 'react-icons/bs'
-import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles'
+import React, { useCallback, ReactElement, useState, useEffect } from 'react';
+import { GetServerSideProps } from 'next';
+import { Cookies } from 'react-cookie';
+import { checkAuth } from '../services/auth';
+import api from '../services/api';
+import { checkPermission } from '../services/permission';
+import { formatDate } from '../utils/date';
+import SidebarMenu from '../components/sidebar-menu';
+import UserNavBar from '../components/user-navbar';
+import ConfirmationDialog from '../components/confirmation-dialog';
+import UserDialog from '../components/user-dialog';
+import Toast from '../components/toast';
+import { useTheme } from '../hooks/theme';
+import {
+  Container,
+  Main,
+  ContentWrapper,
+  Header,
+  Content,
+  MyTableRow
+} from '../styles/pages/courses';
+import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi';
+import { AiOutlineUserDelete } from 'react-icons/ai';
+import { BsCardChecklist } from 'react-icons/bs';
+import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Table,
@@ -29,42 +36,40 @@ import {
   CircularProgress,
   Paper,
   IconButton
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      fontSize: 15,
+      fontSize: 15
     },
     head: {
       backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      color: theme.palette.common.white
     },
     body: {
-      fontSize: 14,
-    },
-  }),
-)(TableCell)
+      fontSize: 14
+    }
+  })
+)(TableCell);
 
-const StyledTableRow = withStyles(() =>
-  createStyles({}),
-)(MyTableRow)
+const StyledTableRow = withStyles(() => createStyles({}))(MyTableRow);
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
-  },
-})
+    minWidth: 700
+  }
+});
 
 const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexShrink: 0,
       marginLeft: theme.spacing(2.5),
-      fontSize: 14,
-    },
-  }),
-)
+      fontSize: 14
+    }
+  })
+);
 
 interface TablePaginationActionsProps {
   count: number;
@@ -74,32 +79,31 @@ interface TablePaginationActionsProps {
 }
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
-  const classes = useStyles1()
-  const { count, page, rowsPerPage, onChangePage } = props
+  const classes = useStyles1();
+  const { count, page, rowsPerPage, onChangePage } = props;
 
   const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, 0)
-  }
+    onChangePage(event, 0);
+  };
 
   const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, page - 1)
-  }
+    onChangePage(event, page - 1);
+  };
 
   const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, page + 1)
-  }
+    onChangePage(event, page + 1);
+  };
 
   const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
-  }
+    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
 
   return (
     <div className={classes.root}>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
-        aria-label="first page"
-      >
+        aria-label="first page">
         <FiChevronsLeft />
       </IconButton>
       <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
@@ -108,106 +112,110 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
+        aria-label="next page">
         <FiChevronRight />
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
+        aria-label="last page">
         <FiChevronsRight />
       </IconButton>
     </div>
-  )
+  );
 }
 
 interface IServerUsers {
-  name: string
-  isAdmin: boolean
+  name: string;
+  isAdmin: boolean;
 }
 
 interface ICreatedBy {
-  id: string
-  name: string
-  email: string
+  id: string;
+  name: string;
+  email: string;
 }
 
 interface IUser {
-  id: string
-  name: string
-  email: string
-  role: string
-  contact: string
-  created_by: ICreatedBy
-  created_at: Date
-  updated_at: Date
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  contact: string;
+  created_by: ICreatedBy;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
-  const [users, setUsers] = useState<IUser[]>([])
-  const [userToDelete, setUserToDelete] = useState<IUser>({} as IUser || null)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [openDialog, setOpenDialog] = useState<boolean>(false)
-  const [openAddDialog, setOpenAddDialog] = useState<boolean>(false)
-  const [error, setError] = useState<string>()
-  const [successDialog, setSuccessDialog] = useState<string>()
-  const { theme } = useTheme()
-  
-  const classes = useStyles()
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [userToDelete, setUserToDelete] = useState<IUser>(({} as IUser) || null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
+  const [successDialog, setSuccessDialog] = useState<string>();
+  const { theme } = useTheme();
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage)
+  const classes = useStyles();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handleChangePage = useCallback((_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-    setPage(newPage)
-  }, [])
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
 
-  const handleChangeRowsPerPage = useCallback((
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
-  }, [])
+  const handleChangePage = useCallback(
+    (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+      setPage(newPage);
+    },
+    []
+  );
+
+  const handleChangeRowsPerPage = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    },
+    []
+  );
 
   const openDeleteDialog = useCallback((user: IUser): void => {
-    setUserToDelete(user)
-    setOpenDialog(true)
-  }, [])
+    setUserToDelete(user);
+    setOpenDialog(true);
+  }, []);
 
   useEffect(() => {
-    fetchUsers()
-  }, [])
+    fetchUsers();
+  }, []);
 
   const fetchUsers = useCallback(async (): Promise<void> => {
-    setLoading(true)
-    setError('')
+    setLoading(true);
+    setError('');
     try {
-      const cookies = new Cookies()
-      const token = cookies.get('@my-school:token')
+      const cookies = new Cookies();
+      const token = cookies.get('@my-school:token');
 
       const response = await api.get<IUser[]>('/users', {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         }
-      })
+      });
 
-      if (response.status !== 200)
-        throw new Error()
+      if (response.status !== 200) throw new Error();
 
-      setUsers(response.data)
-
+      setUsers(response.data);
     } catch (error) {
       if (error.response) {
-        setError('Ops, não foi possível listar os usuários. Por favor, tente novamente mais tarde.')
+        setError(
+          'Ops, não foi possível listar os usuários. Por favor, tente novamente mais tarde.'
+        );
       } else {
-        setError('Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.')
+        setError(
+          'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
+        );
       }
     }
-    setLoading(false)
-  }, [])
+    setLoading(false);
+  }, []);
 
   return (
     <Container className="themed">
@@ -218,16 +226,15 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
           <Header>
             <div className="greeting">
               <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Esses são os usuários cadastrados 🤖</h3>
+              <h3>Esses são os usuários cadastrados</h3>
             </div>
             <div className="add">
               <Button
                 color="primary"
                 variant="contained"
                 size="large"
-                onClick={() => setOpenAddDialog(true)}
-              >
-                  Incluir
+                onClick={() => setOpenAddDialog(true)}>
+                Incluir
               </Button>
             </div>
           </Header>
@@ -291,10 +298,16 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
                           {formatDate(user.updated_at)}
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
-                          <BsCardChecklist onClick={() => openDeleteDialog(user)} style={{ cursor: 'pointer' }}/>
+                          <BsCardChecklist
+                            onClick={() => openDeleteDialog(user)}
+                            style={{ cursor: 'pointer' }}
+                          />
                         </StyledTableCell>
                         <StyledTableCell align="center" style={{ width: 50 }}>
-                          <AiOutlineUserDelete onClick={() => openDeleteDialog(user)} style={{ cursor: 'pointer' }}/>
+                          <AiOutlineUserDelete
+                            onClick={() => openDeleteDialog(user)}
+                            style={{ cursor: 'pointer' }}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -314,7 +327,7 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
                         page={page}
                         SelectProps={{
                           inputProps: { 'aria-label': 'linhas por página' },
-                          native: true,
+                          native: true
                         }}
                         labelRowsPerPage="Linhas por página"
                         onChangePage={handleChangePage}
@@ -330,24 +343,21 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
         </ContentWrapper>
       </Main>
     </Container>
-  )
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServerSideProps: GetServerSideProps<IServerUsers> = async (context: any) => {
   try {
-    checkAuth(context.req.cookies['@my-school:token'])
-    const { id, name } = JSON.parse(context.req.cookies['@my-school:user'])
-    const isAdmin = await checkPermission(
-      context.req.cookies['@my-school:token'],
-      id
-    )
+    checkAuth(context.req.cookies['@my-school:token']);
+    const { id, name } = JSON.parse(context.req.cookies['@my-school:user']);
+    const isAdmin = await checkPermission(context.req.cookies['@my-school:token'], id);
     return {
       props: {
         name,
         isAdmin
       }
-    }
+    };
   } catch (err) {
     return {
       props: {},
@@ -355,6 +365,6 @@ export const getServerSideProps: GetServerSideProps<IServerUsers> = async (conte
         destination: '/login',
         permanent: false
       }
-    }
+    };
   }
-}
+};

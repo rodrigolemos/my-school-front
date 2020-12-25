@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { showFromTop } from '../animations'
-import { TableRow } from '@material-ui/core'
+import styled, { css } from 'styled-components';
+import { showFromTop } from '../animations';
+import { TableRow } from '@material-ui/core';
 
 interface IContainer {
-  customtheme: string
+  customtheme: string;
 }
 
 export const Container = styled.div`
@@ -12,7 +12,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Main = styled.main`
   position: relative;
@@ -25,7 +25,7 @@ export const Main = styled.main`
   @media (max-width: 1110px) {
     width: 100%;
   }
-`
+`;
 
 export const ContentWrapper = styled.div`
   width: 100%;
@@ -40,7 +40,7 @@ export const ContentWrapper = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
-`
+`;
 
 export const Header = styled.div`
   width: 95%;
@@ -58,7 +58,7 @@ export const Header = styled.div`
     h2 {
       font-size: 2.6rem;
       font-weight: normal;
-      margin-bottom: .8rem;
+      margin-bottom: 0.8rem;
     }
 
     h3 {
@@ -75,12 +75,12 @@ export const Header = styled.div`
   div.add {
     display: flex;
     align-items: center;
-    
+
     span {
       font-size: 1.2rem;
     }
   }
-`
+`;
 
 export const Content = styled.div`
   width: 95%;
@@ -91,22 +91,29 @@ export const Content = styled.div`
   align-items: flex-start;
   justify-content: center;
 
-  animation: ${showFromTop} .5s ease-in-out;
-`
+  animation: ${showFromTop} 0.5s ease-in-out;
+`;
 
 export const MyTableRow = styled(TableRow)<IContainer>`
-  transition: all .2s ease-in-out;
-  ${({ customtheme }) => customtheme === 'dark' ? css`
-    th, td, svg {
-      border-bottom: 1px solid var(--logged-dark) !important;
-      background-color: var(--logged);
-      color: var(--white) !important;
-    }
-  ` : css`
-    th, td, svg {
-      border-bottom: 1px solid var(--light) !important;
-      background-color: var(--white);
-      color: var(--logged) !important;
-    }
-  `}
-`
+  transition: all 0.2s ease-in-out;
+  ${({ customtheme }) =>
+    customtheme === 'dark'
+      ? css`
+          th,
+          td,
+          svg {
+            border-bottom: 1px solid var(--logged-dark) !important;
+            background-color: var(--logged);
+            color: var(--white) !important;
+          }
+        `
+      : css`
+          th,
+          td,
+          svg {
+            border-bottom: 1px solid var(--light) !important;
+            background-color: var(--white);
+            color: var(--logged) !important;
+          }
+        `}
+`;

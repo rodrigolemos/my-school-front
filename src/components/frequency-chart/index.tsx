@@ -1,14 +1,13 @@
-import React, { ReactElement } from 'react'
-import { Bar } from 'react-chartjs-2'
-import { useTheme } from '../../hooks/theme'
+import React, { ReactElement } from 'react';
+import { Bar } from 'react-chartjs-2';
+import { useTheme } from '../../hooks/theme';
 
 const FrequencyChart: React.FC = (): ReactElement => {
+  const { theme } = useTheme();
 
-  const { theme } = useTheme()
-
-  let fontColor = '#233044'
+  let fontColor = '#233044';
   if (theme === 'dark') {
-    fontColor = '#F7F9FC'
+    fontColor = '#F7F9FC';
   }
 
   const config = {
@@ -19,39 +18,43 @@ const FrequencyChart: React.FC = (): ReactElement => {
         data: [55, 59, 65, 67, 61, 69]
       }
     ]
-  }
+  };
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <Bar
         data={config}
         options={{
-          title:{
+          title: {
             display: true,
             text: 'Últimos acessos',
             fontSize: 22,
-            fontColor,
+            fontColor
           },
           legend: {
             display: false,
             labels: {
-              fontColor,
-            },
+              fontColor
+            }
           },
           scales: {
-            xAxes: [{
-              gridLines: {
-                color: 'rgba(0, 0, 0, 0)',
-              },
-              ticks: {
-                fontColor
+            xAxes: [
+              {
+                gridLines: {
+                  color: 'rgba(0, 0, 0, 0)'
+                },
+                ticks: {
+                  fontColor
+                }
               }
-            }],
-            yAxes: [{
-              ticks: {
-                fontColor
+            ],
+            yAxes: [
+              {
+                ticks: {
+                  fontColor
+                }
               }
-            }]
+            ]
           },
           responsive: true,
           maintainAspectRatio: false
@@ -60,7 +63,7 @@ const FrequencyChart: React.FC = (): ReactElement => {
         width={null}
       />
     </div>
-  )
-}
+  );
+};
 
-export default FrequencyChart
+export default FrequencyChart;

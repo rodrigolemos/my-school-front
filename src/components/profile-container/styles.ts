@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const ProfileColumn = styled.div`
   height: 100%;
@@ -11,7 +11,7 @@ export const ProfileColumn = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 export const InnerProfile = styled.div`
   width: 100%;
@@ -23,13 +23,13 @@ export const InnerProfile = styled.div`
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
-`
+`;
 
 export const ProfileDetails = styled(InnerProfile)`
   height: 55%;
   min-height: 340px;
   flex-direction: column;
-`
+`;
 
 export const Avatar = styled.div`
   width: 200px;
@@ -41,7 +41,7 @@ export const Avatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Personal = styled.div`
   font-size: 1.6rem;
@@ -53,7 +53,7 @@ export const Personal = styled.div`
   span {
     margin-bottom: 1rem;
   }
-`
+`;
 
 export const About = styled.div`
   font-size: 1.4rem;
@@ -72,7 +72,8 @@ export const About = styled.div`
     height: 100%;
   }
 
-  span, label {
+  span,
+  label {
     margin-bottom: 2rem;
   }
 
@@ -85,12 +86,12 @@ export const About = styled.div`
       margin-right: 1rem;
     }
   }
-`
+`;
 
 export const ProfileAbout = styled(InnerProfile)`
   height: 45%;
   min-height: 278px;
-`
+`;
 
 export const CustomRoleDescription = styled.span`
   display: flex;
@@ -102,4 +103,4 @@ export const CustomRoleDescription = styled.span`
   svg {
     margin-right: 1rem;
   }
-`
+`;
