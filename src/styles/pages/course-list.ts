@@ -184,6 +184,21 @@ export const Card = styled.div`
       width: 100%;
       height: 100%;
       padding: 2rem;
+      position: relative;
+
+      svg {
+        position: absolute;
+        right: 1.2rem;
+        bottom: 1.2rem;
+        font-size: 3rem;
+        cursor: pointer;
+        color: var(--primary);
+        transition: all 0.1s ease-in-out;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
     }
   }
 
