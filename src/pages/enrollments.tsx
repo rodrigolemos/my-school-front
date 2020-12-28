@@ -16,7 +16,9 @@ import {
   ContentWrapper,
   Header,
   Content,
-  MyTableRow
+  MyTableRow,
+  Filter,
+  FilterWrapper
 } from '../styles/pages/enrollments';
 import {
   FiChevronLeft,
@@ -129,7 +131,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-interface IServerCourses {
+interface IServerEnrollments {
   name: string;
   isAdmin: boolean;
 }
@@ -140,7 +142,7 @@ interface ICreatedBy {
   email: string;
 }
 
-interface ICourse {
+interface IEnrollment {
   id: string;
   name: string;
   description: string;
@@ -151,9 +153,9 @@ interface ICourse {
   updated_at: Date;
 }
 
-export default function Enrollments({ name, isAdmin }: IServerCourses): ReactElement {
-  const [courses, setCourses] = useState<ICourse[]>([]);
-  const [courseToEdit, setCourseToEdit] = useState<ICourse>(({} as ICourse) || null);
+export default function Enrollments({ name, isAdmin }: IServerEnrollments): ReactElement {
+  const [enrollments, setEnrollments] = useState<IEnrollment[]>([]);
+  const [courseToEdit, setCourseToEdit] = useState<IEnrollment>(({} as IEnrollment) || null);
   const [loading, setLoading] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [error, setError] = useState<string>();
@@ -164,7 +166,7 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, courses.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, enrollments.length - page * rowsPerPage);
 
   const handleChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
@@ -177,7 +179,7 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
     setPage(0);
   };
 
-  const openEditDialog = (course: ICourse): void => {
+  const openEditDialog = (course: IEnrollment): void => {
     setCourseToEdit(course);
     setOpenDialog(true);
   };
@@ -188,17 +190,17 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
   };
 
   useEffect(() => {
-    fetchCourses();
+    fetchEnrollments();
   }, []);
 
-  const fetchCourses = async (): Promise<void> => {
+  const fetchEnrollments = async (): Promise<void> => {
     setLoading(true);
     setError('');
     try {
-      const response = await api.get<ICourse[]>('/courses');
+      const response = await api.get<IEnrollment[]>('/courses');
       if (response.status !== 200) throw new Error();
 
-      setCourses(response.data);
+      setEnrollments(response.data);
     } catch (error) {
       if (error.response) {
         setError('Ops, não foi possível listar os cursos. Por favor, tente novamente mais tarde.');
@@ -233,8 +235,8 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
               open={openDialog}
               handleDialog={setOpenDialog}
               courseToEdit={courseToEdit}
-              courses={courses}
-              setCourses={setCourses}
+              courses={enrollments}
+              setCourses={setEnrollments}
               setSuccessDialog={setSuccessDialog}
             />
             {error && <Toast type="error" message={error} />}
@@ -242,85 +244,88 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
             {loading ? (
               <CircularProgress />
             ) : (
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell>Nome</StyledTableCell>
-                      <StyledTableCell>Descrição</StyledTableCell>
-                      <StyledTableCell>Período</StyledTableCell>
-                      <StyledTableCell align="center">Criado por</StyledTableCell>
-                      <StyledTableCell align="center">Criado em</StyledTableCell>
-                      <StyledTableCell align="center">Atualizado em</StyledTableCell>
-                      <StyledTableCell align="center">Matrículas</StyledTableCell>
-                      <StyledTableCell align="center">Editar</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {(rowsPerPage > 0
-                      ? courses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      : courses
-                    ).map((course) => (
-                      <StyledTableRow key={course.id} customtheme={theme}>
-                        <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
-                          {course.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="left" style={{ width: 350 }}>
-                          {formatDescription(course.description)}
-                        </StyledTableCell>
-                        <StyledTableCell align="left" style={{ width: 100 }}>
-                          {formatPeriod(course.period)}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 150 }}>
-                          {course.created_by.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 200 }}>
-                          {formatDate(course.created_at)}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 200 }}>
-                          {formatDate(course.updated_at)}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 50 }}>
-                          <BsCardChecklist
-                            onClick={() => openEditDialog(course)}
-                            style={{ cursor: 'pointer' }}
-                          />
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 50 }}>
-                          <FiEdit3
-                            onClick={() => openEditDialog(course)}
-                            style={{ cursor: 'pointer' }}
-                          />
-                        </StyledTableCell>
+              <FilterWrapper>
+                <Filter>Hello</Filter>
+                <TableContainer component={Paper}>
+                  <Table className={classes.table} aria-label="customized table">
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell>Nome</StyledTableCell>
+                        <StyledTableCell>Descrição</StyledTableCell>
+                        <StyledTableCell>Período</StyledTableCell>
+                        <StyledTableCell align="center">Criado por</StyledTableCell>
+                        <StyledTableCell align="center">Criado em</StyledTableCell>
+                        <StyledTableCell align="center">Atualizado em</StyledTableCell>
+                        <StyledTableCell align="center">Matrículas</StyledTableCell>
+                        <StyledTableCell align="center">Editar</StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {(rowsPerPage > 0
+                        ? enrollments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        : enrollments
+                      ).map((enrollment) => (
+                        <StyledTableRow key={enrollment.id} customtheme={theme}>
+                          <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
+                            {enrollment.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="left" style={{ width: 350 }}>
+                            {formatDescription(enrollment.description)}
+                          </StyledTableCell>
+                          <StyledTableCell align="left" style={{ width: 100 }}>
+                            {formatPeriod(enrollment.period)}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" style={{ width: 150 }}>
+                            {enrollment.created_by.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" style={{ width: 200 }}>
+                            {formatDate(enrollment.created_at)}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" style={{ width: 200 }}>
+                            {formatDate(enrollment.updated_at)}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" style={{ width: 50 }}>
+                            <BsCardChecklist
+                              onClick={() => openEditDialog(enrollment)}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </StyledTableCell>
+                          <StyledTableCell align="center" style={{ width: 50 }}>
+                            <FiEdit3
+                              onClick={() => openEditDialog(enrollment)}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                      {emptyRows > 0 && (
+                        <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
+                          <StyledTableCell colSpan={8} />
+                        </StyledTableRow>
+                      )}
+                    </TableBody>
+                    <TableFooter>
+                      <StyledTableRow customtheme={theme}>
+                        <TablePagination
+                          rowsPerPageOptions={[5, 10]}
+                          colSpan={8}
+                          count={enrollments.length}
+                          rowsPerPage={rowsPerPage}
+                          page={page}
+                          SelectProps={{
+                            inputProps: { 'aria-label': 'linhas por página' },
+                            native: true
+                          }}
+                          labelRowsPerPage="Linhas por página"
+                          onChangePage={handleChangePage}
+                          onChangeRowsPerPage={handleChangeRowsPerPage}
+                          ActionsComponent={TablePaginationActions}
+                        />
                       </StyledTableRow>
-                    ))}
-                    {emptyRows > 0 && (
-                      <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                        <StyledTableCell colSpan={8} />
-                      </StyledTableRow>
-                    )}
-                  </TableBody>
-                  <TableFooter>
-                    <StyledTableRow customtheme={theme}>
-                      <TablePagination
-                        rowsPerPageOptions={[5, 10]}
-                        colSpan={8}
-                        count={courses.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        SelectProps={{
-                          inputProps: { 'aria-label': 'linhas por página' },
-                          native: true
-                        }}
-                        labelRowsPerPage="Linhas por página"
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                        ActionsComponent={TablePaginationActions}
-                      />
-                    </StyledTableRow>
-                  </TableFooter>
-                </Table>
-              </TableContainer>
+                    </TableFooter>
+                  </Table>
+                </TableContainer>
+              </FilterWrapper>
             )}
           </Content>
         </ContentWrapper>
@@ -330,7 +335,7 @@ export default function Enrollments({ name, isAdmin }: IServerCourses): ReactEle
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getServerSideProps: GetServerSideProps<IServerCourses> = async (context: any) => {
+export const getServerSideProps: GetServerSideProps<IServerEnrollments> = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token']);
     const { id, name } = JSON.parse(context.req.cookies['@my-school:user']);

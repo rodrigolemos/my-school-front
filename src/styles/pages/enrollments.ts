@@ -117,3 +117,19 @@ export const MyTableRow = styled(TableRow)<IContainer>`
           }
         `}
 `;
+
+export const FilterWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+export const Filter = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
