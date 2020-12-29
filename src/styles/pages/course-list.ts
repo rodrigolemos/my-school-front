@@ -159,9 +159,8 @@ export const ContentWrapper = styled.div`
 
 export const Card = styled.div`
   position: relative;
-  border-radius: 15px;
+  border-radius: 10px;
   width: 30%;
-  height: 180px;
   margin: 1.5rem;
   flex-shrink: 0;
   backface-visibility: hidden;
@@ -170,26 +169,36 @@ export const Card = styled.div`
   background-color: var(--background);
   color: var(--secondary);
 
-  div.content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+  p {
     width: 100%;
-    height: 100%;
+    padding: 2rem;
+    font-size: 1.6rem;
+  }
 
-    p {
-      font-size: 1.6rem;
+  div.title {
+    padding: 1.1rem;
+    border-radius: 10px;
+    background-color: #fff;
+    color: var(--tertirary);
+    background: linear-gradient(to top right, var(--light), var(--background));
+    font-size: 2.8rem;
+    text-transform: capitalize;
+  }
+
+  div.footer {
+    padding: 1rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .more {
       display: flex;
       align-items: center;
-      width: 100%;
-      height: 100%;
-      padding: 2rem;
-      position: relative;
-
+      span {
+        font-size: 1.4rem;
+        margin-right: 1rem;
+      }
       svg {
-        position: absolute;
-        right: 1.2rem;
-        bottom: 1.2rem;
         font-size: 3rem;
         cursor: pointer;
         color: var(--primary);
@@ -200,19 +209,16 @@ export const Card = styled.div`
         }
       }
     }
-  }
 
-  div.title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 1.1rem;
-    border-top-left-radius: 15px;
-    background-color: #fff;
-    color: var(--tertirary);
-    background: linear-gradient(to top right, var(--white), var(--background));
-    font-size: 2.8rem;
-    text-transform: capitalize;
+    .tags {
+      .tag {
+        font-size: 1.2rem;
+        padding: 0.3rem 0.5rem;
+        margin: 0 0.5rem;
+        background-color: var(--secondary-light);
+        color: var(--white);
+      }
+    }
   }
 
   @media (max-width: 1100px) {

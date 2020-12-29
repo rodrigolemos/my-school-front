@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { AiFillPlusCircle } from 'react-icons/ai';
+import { formatDescription } from '../utils/courses';
 import api from '../services/api';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
@@ -19,6 +20,7 @@ interface ICourse {
   name: string;
   description: string;
   period: string;
+  tags?: string[];
   updated_at: Date;
 }
 
@@ -47,14 +49,21 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
           <ContentWrapper>
             {courses.map((course: ICourse) => (
               <Card key={course.id}>
-                <div className="content">
-                  <div className="title">{course.name}</div>
-                  <p>
-                    {course.description}
+                <div className="title">{course.name}</div>
+                <p>{formatDescription(course.description)}</p>
+                <div className="footer">
+                  <div className="tags">
+                    {course.tags.map((tag) => (
+                      <span key={tag} className="tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="more">
                     <Link href={`/course-detail/${course.id}`}>
                       <AiFillPlusCircle />
                     </Link>
-                  </p>
+                  </div>
                 </div>
               </Card>
             ))}
