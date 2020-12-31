@@ -4,22 +4,14 @@ import { useRouter } from 'next/router';
 import { FaMedal } from 'react-icons/fa';
 import { checkAuth } from '../services/auth';
 import api from '../services/api';
-import SidebarMenu from '../components/sidebar-menu';
-import UserNavBar from '../components/user-navbar';
+
+import Layout from '../components/layout';
 import ProfileContainer from '../components/profile-container';
 import PerformanceChart from '../components/performance-chart';
 import FrequencyChart from '../components/frequency-chart';
 import Toast from '../components/toast';
-import {
-  Container,
-  Main,
-  ContentWrapper,
-  Header,
-  Content,
-  StatsColumn,
-  StatsArea,
-  DashboardArea
-} from '../styles/pages/dashboard';
+
+import { Header, Content, StatsColumn, StatsArea, DashboardArea } from '../styles/pages/dashboard';
 
 interface IUser {
   id: string;
@@ -43,42 +35,36 @@ export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactEle
   const router = useRouter();
   const { updated } = router.query;
   return (
-    <Container className="themed">
-      <SidebarMenu isAdmin={isAdmin} />
-      <Main>
-        {updated && <Toast type="success" message="Perfil atualizado com sucesso!" />}
-        <UserNavBar title="Dashboard" />
-        <ContentWrapper>
-          <Header>
-            <div className="greeting">
-              <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Esta é sua área logada</h3>
-            </div>
-          </Header>
-          <Content>
-            <ProfileContainer {...user} />
-            <StatsColumn>
-              <StatsArea>
-                <DashboardArea className="themed">
-                  <div className="themed-aux col">
-                    <div>
-                      <FaMedal />
-                    </div>
-                    <h4>Beta Tester</h4>
-                  </div>
-                  <div className="themed-aux col">
-                    <PerformanceChart />
-                  </div>
-                  <div className="themed-aux col full">
-                    <FrequencyChart />
-                  </div>
-                </DashboardArea>
-              </StatsArea>
-            </StatsColumn>
-          </Content>
-        </ContentWrapper>
-      </Main>
-    </Container>
+    <Layout isAdmin={isAdmin} title="Dashboard">
+      {updated && <Toast type="success" message="Perfil atualizado com sucesso!" />}
+      <Header>
+        <div className="greeting">
+          <h2>Bem vindo novamente, {name}!</h2>
+          <h3>Esta é sua área logada</h3>
+        </div>
+      </Header>
+      <Content>
+        <ProfileContainer {...user} />
+        <StatsColumn>
+          <StatsArea>
+            <DashboardArea className="themed">
+              <div className="themed-aux col">
+                <div>
+                  <FaMedal />
+                </div>
+                <h4>Beta Tester</h4>
+              </div>
+              <div className="themed-aux col">
+                <PerformanceChart />
+              </div>
+              <div className="themed-aux col full">
+                <FrequencyChart />
+              </div>
+            </DashboardArea>
+          </StatsArea>
+        </StatsColumn>
+      </Content>
+    </Layout>
   );
 }
 

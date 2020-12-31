@@ -5,21 +5,7 @@ import api from '../services/api';
 import { checkPermission } from '../services/permission';
 import { formatDate } from '../utils/date';
 import { formatDescription, formatPeriod } from '../utils/courses';
-import SidebarMenu from '../components/sidebar-menu';
-import UserNavBar from '../components/user-navbar';
-import CourseDialog from '../components/course-dialog';
-import Toast from '../components/toast';
 import { useTheme } from '../hooks/theme';
-import {
-  Container,
-  Main,
-  ContentWrapper,
-  Header,
-  Content,
-  MyTableRow,
-  Filter,
-  FilterWrapper
-} from '../styles/pages/enrollments';
 import {
   FiChevronLeft,
   FiChevronsLeft,
@@ -43,6 +29,11 @@ import {
   Paper,
   IconButton
 } from '@material-ui/core';
+
+import Layout from '../components/layout';
+import CourseDialog from '../components/course-dialog';
+import Toast from '../components/toast';
+import { Header, Content, MyTableRow, Filter, FilterWrapper } from '../styles/pages/enrollments';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -214,123 +205,117 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
   };
 
   return (
-    <Container className="themed">
-      <SidebarMenu isAdmin={isAdmin} />
-      <Main>
-        <UserNavBar title="Matrículas" />
-        <ContentWrapper>
-          <Header>
-            <div className="greeting">
-              <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Aqui você gerencia as matrículas na plataforma!</h3>
-            </div>
-            <div className="add">
-              <Button onClick={openAddDialog} color="primary" variant="contained" size="large">
-                Incluir
-              </Button>
-            </div>
-          </Header>
-          <Content>
-            <CourseDialog
-              open={openDialog}
-              handleDialog={setOpenDialog}
-              courseToEdit={courseToEdit}
-              courses={enrollments}
-              setCourses={setEnrollments}
-              setSuccessDialog={setSuccessDialog}
-            />
-            {error && <Toast type="error" message={error} />}
-            {successDialog && <Toast type="success" message={successDialog} />}
-            {loading ? (
-              <CircularProgress />
-            ) : (
-              <FilterWrapper>
-                <Filter>Hello</Filter>
-                <TableContainer component={Paper}>
-                  <Table className={classes.table} aria-label="customized table">
-                    <TableHead>
-                      <TableRow>
-                        <StyledTableCell>Nome</StyledTableCell>
-                        <StyledTableCell>Descrição</StyledTableCell>
-                        <StyledTableCell>Período</StyledTableCell>
-                        <StyledTableCell align="center">Criado por</StyledTableCell>
-                        <StyledTableCell align="center">Criado em</StyledTableCell>
-                        <StyledTableCell align="center">Atualizado em</StyledTableCell>
-                        <StyledTableCell align="center">Matrículas</StyledTableCell>
-                        <StyledTableCell align="center">Editar</StyledTableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {(rowsPerPage > 0
-                        ? enrollments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : enrollments
-                      ).map((enrollment) => (
-                        <StyledTableRow key={enrollment.id} customtheme={theme}>
-                          <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
-                            {enrollment.name}
-                          </StyledTableCell>
-                          <StyledTableCell align="left" style={{ width: 350 }}>
-                            {formatDescription(enrollment.description)}
-                          </StyledTableCell>
-                          <StyledTableCell align="left" style={{ width: 100 }}>
-                            {formatPeriod(enrollment.period)}
-                          </StyledTableCell>
-                          <StyledTableCell align="center" style={{ width: 150 }}>
-                            {enrollment.created_by.name}
-                          </StyledTableCell>
-                          <StyledTableCell align="center" style={{ width: 200 }}>
-                            {formatDate(enrollment.created_at)}
-                          </StyledTableCell>
-                          <StyledTableCell align="center" style={{ width: 200 }}>
-                            {formatDate(enrollment.updated_at)}
-                          </StyledTableCell>
-                          <StyledTableCell align="center" style={{ width: 50 }}>
-                            <BsCardChecklist
-                              onClick={() => openEditDialog(enrollment)}
-                              style={{ cursor: 'pointer' }}
-                            />
-                          </StyledTableCell>
-                          <StyledTableCell align="center" style={{ width: 50 }}>
-                            <FiEdit3
-                              onClick={() => openEditDialog(enrollment)}
-                              style={{ cursor: 'pointer' }}
-                            />
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      ))}
-                      {emptyRows > 0 && (
-                        <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                          <StyledTableCell colSpan={8} />
-                        </StyledTableRow>
-                      )}
-                    </TableBody>
-                    <TableFooter>
-                      <StyledTableRow customtheme={theme}>
-                        <TablePagination
-                          rowsPerPageOptions={[5, 10]}
-                          colSpan={8}
-                          count={enrollments.length}
-                          rowsPerPage={rowsPerPage}
-                          page={page}
-                          SelectProps={{
-                            inputProps: { 'aria-label': 'linhas por página' },
-                            native: true
-                          }}
-                          labelRowsPerPage="Linhas por página"
-                          onChangePage={handleChangePage}
-                          onChangeRowsPerPage={handleChangeRowsPerPage}
-                          ActionsComponent={TablePaginationActions}
+    <Layout isAdmin={isAdmin} title="Matrículas">
+      <Header>
+        <div className="greeting">
+          <h2>Bem vindo novamente, {name}!</h2>
+          <h3>Aqui você gerencia as matrículas na plataforma!</h3>
+        </div>
+        <div className="add">
+          <Button onClick={openAddDialog} color="primary" variant="contained" size="large">
+            Incluir
+          </Button>
+        </div>
+      </Header>
+      <Content>
+        <CourseDialog
+          open={openDialog}
+          handleDialog={setOpenDialog}
+          courseToEdit={courseToEdit}
+          courses={enrollments}
+          setCourses={setEnrollments}
+          setSuccessDialog={setSuccessDialog}
+        />
+        {error && <Toast type="error" message={error} />}
+        {successDialog && <Toast type="success" message={successDialog} />}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <FilterWrapper>
+            <Filter>Hello</Filter>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Nome</StyledTableCell>
+                    <StyledTableCell>Descrição</StyledTableCell>
+                    <StyledTableCell>Período</StyledTableCell>
+                    <StyledTableCell align="center">Criado por</StyledTableCell>
+                    <StyledTableCell align="center">Criado em</StyledTableCell>
+                    <StyledTableCell align="center">Atualizado em</StyledTableCell>
+                    <StyledTableCell align="center">Matrículas</StyledTableCell>
+                    <StyledTableCell align="center">Editar</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? enrollments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : enrollments
+                  ).map((enrollment) => (
+                    <StyledTableRow key={enrollment.id} customtheme={theme}>
+                      <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
+                        {enrollment.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: 350 }}>
+                        {formatDescription(enrollment.description)}
+                      </StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: 100 }}>
+                        {formatPeriod(enrollment.period)}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 150 }}>
+                        {enrollment.created_by.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 200 }}>
+                        {formatDate(enrollment.created_at)}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 200 }}>
+                        {formatDate(enrollment.updated_at)}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 50 }}>
+                        <BsCardChecklist
+                          onClick={() => openEditDialog(enrollment)}
+                          style={{ cursor: 'pointer' }}
                         />
-                      </StyledTableRow>
-                    </TableFooter>
-                  </Table>
-                </TableContainer>
-              </FilterWrapper>
-            )}
-          </Content>
-        </ContentWrapper>
-      </Main>
-    </Container>
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 50 }}>
+                        <FiEdit3
+                          onClick={() => openEditDialog(enrollment)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                  {emptyRows > 0 && (
+                    <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
+                      <StyledTableCell colSpan={8} />
+                    </StyledTableRow>
+                  )}
+                </TableBody>
+                <TableFooter>
+                  <StyledTableRow customtheme={theme}>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10]}
+                      colSpan={8}
+                      count={enrollments.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      SelectProps={{
+                        inputProps: { 'aria-label': 'linhas por página' },
+                        native: true
+                      }}
+                      labelRowsPerPage="Linhas por página"
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                      ActionsComponent={TablePaginationActions}
+                    />
+                  </StyledTableRow>
+                </TableFooter>
+              </Table>
+            </TableContainer>
+          </FilterWrapper>
+        )}
+      </Content>
+    </Layout>
   );
 }
 

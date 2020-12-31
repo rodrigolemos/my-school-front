@@ -3,17 +3,17 @@ import { Cookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { checkAuth } from '../services/auth';
-import { CircularProgress } from '@material-ui/core';
 import api from '../services/api';
-import SidebarMenu from '../components/sidebar-menu';
-import UserNavBar from '../components/user-navbar';
+import { CircularProgress } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import Layout from '../components/layout';
 import ProfileContainer from '../components/profile-container';
 import Toast from '../components/toast';
-import { Button } from '@material-ui/core';
 import {
-  Container,
-  Main,
-  ContentWrapper,
   Content,
   FormColumn,
   FormArea,
@@ -21,9 +21,6 @@ import {
   Controls,
   CustomInput
 } from '../styles/pages/profile';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
 interface IUser {
   id: string;
@@ -114,80 +111,72 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
   }, []);
 
   return (
-    <Container className="themed">
-      <SidebarMenu isAdmin={isAdmin} />
-      <Main>
-        <UserNavBar title="Perfil" />
-        <ContentWrapper>
-          <Content>
-            {error && <Toast type="error" message={error} />}
-            <ProfileContainer {...user} />
-            <FormColumn>
-              <FormArea>
-                <Form onSubmit={handleSubmit(onSubmit)} className="themed-aux">
-                  <h3>Minhas informações</h3>
-                  <Controller
-                    name="name"
-                    control={control}
-                    defaultValue={user.name}
-                    as={<CustomInput label="Nome" variant="filled" required ref={register} />}
+    <Layout isAdmin={isAdmin} title="Perfil">
+      <Content>
+        {error && <Toast type="error" message={error} />}
+        <ProfileContainer {...user} />
+        <FormColumn>
+          <FormArea>
+            <Form onSubmit={handleSubmit(onSubmit)} className="themed-aux">
+              <h3>Minhas informações</h3>
+              <Controller
+                name="name"
+                control={control}
+                defaultValue={user.name}
+                as={<CustomInput label="Nome" variant="filled" required ref={register} />}
+              />
+              {errors.name && <p className="error">Preencha corretamente o nome</p>}
+              <Controller
+                name="email"
+                control={control}
+                defaultValue={user.email}
+                as={<CustomInput label="E-mail" variant="filled" required ref={register} />}
+              />
+              {errors.email && <p className="error">Preencha corretamente o email</p>}
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                as={
+                  <CustomInput
+                    type="password"
+                    label="Nova Senha"
+                    variant="filled"
+                    required
+                    ref={register}
+                    autoComplete=""
                   />
-                  {errors.name && <p className="error">Preencha corretamente o nome</p>}
-                  <Controller
-                    name="email"
-                    control={control}
-                    defaultValue={user.email}
-                    as={<CustomInput label="E-mail" variant="filled" required ref={register} />}
-                  />
-                  {errors.email && <p className="error">Preencha corretamente o email</p>}
-                  <Controller
-                    name="password"
-                    control={control}
-                    defaultValue=""
-                    as={
-                      <CustomInput
-                        type="password"
-                        label="Nova Senha"
-                        variant="filled"
-                        required
-                        ref={register}
-                        autoComplete=""
-                      />
-                    }
-                  />
-                  {errors.password && <p className="error">Preencha corretamente a senha</p>}
-                  <Controller
-                    name="contact"
-                    control={control}
-                    defaultValue={user.contact ? user.contact : ''}
-                    as={<CustomInput label="Contato" variant="filled" ref={register} />}
-                  />
-                  {errors.contact && <p className="error">Preencha corretamente o contato</p>}
-                  <Controller
-                    name="bio"
-                    control={control}
-                    defaultValue={user.bio ? user.bio : ''}
-                    as={
-                      <CustomInput label="Bio" variant="filled" ref={register} multiline rows={5} />
-                    }
-                  />
-                  {errors.bio && <p className="error">Preencha corretamente a bio</p>}
-                  <Controls>
-                    {!loading ? (
-                      <Button type="submit" variant="contained" color="primary" size="large">
-                        Atualizar
-                      </Button>
-                    ) : (
-                      <CircularProgress />
-                    )}
-                  </Controls>
-                </Form>
-              </FormArea>
-            </FormColumn>
-          </Content>
-        </ContentWrapper>
-      </Main>
-    </Container>
+                }
+              />
+              {errors.password && <p className="error">Preencha corretamente a senha</p>}
+              <Controller
+                name="contact"
+                control={control}
+                defaultValue={user.contact ? user.contact : ''}
+                as={<CustomInput label="Contato" variant="filled" ref={register} />}
+              />
+              {errors.contact && <p className="error">Preencha corretamente o contato</p>}
+              <Controller
+                name="bio"
+                control={control}
+                defaultValue={user.bio ? user.bio : ''}
+                as={<CustomInput label="Bio" variant="filled" ref={register} multiline rows={5} />}
+              />
+              {errors.bio && <p className="error">Preencha corretamente a bio</p>}
+              <Controls>
+                {!loading ? (
+                  <Button type="submit" variant="contained" color="primary" size="large">
+                    Atualizar
+                  </Button>
+                ) : (
+                  <CircularProgress />
+                )}
+              </Controls>
+            </Form>
+          </FormArea>
+        </FormColumn>
+      </Content>
+    </Layout>
   );
 }
 

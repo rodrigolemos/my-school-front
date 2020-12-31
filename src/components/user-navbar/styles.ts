@@ -7,21 +7,12 @@ interface NavProps {
 }
 
 export const DesktopNav = styled.nav<NavProps>`
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-
   width: 100%;
-  height: 10vh;
+  height: 100%;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `;
 
 export const MobileNav = styled.div<NavProps>`
@@ -74,7 +65,7 @@ export const OpenMobileMenu = styled(GiHamburgerMenu)`
   display: none;
   font-size: 3rem;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 768px) {
     display: block;
   }
 `;

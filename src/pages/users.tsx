@@ -5,20 +5,9 @@ import { checkAuth } from '../services/auth';
 import api from '../services/api';
 import { checkPermission } from '../services/permission';
 import { formatDate } from '../utils/date';
-import SidebarMenu from '../components/sidebar-menu';
-import UserNavBar from '../components/user-navbar';
 import ConfirmationDialog from '../components/confirmation-dialog';
 import UserDialog from '../components/user-dialog';
-import Toast from '../components/toast';
 import { useTheme } from '../hooks/theme';
-import {
-  Container,
-  Main,
-  ContentWrapper,
-  Header,
-  Content,
-  MyTableRow
-} from '../styles/pages/courses';
 import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 import { BsCardChecklist } from 'react-icons/bs';
@@ -37,6 +26,10 @@ import {
   Paper,
   IconButton
 } from '@material-ui/core';
+
+import Layout from '../components/layout';
+import Toast from '../components/toast';
+import { Header, Content, MyTableRow } from '../styles/pages/courses';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -218,131 +211,125 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
   }, []);
 
   return (
-    <Container className="themed">
-      <SidebarMenu isAdmin={isAdmin} />
-      <Main>
-        <UserNavBar title="Usuários" />
-        <ContentWrapper>
-          <Header>
-            <div className="greeting">
-              <h2>Bem vindo novamente, {name}!</h2>
-              <h3>Esses são os usuários cadastrados</h3>
-            </div>
-            <div className="add">
-              <Button
-                color="primary"
-                variant="contained"
-                size="large"
-                onClick={() => setOpenAddDialog(true)}>
-                Incluir
-              </Button>
-            </div>
-          </Header>
-          <Content>
-            <UserDialog
-              open={openAddDialog}
-              handleDialog={setOpenAddDialog}
-              users={users}
-              setUsers={setUsers}
-              setSuccessDialog={setSuccessDialog}
-            />
-            <ConfirmationDialog
-              open={openDialog}
-              handleDialog={setOpenDialog}
-              userToDelete={userToDelete}
-              users={users}
-              setUsers={setUsers}
-              setSuccessDialog={setSuccessDialog}
-            />
-            {error && <Toast type="error" message={error} />}
-            {successDialog && <Toast type="success" message={successDialog} />}
-            {loading ? (
-              <CircularProgress />
-            ) : (
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell>Nome</StyledTableCell>
-                      <StyledTableCell>E-mail</StyledTableCell>
-                      <StyledTableCell>Perfil</StyledTableCell>
-                      <StyledTableCell>Contato</StyledTableCell>
-                      <StyledTableCell align="center">Criado em</StyledTableCell>
-                      <StyledTableCell align="center">Atualizado em</StyledTableCell>
-                      <StyledTableCell align="center">Matrículas</StyledTableCell>
-                      <StyledTableCell align="center">Excluir</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {(rowsPerPage > 0
-                      ? users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      : users
-                    ).map((user) => (
-                      <StyledTableRow key={user.id} customtheme={theme}>
-                        <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
-                          {user.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="left" style={{ width: 220 }}>
-                          {user.email}
-                        </StyledTableCell>
-                        <StyledTableCell align="left" style={{ width: 100 }}>
-                          {user.role}
-                        </StyledTableCell>
-                        <StyledTableCell align="left" style={{ width: 150 }}>
-                          {user.contact}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 200 }}>
-                          {formatDate(user.created_at)}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 200 }}>
-                          {formatDate(user.updated_at)}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 50 }}>
-                          <BsCardChecklist
-                            onClick={() => openDeleteDialog(user)}
-                            style={{ cursor: 'pointer' }}
-                          />
-                        </StyledTableCell>
-                        <StyledTableCell align="center" style={{ width: 50 }}>
-                          <AiOutlineUserDelete
-                            onClick={() => openDeleteDialog(user)}
-                            style={{ cursor: 'pointer' }}
-                          />
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                    {emptyRows > 0 && (
-                      <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                        <StyledTableCell colSpan={9} />
-                      </StyledTableRow>
-                    )}
-                  </TableBody>
-                  <TableFooter>
-                    <StyledTableRow customtheme={theme}>
-                      <TablePagination
-                        rowsPerPageOptions={[5, 10]}
-                        colSpan={9}
-                        count={users.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        SelectProps={{
-                          inputProps: { 'aria-label': 'linhas por página' },
-                          native: true
-                        }}
-                        labelRowsPerPage="Linhas por página"
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                        ActionsComponent={TablePaginationActions}
+    <Layout isAdmin={isAdmin} title="Usuários">
+      <Header>
+        <div className="greeting">
+          <h2>Bem vindo novamente, {name}!</h2>
+          <h3>Esses são os usuários cadastrados</h3>
+        </div>
+        <div className="add">
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            onClick={() => setOpenAddDialog(true)}>
+            Incluir
+          </Button>
+        </div>
+      </Header>
+      <Content>
+        <UserDialog
+          open={openAddDialog}
+          handleDialog={setOpenAddDialog}
+          users={users}
+          setUsers={setUsers}
+          setSuccessDialog={setSuccessDialog}
+        />
+        <ConfirmationDialog
+          open={openDialog}
+          handleDialog={setOpenDialog}
+          userToDelete={userToDelete}
+          users={users}
+          setUsers={setUsers}
+          setSuccessDialog={setSuccessDialog}
+        />
+        {error && <Toast type="error" message={error} />}
+        {successDialog && <Toast type="success" message={successDialog} />}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Nome</StyledTableCell>
+                  <StyledTableCell>E-mail</StyledTableCell>
+                  <StyledTableCell>Perfil</StyledTableCell>
+                  <StyledTableCell>Contato</StyledTableCell>
+                  <StyledTableCell align="center">Criado em</StyledTableCell>
+                  <StyledTableCell align="center">Atualizado em</StyledTableCell>
+                  <StyledTableCell align="center">Matrículas</StyledTableCell>
+                  <StyledTableCell align="center">Excluir</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0
+                  ? users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : users
+                ).map((user) => (
+                  <StyledTableRow key={user.id} customtheme={theme}>
+                    <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
+                      {user.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" style={{ width: 220 }}>
+                      {user.email}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" style={{ width: 100 }}>
+                      {user.role}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" style={{ width: 150 }}>
+                      {user.contact}
+                    </StyledTableCell>
+                    <StyledTableCell align="center" style={{ width: 200 }}>
+                      {formatDate(user.created_at)}
+                    </StyledTableCell>
+                    <StyledTableCell align="center" style={{ width: 200 }}>
+                      {formatDate(user.updated_at)}
+                    </StyledTableCell>
+                    <StyledTableCell align="center" style={{ width: 50 }}>
+                      <BsCardChecklist
+                        onClick={() => openDeleteDialog(user)}
+                        style={{ cursor: 'pointer' }}
                       />
-                    </StyledTableRow>
-                  </TableFooter>
-                </Table>
-              </TableContainer>
-            )}
-          </Content>
-        </ContentWrapper>
-      </Main>
-    </Container>
+                    </StyledTableCell>
+                    <StyledTableCell align="center" style={{ width: 50 }}>
+                      <AiOutlineUserDelete
+                        onClick={() => openDeleteDialog(user)}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+                {emptyRows > 0 && (
+                  <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
+                    <StyledTableCell colSpan={9} />
+                  </StyledTableRow>
+                )}
+              </TableBody>
+              <TableFooter>
+                <StyledTableRow customtheme={theme}>
+                  <TablePagination
+                    rowsPerPageOptions={[5, 10]}
+                    colSpan={9}
+                    count={users.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    SelectProps={{
+                      inputProps: { 'aria-label': 'linhas por página' },
+                      native: true
+                    }}
+                    labelRowsPerPage="Linhas por página"
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </StyledTableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+        )}
+      </Content>
+    </Layout>
   );
 }
 
