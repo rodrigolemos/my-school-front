@@ -3,11 +3,11 @@ import { heartBeat } from '../animations';
 
 export const Header = styled.div`
   width: 100%;
-  min-height: 15%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
+  margin-bottom: 1rem;
 
   @media (max-width: 375px) {
     flex-direction: column;
@@ -34,7 +34,6 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  min-height: 85%;
   padding: 1rem;
 
   display: flex;
@@ -65,6 +64,10 @@ export const StatsArea = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+
+  @media (max-width: 375px) {
+    display: none !important;
+  }
 `;
 
 export const DashboardArea = styled.div`
