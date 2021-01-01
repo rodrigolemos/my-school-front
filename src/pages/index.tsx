@@ -1,10 +1,7 @@
 import React, { ReactElement } from 'react';
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
 import {
   AnimatedBanner,
   Card,
-  Container,
   ContentWrapper,
   Motivation,
   Presentation,
@@ -12,10 +9,11 @@ import {
   SectionName
 } from '../styles/pages/home';
 
+import PublicLayout from '../components/public-layout';
+
 export default function Home(): ReactElement {
   return (
-    <Container>
-      <Navbar />
+    <PublicLayout>
       <Presentation>
         <AnimatedBanner>
           <span>Olá, nós somos a</span>
@@ -81,7 +79,6 @@ export default function Home(): ReactElement {
           Uma plataforma educacional para quem usa e para quem desenvolve.
         </SectionAdditional>
       </Motivation>
-      <Footer />
-    </Container>
+    </PublicLayout>
   );
 }

@@ -8,11 +8,6 @@ const cardImage2 = require('../../../public/images/working-1.jpg');
 const cardImage3 = require('../../../public/images/strategy-1.jpg');
 const cardImage4 = require('../../../public/images/collaboration-1.jpg');
 
-export const Container = styled.section`
-  min-height: 90vh;
-  margin-top: 10vh;
-`;
-
 export const Section = styled.section`
   width: 100vw;
   height: 90vh;
@@ -158,45 +153,6 @@ export const ContentWrapper = styled.div`
   @media (max-width: 1100px) {
     justify-content: flex-start;
     flex-direction: column;
-  }
-`;
-
-export const Technologies = styled(Section)`
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: var(--secondary);
-  color: var(--white);
-`;
-
-export const Panel = styled.div`
-  width: 45%;
-  height: 100%;
-  margin: 0 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ul {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-
-  li {
-    list-style-type: none;
-    margin: 2rem 0;
-    font-size: 4rem;
-    display: flex;
-    align-items: center;
-
-    svg {
-      margin-right: 2rem;
-    }
-
-    @media (max-width: 375px) {
-      font-size: 3rem;
-    }
   }
 `;
 
