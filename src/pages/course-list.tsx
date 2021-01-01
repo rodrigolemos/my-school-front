@@ -42,11 +42,12 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
                 <p>{formatDescription(course.description)}</p>
                 <div className="footer">
                   <div className="tags">
-                    {course.tags.map((tag) => (
-                      <span key={tag} className="tag">
-                        {tag}
-                      </span>
-                    ))}
+                    {course.tags &&
+                      course.tags.map((tag) => (
+                        <span key={tag} className="tag">
+                          {tag}
+                        </span>
+                      ))}
                   </div>
                   <div className="more">
                     <Link href={`/course-detail/${course.id}`}>
