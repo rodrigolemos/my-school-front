@@ -40,10 +40,7 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
             {error ? (
               <h2>{error}</h2>
             ) : (
-              <h2>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur recusandae
-                laboriosam placeat et
-              </h2>
+              <h2>Conheça os cursos disponíveis atualmente em nossa plataforma.</h2>
             )}
           </Title>
           <ContentWrapper>
