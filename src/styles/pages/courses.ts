@@ -8,11 +8,11 @@ interface IContainer {
 
 export const Header = styled.div`
   width: 100%;
-  min-height: 15%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
+  margin-bottom: 1rem;
 
   @media (max-width: 375px) {
     flex-direction: column;
@@ -48,7 +48,6 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  min-height: 85%;
   padding: 0 1rem;
 
   display: flex;

@@ -155,7 +155,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
 
   const classes = useStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, courses.length - page * rowsPerPage);
 
