@@ -1,4 +1,6 @@
 import React, { ReactElement } from 'react';
+
+import PublicLayout from '../components/public-layout';
 import {
   AnimatedBanner,
   Card,
@@ -8,8 +10,6 @@ import {
   SectionAdditional,
   SectionName
 } from '../styles/pages/home';
-
-import PublicLayout from '../components/public-layout';
 
 export default function Home(): ReactElement {
   return (
