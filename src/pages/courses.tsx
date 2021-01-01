@@ -244,7 +244,6 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                   <StyledTableCell>Período</StyledTableCell>
                   <StyledTableCell align="center">Vagas</StyledTableCell>
                   <StyledTableCell align="center">Criado por</StyledTableCell>
-                  <StyledTableCell align="center">Criado em</StyledTableCell>
                   <StyledTableCell align="center">Atualizado em</StyledTableCell>
                   <StyledTableCell align="center">Matrículas</StyledTableCell>
                   <StyledTableCell align="center">Editar</StyledTableCell>
@@ -256,34 +255,31 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                   : courses
                 ).map((course) => (
                   <StyledTableRow key={course.id} customtheme={theme}>
-                    <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
+                    <StyledTableCell component="th" scope="row" style={{ width: 200 }}>
                       {course.name}
                     </StyledTableCell>
-                    <StyledTableCell align="left" style={{ width: 350 }}>
+                    <StyledTableCell align="left" style={{ width: 500 }}>
                       {formatDescription(course.description)}
                     </StyledTableCell>
                     <StyledTableCell align="left" style={{ width: 100 }}>
                       {formatPeriod(course.period)}
                     </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 100 }}>
+                    <StyledTableCell align="center" style={{ width: 50 }}>
                       {course.positions}
                     </StyledTableCell>
                     <StyledTableCell align="center" style={{ width: 150 }}>
                       {course.created_by.name}
                     </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 200 }}>
-                      {formatDate(course.created_at)}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 200 }}>
+                    <StyledTableCell align="center" style={{ width: 250 }}>
                       {formatDate(course.updated_at)}
                     </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 50 }}>
+                    <StyledTableCell align="center" style={{ width: 30 }}>
                       <BsCardChecklist
                         onClick={() => openEditDialog(course)}
                         style={{ cursor: 'pointer' }}
                       />
                     </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 50 }}>
+                    <StyledTableCell align="center" style={{ width: 30 }}>
                       <FiEdit3
                         onClick={() => openEditDialog(course)}
                         style={{ cursor: 'pointer' }}
@@ -293,7 +289,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                 ))}
                 {emptyRows > 0 && (
                   <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                    <StyledTableCell colSpan={9} />
+                    <StyledTableCell colSpan={8} />
                   </StyledTableRow>
                 )}
               </TableBody>
@@ -301,7 +297,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                 <StyledTableRow customtheme={theme}>
                   <TablePagination
                     rowsPerPageOptions={[5, 10]}
-                    colSpan={9}
+                    colSpan={8}
                     count={courses.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
