@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
-  min-height: 90vh;
-  margin-top: 10vh;
-`;
-
 export const Section = styled.section`
   width: 100vw;
   min-height: 90vh;
@@ -54,12 +49,6 @@ export const Title = styled.div`
     margin-top: 1.5rem;
     margin-bottom: 3rem;
   }
-`;
-
-export const SectionAdditional = styled.h2`
-  margin-top: 4rem;
-  font-size: 2.5rem !important;
-  text-align: center;
 `;
 
 export const Presentation = styled(Section)`

@@ -4,16 +4,9 @@ import Link from 'next/link';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { formatDescription } from '../utils/courses';
 import api from '../services/api';
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
-import {
-  Banner,
-  Card,
-  Container,
-  ContentWrapper,
-  Presentation,
-  Title
-} from '../styles/pages/course-list';
+
+import PublicLayout from '../components/public-layout';
+import { Banner, Card, ContentWrapper, Presentation, Title } from '../styles/pages/course-list';
 
 interface ICourse {
   id: string;
@@ -31,8 +24,7 @@ interface CourseListProps {
 
 export default function CourseList({ error, courses }: CourseListProps): ReactElement {
   return (
-    <Container>
-      <Navbar />
+    <PublicLayout>
       <Presentation>
         <Banner>
           <Title>
@@ -67,8 +59,7 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
           </ContentWrapper>
         </Banner>
       </Presentation>
-      <Footer />
-    </Container>
+    </PublicLayout>
   );
 }
 
