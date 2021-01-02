@@ -147,66 +147,64 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Card = styled.div`
-  position: relative;
-  border-radius: 10px;
-  width: 30%;
+  width: 35rem;
+  height: 35rem;
   margin: 1.5rem;
+
   flex-shrink: 0;
   backface-visibility: hidden;
-  transition: all 0.1s ease-out;
   cursor: default;
+
   background-color: var(--background);
   color: var(--secondary);
+  transition: all 0.1s ease-out;
 
-  p {
-    width: 100%;
-    padding: 2rem;
-    font-size: 1.6rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 
   div.title {
-    padding: 1.1rem;
-    border-radius: 10px;
-    background-color: #fff;
-    color: var(--tertirary);
-    background: linear-gradient(to top right, var(--light), var(--background));
-    font-size: 2.8rem;
-    text-transform: capitalize;
+    width: 100%;
+    height: 45%;
+    background-color: var(--light);
+    position: relative;
+
+    h3 {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      font-size: 2rem;
+      font-weight: normal;
+    }
+  }
+
+  div.content {
+    width: 100%;
+    height: 40%;
+
+    p {
+      width: 100%;
+      height: 100%;
+      font-size: 1.4rem;
+      padding: 1rem;
+    }
   }
 
   div.footer {
-    padding: 1rem 1.4rem;
+    width: 100%;
+    height: 15%;
+
+    padding: 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 
-    .more {
-      display: flex;
-      align-items: center;
-      span {
-        font-size: 1.4rem;
-        margin-right: 1rem;
-      }
-      svg {
-        font-size: 3rem;
-        cursor: pointer;
-        color: var(--primary);
-        transition: all 0.1s ease-in-out;
-
-        &:hover {
-          transform: scale(1.2);
-        }
-      }
-    }
-
-    .tags {
-      .tag {
-        font-size: 1.2rem;
-        padding: 0.3rem 0.5rem;
-        margin: 0 0.5rem;
-        background-color: var(--secondary-light);
-        color: var(--white);
-      }
+    span {
+      font-size: 1.4rem;
+      padding: 0.6rem 1rem;
+      background-color: var(--secondary);
+      color: var(--white);
     }
   }
 
