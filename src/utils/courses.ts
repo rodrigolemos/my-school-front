@@ -7,8 +7,7 @@ export const formatPeriod = (period: string): string => {
   return periods[period] || 'Período não informado';
 };
 
-export const formatDescription = (description: string): string => {
-  const limit = 80;
+export const formatDescription = (description: string, limit = 80): string => {
   let formatedDescription = description;
   if (description.length > limit) formatedDescription = `${description.substr(0, limit)}...`;
   return formatedDescription;
