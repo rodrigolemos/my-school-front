@@ -29,37 +29,32 @@ export const FooterContent = styled.div`
   }
 `;
 
-export const Box = styled.div`
+export const ContactBox = styled.div`
   margin-top: 3rem;
-  width: 45%;
+  width: 100%;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
 
   padding-top: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   border-top: 1px solid var(--shadow);
+
+  svg {
+    margin: 0 0.6rem;
+    font-size: 1.8rem;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
-  }
-`;
-
-export const BrandBox = styled(Box)`
-  svg {
-    margin-right: 1rem;
-  }
-`;
-
-export const ContactBox = styled(Box)`
-  justify-content: space-between;
-
-  svg {
-    margin-right: 1rem;
+    justify-content: center;
   }
 `;
 
 export const Copyright = styled.div`
   position: absolute;
-  margin: 0 auto;
   bottom: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
