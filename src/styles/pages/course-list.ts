@@ -26,8 +26,7 @@ export const Section = styled.section`
 `;
 
 export const Title = styled.div`
-  width: 100%;
-  height: 30%;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,7 +186,8 @@ export const Card = styled.div`
       width: 100%;
       height: 100%;
       font-size: 1.4rem;
-      padding: 1rem;
+      padding: 1.2rem;
+      letter-spacing: 0.2px;
     }
   }
 
