@@ -7,7 +7,7 @@ const Footer: React.FC = (): ReactElement => {
     <DesktopFooter>
       <FooterContent>
         <ContactBox>
-          My School / Rodrigo Lemos
+          Rodrigo Lemos | My School
           <AiFillLinkedin />
           <AiFillGithub />
           <AiFillTwitterCircle />
