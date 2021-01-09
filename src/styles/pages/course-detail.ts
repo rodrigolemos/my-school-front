@@ -17,6 +17,51 @@ export const Section = styled.section`
 export const CourseInfo = styled.div`
   background-color: var(--secondary);
   color: var(--white);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+
+  h1.title {
+    font-size: 5rem;
+  }
 `;
 
-export const CourseDescription = styled.div``;
+export const CourseDescription = styled.div`
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  ul.tags {
+    width: 100%;
+
+    li {
+      list-style: none;
+      font-size: 2.2rem;
+      background-color: var(--secondary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+
+      display: inline;
+      margin: 0.7rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  div.details {
+    width: 100%;
+    font-size: 2.2rem;
+  }
+
+  div.more-info {
+    width: 100%;
+    font-size: 2.2rem;
+  }
+`;
