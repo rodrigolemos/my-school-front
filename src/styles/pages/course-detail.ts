@@ -35,9 +35,12 @@ export const CourseDescription = styled.div`
   flex-direction: column;
   justify-content: space-around;
 
-  ul.tags {
+  & > * {
     width: 100%;
+    font-size: 2.2rem;
+  }
 
+  ul.tags {
     li {
       list-style: none;
       font-size: 2.2rem;
@@ -55,13 +58,36 @@ export const CourseDescription = styled.div`
     }
   }
 
-  div.details {
-    width: 100%;
-    font-size: 2.2rem;
-  }
+  div.more {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 
-  div.more-info {
-    width: 100%;
-    font-size: 2.2rem;
+    span.label {
+      display: inline-block;
+      margin: 0 1rem;
+      font-size: 1.5rem;
+
+      & > span {
+        display: block;
+        font-size: 2rem;
+      }
+    }
+
+    button {
+      border: none;
+      font-size: 2rem;
+      padding: 1rem;
+      cursor: pointer;
+      background-color: var(--primary);
+      color: var(--light);
+      border-radius: 5px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        transform: translateY(-0.2rem);
+        box-shadow: 0 1rem 1rem var(--light);
+      }
+    }
   }
 `;

@@ -53,9 +53,16 @@ export default function CourseDetail(): ReactElement {
                 {course.tags && course.tags.map((tag, i) => <li key={i}>{tag}</li>)}
               </ul>
               <div className="details">{course.description}</div>
-              <div className="more-info">
-                <span className="period">Noturno</span>
-                <span className="updated">09/01/2021</span>
+              <div className="more">
+                <span className="label">
+                  Período
+                  <span>Noturno</span>
+                </span>
+                <span className="label">
+                  Atualizado
+                  <span>09/01/2021</span>
+                </span>
+                <button>Matricule-me!</button>
               </div>
             </CourseDescription>
           </>
