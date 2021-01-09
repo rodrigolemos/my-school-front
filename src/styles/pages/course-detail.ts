@@ -7,10 +7,18 @@ export const Section = styled.section`
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
   & > div {
     width: 50%;
     height: 100%;
     padding: 2rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -37,6 +45,7 @@ export const CourseDescription = styled.div`
 
   & > * {
     width: 100%;
+    margin: 1rem 0;
     font-size: 2.2rem;
   }
 
@@ -62,6 +71,7 @@ export const CourseDescription = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
 
     span.label {
       display: inline-block;
