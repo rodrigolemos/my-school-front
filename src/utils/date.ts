@@ -5,5 +5,6 @@ export const formatDate = (date: Date): string => {
 };
 
 export const simpleDate = (date: Date): string => {
+  if (!date) return;
   return format(parseISO(date.toLocaleString('pt-br')), 'dd/MM/yy');
 };
