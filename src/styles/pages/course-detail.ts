@@ -101,3 +101,19 @@ export const CourseDescription = styled.div`
     }
   }
 `;
+
+export const BackButton = styled.div`
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  svg {
+    margin-right: 1rem;
+    font-size: 1.7rem;
+  }
+`;

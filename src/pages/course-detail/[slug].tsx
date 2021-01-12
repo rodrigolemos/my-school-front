@@ -1,12 +1,18 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { CircularProgress } from '@material-ui/core';
+import { IoIosArrowBack } from 'react-icons/io';
 import api from '../../services/api';
 import { simpleDate } from '../../utils/date';
 import { formatPeriod } from '../../utils/courses';
 
 import PublicLayout from '../../components/public-layout';
-import { Section, CourseInfo, CourseDescription } from '../../styles/pages/course-detail';
+import {
+  Section,
+  CourseInfo,
+  CourseDescription,
+  BackButton
+} from '../../styles/pages/course-detail';
 
 interface ICourse {
   id: string;
@@ -48,6 +54,9 @@ export default function CourseDetail(): ReactElement {
         ) : (
           <>
             <CourseInfo>
+              <BackButton onClick={() => router.push('/course-list')}>
+                <IoIosArrowBack /> Voltar
+              </BackButton>
               <h1 className="title">{course.name}</h1>
             </CourseInfo>
             <CourseDescription>
