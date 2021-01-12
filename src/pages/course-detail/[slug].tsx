@@ -2,6 +2,8 @@ import React, { ReactElement, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { CircularProgress } from '@material-ui/core';
 import api from '../../services/api';
+import { simpleDate } from '../../utils/date';
+import { formatPeriod } from '../../utils/courses';
 
 import PublicLayout from '../../components/public-layout';
 import { Section, CourseInfo, CourseDescription } from '../../styles/pages/course-detail';
@@ -56,11 +58,11 @@ export default function CourseDetail(): ReactElement {
               <div className="more">
                 <span className="label">
                   Período
-                  <span>Noturno</span>
+                  <span>{formatPeriod(course.period)}</span>
                 </span>
                 <span className="label">
                   Atualizado
-                  <span>09/01/2021</span>
+                  <span>{simpleDate(course.updated_at)}</span>
                 </span>
                 <button>Matricule-me!</button>
               </div>

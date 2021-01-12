@@ -41,7 +41,7 @@ export const CourseDescription = styled.div`
   background-color: var(--white);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 
   & > * {
     width: 100%;
@@ -70,7 +70,7 @@ export const CourseDescription = styled.div`
   div.more {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
 
     span.label {
