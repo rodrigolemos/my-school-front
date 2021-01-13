@@ -1,11 +1,14 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useCallback, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { Cookies } from 'react-cookie';
 import { CircularProgress } from '@material-ui/core';
 import { IoIosArrowBack } from 'react-icons/io';
 import api from '../../services/api';
+import { checkPermission } from '../../services/permission';
 import { simpleDate } from '../../utils/date';
 import { formatPeriod } from '../../utils/courses';
 
+import Toast from '../../components/toast';
 import PublicLayout from '../../components/public-layout';
 import {
   Section,
@@ -27,8 +30,9 @@ export default function CourseDetail(): ReactElement {
   const router = useRouter();
   const [course, setCourse] = useState<ICourse>({} as ICourse);
   const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>();
 
-  const fetchCourseDetail = async () => {
+  const fetchCourseDetail = useCallback(async (): Promise<void> => {
     setLoading(true);
 
     if (!router.query.slug) return;
@@ -40,6 +44,22 @@ export default function CourseDetail(): ReactElement {
     if (response.status !== 200) throw new Error();
 
     setCourse(response.data[0]);
+  }, []);
+
+  const validateEnrollment = async (): Promise<void> => {
+    try {
+      const cookies = new Cookies();
+      const { id } = cookies.get('@my-school:user');
+      const isAdmin = await checkPermission(cookies.get('@my-school:token'), id);
+
+      if (isAdmin) {
+        setMessage('Parece que você é um administrador. Efetue login para maiores informações');
+      } else {
+        setMessage('Aluno!');
+      }
+    } catch (err) {
+      router.push('/login');
+    }
   };
 
   useEffect(() => {
@@ -54,6 +74,7 @@ export default function CourseDetail(): ReactElement {
         ) : (
           <>
             <CourseInfo>
+              {message && <Toast type="success" message={message} />}
               <BackButton onClick={() => router.push('/course-list')}>
                 <IoIosArrowBack /> Voltar
               </BackButton>
@@ -73,7 +94,7 @@ export default function CourseDetail(): ReactElement {
                   Atualizado
                   <span>{simpleDate(course.updated_at)}</span>
                 </span>
-                <button>Matricule-me!</button>
+                <button onClick={validateEnrollment}>Matricule-me!</button>
               </div>
             </CourseDescription>
           </>
