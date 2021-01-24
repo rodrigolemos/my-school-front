@@ -33,7 +33,7 @@ export default function Login(): ReactElement {
     resolver: yupResolver(schema)
   });
 
-  const { user } = router.query;
+  const { user, notLogged } = router.query;
 
   const onSubmit = useCallback(async (data: IFormInput) => {
     setLoading(true);
@@ -78,6 +78,9 @@ export default function Login(): ReactElement {
             type="success"
             message="Perfil criado com sucesso. Você já pode acessar a plataforma!"
           />
+        )}
+        {notLogged && (
+          <Toast type="warning" message="Efetue seu login para ter acesso a essa função." />
         )}
         <BackButton onClick={() => router.push('/')}>
           <IoIosArrowBack /> Voltar

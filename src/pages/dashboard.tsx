@@ -33,10 +33,16 @@ interface IDashboard {
 
 export default function Dashboard({ name, isAdmin, user }: IDashboard): ReactElement {
   const router = useRouter();
-  const { updated } = router.query;
+  const { updated, enrollment } = router.query;
   return (
     <Layout isAdmin={isAdmin} title="Dashboard">
       {updated && <Toast type="success" message="Perfil atualizado com sucesso!" />}
+      {enrollment && (
+        <Toast
+          type="success"
+          message="Obrigado por demonstrar interesse em nossos cursos. Acesse a plataforma para consultar o andamento da solicitação!"
+        />
+      )}
       <Header>
         <div className="greeting">
           <h2>Bem vindo novamente, {name}!</h2>

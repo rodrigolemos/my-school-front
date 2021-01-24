@@ -26,6 +26,12 @@ interface ICourse {
   updated_at: Date;
 }
 
+interface IEnrollment {
+  user_id: string;
+  course_id: string;
+  id: string;
+}
+
 export default function CourseDetail(): ReactElement {
   const router = useRouter();
   const [course, setCourse] = useState<ICourse>({} as ICourse);
@@ -50,15 +56,30 @@ export default function CourseDetail(): ReactElement {
     try {
       const cookies = new Cookies();
       const { id } = cookies.get('@my-school:user');
-      const isAdmin = await checkPermission(cookies.get('@my-school:token'), id);
+      const token = cookies.get('@my-school:token');
+      const isAdmin = await checkPermission(token, id);
 
       if (isAdmin) {
         setMessage('Parece que você é um administrador. Efetue login para maiores informações');
       } else {
-        setMessage('Aluno!');
+        const data: IEnrollment = {
+          course_id: course.id,
+          user_id: id,
+          id
+        };
+
+        const response = await api.post<IEnrollment>(`/enrollments/create`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        if (response.status === 201) {
+          router.push('/dashboard?enrollment=created');
+        }
       }
     } catch (err) {
-      router.push('/login');
+      router.push('/login?notLogged=true');
     }
   };
 
