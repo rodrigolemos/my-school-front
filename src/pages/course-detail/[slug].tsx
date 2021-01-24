@@ -60,7 +60,9 @@ export default function CourseDetail(): ReactElement {
       const isAdmin = await checkPermission(token, id);
 
       if (isAdmin) {
-        setMessage('Parece que você é um administrador. Efetue login para maiores informações');
+        setMessage(
+          'Parece que você é um administrador. Não é necessário se matricular neste curso.'
+        );
       } else {
         const data: IEnrollment = {
           course_id: course.id,
