@@ -73,7 +73,7 @@ export default function Home(): ReactElement {
             </div>
           </Card>
         </ContentWrapper>
-        <SectionAdditional>Feito para quem usa e para quem desenvolve.</SectionAdditional>
+        <SectionAdditional>De quem desenvolve para quem desenvolve.</SectionAdditional>
       </Motivation>
     </PublicLayout>
   );
