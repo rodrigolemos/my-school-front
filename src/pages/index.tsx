@@ -20,8 +20,7 @@ export default function Home(): ReactElement {
           <h1>My School.</h1>
           <h2>Aprendemos com você como ensinar melhor.</h2>
           <p>
-            Uma aplicação fictícia para simular o controle de usuários em um sistema educacional
-            feita com Node, Typescript e NextJS.
+            Uma aplicação fictícia para simular o controle de usuários em um sistema educacional.
           </p>
           <div className="link">
             <a href="#motivation">Conheça o projeto</a>
@@ -30,54 +29,51 @@ export default function Home(): ReactElement {
       </Presentation>
       <Motivation>
         <a id="motivation" className="navigation" />
-        <SectionName>A sala de aula fora da sala</SectionName>
+        <SectionName>Uma proposta simples</SectionName>
         <ContentWrapper>
           <Card>
             <div className="image first"></div>
             <div className="content">
-              <div className="title">PARTICIPAÇÃO</div>
+              <div className="title">VISITANTES</div>
               <p>
-                Construa sua própria grade com temas que julgue importantes para o aprendizado e
-                tenha seu curso avaliado por alunos com perfis parecidos. Os melhores cursos são
-                disponibilizados para o público e você é presenteado com bônus exclusivos.
+                Consulte os cursos disponíveis e as páginas de cadastro e login para ver na prática
+                o uso da stack de front-end React, Styled Components e Next.js.
               </p>
             </div>
           </Card>
           <Card>
             <div className="image second"></div>
             <div className="content">
-              <div className="title">CONECTIVIDADE</div>
+              <div className="title">ALUNOS</div>
               <p>
-                Esteja em contato com alunos e professores com interesses similares através de
-                canais exclusivos e discuta ideias 24h por dia, 7 dias por semana.
+                Faça seu cadastro e matricule-se nos cursos ofertados, acompanhe a aprovação de suas
+                solicitações e assista as aulas disponíveis na plataforma!
               </p>
             </div>
           </Card>
           <Card>
             <div className="image third"></div>
             <div className="content">
-              <div className="title">COLABORAÇÃO</div>
+              <div className="title">PROFESSORES</div>
               <p>
-                Proponha temas, avalie cursos, participe de grupos de discussão e tenha feedback
-                individual e personalizado. Aqui sua opinião conta (e muito).
+                Crie aulas e quizzes, proponha temas de discussão, avalie seus alunos e colabore com
+                o crescimento da plataforma.
               </p>
             </div>
           </Card>
           <Card>
             <div className="image fourth"></div>
             <div className="content">
-              <div className="title">CRIATIVIDADE</div>
+              <div className="title">ADMINISTRADORES</div>
               <p>
-                Crie posts interativos, pesquisas e atividades para tornar seu curso mais atrativo e
-                divertido para o público. Quanto maior sua comunidade, mais bem avaliado seus cursos
-                serão.
+                Gerencie os recursos da plataforma. Inclua, altere ou exclua cursos, alunos,
+                professores e matrículas; Revise e aprove solicitações e Avalie e responda feedbacks
+                dos demais usuários.
               </p>
             </div>
           </Card>
         </ContentWrapper>
-        <SectionAdditional>
-          Uma plataforma educacional para quem usa e para quem desenvolve.
-        </SectionAdditional>
+        <SectionAdditional>Feito para quem usa e para quem desenvolve.</SectionAdditional>
       </Motivation>
     </PublicLayout>
   );

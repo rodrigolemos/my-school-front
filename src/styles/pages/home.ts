@@ -56,12 +56,12 @@ export const AnimatedBanner = styled.div`
   }
 
   h2 {
-    font-size: 5.7rem;
+    font-size: 5rem;
     margin-bottom: 1rem;
     color: var(--white);
 
     @media (max-width: 375px) {
-      font-size: 4.2rem;
+      font-size: 4rem;
     }
   }
 
