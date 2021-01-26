@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import { FaUsers, FaUserGraduate, FaUsersCog, FaUserTie } from 'react-icons/fa';
 
 import PublicLayout from '../components/public-layout';
 import {
@@ -32,7 +33,9 @@ export default function Home(): ReactElement {
         <SectionName>Uma proposta simples</SectionName>
         <ContentWrapper>
           <Card>
-            <div className="image first"></div>
+            <div className="image first">
+              <FaUsers />
+            </div>
             <div className="content">
               <div className="title">VISITANTES</div>
               <p>
@@ -42,7 +45,9 @@ export default function Home(): ReactElement {
             </div>
           </Card>
           <Card>
-            <div className="image second"></div>
+            <div className="image second">
+              <FaUserGraduate />
+            </div>
             <div className="content">
               <div className="title">ALUNOS</div>
               <p>
@@ -52,7 +57,9 @@ export default function Home(): ReactElement {
             </div>
           </Card>
           <Card>
-            <div className="image third"></div>
+            <div className="image third">
+              <FaUserTie />
+            </div>
             <div className="content">
               <div className="title">PROFESSORES</div>
               <p>
@@ -62,7 +69,9 @@ export default function Home(): ReactElement {
             </div>
           </Card>
           <Card>
-            <div className="image fourth"></div>
+            <div className="image fourth">
+              <FaUsersCog />
+            </div>
             <div className="content">
               <div className="title">ADMINISTRADORES</div>
               <p>

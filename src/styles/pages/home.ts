@@ -3,10 +3,6 @@ import styled from 'styled-components';
 import { showFromLeft } from '../animations';
 
 const backgroundImage = require('../../../public/images/bookshelf-1.jpg');
-const cardImage1 = require('../../../public/images/studying-1.jpg');
-const cardImage2 = require('../../../public/images/working-1.jpg');
-const cardImage3 = require('../../../public/images/strategy-1.jpg');
-const cardImage4 = require('../../../public/images/collaboration-1.jpg');
 
 export const Section = styled.section`
   width: 100vw;
@@ -182,28 +178,34 @@ export const Card = styled.div`
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    padding: 1rem;
+
+    svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 18rem;
+      color: var(--white);
+      opacity: 0.09;
+    }
 
     &.first {
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-        url('${cardImage1}');
+      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
       background-size: cover;
     }
 
     &.second {
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-        url('${cardImage2}');
+      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
       background-size: cover;
     }
 
     &.third {
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-        url('${cardImage3}');
+      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
       background-size: cover;
     }
 
     &.fourth {
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-        url('${cardImage4}');
+      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
       background-size: cover;
     }
   }
