@@ -18,6 +18,7 @@ export const DesktopPanel = styled.div`
   align-items: center;
   justify-content: center;
   background-color: var(--secondary);
+  color: var(--white);
 
   background: linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url('${backgroundImage}');
   background-size: cover;
@@ -87,6 +88,7 @@ export const BackButton = styled.div`
 export const FormPanel = styled.div`
   position: relative;
   width: 45vw;
+  min-height: 640px;
   height: 100vh;
 
   display: flex;
@@ -127,6 +129,7 @@ export const FormPanel = styled.div`
 
       svg {
         margin-right: 1rem;
+        cursor: pointer;
       }
     }
 

@@ -86,6 +86,7 @@ export const BackButton = styled.div`
 export const FormPanel = styled.div`
   position: relative;
   width: 45vw;
+  min-height: 640px;
   height: 100vh;
 
   display: flex;

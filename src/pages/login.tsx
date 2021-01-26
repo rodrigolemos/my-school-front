@@ -87,7 +87,7 @@ export default function Login(): ReactElement {
         </BackButton>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>
-            <GoMortarBoard />
+            <GoMortarBoard onClick={() => router.push('/')} />
             My School
           </h1>
           <label>
