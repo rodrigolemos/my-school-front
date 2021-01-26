@@ -160,13 +160,15 @@ export const Card = styled.div`
   margin: 1.5rem;
   flex-shrink: 0;
   backface-visibility: hidden;
-  transition: all 0.1s ease-out;
+  transition: all 0.2s ease-out;
   cursor: default;
   background-color: var(--background);
   box-shadow: 0 0 0.5rem #ddd;
+  backface-visibility: hidden;
 
   &:hover {
-    box-shadow: 0 0 1.3rem #bbb;
+    box-shadow: 0 0 1.4rem #ccc;
+    transform: translateY(-0.5rem);
   }
 
   div.image {
@@ -179,6 +181,8 @@ export const Card = styled.div`
     border-top-right-radius: 5px;
     clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
     padding: 1rem;
+    background: linear-gradient(to right, var(--secondary), var(--secondary-light));
+    background-size: cover;
 
     svg {
       position: absolute;
@@ -187,26 +191,6 @@ export const Card = styled.div`
       font-size: 18rem;
       color: var(--white);
       opacity: 0.09;
-    }
-
-    &.first {
-      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
-      background-size: cover;
-    }
-
-    &.second {
-      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
-      background-size: cover;
-    }
-
-    &.third {
-      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
-      background-size: cover;
-    }
-
-    &.fourth {
-      background: linear-gradient(to right, var(--secondary), var(--secondary-light));
-      background-size: cover;
     }
   }
 
