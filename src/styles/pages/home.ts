@@ -202,7 +202,7 @@ export const Card = styled.div`
     height: 50%;
 
     p {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       display: flex;
       align-items: center;
       width: 100%;
