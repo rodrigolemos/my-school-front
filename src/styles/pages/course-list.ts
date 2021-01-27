@@ -32,7 +32,6 @@ export const Title = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  color: var(--white);
 
   h1 {
     font-size: 6rem !important;
@@ -44,6 +43,11 @@ export const Title = styled.div`
     font-weight: normal;
   }
 
+  h1,
+  h2 {
+    color: var(--secondary) !important;
+  }
+
   @media (max-width: 768px) {
     margin-top: 1.5rem;
     margin-bottom: 3rem;
@@ -51,8 +55,8 @@ export const Title = styled.div`
 `;
 
 export const Presentation = styled(Section)`
-  background-color: var(--secondary);
-  color: var(--white);
+  background-color: var(--lighter);
+  color: var(--secondary);
 
   span {
     font-size: 2.2rem;
@@ -146,7 +150,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Card = styled.div`
-  width: 35rem;
+  width: 32rem;
   height: 35rem;
   margin: 1.5rem;
 
@@ -162,12 +166,26 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  border-radius: 5px;
+  box-shadow: 0 1rem 1rem var(--light);
+
+  transition: all 0.2s ease-out;
+  cursor: default;
+  backface-visibility: hidden;
+
+  &:hover {
+    box-shadow: 0 0 1.4rem #ccc;
+    transform: translateY(-0.5rem);
+  }
 
   div.title {
     width: 100%;
     height: 45%;
-    background-color: var(--light);
+    background-color: var(--secondary);
+    color: var(--background);
     position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 
     h3 {
       position: absolute;
@@ -185,9 +203,10 @@ export const Card = styled.div`
     p {
       width: 100%;
       height: 100%;
-      font-size: 1.5rem;
-      padding: 1.2rem;
+      font-size: 1.7rem;
+      padding: 2rem;
       letter-spacing: 0.2px;
+      color: var(--tertiary-light);
     }
   }
 
@@ -213,6 +232,7 @@ export const Card = styled.div`
     span {
       font-size: 1.4rem;
       padding: 0.6rem 1rem;
+      border-radius: 5px;
       background-color: var(--secondary);
       color: var(--white);
     }

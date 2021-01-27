@@ -40,7 +40,7 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
                   <h3>{course.name}</h3>
                 </div>
                 <div className="content">
-                  <p>{formatDescription(course.description, 200)}</p>
+                  <p>{formatDescription(course.description, 120)}</p>
                 </div>
                 <div className="footer">
                   <div className="more">
