@@ -185,7 +185,7 @@ export const Card = styled.div`
     p {
       width: 100%;
       height: 100%;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       padding: 1.2rem;
       letter-spacing: 0.2px;
     }

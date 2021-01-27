@@ -1,5 +1,6 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
+import { Cookies } from 'react-cookie';
 import { checkAuth } from '../services/auth';
 import api from '../services/api';
 import { checkPermission } from '../services/permission';
@@ -127,35 +128,40 @@ interface IServerEnrollments {
   isAdmin: boolean;
 }
 
-interface ICreatedBy {
+interface IUser {
   id: string;
   name: string;
   email: string;
 }
 
-interface IEnrollment {
+interface ICourse {
   id: string;
   name: string;
-  description: string;
   period: string;
   positions: number;
-  created_by: ICreatedBy;
+  created_by: IUser;
+}
+interface IEnrollment {
+  user_id: IUser;
+  course_id: ICourse;
+  positions: number;
   created_at: Date;
   updated_at: Date;
+  status: string;
 }
 
 export default function Enrollments({ name, isAdmin }: IServerEnrollments): ReactElement {
   const [enrollments, setEnrollments] = useState<IEnrollment[]>([]);
-  const [courseToEdit, setCourseToEdit] = useState<IEnrollment>(({} as IEnrollment) || null);
+  // const [courseToEdit, setCourseToEdit] = useState<IEnrollment>(({} as IEnrollment) || null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  // const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [error, setError] = useState<string>();
-  const [successDialog, setSuccessDialog] = useState<string>();
+  // const [successDialog, setSuccessDialog] = useState<string>();
   const { theme } = useTheme();
 
   const classes = useStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, enrollments.length - page * rowsPerPage);
 
@@ -171,13 +177,13 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
   };
 
   const openEditDialog = (course: IEnrollment): void => {
-    setCourseToEdit(course);
-    setOpenDialog(true);
+    // setCourseToEdit(course);
+    // setOpenDialog(true);
   };
 
   const openAddDialog = (): void => {
-    setCourseToEdit(null);
-    setOpenDialog(true);
+    // setCourseToEdit(null);
+    // setOpenDialog(true);
   };
 
   useEffect(() => {
@@ -188,13 +194,23 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
     setLoading(true);
     setError('');
     try {
-      const response = await api.get<IEnrollment[]>('/courses');
+      const cookies = new Cookies();
+      const token = cookies.get('@my-school:token');
+
+      const response = await api.get<IEnrollment[]>('/enrollments', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       if (response.status !== 200) throw new Error();
 
+      console.log(response.data);
       setEnrollments(response.data);
     } catch (error) {
       if (error.response) {
-        setError('Ops, não foi possível listar os cursos. Por favor, tente novamente mais tarde.');
+        setError(
+          'Ops, não foi possível listar as matrículas. Por favor, tente novamente mais tarde.'
+        );
       } else {
         setError(
           'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
@@ -218,32 +234,31 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
         </div>
       </Header>
       <Content>
-        <CourseDialog
+        {/* <CourseDialog
           open={openDialog}
           handleDialog={setOpenDialog}
           courseToEdit={courseToEdit}
           courses={enrollments}
           setCourses={setEnrollments}
           setSuccessDialog={setSuccessDialog}
-        />
+        /> */}
         {error && <Toast type="error" message={error} />}
-        {successDialog && <Toast type="success" message={successDialog} />}
+        {/* {successDialog && <Toast type="success" message={successDialog} />} */}
         {loading ? (
           <CircularProgress />
         ) : (
           <FilterWrapper>
-            <Filter>Hello</Filter>
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>Nome</StyledTableCell>
-                    <StyledTableCell>Descrição</StyledTableCell>
+                    <StyledTableCell>Usuário</StyledTableCell>
+                    <StyledTableCell>Curso</StyledTableCell>
                     <StyledTableCell>Período</StyledTableCell>
-                    <StyledTableCell align="center">Criado por</StyledTableCell>
+                    <StyledTableCell align="center">Vagas</StyledTableCell>
                     <StyledTableCell align="center">Criado em</StyledTableCell>
                     <StyledTableCell align="center">Atualizado em</StyledTableCell>
-                    <StyledTableCell align="center">Matrículas</StyledTableCell>
+                    <StyledTableCell align="center">Status</StyledTableCell>
                     <StyledTableCell align="center">Editar</StyledTableCell>
                   </TableRow>
                 </TableHead>
@@ -252,18 +267,20 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                     ? enrollments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : enrollments
                   ).map((enrollment) => (
-                    <StyledTableRow key={enrollment.id} customtheme={theme}>
-                      <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
-                        {enrollment.name}
+                    <StyledTableRow
+                      key={`${enrollment.user_id.id}-${enrollment.course_id.id}`}
+                      customtheme={theme}>
+                      <StyledTableCell component="th" scope="row" style={{ width: 350 }}>
+                        {enrollment.user_id.name} ({enrollment.user_id.email})
                       </StyledTableCell>
-                      <StyledTableCell align="left" style={{ width: 350 }}>
-                        {formatDescription(enrollment.description)}
+                      <StyledTableCell align="left" style={{ width: 220 }}>
+                        {enrollment.course_id.name}
                       </StyledTableCell>
                       <StyledTableCell align="left" style={{ width: 100 }}>
-                        {formatPeriod(enrollment.period)}
+                        {formatPeriod(enrollment.course_id.period)}
                       </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 150 }}>
-                        {enrollment.created_by.name}
+                        {enrollment.course_id.positions}
                       </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 200 }}>
                         {formatDate(enrollment.created_at)}
@@ -271,11 +288,8 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                       <StyledTableCell align="center" style={{ width: 200 }}>
                         {formatDate(enrollment.updated_at)}
                       </StyledTableCell>
-                      <StyledTableCell align="center" style={{ width: 50 }}>
-                        <BsCardChecklist
-                          onClick={() => openEditDialog(enrollment)}
-                          style={{ cursor: 'pointer' }}
-                        />
+                      <StyledTableCell align="center" style={{ width: 150 }}>
+                        {enrollment.status}
                       </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 50 }}>
                         <FiEdit3
@@ -287,7 +301,7 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                   ))}
                   {emptyRows > 0 && (
                     <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                      <StyledTableCell colSpan={8} />
+                      <StyledTableCell colSpan={9} />
                     </StyledTableRow>
                   )}
                 </TableBody>
@@ -295,7 +309,7 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                   <StyledTableRow customtheme={theme}>
                     <TablePagination
                       rowsPerPageOptions={[5, 10]}
-                      colSpan={8}
+                      colSpan={9}
                       count={enrollments.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
