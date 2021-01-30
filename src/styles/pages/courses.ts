@@ -75,7 +75,7 @@ export const MyTableRow = styled(TableRow)<IContainer>`
           td,
           svg {
             border-bottom: 1px solid var(--light) !important;
-            background-color: var(--white);
+            background-color: var(--lighter);
             color: var(--logged) !important;
           }
         `}

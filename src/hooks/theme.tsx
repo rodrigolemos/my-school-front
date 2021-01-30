@@ -43,7 +43,7 @@ const StyledTheme = styled.div<IContainer>`
             color: var(--white);
           `
         : css`
-            background-color: var(--lighter);
+            background-color: var(--light);
             color: var(--logged);
           `}
   }
