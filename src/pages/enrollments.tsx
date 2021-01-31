@@ -1,6 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { Cookies } from 'react-cookie';
+import EnrollmentDialog from '../components/enrollment-dialog';
 import { checkAuth } from '../services/auth';
 import api from '../services/api';
 import { checkPermission } from '../services/permission';
@@ -32,7 +33,6 @@ import {
 } from '@material-ui/core';
 
 import Layout from '../components/layout';
-import CourseDialog from '../components/course-dialog';
 import Toast from '../components/toast';
 import { Header, Content, MyTableRow, Status, FilterWrapper } from '../styles/pages/enrollments';
 
@@ -152,11 +152,11 @@ interface IEnrollment {
 
 export default function Enrollments({ name, isAdmin }: IServerEnrollments): ReactElement {
   const [enrollments, setEnrollments] = useState<IEnrollment[]>([]);
-  // const [courseToEdit, setCourseToEdit] = useState<IEnrollment>(({} as IEnrollment) || null);
+  const [enrollmentToEdit, setEnrollmentToEdit] = useState<IEnrollment>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  // const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [error, setError] = useState<string>();
-  // const [successDialog, setSuccessDialog] = useState<string>();
+  const [successDialog, setSuccessDialog] = useState<string>();
   const { theme } = useTheme();
 
   const classes = useStyles();
@@ -176,14 +176,14 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
     setPage(0);
   };
 
-  const openEditDialog = (course: IEnrollment): void => {
-    // setCourseToEdit(course);
-    // setOpenDialog(true);
+  const openEditDialog = (enrollment: IEnrollment): void => {
+    setEnrollmentToEdit(enrollment);
+    setOpenDialog(true);
   };
 
   const openAddDialog = (): void => {
-    // setCourseToEdit(null);
-    // setOpenDialog(true);
+    setEnrollmentToEdit(null);
+    setOpenDialog(true);
   };
 
   useEffect(() => {
@@ -204,7 +204,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
       });
       if (response.status !== 200) throw new Error();
 
-      console.log(response.data);
       setEnrollments(response.data);
     } catch (error) {
       if (error.response) {
@@ -234,20 +233,22 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
         </div>
       </Header>
       <Content>
-        {/* <CourseDialog
-          open={openDialog}
-          handleDialog={setOpenDialog}
-          courseToEdit={courseToEdit}
-          courses={enrollments}
-          setCourses={setEnrollments}
-          setSuccessDialog={setSuccessDialog}
-        /> */}
         {error && <Toast type="error" message={error} />}
-        {/* {successDialog && <Toast type="success" message={successDialog} />} */}
+        {successDialog && <Toast type="success" message={successDialog} />}
         {loading ? (
           <CircularProgress />
         ) : (
           <FilterWrapper>
+            {enrollmentToEdit && (
+              <EnrollmentDialog
+                open={openDialog}
+                handleDialog={setOpenDialog}
+                enrollmentToEdit={enrollmentToEdit}
+                enrollments={enrollments}
+                setEnrollments={setEnrollments}
+                setSuccessDialog={setSuccessDialog}
+              />
+            )}
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="customized table">
                 <TableHead>
