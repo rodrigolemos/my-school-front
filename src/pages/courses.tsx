@@ -245,7 +245,6 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                   <StyledTableCell align="center">Vagas</StyledTableCell>
                   <StyledTableCell align="center">Criado por</StyledTableCell>
                   <StyledTableCell align="center">Atualizado em</StyledTableCell>
-                  <StyledTableCell align="center">Matrículas</StyledTableCell>
                   <StyledTableCell align="center">Editar</StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -274,12 +273,6 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                       {formatDate(course.updated_at)}
                     </StyledTableCell>
                     <StyledTableCell align="center" style={{ width: 30 }}>
-                      <BsCardChecklist
-                        onClick={() => openEditDialog(course)}
-                        style={{ cursor: 'pointer' }}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 30 }}>
                       <FiEdit3
                         onClick={() => openEditDialog(course)}
                         style={{ cursor: 'pointer' }}
@@ -289,7 +282,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                 ))}
                 {emptyRows > 0 && (
                   <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                    <StyledTableCell colSpan={8} />
+                    <StyledTableCell colSpan={7} />
                   </StyledTableRow>
                 )}
               </TableBody>
@@ -297,7 +290,7 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                 <StyledTableRow customtheme={theme}>
                   <TablePagination
                     rowsPerPageOptions={[5, 10]}
-                    colSpan={8}
+                    colSpan={7}
                     count={courses.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
