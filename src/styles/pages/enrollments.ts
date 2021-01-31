@@ -97,3 +97,23 @@ export const Filter = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+interface IStatus {
+  status: string;
+}
+
+export const Status = styled.div<IStatus>`
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: 10rem;
+  margin: 0 auto;
+  color: white;
+  ${({ status }) =>
+    status === 'A'
+      ? css`
+          background-color: darkgreen;
+        `
+      : css`
+          background-color: #daa520;
+        `}
+`;

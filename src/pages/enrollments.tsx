@@ -5,7 +5,8 @@ import { checkAuth } from '../services/auth';
 import api from '../services/api';
 import { checkPermission } from '../services/permission';
 import { formatDate } from '../utils/date';
-import { formatDescription, formatPeriod } from '../utils/courses';
+import { formatPeriod } from '../utils/courses';
+import { formatStatus } from '../utils/enrollments';
 import { useTheme } from '../hooks/theme';
 import {
   FiChevronLeft,
@@ -14,7 +15,6 @@ import {
   FiChevronsRight,
   FiEdit3
 } from 'react-icons/fi';
-import { BsCardChecklist } from 'react-icons/bs';
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Button,
@@ -34,7 +34,7 @@ import {
 import Layout from '../components/layout';
 import CourseDialog from '../components/course-dialog';
 import Toast from '../components/toast';
-import { Header, Content, MyTableRow, Filter, FilterWrapper } from '../styles/pages/enrollments';
+import { Header, Content, MyTableRow, Status, FilterWrapper } from '../styles/pages/enrollments';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -273,7 +273,7 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                       <StyledTableCell component="th" scope="row" style={{ width: 350 }}>
                         {enrollment.user_id.name} ({enrollment.user_id.email})
                       </StyledTableCell>
-                      <StyledTableCell align="left" style={{ width: 220 }}>
+                      <StyledTableCell align="left" style={{ width: 200 }}>
                         {enrollment.course_id.name}
                       </StyledTableCell>
                       <StyledTableCell align="left" style={{ width: 100 }}>
@@ -289,7 +289,9 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                         {formatDate(enrollment.updated_at)}
                       </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 150 }}>
-                        {enrollment.status}
+                        <Status status={enrollment.status}>
+                          {formatStatus(enrollment.status)}
+                        </Status>
                       </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 50 }}>
                         <FiEdit3
