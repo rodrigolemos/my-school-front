@@ -13,7 +13,6 @@ import {
   FiChevronsRight,
   FiEdit3
 } from 'react-icons/fi';
-import { BsCardChecklist } from 'react-icons/bs';
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Button,
