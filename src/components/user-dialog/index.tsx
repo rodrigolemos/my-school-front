@@ -115,7 +115,7 @@ export default function UserDialog({
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       fullWidth={true}
-      maxWidth="sm">
+      maxWidth="md">
       <CustomDialogContent customtheme={theme}>
         {error && <Toast type="error" message={error} />}
         <Form onSubmit={handleSubmit(onSubmit)}>
