@@ -22,10 +22,6 @@ O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte
 
 - **Administrador** - Esse é o nível de maior privilégio logado. Administradores podem incluir, alterar, atualizar e excluir cursos; incluir ou atualizar acessos de professores e outros administradores; aprovar ou excluir matrículas em determinados cursos. Entretanto, administradores não podem estar matriculados em curso algum.
 
-## Layout
-
-(Imagens do layout)
-
 ## Tecnologias
 
 Como mencionado, este é um projeto de estudos e tem como premissa o aprendizado e a apresentação de tecnologias, frameworks e ferramentas de desenvolvimento. Segue a lista das principais libs utilizadas:
