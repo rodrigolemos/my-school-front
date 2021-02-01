@@ -18,17 +18,17 @@ O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte
 
 Como mencionado, este é um projeto de estudos e tem como premissa o aprendizado e a apresentação de tecnologias, frameworks e ferramentas de desenvolvimento. Segue a lista das principais libs utilizadas:
 
-- React JS - Uma biblioteca JavaScript para criar interfaces de usuário;
-- Next JS – Um framework React para produção;
-- Styled Components – Uma biblioteca popular para uso de CSS-in-JS;
-- Material UI - Biblioteca de componentes React baseada no design Material;
-- Chart JS – Biblioteca open source de gráficos;
-- react-hook-form – Biblioteca popular para validação de formulários completos;
-- yup – Biblioteca para validação de campos e schemas;
-- date-fns – Biblioteca para manipulação de datas;
-- jsonwebtoken – Biblioteca para transmissão segura de JWTs;
-- axios – Cliente HTTP baseado em promises;
-- react-cookie – Para manipulação dos cookies;
+- [React JS](https://reactjs.org/) - Uma biblioteca JavaScript para criar interfaces de usuário;
+- [Next JS](https://nextjs.org/) – Um framework React para produção;
+- [Styled Components](https://styled-components.com/) – Uma biblioteca popular para uso de CSS-in-JS;
+- [Material UI](https://material-ui.com/) - Biblioteca de componentes React baseada no design Material;
+- [Chart JS](https://www.chartjs.org/) – Biblioteca open source de gráficos;
+- [react-hook-form](https://react-hook-form.com/) – Biblioteca popular para validação de formulários completos;
+- [yup](https://github.com/jquense/yup) – Biblioteca para validação de campos e schemas;
+- [date-fns](https://date-fns.org/) – Biblioteca para manipulação de datas;
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) – Biblioteca para transmissão segura de JWTs;
+- [axios](https://github.com/axios/axios) – Cliente HTTP baseado em promises;
+- [react-cookie](https://www.npmjs.com/package/react-cookie) – Para manipulação dos cookies;
 
 ## Autor
 
