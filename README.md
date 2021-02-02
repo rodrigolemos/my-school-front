@@ -23,7 +23,7 @@ O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte
 
 ## Layout
 
-Exemplo dos designs adotados para páginas públicas.
+Exemplo do design adotado para páginas públicas.
 
 <p align="left">
   <img alt="Principal" src="./public/images/my-school-1.png" style="width: 400px; margin-top: 10px; margin-right: 5px;">
