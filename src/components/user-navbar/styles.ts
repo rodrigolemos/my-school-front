@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
-
+import { showFromTop } from '../../styles/animations';
 interface NavProps {
   isMobile: boolean;
 }
@@ -31,6 +31,7 @@ export const MobileNav = styled.div<NavProps>`
       display: flex;
       align-items: center;
       justify-content: center;
+      animation: ${showFromTop} 0.2s ease-in-out;
     `}
 `;
 

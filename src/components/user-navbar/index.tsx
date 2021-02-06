@@ -81,6 +81,9 @@ const UserNavbar: React.FC<IUserNavbarProps> = ({ title }: IUserNavbarProps): Re
       <MobileNav isMobile={isMobile} className="themed">
         <CloseMobileNav onClick={() => setIsMobile(false)} />
         <MobileMenu>
+          <li onClick={changeTheme} role="presentation">
+            <span>Alterar Tema</span>
+          </li>
           <li>
             <span>Mensagens</span>
           </li>
