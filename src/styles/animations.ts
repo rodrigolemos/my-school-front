@@ -10,6 +10,7 @@ export const showFromLeft = keyframes`
     opacity: 1;
   }
 `;
+
 export const showFromTop = keyframes`
   from {
     transform: translateY(-1rem);
