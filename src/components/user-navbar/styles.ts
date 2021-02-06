@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { GoMortarBoard } from 'react-icons/go';
 import { AiOutlineClose } from 'react-icons/ai';
 import { showFromTop } from '../../styles/animations';
 interface NavProps {
@@ -62,7 +62,7 @@ export const Title = styled.div`
   justify-content: center;
 `;
 
-export const OpenMobileMenu = styled(GiHamburgerMenu)`
+export const OpenMobileMenu = styled(GoMortarBoard)`
   display: none;
   font-size: 3rem;
 
