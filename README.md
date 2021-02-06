@@ -9,6 +9,10 @@
 
 My School é um simples projeto de gerenciamento de usuários feito com o intuito de aplicar ferramentas que tenho estudado recentemente. Nele é possível ver na prática a utilização da stack ReactJS, NextJS e styled-components; material-ui e react-hook-form além de várias outras APIs bastante úteis no desenvolvimento deste tipo de software. Por ser uma aplicação de estudos, não há intenção em disponibilizá-la como produto ou publicá-la para uso em produção. Caso considere alguma parte do código interessante ou acredite que algo possa ser melhorado, fique à vontade para comentar. Todo feedback é bem-vindo.
 
+## Back-end
+
+Para facilitar a manutenção e separar as responsabilidades da aplicação, o back-end encontra-se [neste repositório](https://github.com/rodrigolemos/my-school).
+
 ## Definições
 
 O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte maneira:
@@ -26,8 +30,7 @@ O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte
 Exemplo do design adotado para páginas públicas.
 
 <p align="left">
-  <img alt="Principal" src="./public/images/my-school-1.png" style="width: 400px; margin-top: 10px; margin-right: 5px;">
-  <img alt="Principal" src="./public/images/my-school-2.png" style="width: 400px; margin-top: 10px;">
+  <img alt="Principal" src="./public/images/my-school.png" style="width: 1100px; margin-top: 10px; margin-right: 5px;">
 </p>
 
 ## Tecnologias
