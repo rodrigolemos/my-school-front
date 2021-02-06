@@ -27,6 +27,7 @@ Exemplo do design adotado para páginas públicas.
 
 <p align="left">
   <img alt="Principal" src="./public/images/my-school-1.png" style="width: 400px; margin-top: 10px; margin-right: 5px;">
+  <img alt="Principal" src="./public/images/my-school-2.png" style="width: 400px; margin-top: 10px;">
 </p>
 
 ## Tecnologias
