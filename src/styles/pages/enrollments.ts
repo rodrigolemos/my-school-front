@@ -113,6 +113,10 @@ export const Status = styled.div<IStatus>`
       ? css`
           background-color: darkgreen;
         `
+      : status === 'C'
+      ? css`
+          background-color: darkred;
+        `
       : css`
           background-color: #daa520;
         `}
