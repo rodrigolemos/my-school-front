@@ -256,7 +256,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                     <StyledTableCell>Usuário</StyledTableCell>
                     <StyledTableCell>Curso</StyledTableCell>
                     <StyledTableCell>Período</StyledTableCell>
-                    <StyledTableCell align="center">Vagas</StyledTableCell>
                     <StyledTableCell align="center">Criado em</StyledTableCell>
                     <StyledTableCell align="center">Atualizado em</StyledTableCell>
                     <StyledTableCell align="center">Status</StyledTableCell>
@@ -280,9 +279,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                       <StyledTableCell align="left" style={{ width: 100 }}>
                         {formatPeriod(enrollment.course_id.period)}
                       </StyledTableCell>
-                      <StyledTableCell align="center" style={{ width: 150 }}>
-                        {enrollment.course_id.positions}
-                      </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 200 }}>
                         {formatDate(enrollment.created_at)}
                       </StyledTableCell>
@@ -304,7 +300,7 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                   ))}
                   {emptyRows > 0 && (
                     <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                      <StyledTableCell colSpan={9} />
+                      <StyledTableCell colSpan={8} />
                     </StyledTableRow>
                   )}
                 </TableBody>
@@ -312,7 +308,7 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                   <StyledTableRow customtheme={theme}>
                     <TablePagination
                       rowsPerPageOptions={[5, 10]}
-                      colSpan={9}
+                      colSpan={8}
                       count={enrollments.length}
                       rowsPerPage={rowsPerPage}
                       page={page}

@@ -61,7 +61,7 @@ export default function EnrollmentDialog({
     handleDialog(false);
   };
 
-  const updateEnrollment = async (): Promise<void> => {
+  const updateEnrollment = async (status: string): Promise<void> => {
     setLoading(true);
     setError('');
     try {
@@ -73,7 +73,7 @@ export default function EnrollmentDialog({
         user_id: enrollmentToEdit.user_id.id,
         course_id: enrollmentToEdit.course_id.id,
         approved_by: id,
-        status: 'A'
+        status
       };
 
       const response = await api.put(`/enrollments`, data, {
@@ -129,10 +129,18 @@ export default function EnrollmentDialog({
           </div>
           {!loading ? (
             <DialogActions>
-              <Button onClick={updateEnrollment} variant="contained" color="primary" size="large">
+              <Button
+                onClick={() => updateEnrollment('A')}
+                variant="contained"
+                color="primary"
+                size="large">
                 Aprovar
               </Button>
-              <Button onClick={updateEnrollment} variant="contained" color="secondary" size="large">
+              <Button
+                onClick={() => updateEnrollment('C')}
+                variant="contained"
+                color="secondary"
+                size="large">
                 Excluir
               </Button>
               <Button onClick={handleClose} variant="contained" size="large">
