@@ -38,6 +38,13 @@ interface IEnrollmentDialog {
   setSuccessDialog(message: string): void;
 }
 
+interface IRequest {
+  user_id: string;
+  course_id: string;
+  approved_by: string;
+  status: string;
+}
+
 export default function EnrollmentDialog({
   open,
   handleDialog,
@@ -60,35 +67,41 @@ export default function EnrollmentDialog({
     try {
       const cookies = new Cookies();
       const token = cookies.get('@my-school:token');
+      const { id } = cookies.get('@my-school:user');
 
-      const response = await api.delete(`/users/${enrollmentToEdit.course_id.id}`, {
+      const data: IRequest = {
+        user_id: enrollmentToEdit.user_id.id,
+        course_id: enrollmentToEdit.course_id.id,
+        approved_by: id,
+        status: 'A'
+      };
+
+      const response = await api.put(`/enrollments`, data, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
 
-      if (response.status !== 204) throw new Error();
+      if (response.status !== 200) throw new Error();
 
       setEnrollments(
-        enrollments.filter(
-          (enrollment) => enrollment.course_id.id !== enrollmentToEdit.course_id.id
-        )
+        enrollments.map((enrollment) => {
+          if (
+            enrollment.course_id.id === enrollmentToEdit.course_id.id &&
+            enrollment.user_id.id === enrollmentToEdit.user_id.id
+          ) {
+            enrollment = response.data;
+          }
+          return enrollment;
+        })
       );
 
-      setSuccessDialog('Usuário excluído com sucesso!');
+      setSuccessDialog('Matrícula atualizada com sucesso!');
 
       handleClose();
     } catch (error) {
       if (error.response) {
-        if (error.response.status == 400) {
-          setError(
-            'Atenção, este usuário está vinculado a um ou mais cursos. Exclua as matrículas/cursos antes de prosseguir.'
-          );
-        } else {
-          setError(
-            'Ops, não foi possível excluir o usuário. Por favor, tente novamente mais tarde.'
-          );
-        }
+        setError('Ops, não foi atualizar matrícula. Por favor, tente novamente mais tarde.');
       } else {
         setError(
           'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
