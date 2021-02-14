@@ -10,9 +10,10 @@ const Alert = (props: AlertProps) => {
 interface IToast {
   type: 'error' | 'warning' | 'success' | 'info';
   message: string;
+  duration?: number;
 }
 
-const Toast: React.FC<IToast> = ({ type, message }: IToast) => {
+const Toast: React.FC<IToast> = ({ type, message, duration = 6000 }: IToast) => {
   const [open, setOpen] = useState<boolean>(message ? true : false);
 
   const handleClose = (_?: SyntheticEvent, reason?: string) => {
@@ -26,7 +27,7 @@ const Toast: React.FC<IToast> = ({ type, message }: IToast) => {
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       open={open}
-      autoHideDuration={6000}
+      autoHideDuration={duration}
       onClose={handleClose}>
       <Alert onClose={handleClose} severity={type}>
         {message}
