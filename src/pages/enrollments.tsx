@@ -18,7 +18,6 @@ import {
 } from 'react-icons/fi';
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -181,11 +180,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
     setOpenDialog(true);
   };
 
-  const openAddDialog = (): void => {
-    setEnrollmentToEdit(null);
-    setOpenDialog(true);
-  };
-
   useEffect(() => {
     fetchEnrollments();
   }, []);
@@ -225,11 +219,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
         <div className="greeting">
           <h2>Bem vindo novamente, {name}!</h2>
           <h3>Aqui você gerencia as matrículas na plataforma!</h3>
-        </div>
-        <div className="add">
-          <Button onClick={openAddDialog} color="primary" variant="contained" size="large">
-            Incluir
-          </Button>
         </div>
       </Header>
       <Content>
