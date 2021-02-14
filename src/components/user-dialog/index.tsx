@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { useTheme } from '../../hooks/theme';
 import { Cookies } from 'react-cookie';
 import api from '../../services/api';
@@ -108,6 +108,12 @@ export default function UserDialog({
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError('');
+    }, 4000);
+  }, [error]);
 
   return (
     <Dialog
