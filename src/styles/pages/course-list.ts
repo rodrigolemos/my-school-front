@@ -219,22 +219,22 @@ export const Card = styled.div`
     align-items: center;
     justify-content: flex-end;
 
-    div.more {
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-
-      &:hover {
-        transform: translateY(-0.2rem);
-        box-shadow: 0 1rem 1rem var(--light);
-      }
-    }
-
     span {
       font-size: 1.4rem;
       padding: 0.6rem 1rem;
       border-radius: 5px;
       background-color: var(--secondary);
       color: var(--white);
+      cursor: pointer;
+      transition: background-color 0.1s ease-in-out;
+
+      &:hover {
+        background-color: var(--secondary-light);
+      }
+
+      &:active {
+        background-color: var(--secondary);
+      }
     }
   }
 

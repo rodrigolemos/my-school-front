@@ -86,8 +86,9 @@ export const CourseDescription = styled.div`
 
     button {
       border: none;
-      font-size: 2rem;
-      padding: 1rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 1.1rem;
       cursor: pointer;
       background-color: var(--primary);
       color: var(--light);
@@ -97,6 +98,7 @@ export const CourseDescription = styled.div`
       &:hover {
         transform: translateY(-0.2rem);
         box-shadow: 0 1rem 1rem var(--light);
+        background-color: var(--primary-light);
       }
     }
   }
