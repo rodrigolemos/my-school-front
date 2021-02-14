@@ -51,6 +51,26 @@ Como mencionado, este é um projeto de estudos e tem como premissa o aprendizado
 - [axios](https://github.com/axios/axios) – Cliente HTTP baseado em promises;
 - [react-cookie](https://www.npmjs.com/package/react-cookie) – Para manipulação dos cookies;
 
+## Como executar o projeto localmente
+
+Certifique-se que você tenha instalado em sua máquina o [Git](https://git-scm.com) e o [NodeJS](https://nodejs.org/en/). Em seguida, execute os seguintes passos:
+
+```bash
+# Clone este repositório
+$ git clone https://github.com/rodrigolemos/my-school-front
+
+# Acesse a pasta do projeto
+$ cd my-school-front
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev
+```
+
+Após esses passos, aplicação estará disponível na porta 3001  - http://localhost:3001.
+
 ## Autor
 
 Rodrigo Lemos
