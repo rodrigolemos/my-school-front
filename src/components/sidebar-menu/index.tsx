@@ -63,14 +63,6 @@ const SidebarMenu: React.FC<ISidebarMenu> = ({ isAdmin }: ISidebarMenu): ReactEl
           </>
         ) : (
           <>
-            <Link href="/course-list">
-              <ListItem button>
-                <ListIcon>
-                  <IoIosList />
-                </ListIcon>
-                <ListItemText primary="Cursos" />
-              </ListItem>
-            </Link>
             <Link href="/classes">
               <ListItem button>
                 <ListIcon>
