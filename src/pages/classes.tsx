@@ -17,8 +17,8 @@ interface IServerUsers {
 }
 
 export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
-  const [loading /*setLoading*/] = useState<boolean>(false);
-  const [error /*setError*/] = useState<string>();
+  const [loading] = useState<boolean>(false);
+  const [error] = useState<string>();
   // const { theme } = useTheme();
 
   useEffect(() => {
