@@ -30,15 +30,6 @@ export const Header = styled.div`
       margin: 2rem 0;
     }
   }
-
-  div.add {
-    display: flex;
-    align-items: center;
-
-    span {
-      font-size: 1.2rem;
-    }
-  }
 `;
 
 export const Content = styled.div`
@@ -47,7 +38,19 @@ export const Content = styled.div`
 
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
 
   animation: ${showFromTop} 0.5s ease-in-out;
+`;
+
+export const Card = styled.div`
+  width: 25rem;
+  height: 25rem;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+
+  &:first-child {
+    margin-left: 0;
+  }
 `;
