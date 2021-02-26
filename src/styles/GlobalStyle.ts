@@ -57,5 +57,7 @@ export default createGlobalStyle`
     --logged-dark: #1B2635;
     --logged: #233044;
     --logged-font: #888F99;
+
+    --font: #495057;
   }
 `;
