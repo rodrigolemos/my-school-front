@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { GetServerSideProps } from 'next';
+import { MdLibraryBooks } from 'react-icons/md';
 import Link from 'next/link';
 import { formatDescription } from '../utils/courses';
 import api from '../services/api';
@@ -37,6 +38,7 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
             {courses.map((course: ICourse) => (
               <Card key={course.id}>
                 <div className="title">
+                  <MdLibraryBooks />
                   <h3>{course.name}</h3>
                 </div>
                 <div className="content">

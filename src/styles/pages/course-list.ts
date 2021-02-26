@@ -151,7 +151,7 @@ export const ContentWrapper = styled.div`
 
 export const Card = styled.div`
   width: 32rem;
-  height: 35rem;
+  height: 36rem;
   margin: 1.5rem;
 
   flex-shrink: 0;
@@ -186,12 +186,21 @@ export const Card = styled.div`
     position: relative;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    position: relative;
+
+    svg {
+      font-size: 15rem;
+      color: var(--secondary-light);
+      opacity: 0.17;
+      position: absolute;
+      right: 0;
+    }
 
     h3 {
       position: absolute;
       bottom: 1rem;
       left: 1rem;
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: normal;
     }
   }
@@ -221,8 +230,8 @@ export const Card = styled.div`
 
     span {
       font-size: 1.4rem;
-      padding: 0.6rem 1rem;
-      border-radius: 5px;
+      padding: 0.8rem 1.2rem;
+      border-radius: 3px;
       background-color: var(--secondary);
       color: var(--white);
       cursor: pointer;
