@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { showFromLeft } from '../animations';
+import backgroundImage from '../../../public/images/course-detail.jpg';
 
 export const Section = styled.section`
   width: 100vw;
@@ -32,8 +34,21 @@ export const CourseInfo = styled.div`
   flex-direction: column;
   position: relative;
 
+  background: linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url('${backgroundImage}');
+  background-size: cover;
+
+  div.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary);
+    opacity: 0.85;
+  }
+
   h1.title {
-    font-size: 5rem;
+    font-size: 5.5rem;
+    z-index: 1;
+    animation: ${showFromLeft} 0.5s ease-in-out;
   }
 `;
 
@@ -65,6 +80,12 @@ export const CourseDescription = styled.div`
         margin-left: 0;
       }
     }
+  }
+  div.details {
+    width: 75%;
+    font-size: 2.4rem;
+    line-height: 3.5rem;
+    color: var(--font);
   }
 
   div.more {

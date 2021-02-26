@@ -97,6 +97,7 @@ export default function CourseDetail(): ReactElement {
         ) : (
           <>
             <CourseInfo>
+              <div className="overlay" />
               {message && <Toast type="success" message={message} />}
               <BackButton onClick={() => router.push('/course-list')}>
                 <IoIosArrowBack /> Voltar
