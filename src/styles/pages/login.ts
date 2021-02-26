@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import styled from 'styled-components';
 import { showFromLeft } from '../animations';
-
-const backgroundImage = require('../../../public/images/typing-1.jpg');
+import backgroundImage from '../../../public/images/typing-1.jpg';
 
 export const Container = styled.div`
   width: 100vw;
