@@ -52,7 +52,7 @@ export default createGlobalStyle`
     
     --white: #F7F9FC;
     --light: #DEE4F0;
-    --lighter: #f0f2f8;
+    --lighter: #f0f1f6;
 
     --logged-dark: #1B2635;
     --logged: #233044;
