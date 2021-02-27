@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import styled from 'styled-components';
 import { showFromLeft } from '../animations';
-
-const backgroundImage = require('../../../public/images/bookshelf-1.jpg');
+import backgroundImage from '../../../public/images/bookshelf-1.jpg';
 
 export const Section = styled.section`
   width: 100vw;
