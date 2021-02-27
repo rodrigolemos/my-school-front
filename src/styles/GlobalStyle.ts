@@ -10,7 +10,6 @@ export default createGlobalStyle`
 
   html {
     font-size: 10px;
-    scroll-behavior: smooth !important;
   }
 
   body {
