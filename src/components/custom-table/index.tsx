@@ -11,7 +11,8 @@ export const StyledTableCell = withStyles(() =>
     },
     head: {
       backgroundColor: '#222',
-      color: '#F6F7FE'
+      color: '#F6F7FE',
+      borderBottom: 'none'
     },
     body: {
       fontSize: 16
