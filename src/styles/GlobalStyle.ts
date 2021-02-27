@@ -58,5 +58,9 @@ export default createGlobalStyle`
     --logged-font: #888F99;
 
     --font: #495057;
+
+    --warning: #F59E0B;
+    --danger: #DC2626;
+    --success: #10B981;
   }
 `;
