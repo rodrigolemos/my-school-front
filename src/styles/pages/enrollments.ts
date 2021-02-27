@@ -111,13 +111,13 @@ export const Status = styled.div<IStatus>`
   ${({ status }) =>
     status === 'A'
       ? css`
-          background-color: darkgreen;
+          background-color: var(--success);
         `
       : status === 'C'
       ? css`
-          background-color: darkred;
+          background-color: var(--danger);
         `
       : css`
-          background-color: #daa520;
+          background-color: var(--warning);
         `}
 `;
