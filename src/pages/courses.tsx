@@ -1,8 +1,6 @@
 import React, { ReactElement, useCallback, useState, useEffect } from 'react';
-import { GetServerSideProps } from 'next';
-import { checkAuth } from '../services/auth';
 import api from '../services/api';
-import { checkPermission } from '../services/permission';
+import { getServerSidePropsDefault } from '../utils/server-props';
 import { formatDate } from '../utils/date';
 import { formatDescription, formatPeriod } from '../utils/courses';
 import { useTheme } from '../hooks/theme';
@@ -221,25 +219,4 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getServerSideProps: GetServerSideProps<IServerCourses> = async (context: any) => {
-  try {
-    checkAuth(context.req.cookies['@my-school:token']);
-    const { id, name } = JSON.parse(context.req.cookies['@my-school:user']);
-    const isAdmin = await checkPermission(context.req.cookies['@my-school:token'], id);
-    return {
-      props: {
-        name,
-        isAdmin
-      }
-    };
-  } catch (err) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/login',
-        permanent: false
-      }
-    };
-  }
-};
+export const getServerSideProps = getServerSidePropsDefault;

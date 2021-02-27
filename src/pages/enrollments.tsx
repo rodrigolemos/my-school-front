@@ -1,10 +1,8 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { GetServerSideProps } from 'next';
+import { getServerSidePropsDefault } from '../utils/server-props';
 import { Cookies } from 'react-cookie';
 import EnrollmentDialog from '../components/enrollment-dialog';
-import { checkAuth } from '../services/auth';
 import api from '../services/api';
-import { checkPermission } from '../services/permission';
 import { formatDate } from '../utils/date';
 import { formatPeriod } from '../utils/courses';
 import { formatStatus } from '../utils/enrollments';
@@ -230,25 +228,4 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getServerSideProps: GetServerSideProps<IServerEnrollments> = async (context: any) => {
-  try {
-    checkAuth(context.req.cookies['@my-school:token']);
-    const { id, name } = JSON.parse(context.req.cookies['@my-school:user']);
-    const isAdmin = await checkPermission(context.req.cookies['@my-school:token'], id);
-    return {
-      props: {
-        name,
-        isAdmin
-      }
-    };
-  } catch (err) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/login',
-        permanent: false
-      }
-    };
-  }
-};
+export const getServerSideProps = getServerSidePropsDefault;
