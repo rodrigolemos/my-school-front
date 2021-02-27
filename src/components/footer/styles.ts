@@ -40,9 +40,24 @@ export const ContactBox = styled.div`
   font-size: 1.5rem;
   border-top: 1px solid var(--shadow);
 
+  .contacts {
+    display: flex;
+    align-items: center;
+  }
+
   svg {
-    margin: 0 0.6rem;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
+  }
+
+  a,
+  a:link,
+  a:visited {
+    text-decoration: none;
+    color: var(--white);
+
+    &:not(:last-child) > svg {
+      margin: 0 0.7rem;
+    }
   }
 
   @media (max-width: 768px) {

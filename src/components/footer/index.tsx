@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { AiFillLinkedin, AiFillGithub, AiFillTwitterCircle } from 'react-icons/ai';
+import { AiFillLinkedin, AiFillGithub } from 'react-icons/ai';
 import { DesktopFooter, FooterContent, ContactBox, Copyright } from './styles';
 
 const Footer: React.FC = (): ReactElement => {
@@ -7,10 +7,15 @@ const Footer: React.FC = (): ReactElement => {
     <DesktopFooter>
       <FooterContent>
         <ContactBox>
-          Rodrigo Lemos | My School
-          <AiFillLinkedin />
-          <AiFillGithub />
-          <AiFillTwitterCircle />
+          <div className="contacts">
+            <span>My School</span>
+            <a href="https://www.linkedin.com/in/rodrigolemosrl">
+              <AiFillLinkedin />
+            </a>
+            <a href="https://github.com/rodrigolemos">
+              <AiFillGithub />
+            </a>
+          </div>
         </ContactBox>
       </FooterContent>
       <Copyright>&copy; 2021 Todos os direitos reservados</Copyright>
