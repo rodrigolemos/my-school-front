@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { showFromTop } from '../animations';
 import { TableRow } from '@material-ui/core';
 
 interface IContainer {
@@ -53,12 +52,16 @@ export const Content = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-
-  animation: ${showFromTop} 0.5s ease-in-out;
 `;
 
 export const MyTableRow = styled(TableRow)<IContainer>`
-  transition: all 0.2s ease-in-out;
+  *,
+  p {
+    font-size: 16px;
+  }
+  select {
+    color: var(--font);
+  }
   ${({ customtheme }) =>
     customtheme === 'dark'
       ? css`

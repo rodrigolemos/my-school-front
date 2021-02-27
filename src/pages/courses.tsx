@@ -34,17 +34,17 @@ import CourseDialog from '../components/course-dialog';
 import Toast from '../components/toast';
 import { Header, Content, MyTableRow } from '../styles/pages/courses';
 
-const StyledTableCell = withStyles((theme: Theme) =>
+const StyledTableCell = withStyles(() =>
   createStyles({
     root: {
-      fontSize: 15
+      fontSize: 16
     },
     head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white
+      backgroundColor: '#222',
+      color: '#F6F7FE'
     },
     body: {
-      fontSize: 14
+      fontSize: 16
     }
   })
 )(TableCell);
@@ -61,8 +61,8 @@ const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexShrink: 0,
-      marginLeft: theme.spacing(2.5),
-      fontSize: 14
+      marginLeft: theme.spacing(3),
+      fontSize: 16
     }
   })
 );
@@ -256,8 +256,8 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
                     <StyledTableCell component="th" scope="row" style={{ width: 200 }}>
                       {course.name}
                     </StyledTableCell>
-                    <StyledTableCell align="left" style={{ width: 500 }}>
-                      {formatDescription(course.description)}
+                    <StyledTableCell align="left" style={{ width: 450 }}>
+                      {formatDescription(course.description, 200)}
                     </StyledTableCell>
                     <StyledTableCell align="left" style={{ width: 100 }}>
                       {formatPeriod(course.period)}
