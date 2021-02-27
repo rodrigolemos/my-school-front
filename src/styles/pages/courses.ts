@@ -1,9 +1,4 @@
-import styled, { css } from 'styled-components';
-import { TableRow } from '@material-ui/core';
-
-interface IContainer {
-  customtheme: string;
-}
+import styled from 'styled-components';
 
 export const Header = styled.div`
   width: 100%;
@@ -47,39 +42,9 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  padding: 0 1rem;
+  padding: 1rem;
 
   display: flex;
   align-items: flex-start;
   justify-content: center;
-`;
-
-export const MyTableRow = styled(TableRow)<IContainer>`
-  *,
-  p {
-    font-size: 16px;
-  }
-  select {
-    color: var(--font);
-  }
-  ${({ customtheme }) =>
-    customtheme === 'dark'
-      ? css`
-          th,
-          td,
-          svg {
-            border-bottom: 1px solid var(--logged-dark) !important;
-            background-color: var(--logged);
-            color: var(--white) !important;
-          }
-        `
-      : css`
-          th,
-          td,
-          svg {
-            border-bottom: 1px solid var(--light) !important;
-            background-color: var(--lighter);
-            color: var(--logged) !important;
-          }
-        `}
 `;
