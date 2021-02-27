@@ -150,8 +150,8 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Card = styled.div`
-  width: 32rem;
-  height: 36rem;
+  width: 18vw;
+  height: 390px;
   margin: 1.5rem;
 
   flex-shrink: 0;
@@ -189,7 +189,7 @@ export const Card = styled.div`
     position: relative;
 
     svg {
-      font-size: 15rem;
+      font-size: 17rem;
       color: var(--secondary-light);
       opacity: 0.17;
       position: absolute;
@@ -199,7 +199,7 @@ export const Card = styled.div`
     h3 {
       position: absolute;
       bottom: 1rem;
-      left: 1rem;
+      left: 2rem;
       font-size: 2.1rem;
       font-weight: normal;
     }
@@ -208,27 +208,31 @@ export const Card = styled.div`
   div.content {
     width: 100%;
     height: 40%;
+    padding: 2rem;
+    color: var(--font);
 
     p {
+      font-size: 1.55rem;
       width: 100%;
       height: 100%;
-      font-size: 1.7rem;
-      padding: 2rem;
-      letter-spacing: 0.2px;
-      color: var(--tertiary-light);
+      letter-spacing: 0.3px;
     }
   }
 
   div.footer {
     width: 100%;
     height: 15%;
+    padding: 2rem;
 
-    padding: 1rem;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
 
-    span {
+    span.date {
+      font-size: 1.4rem;
+    }
+
+    span.more {
       font-size: 1.4rem;
       padding: 0.8rem 1.2rem;
       border-radius: 3px;

@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import { MdLibraryBooks } from 'react-icons/md';
 import Link from 'next/link';
 import { formatDescription } from '../utils/courses';
+import { simpleDate } from '../utils/date';
 import api from '../services/api';
 
 import PublicLayout from '../components/public-layout';
@@ -42,14 +43,13 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
                   <h3>{course.name}</h3>
                 </div>
                 <div className="content">
-                  <p>{formatDescription(course.description, 120)}</p>
+                  <p>{formatDescription(course.description, 170)}</p>
                 </div>
                 <div className="footer">
-                  <div className="more">
-                    <Link href={`/course-detail/${course.id}`}>
-                      <span>Saber Mais</span>
-                    </Link>
-                  </div>
+                  <span className="date">Atualizado em {simpleDate(course.updated_at)}</span>
+                  <Link href={`/course-detail/${course.id}`}>
+                    <span className="more">Saber Mais</span>
+                  </Link>
                 </div>
               </Card>
             ))}
