@@ -8,115 +8,29 @@ import { formatDate } from '../utils/date';
 import ConfirmationDialog from '../components/confirmation-dialog';
 import UserDialog from '../components/user-dialog';
 import { useTheme } from '../hooks/theme';
-import { FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 import { BsCardChecklist } from 'react-icons/bs';
-import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
   TableFooter,
   TablePagination,
   CircularProgress,
-  Paper,
-  IconButton
+  Paper
 } from '@material-ui/core';
-
+import {
+  TablePaginationActions,
+  StyledTableCell,
+  StyledTableRow,
+  useStyles
+} from '../components/custom-table';
 import Layout from '../components/layout';
 import Toast from '../components/toast';
-import { Header, Content, MyTableRow } from '../styles/pages/courses';
-
-const StyledTableCell = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      fontSize: 15
-    },
-    head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white
-    },
-    body: {
-      fontSize: 14
-    }
-  })
-)(TableCell);
-
-const StyledTableRow = withStyles(() => createStyles({}))(MyTableRow);
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700
-  }
-});
-
-const useStyles1 = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexShrink: 0,
-      marginLeft: theme.spacing(2.5),
-      fontSize: 14
-    }
-  })
-);
-
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onChangePage: (event: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
-}
-
-function TablePaginationActions(props: TablePaginationActionsProps) {
-  const classes = useStyles1();
-  const { count, page, rowsPerPage, onChangePage } = props;
-
-  const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, 0);
-  };
-
-  const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <div className={classes.root}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page">
-        <FiChevronsLeft />
-      </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        <FiChevronLeft />
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page">
-        <FiChevronRight />
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page">
-        <FiChevronsRight />
-      </IconButton>
-    </div>
-  );
-}
+import { Header, Content } from '../styles/pages/courses';
 
 interface IServerUsers {
   name: string;
