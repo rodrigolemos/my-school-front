@@ -33,7 +33,7 @@ export default function Home(): ReactElement {
         <SectionName>Uma proposta simples</SectionName>
         <ContentWrapper>
           <Card>
-            <div className="image first">
+            <div className="image">
               <FaUsers />
             </div>
             <div className="content">
@@ -45,7 +45,7 @@ export default function Home(): ReactElement {
             </div>
           </Card>
           <Card>
-            <div className="image second">
+            <div className="image">
               <FaUserGraduate />
             </div>
             <div className="content">
@@ -57,7 +57,7 @@ export default function Home(): ReactElement {
             </div>
           </Card>
           <Card>
-            <div className="image third">
+            <div className="image">
               <FaUserTie />
             </div>
             <div className="content">
@@ -69,7 +69,7 @@ export default function Home(): ReactElement {
             </div>
           </Card>
           <Card>
-            <div className="image fourth">
+            <div className="image">
               <FaUsersCog />
             </div>
             <div className="content">
