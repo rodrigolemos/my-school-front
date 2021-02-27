@@ -49,7 +49,7 @@ export const Header = styled.div`
 export const Content = styled.div`
   width: 100%;
   min-height: 85%;
-  padding: 0 1rem;
+  padding: 1rem;
 
   display: flex;
   align-items: flex-start;
