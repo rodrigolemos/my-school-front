@@ -50,7 +50,7 @@ const StyledTheme = styled.div<IContainer>`
 `;
 
 const ThemeContextProvider: React.FC = ({ children }: IThemeContextProvider) => {
-  const [theme, setTheme] = useState<ThemeProp>('dark');
+  const [theme, setTheme] = useState<ThemeProp>('light');
 
   useEffect(() => {
     fetchPrevious();
