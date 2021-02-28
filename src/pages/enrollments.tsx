@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { getServerSidePropsDefault } from '../utils/server-props';
+import { getServerSidePropsAdmin } from '../utils/server-props';
 import { Cookies } from 'react-cookie';
 import EnrollmentDialog from '../components/enrollment-dialog';
 import api from '../services/api';
@@ -228,4 +228,4 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
   );
 }
 
-export const getServerSideProps = getServerSidePropsDefault;
+export const getServerSideProps = getServerSidePropsAdmin;

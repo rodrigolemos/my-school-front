@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import api from '../services/api';
-import { getServerSidePropsDefault } from '../utils/server-props';
+import { getServerSidePropsAdmin } from '../utils/server-props';
 import { CircularProgress } from '@material-ui/core';
 
 import Layout from '../components/layout';
@@ -103,4 +103,4 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
   );
 }
 
-export const getServerSideProps = getServerSidePropsDefault;
+export const getServerSideProps = getServerSidePropsAdmin;

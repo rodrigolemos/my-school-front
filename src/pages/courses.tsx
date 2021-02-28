@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useState, useEffect } from 'react';
 import api from '../services/api';
-import { getServerSidePropsDefault } from '../utils/server-props';
+import { getServerSidePropsAdmin } from '../utils/server-props';
 import { formatDate } from '../utils/date';
 import { formatDescription, formatPeriod } from '../utils/courses';
 import { useTheme } from '../hooks/theme';
@@ -219,4 +219,4 @@ export default function Courses({ name, isAdmin }: IServerCourses): ReactElement
   );
 }
 
-export const getServerSideProps = getServerSidePropsDefault;
+export const getServerSideProps = getServerSidePropsAdmin;

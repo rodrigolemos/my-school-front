@@ -1,5 +1,5 @@
 import React, { useCallback, ReactElement, useState, useEffect } from 'react';
-import { getServerSidePropsDefault } from '../utils/server-props';
+import { getServerSidePropsAdmin } from '../utils/server-props';
 import { Cookies } from 'react-cookie';
 import api from '../services/api';
 import { formatDate } from '../utils/date';
@@ -245,4 +245,4 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
   );
 }
 
-export const getServerSideProps = getServerSidePropsDefault;
+export const getServerSideProps = getServerSidePropsAdmin;
