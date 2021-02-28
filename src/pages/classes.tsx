@@ -1,18 +1,13 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import api from '../services/api';
-import { getServerSidePropsAdmin } from '../utils/server-props';
+import { getServerSidePropsUser } from '../utils/server-props';
 import { CircularProgress } from '@material-ui/core';
 
 import Layout from '../components/layout';
 import Toast from '../components/toast';
 import { Header, Content, Card } from '../styles/pages/classes';
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-}
+import { IUser } from '../interfaces/IUser';
 
 interface ICourse {
   id: string;
@@ -103,4 +98,4 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
   );
 }
 
-export const getServerSideProps = getServerSidePropsAdmin;
+export const getServerSideProps = getServerSidePropsUser;

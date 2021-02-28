@@ -29,27 +29,11 @@ import {
 import Layout from '../components/layout';
 import Toast from '../components/toast';
 import { Header, Content } from '../styles/pages/courses';
+import { IUser } from '../interfaces/IUser';
 
 interface IServerUsers {
   name: string;
   isAdmin: boolean;
-}
-
-interface ICreatedBy {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  contact: string;
-  created_by: ICreatedBy;
-  created_at: Date;
-  updated_at: Date;
 }
 
 export default function Users({ name, isAdmin }: IServerUsers): ReactElement {

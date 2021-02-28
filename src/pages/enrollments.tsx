@@ -28,16 +28,11 @@ import {
 import Layout from '../components/layout';
 import Toast from '../components/toast';
 import { Header, Content, Status, FilterWrapper } from '../styles/pages/enrollments';
+import { IUser } from '../interfaces/IUser';
 
 interface IServerEnrollments {
   name: string;
   isAdmin: boolean;
-}
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
 }
 
 interface ICourse {

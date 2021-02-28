@@ -14,18 +14,7 @@ import {
   About,
   CustomRoleDescription
 } from './styles';
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  contact: string;
-  bio: string;
-  created_by?: string;
-  created_at: Date;
-  updated_at: Date;
-}
+import { IUser } from '../../interfaces/IUser';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const RoleDescription = ({ role }: any): ReactElement => {

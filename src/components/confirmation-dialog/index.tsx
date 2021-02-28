@@ -6,23 +6,7 @@ import Toast from '../toast';
 import { CircularProgress } from '@material-ui/core';
 import { Button, Dialog, DialogActions } from '@material-ui/core';
 import { CustomDialogContent, Form } from './styles';
-
-interface ICreatedBy {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  contact: string;
-  created_by: ICreatedBy;
-  created_at: Date;
-  updated_at: Date;
-}
+import { IUser } from '../../interfaces/IUser';
 
 interface ICourseDialog {
   open: boolean;

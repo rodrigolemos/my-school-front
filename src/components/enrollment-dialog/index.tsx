@@ -6,12 +6,7 @@ import Toast from '../toast';
 import { CircularProgress } from '@material-ui/core';
 import { Button, Dialog, DialogActions } from '@material-ui/core';
 import { CustomDialogContent, Form } from './styles';
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-}
+import { IUser } from '../../interfaces/IUser';
 
 interface ICourse {
   id: string;

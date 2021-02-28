@@ -9,23 +9,7 @@ import { CustomDialogContent, Form, CustomInput, CustomSelect, CustomMenuItem } 
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-interface ICreatedBy {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  contact: string;
-  created_by: ICreatedBy;
-  created_at: Date;
-  updated_at: Date;
-}
+import { IUser } from '../../interfaces/IUser';
 
 interface IUserDialog {
   open: boolean;
