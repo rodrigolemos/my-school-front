@@ -145,7 +145,7 @@ export default function EnrollmentDialog({
                 Cancelar
               </Button>
               <Button onClick={handleClose} variant="contained" size="large">
-                Cancelar
+                Voltar
               </Button>
             </DialogActions>
           ) : (

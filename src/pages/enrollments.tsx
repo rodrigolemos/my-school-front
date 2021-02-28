@@ -182,10 +182,12 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                         </Status>
                       </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 50 }}>
-                        <FiEdit3
-                          onClick={() => openEditDialog(enrollment)}
-                          style={{ cursor: 'pointer' }}
-                        />
+                        {enrollment.status === 'P' && (
+                          <FiEdit3
+                            onClick={() => openEditDialog(enrollment)}
+                            style={{ cursor: 'pointer' }}
+                          />
+                        )}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
