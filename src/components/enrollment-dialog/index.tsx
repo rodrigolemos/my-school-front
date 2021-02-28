@@ -122,7 +122,7 @@ export default function EnrollmentDialog({
       <CustomDialogContent customtheme={theme}>
         {error && <Toast type="error" message={error} />}
         <Form>
-          <h1>Aprovar/Excluir matrícula </h1>
+          <h1>Aprovar ou cancelar matrícula </h1>
           <div className="alert">
             Atenção! Selecione a opção para a matrícula do usuário{' '}
             <u>{enrollmentToEdit.user_id.name}</u> para o curso{' '}
@@ -142,7 +142,7 @@ export default function EnrollmentDialog({
                 variant="contained"
                 color="secondary"
                 size="large">
-                Excluir
+                Cancelar
               </Button>
               <Button onClick={handleClose} variant="contained" size="large">
                 Cancelar
