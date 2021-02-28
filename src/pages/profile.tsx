@@ -1,8 +1,7 @@
-import React, { useCallback, useState, ReactElement } from 'react';
+import React, { useCallback, useEffect, useState, ReactElement } from 'react';
+import { getServerSidePropsUser } from '../utils/server-props';
 import { Cookies } from 'react-cookie';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
-import { checkAuth } from '../services/auth';
 import api from '../services/api';
 import { CircularProgress } from '@material-ui/core';
 import { Button } from '@material-ui/core';
@@ -21,18 +20,7 @@ import {
   Controls,
   CustomInput
 } from '../styles/pages/profile';
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  contact: string;
-  bio: string;
-  created_by?: string;
-  created_at: Date;
-  updated_at: Date;
-}
+import { IUser } from '../interfaces/IUser';
 
 interface IProfile {
   isAdmin: boolean;
@@ -56,9 +44,10 @@ const schema = yup.object().shape({
   bio: yup.string()
 });
 
-export default function Profile({ isAdmin, user }: IProfile): ReactElement {
-  const [loading, setLoading] = useState<boolean>(false);
+export default function Profile({ isAdmin }: IProfile): ReactElement {
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>();
+  const [user, setUser] = useState<IUser>();
   const router = useRouter();
   const { register, control, handleSubmit, errors } = useForm<IFormInput>({
     resolver: yupResolver(schema)
@@ -110,107 +99,109 @@ export default function Profile({ isAdmin, user }: IProfile): ReactElement {
     setLoading(false);
   }, []);
 
+  const fetchUserInfo = useCallback(async (): Promise<void> => {
+    setLoading(true);
+    setError('');
+    try {
+      const cookies = new Cookies();
+      const token = cookies.get('@my-school:token');
+      const { id } = cookies.get('@my-school:user');
+
+      const response = await api.get<IUser>(`/users/about/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (response.status !== 200) throw new Error('Not allowed');
+
+      setUser(response.data[0]);
+    } catch (error) {
+      setError('Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.');
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
   return (
     <Layout isAdmin={isAdmin} title="Perfil">
       <Content>
         {error && <Toast type="error" message={error} />}
-        <ProfileContainer {...user} />
-        <FormColumn>
-          <FormArea>
-            <Form onSubmit={handleSubmit(onSubmit)} className="themed-aux">
-              <h3>Minhas informações</h3>
-              <Controller
-                name="name"
-                control={control}
-                defaultValue={user.name}
-                as={<CustomInput label="Nome" variant="filled" required ref={register} />}
-              />
-              {errors.name && <p className="error">Preencha corretamente o nome</p>}
-              <Controller
-                name="email"
-                control={control}
-                defaultValue={user.email}
-                as={<CustomInput label="E-mail" variant="filled" required ref={register} />}
-              />
-              {errors.email && <p className="error">Preencha corretamente o email</p>}
-              <Controller
-                name="password"
-                control={control}
-                defaultValue=""
-                as={
-                  <CustomInput
-                    type="password"
-                    label="Nova Senha"
-                    variant="filled"
-                    required
-                    ref={register}
-                    autoComplete=""
+        {loading && !user ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <ProfileContainer {...user} />
+            <FormColumn>
+              <FormArea>
+                <Form onSubmit={handleSubmit(onSubmit)} className="themed-aux">
+                  <h3>Minhas informações</h3>
+                  <Controller
+                    name="name"
+                    control={control}
+                    defaultValue={user.name}
+                    as={<CustomInput label="Nome" variant="filled" required ref={register} />}
                   />
-                }
-              />
-              {errors.password && <p className="error">Preencha corretamente a senha</p>}
-              <Controller
-                name="contact"
-                control={control}
-                defaultValue={user.contact ? user.contact : ''}
-                as={<CustomInput label="Contato" variant="filled" ref={register} />}
-              />
-              {errors.contact && <p className="error">Preencha corretamente o contato</p>}
-              <Controller
-                name="bio"
-                control={control}
-                defaultValue={user.bio ? user.bio : ''}
-                as={<CustomInput label="Bio" variant="filled" ref={register} multiline rows={5} />}
-              />
-              {errors.bio && <p className="error">Preencha corretamente a bio</p>}
-              <Controls>
-                {!loading ? (
-                  <Button type="submit" variant="contained" color="primary" size="large">
-                    Atualizar
-                  </Button>
-                ) : (
-                  <CircularProgress />
-                )}
-              </Controls>
-            </Form>
-          </FormArea>
-        </FormColumn>
+                  {errors.name && <p className="error">Preencha corretamente o nome</p>}
+                  <Controller
+                    name="email"
+                    control={control}
+                    defaultValue={user.email}
+                    as={<CustomInput label="E-mail" variant="filled" required ref={register} />}
+                  />
+                  {errors.email && <p className="error">Preencha corretamente o email</p>}
+                  <Controller
+                    name="password"
+                    control={control}
+                    defaultValue=""
+                    as={
+                      <CustomInput
+                        type="password"
+                        label="Nova Senha"
+                        variant="filled"
+                        required
+                        ref={register}
+                        autoComplete=""
+                      />
+                    }
+                  />
+                  {errors.password && <p className="error">Preencha corretamente a senha</p>}
+                  <Controller
+                    name="contact"
+                    control={control}
+                    defaultValue={user.contact ? user.contact : ''}
+                    as={<CustomInput label="Contato" variant="filled" ref={register} />}
+                  />
+                  {errors.contact && <p className="error">Preencha corretamente o contato</p>}
+                  <Controller
+                    name="bio"
+                    control={control}
+                    defaultValue={user.bio ? user.bio : ''}
+                    as={
+                      <CustomInput label="Bio" variant="filled" ref={register} multiline rows={5} />
+                    }
+                  />
+                  {errors.bio && <p className="error">Preencha corretamente a bio</p>}
+                  <Controls>
+                    {!loading ? (
+                      <Button type="submit" variant="contained" color="primary" size="large">
+                        Atualizar
+                      </Button>
+                    ) : (
+                      <CircularProgress />
+                    )}
+                  </Controls>
+                </Form>
+              </FormArea>
+            </FormColumn>
+          </>
+        )}
       </Content>
     </Layout>
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
-  try {
-    checkAuth(context.req.cookies['@my-school:token']);
-    const { id } = JSON.parse(context.req.cookies['@my-school:user']);
-
-    const response = await api.get<IUser>(`/users/about/${id}`, {
-      headers: {
-        Authorization: `Bearer ${context.req.cookies['@my-school:token']}`
-      }
-    });
-
-    if (response.status !== 200) throw new Error('Not allowed');
-
-    const user: IUser = response.data[0];
-
-    const isAdmin = user.role === 'admin' ? true : false;
-
-    return {
-      props: {
-        isAdmin,
-        user
-      }
-    };
-  } catch (err) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/login',
-        permanent: false
-      }
-    };
-  }
-};
+export const getServerSideProps = getServerSidePropsUser;
