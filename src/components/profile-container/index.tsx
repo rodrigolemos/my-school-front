@@ -16,8 +16,7 @@ import {
 } from './styles';
 import { IUser } from '../../interfaces/IUser';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const RoleDescription = ({ role }: any): ReactElement => {
+export const RoleDescription = ({ userRole }: { userRole: string }): ReactElement => {
   const roles = {
     student: {
       label: 'Aluno',
@@ -34,9 +33,9 @@ const RoleDescription = ({ role }: any): ReactElement => {
   };
   return (
     <>
-      {roles[role] ? (
+      {roles[userRole] ? (
         <CustomRoleDescription>
-          {roles[role].icon} {roles[role].label}
+          {roles[userRole].icon} {roles[userRole].label}
         </CustomRoleDescription>
       ) : (
         <CustomRoleDescription>Perfil Não Identificado</CustomRoleDescription>
@@ -52,7 +51,7 @@ const ProfileContainer: React.FC<IUser> = (user: IUser): ReactElement => {
         <Avatar className="themed-aux">{user.name.substr(0, 1)}</Avatar>
         <Personal>
           <span>{user.name}</span>
-          <RoleDescription role={user.role} />
+          <RoleDescription userRole={user.role} />
           <span>{user.email}</span>
         </Personal>
       </ProfileDetails>
