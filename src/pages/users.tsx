@@ -31,6 +31,8 @@ import Toast from '../components/toast';
 import { Header, Content } from '../styles/pages/courses';
 import { IUser } from '../interfaces/IUser';
 
+import UserCard from '../components/user-card';
+
 interface IServerUsers {
   name: string;
   isAdmin: boolean;
@@ -144,85 +146,90 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
         {loading ? (
           <CircularProgress />
         ) : (
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Nome</StyledTableCell>
-                  <StyledTableCell>E-mail</StyledTableCell>
-                  <StyledTableCell>Perfil</StyledTableCell>
-                  <StyledTableCell>Contato</StyledTableCell>
-                  <StyledTableCell align="center">Criado em</StyledTableCell>
-                  <StyledTableCell align="center">Atualizado em</StyledTableCell>
-                  <StyledTableCell align="center">Matrículas</StyledTableCell>
-                  <StyledTableCell align="center">Excluir</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {(rowsPerPage > 0
-                  ? users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : users
-                ).map((user) => (
-                  <StyledTableRow key={user.id} customtheme={theme}>
-                    <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
-                      {user.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="left" style={{ width: 220 }}>
-                      {user.email}
-                    </StyledTableCell>
-                    <StyledTableCell align="left" style={{ width: 100 }}>
-                      {user.role}
-                    </StyledTableCell>
-                    <StyledTableCell align="left" style={{ width: 150 }}>
-                      {user.contact}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 200 }}>
-                      {formatDate(user.created_at)}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 200 }}>
-                      {formatDate(user.updated_at)}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 50 }}>
-                      <BsCardChecklist
-                        onClick={() => openDeleteDialog(user)}
-                        style={{ cursor: 'pointer' }}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="center" style={{ width: 50 }}>
-                      <AiOutlineUserDelete
-                        onClick={() => openDeleteDialog(user)}
-                        style={{ cursor: 'pointer' }}
-                      />
-                    </StyledTableCell>
+          <>
+            {users.map((user) => (
+              <UserCard key={user.id} {...user} />
+            ))}
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Nome</StyledTableCell>
+                    <StyledTableCell>E-mail</StyledTableCell>
+                    <StyledTableCell>Perfil</StyledTableCell>
+                    <StyledTableCell>Contato</StyledTableCell>
+                    <StyledTableCell align="center">Criado em</StyledTableCell>
+                    <StyledTableCell align="center">Atualizado em</StyledTableCell>
+                    <StyledTableCell align="center">Matrículas</StyledTableCell>
+                    <StyledTableCell align="center">Excluir</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : users
+                  ).map((user) => (
+                    <StyledTableRow key={user.id} customtheme={theme}>
+                      <StyledTableCell component="th" scope="row" style={{ width: 220 }}>
+                        {user.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: 220 }}>
+                        {user.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: 100 }}>
+                        {user.role}
+                      </StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: 150 }}>
+                        {user.contact}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 200 }}>
+                        {formatDate(user.created_at)}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 200 }}>
+                        {formatDate(user.updated_at)}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 50 }}>
+                        <BsCardChecklist
+                          onClick={() => openDeleteDialog(user)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="center" style={{ width: 50 }}>
+                        <AiOutlineUserDelete
+                          onClick={() => openDeleteDialog(user)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                  {emptyRows > 0 && (
+                    <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
+                      <StyledTableCell colSpan={9} />
+                    </StyledTableRow>
+                  )}
+                </TableBody>
+                <TableFooter>
+                  <StyledTableRow customtheme={theme}>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10]}
+                      colSpan={9}
+                      count={users.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      SelectProps={{
+                        inputProps: { 'aria-label': 'linhas por página' },
+                        native: true
+                      }}
+                      labelRowsPerPage="Linhas por página"
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                      ActionsComponent={TablePaginationActions}
+                    />
                   </StyledTableRow>
-                ))}
-                {emptyRows > 0 && (
-                  <StyledTableRow style={{ height: 53 * emptyRows }} customtheme={theme}>
-                    <StyledTableCell colSpan={9} />
-                  </StyledTableRow>
-                )}
-              </TableBody>
-              <TableFooter>
-                <StyledTableRow customtheme={theme}>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10]}
-                    colSpan={9}
-                    count={users.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    SelectProps={{
-                      inputProps: { 'aria-label': 'linhas por página' },
-                      native: true
-                    }}
-                    labelRowsPerPage="Linhas por página"
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </StyledTableRow>
-              </TableFooter>
-            </Table>
-          </TableContainer>
+                </TableFooter>
+              </Table>
+            </TableContainer>
+          </>
         )}
       </Content>
     </Layout>
