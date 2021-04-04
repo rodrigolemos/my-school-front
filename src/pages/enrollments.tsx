@@ -82,10 +82,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
     setOpenDialog(true);
   };
 
-  useEffect(() => {
-    fetchEnrollments();
-  }, []);
-
   const fetchEnrollments = async (): Promise<void> => {
     setLoading(true);
     setError('');
@@ -114,6 +110,10 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchEnrollments();
+  }, []);
 
   return (
     <Layout isAdmin={isAdmin} title="Matrículas">

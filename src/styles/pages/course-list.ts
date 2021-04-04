@@ -174,8 +174,7 @@ export const Card = styled.div`
   backface-visibility: hidden;
 
   &:hover {
-    box-shadow: 0 0 1.4rem #ccc;
-    transform: translateY(-0.5rem);
+    box-shadow: 0 0 1.7rem #aaa;
   }
 
   div.title {
