@@ -50,6 +50,32 @@ export const Card = styled.div`
   margin: 1rem;
   border-radius: 5px;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  & > * {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: normal;
+  }
+
+  .enrollment-status {
+    font-size: 1.4rem;
+
+    span {
+      display: block;
+      margin-bottom: 1.4rem;
+    }
+  }
+
+  .progress {
+    font-size: 1.4rem;
+  }
+
   &:first-child {
     margin-left: 0;
   }

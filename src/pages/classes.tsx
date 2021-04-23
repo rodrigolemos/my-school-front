@@ -7,7 +7,9 @@ import { CircularProgress } from '@material-ui/core';
 import Layout from '../components/layout';
 import Toast from '../components/toast';
 import { Header, Content, Card } from '../styles/pages/classes';
+import { Status } from '../styles/pages/enrollments';
 import { IUser } from '../interfaces/IUser';
+import { formatStatus } from '../utils/enrollments';
 
 interface ICourse {
   id: string;
@@ -89,6 +91,11 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
                 key={`${enrollment.user_id.id}-${enrollment.course_id.id}`}
                 className="themed-aux">
                 <h2>{enrollment.course_id.name}</h2>
+                <div className="enrollment-status">
+                  <span>Situação da matrícula</span>
+                  <Status status={enrollment.status}>{formatStatus(enrollment.status)}</Status>
+                </div>
+                <div className="progress">0/10 aulas finalizadas</div>
               </Card>
             ))}
           </>
