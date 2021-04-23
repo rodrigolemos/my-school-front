@@ -31,8 +31,6 @@ import Toast from '../components/toast';
 import { Header, Content } from '../styles/pages/courses';
 import { IUser } from '../interfaces/IUser';
 
-import UserCard from '../components/user-card';
-
 interface IServerUsers {
   name: string;
   isAdmin: boolean;
@@ -147,9 +145,6 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
           <CircularProgress />
         ) : (
           <>
-            {users.map((user) => (
-              <UserCard key={user.id} {...user} />
-            ))}
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="customized table">
                 <TableHead>
