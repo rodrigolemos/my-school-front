@@ -1,4 +1,5 @@
 import React, { ReactElement, useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Cookies } from 'react-cookie';
 import api from '../services/api';
 import { getServerSidePropsUser } from '../utils/server-props';
@@ -77,7 +78,10 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
       <Header>
         <div className="greeting">
           <h2>Bem vindo novamente, {name}!</h2>
-          <h3>Esses são os seus cursos</h3>
+          <h3>
+            Esses são os seus cursos. Clique <Link href="/course-list">aqui</Link> para ver os
+            cursos disponíveis.
+          </h3>
         </div>
       </Header>
       <Content>
