@@ -65,6 +65,8 @@ export const Card = styled.div`
 
   .enrollment-status {
     font-size: 1.4rem;
+    padding: 1.4rem;
+    border-radius: 5px;
 
     span {
       display: block;
@@ -74,6 +76,8 @@ export const Card = styled.div`
 
   .progress {
     font-size: 1.4rem;
+    padding: 1.4rem;
+    border-radius: 5px;
   }
 
   &:first-child {

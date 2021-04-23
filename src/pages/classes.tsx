@@ -91,7 +91,7 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
                 key={`${enrollment.user_id.id}-${enrollment.course_id.id}`}
                 className="themed-aux">
                 <h2>{enrollment.course_id.name}</h2>
-                <div className="enrollment-status">
+                <div className="enrollment-status themed">
                   <span>Situação da matrícula</span>
                   <Status status={enrollment.status}>{formatStatus(enrollment.status)}</Status>
                 </div>
