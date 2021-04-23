@@ -62,7 +62,7 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
       {enrollment && (
         <Toast
           type="success"
-          message="Obrigado por demonstrar interesse em nossos cursos. Acesse a plataforma para consultar o andamento da solicitação!"
+          message="Solicitação registrada. Clique em aulas e consulte o andamento da solicitação!"
         />
       )}
       <Header>
