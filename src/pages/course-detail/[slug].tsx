@@ -36,6 +36,7 @@ export default function CourseDetail(): ReactElement {
   const router = useRouter();
   const [course, setCourse] = useState<ICourse>({} as ICourse);
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingEnrollment, setLoadingEnrollment] = useState<boolean>(false);
   const [message, setMessage] = useState<string>();
 
   const fetchCourseDetail = useCallback(async (): Promise<void> => {
@@ -64,6 +65,7 @@ export default function CourseDetail(): ReactElement {
           'Parece que você é um administrador. Não é necessário se matricular neste curso.'
         );
       } else {
+        setLoadingEnrollment(true);
         const data: IEnrollment = {
           course_id: course.id,
           user_id: id,
@@ -77,10 +79,12 @@ export default function CourseDetail(): ReactElement {
         });
 
         if (response.status === 201) {
+          setLoadingEnrollment(false);
           router.push('/dashboard?enrollment=created');
         }
       }
     } catch (err) {
+      setLoadingEnrollment(false);
       router.push('/login?notLogged=true');
     }
   };
@@ -118,7 +122,11 @@ export default function CourseDetail(): ReactElement {
                   Atualizado
                   <span>{simpleDate(course.updated_at)}</span>
                 </span>
-                <button onClick={validateEnrollment}>Matricule-me!</button>
+                {!loadingEnrollment ? (
+                  <button onClick={validateEnrollment}>Matricule-me!</button>
+                ) : (
+                  <CircularProgress />
+                )}
               </div>
             </CourseDescription>
           </>
