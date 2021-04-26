@@ -56,14 +56,16 @@ export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
 
       setEnrollments(response.data);
     } catch (error) {
-      if (error.response) {
-        setError(
-          'Ops, não foi possível listar os seus cursos. Por favor, tente novamente mais tarde.'
-        );
-      } else {
-        setError(
-          'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
-        );
+      if (error.response.status !== 404) {
+        if (error.response) {
+          setError(
+            'Ops, não foi possível listar os seus cursos. Por favor, tente novamente mais tarde.'
+          );
+        } else {
+          setError(
+            'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
+          );
+        }
       }
     }
     setLoading(false);
