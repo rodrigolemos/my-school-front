@@ -8,14 +8,7 @@ import api from '../services/api';
 
 import PublicLayout from '../components/public-layout';
 import { Banner, Card, ContentWrapper, Presentation, Title } from '../styles/pages/course-list';
-
-interface ICourse {
-  id: string;
-  name: string;
-  description: string;
-  period: string;
-  updated_at: Date;
-}
+import { ICourse } from '../interfaces/ICourse';
 
 interface CourseListProps {
   courses: ICourse[];

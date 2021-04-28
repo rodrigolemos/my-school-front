@@ -7,14 +7,8 @@ import { CircularProgress } from '@material-ui/core';
 import { Button, Dialog, DialogActions } from '@material-ui/core';
 import { CustomDialogContent, Form } from './styles';
 import { IUser } from '../../interfaces/IUser';
+import { ICourse } from '../../interfaces/ICourse';
 
-interface ICourse {
-  id: string;
-  name: string;
-  period: string;
-  positions: number;
-  created_by: IUser;
-}
 interface IEnrollment {
   user_id: IUser;
   course_id: ICourse;

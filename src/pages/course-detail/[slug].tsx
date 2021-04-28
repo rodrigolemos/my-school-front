@@ -16,15 +16,7 @@ import {
   CourseDescription,
   BackButton
 } from '../../styles/pages/course-detail';
-
-interface ICourse {
-  id: string;
-  name: string;
-  description: string;
-  tags: string[];
-  period: string;
-  updated_at: Date;
-}
+import { ICourse } from '../../interfaces/ICourse';
 
 interface IEnrollment {
   user_id: string;

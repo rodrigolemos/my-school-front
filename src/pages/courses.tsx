@@ -27,27 +27,11 @@ import Layout from '../components/layout';
 import CourseDialog from '../components/course-dialog';
 import Toast from '../components/toast';
 import { Header, Content } from '../styles/pages/courses';
+import { ICourse } from '../interfaces/ICourse';
 
 interface IServerCourses {
   name: string;
   isAdmin: boolean;
-}
-
-interface ICreatedBy {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface ICourse {
-  id: string;
-  name: string;
-  description: string;
-  period: string;
-  positions: number;
-  created_by: ICreatedBy;
-  created_at: Date;
-  updated_at: Date;
 }
 
 export default function Courses({ name, isAdmin }: IServerCourses): ReactElement {

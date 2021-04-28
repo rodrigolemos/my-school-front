@@ -10,22 +10,7 @@ import { CustomDialogContent, Form, CustomInput, CustomSelect, CustomMenuItem } 
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-interface ICreatedBy {
-  id: string;
-  name: string;
-  email: string;
-}
-interface ICourse {
-  id: string;
-  name: string;
-  description: string;
-  period: string;
-  positions: number;
-  created_by: ICreatedBy;
-  created_at: Date;
-  updated_at: Date;
-}
+import { ICourse } from '../../interfaces/ICourse';
 
 interface ICourseDialog {
   open: boolean;

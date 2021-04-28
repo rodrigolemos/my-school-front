@@ -11,14 +11,8 @@ import { Header, Content, Card } from '../styles/pages/classes';
 import { Status } from '../styles/pages/enrollments';
 import { IUser } from '../interfaces/IUser';
 import { formatStatus } from '../utils/enrollments';
+import { ICourse } from '../interfaces/ICourse';
 
-interface ICourse {
-  id: string;
-  name: string;
-  period: string;
-  positions: number;
-  created_by: IUser;
-}
 interface IEnrollment {
   user_id: IUser;
   course_id: ICourse;
