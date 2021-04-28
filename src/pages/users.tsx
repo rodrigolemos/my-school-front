@@ -30,11 +30,7 @@ import Layout from '../components/layout';
 import Toast from '../components/toast';
 import { Header, Content } from '../styles/pages/courses';
 import { IUser } from '../interfaces/IUser';
-
-interface IServerUsers {
-  name: string;
-  isAdmin: boolean;
-}
+import { IServerUsers } from '../interfaces/IServerUsers';
 
 export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
   const [users, setUsers] = useState<IUser[]>([]);

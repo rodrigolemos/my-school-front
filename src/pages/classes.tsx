@@ -12,6 +12,7 @@ import { Status } from '../styles/pages/enrollments';
 import { IUser } from '../interfaces/IUser';
 import { formatStatus } from '../utils/enrollments';
 import { ICourse } from '../interfaces/ICourse';
+import { IServerUsers } from '../interfaces/IServerUsers';
 
 interface IEnrollment {
   user_id: IUser;
@@ -20,11 +21,6 @@ interface IEnrollment {
   created_at: Date;
   updated_at: Date;
   status: string;
-}
-
-interface IServerUsers {
-  name: string;
-  isAdmin: boolean;
 }
 
 export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
