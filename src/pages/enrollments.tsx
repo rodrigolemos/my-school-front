@@ -28,21 +28,11 @@ import {
 import Layout from '../components/layout';
 import Toast from '../components/toast';
 import { Header, Content, Status, FilterWrapper } from '../styles/pages/enrollments';
-import { IUser } from '../interfaces/IUser';
-import { ICourse } from '../interfaces/ICourse';
+import { IEnrollment } from '../interfaces/IEnrollment';
 
 interface IServerEnrollments {
   name: string;
   isAdmin: boolean;
-}
-
-interface IEnrollment {
-  user_id: IUser;
-  course_id: ICourse;
-  positions: number;
-  created_at: Date;
-  updated_at: Date;
-  status: string;
 }
 
 export default function Enrollments({ name, isAdmin }: IServerEnrollments): ReactElement {

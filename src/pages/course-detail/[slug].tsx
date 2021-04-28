@@ -17,12 +17,7 @@ import {
   BackButton
 } from '../../styles/pages/course-detail';
 import { ICourse } from '../../interfaces/ICourse';
-
-interface IEnrollment {
-  user_id: string;
-  course_id: string;
-  id: string;
-}
+import { IEnrollment } from '../../interfaces/IEnrollment';
 
 export default function CourseDetail(): ReactElement {
   const router = useRouter();
@@ -58,7 +53,7 @@ export default function CourseDetail(): ReactElement {
         );
       } else {
         setLoadingEnrollment(true);
-        const data: IEnrollment = {
+        const data = {
           course_id: course.id,
           user_id: id,
           id

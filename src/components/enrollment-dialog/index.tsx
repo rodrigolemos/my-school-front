@@ -6,17 +6,7 @@ import Toast from '../toast';
 import { CircularProgress } from '@material-ui/core';
 import { Button, Dialog, DialogActions } from '@material-ui/core';
 import { CustomDialogContent, Form } from './styles';
-import { IUser } from '../../interfaces/IUser';
-import { ICourse } from '../../interfaces/ICourse';
-
-interface IEnrollment {
-  user_id: IUser;
-  course_id: ICourse;
-  positions: number;
-  created_at: Date;
-  updated_at: Date;
-  status: string;
-}
+import { IEnrollment } from '../../interfaces/IEnrollment';
 
 interface IEnrollmentDialog {
   open: boolean;

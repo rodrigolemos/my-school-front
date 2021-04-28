@@ -9,19 +9,9 @@ import Layout from '../components/layout';
 import Toast from '../components/toast';
 import { Header, Content, Card } from '../styles/pages/classes';
 import { Status } from '../styles/pages/enrollments';
-import { IUser } from '../interfaces/IUser';
 import { formatStatus } from '../utils/enrollments';
-import { ICourse } from '../interfaces/ICourse';
 import { IServerUsers } from '../interfaces/IServerUsers';
-
-interface IEnrollment {
-  user_id: IUser;
-  course_id: ICourse;
-  positions: number;
-  created_at: Date;
-  updated_at: Date;
-  status: string;
-}
+import { IEnrollment } from '../interfaces/IEnrollment';
 
 export default function Users({ name, isAdmin }: IServerUsers): ReactElement {
   const [enrollments, setEnrollments] = useState<IEnrollment[]>([]);
