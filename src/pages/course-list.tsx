@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps<unknown> = async () => {
     return {
       props: {
         courses: [],
-        error: 'Não foi possível consultar os cursos no momento. Tente novamente mais tarde.'
+        error: 'Nenhum curso cadastrado. Tente novamente mais tarde.'
       }
     };
   }
