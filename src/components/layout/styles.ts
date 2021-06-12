@@ -59,6 +59,7 @@ export const Logo = styled.div`
   height: 10vh;
   background-color: var(--logged);
   color: var(--white);
+  cursor: pointer;
 
   svg {
     margin-right: 1rem;

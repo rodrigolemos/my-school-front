@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState, ReactElement } from 'react';
+import Head from 'next/head';
 import { getServerSidePropsUser } from '../utils/server-props';
 import { CircularProgress } from '@material-ui/core';
 import { Cookies } from 'react-cookie';
@@ -57,6 +58,9 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
 
   return (
     <Layout isAdmin={isAdmin} title="Dashboard">
+      <Head>
+        <title>My School | dashboard</title>
+      </Head>
       {error && <Toast type="error" message={error} />}
       {updated && <Toast type="success" message="Perfil atualizado com sucesso!" />}
       {enrollment && (

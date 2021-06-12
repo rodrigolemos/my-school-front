@@ -144,8 +144,7 @@ export default function Login(): ReactElement {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getServerSideProps: GetServerSideProps<any> = async (context: any) => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   try {
     checkAuth(context.req.cookies['@my-school:token']);
     return {

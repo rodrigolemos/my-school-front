@@ -65,6 +65,7 @@ export const Title = styled.h1`
   font-size: 3rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   svg {
     margin-right: 1rem;
