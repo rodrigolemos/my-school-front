@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeContextProvider } from '../hooks/theme';
 import GlobalStyle from '../styles/GlobalStyle';
 
-function MyApp({ Component, pageProps }): ReactElement {
+function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <ThemeContextProvider>
       <Head>
