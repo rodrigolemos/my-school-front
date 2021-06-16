@@ -141,16 +141,17 @@ export default function Profile({ isAdmin }: IProfile): ReactElement {
                   <h3>Minhas informações</h3>
                   <Controller
                     name="name"
+                    autoFocus
                     control={control}
                     defaultValue={user.name}
-                    as={<CustomInput label="Nome" variant="filled" required ref={register} />}
+                    as={<CustomInput label="Nome" variant="standard" required ref={register} />}
                   />
                   {errors.name && <p className="error">Preencha corretamente o nome</p>}
                   <Controller
                     name="email"
                     control={control}
                     defaultValue={user.email}
-                    as={<CustomInput label="E-mail" variant="filled" required ref={register} />}
+                    as={<CustomInput label="E-mail" variant="standard" required ref={register} />}
                   />
                   {errors.email && <p className="error">Preencha corretamente o email</p>}
                   <Controller
@@ -161,7 +162,7 @@ export default function Profile({ isAdmin }: IProfile): ReactElement {
                       <CustomInput
                         type="password"
                         label="Nova Senha"
-                        variant="filled"
+                        variant="standard"
                         required
                         ref={register}
                         autoComplete=""
@@ -173,7 +174,7 @@ export default function Profile({ isAdmin }: IProfile): ReactElement {
                     name="contact"
                     control={control}
                     defaultValue={user.contact ? user.contact : ''}
-                    as={<CustomInput label="Contato" variant="filled" ref={register} />}
+                    as={<CustomInput label="Contato" variant="standard" ref={register} />}
                   />
                   {errors.contact && <p className="error">Preencha corretamente o contato</p>}
                   <Controller
@@ -181,7 +182,13 @@ export default function Profile({ isAdmin }: IProfile): ReactElement {
                     control={control}
                     defaultValue={user.bio ? user.bio : ''}
                     as={
-                      <CustomInput label="Bio" variant="filled" ref={register} multiline rows={5} />
+                      <CustomInput
+                        label="Bio"
+                        variant="standard"
+                        ref={register}
+                        multiline
+                        rows={5}
+                      />
                     }
                   />
                   {errors.bio && <p className="error">Preencha corretamente a bio</p>}
