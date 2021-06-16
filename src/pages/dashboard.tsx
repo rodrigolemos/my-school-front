@@ -54,6 +54,7 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
 
   useEffect(() => {
     fetchUserInfo();
+    window.history.pushState({}, null, '/dashboard');
   }, []);
 
   return (

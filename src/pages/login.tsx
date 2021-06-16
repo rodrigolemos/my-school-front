@@ -1,4 +1,4 @@
-import React, { useCallback, useState, ReactElement } from 'react';
+import React, { useCallback, useEffect, useState, ReactElement } from 'react';
 import { Cookies } from 'react-cookie';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -67,6 +67,10 @@ export default function Login(): ReactElement {
       }
     }
     setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    window.history.pushState({}, null, '/login');
   }, []);
 
   return (
