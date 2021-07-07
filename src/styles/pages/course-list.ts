@@ -150,6 +150,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Card = styled.div`
+  min-width: 32.5rem;
   width: 18vw;
   height: 390px;
   margin: 1.5rem;
