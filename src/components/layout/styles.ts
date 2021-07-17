@@ -54,7 +54,8 @@ export const Logo = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 3.5rem;
   width: 100%;
   height: 10vh;
   background-color: var(--logged);
