@@ -11,6 +11,7 @@ export const Section = styled.section`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    height: 100rem;
   }
 
   & > div {
@@ -46,8 +47,8 @@ export const CourseInfo = styled.div`
   }
 
   h1.title {
-    font-size: 5.5rem;
-    z-index: 1;
+    font-size: 4.8rem;
+    z-index: 0;
     animation: ${showFromLeft} 0.5s ease-in-out;
   }
 `;
@@ -82,10 +83,15 @@ export const CourseDescription = styled.div`
     }
   }
   div.details {
-    width: 75%;
-    font-size: 2.4rem;
     line-height: 3.5rem;
     color: var(--font);
+    width: 75%;
+    font-size: 2.4rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      font-size: 1.8rem;
+    }
   }
 
   div.more {
@@ -117,7 +123,6 @@ export const CourseDescription = styled.div`
       transition: all 0.2s ease-in-out;
 
       &:hover {
-        transform: translateY(-0.2rem);
         box-shadow: 0 1rem 1rem var(--light);
         background-color: var(--primary-light);
       }

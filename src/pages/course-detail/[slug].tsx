@@ -5,7 +5,6 @@ import { CircularProgress } from '@material-ui/core';
 import { IoIosArrowBack } from 'react-icons/io';
 import api from '../../services/api';
 import { checkPermission } from '../../services/permission';
-import { simpleDate } from '../../utils/date';
 import { formatPeriod } from '../../utils/courses';
 
 import Toast from '../../components/toast';
@@ -104,10 +103,6 @@ export default function CourseDetail(): ReactElement {
                 <span className="label">
                   Período
                   <span>{formatPeriod(course.period)}</span>
-                </span>
-                <span className="label">
-                  Atualizado
-                  <span>{simpleDate(course.updated_at)}</span>
                 </span>
                 {!loadingEnrollment ? (
                   <button onClick={validateEnrollment}>Matricule-me!</button>
