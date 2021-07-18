@@ -123,9 +123,9 @@ export default function Login(): ReactElement {
           {!loading ? (
             <button>ENTRAR</button>
           ) : (
-            <div className="loading">
-              <CircularProgress />
-            </div>
+            <button disabled={true}>
+              <CircularProgress size={20} />
+            </button>
           )}
           <div className="controls">
             <Link href="/login">Esqueci minha senha</Link>

@@ -116,9 +116,9 @@ export default function CreateProfile(): ReactElement {
           {!loading ? (
             <button>CRIAR CONTA</button>
           ) : (
-            <div className="loading">
-              <CircularProgress />
-            </div>
+            <button disabled={true}>
+              <CircularProgress size={20} />
+            </button>
           )}
           <div className="controls">
             <Link href="/login">Efetuar Login</Link>

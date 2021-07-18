@@ -178,6 +178,9 @@ export const FormPanel = styled.div`
       height: 4rem;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       font-weight: bold;
       background-color: var(--secondary);
@@ -187,16 +190,14 @@ export const FormPanel = styled.div`
       &:hover {
         background-color: var(--secondary-light);
       }
-    }
-
-    div.loading {
-      width: 100%;
-      text-align: center;
-      margin-top: 2rem;
-      height: 4rem;
 
       svg {
-        color: var(--secondary);
+        color: var(--white);
+      }
+
+      &:disabled {
+        background-color: var(--secondary);
+        cursor: not-allowed;
       }
     }
 

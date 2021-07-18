@@ -55,7 +55,7 @@ export const AnimatedBanner = styled.div`
     color: var(--white);
 
     @media (max-width: 375px) {
-      font-size: 3.5rem;
+      font-size: 4rem;
       line-height: 4.5rem;
     }
   }
@@ -112,6 +112,10 @@ export const Presentation = styled(Section)`
     margin-top: 2rem;
     display: block;
     width: auto;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
 
     a {
       text-decoration: none;
