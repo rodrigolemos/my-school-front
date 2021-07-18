@@ -40,12 +40,12 @@ export default createGlobalStyle`
   }
 
   :root {
-    --primary: #0F9B8E;
-    --primary-light: #2FBDAF;
-    --secondary: #03719C;
-    --secondary-light: #2593BE;
-    --tertiary: #343837;
-    --tertiary-light: #565A59;
+    --primary: #008A60;
+    --primary-light: #30C192;
+    --secondary: #2B6CB0;
+    --secondary-light: #4299E1;
+    --tertiary: #3F4756;
+    --tertiary-light: #A3ABBD;
     --background: #FFFFFF;
     --shadow: #DDDDDD;
     

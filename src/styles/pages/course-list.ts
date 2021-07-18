@@ -34,12 +34,12 @@ export const Title = styled.div`
   text-align: center;
 
   h1 {
-    font-size: 6rem !important;
-    margin: 2rem 0;
+    font-size: 5.2rem !important;
+    margin: 1rem 0;
   }
 
   h2 {
-    font-size: 3rem !important;
+    font-size: 2.5rem !important;
     font-weight: normal;
   }
 

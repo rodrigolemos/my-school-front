@@ -17,6 +17,7 @@ export const FooterContent = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  cursor: default;
 
   width: 70%;
   height: 100%;
@@ -30,15 +31,12 @@ export const FooterContent = styled.div`
 `;
 
 export const ContactBox = styled.div`
-  margin-top: 3rem;
+  margin-top: 2rem;
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  padding-top: 1rem;
   font-size: 1.5rem;
-  border-top: 1px solid var(--shadow);
 
   .contacts {
     display: flex;

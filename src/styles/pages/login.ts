@@ -150,7 +150,7 @@ export const FormPanel = styled.div`
       outline: none;
       border-radius: 5px;
       margin-top: 0.5rem;
-      color: var(--tertiary-light);
+      color: var(--tertiary);
       font-weight: bold;
       transition: all 0.2s ease-in-out;
 

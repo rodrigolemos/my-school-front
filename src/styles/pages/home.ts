@@ -55,7 +55,8 @@ export const AnimatedBanner = styled.div`
     color: var(--white);
 
     @media (max-width: 375px) {
-      font-size: 4rem;
+      font-size: 3.5rem;
+      line-height: 4.5rem;
     }
   }
 
@@ -152,9 +153,9 @@ export const ContentWrapper = styled.div`
 
 export const Card = styled.div`
   position: relative;
-  border-radius: 5px;
+  border-radius: 7px;
   width: 18vw;
-  height: 390px;
+  min-height: 390px;
   margin: 1.5rem;
   flex-shrink: 0;
   backface-visibility: hidden;
@@ -177,9 +178,8 @@ export const Card = styled.div`
     height: 50%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
     padding: 1rem;
-    background: linear-gradient(to right, var(--secondary), var(--secondary-light));
+    background-color: var(--secondary);
     background-size: cover;
 
     svg {
@@ -198,27 +198,22 @@ export const Card = styled.div`
     left: 0;
     width: 100%;
     height: 50%;
+    overflow-y: hidden;
 
     p {
       font-size: 1.6rem;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       width: 100%;
       height: 100%;
-      padding: 2rem;
+      padding: 0 2rem;
     }
   }
 
   div.title {
-    position: absolute;
-    top: -4.1rem;
-    right: 0;
-    padding: 1.1rem;
-    background-color: #fff;
-    color: var(--tertirary);
-    background: linear-gradient(to top right, var(--white), var(--background));
-    font-size: 1.8rem;
-    text-transform: capitalize;
+    padding: 2rem;
+    font-weight: bold;
+    font-size: 1.9rem;
   }
 
   @media (max-width: 1100px) {

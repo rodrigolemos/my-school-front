@@ -20,11 +20,9 @@ export default function Home(): ReactElement {
           <span>Olá, nós somos a</span>
           <h1>My School.</h1>
           <h2>Aprendemos com você como ensinar melhor.</h2>
-          <p>
-            Uma aplicação fictícia para simular o controle de usuários em um sistema educacional.
-          </p>
+          <p>Uma aplicação fictícia para simular um sistema educacional.</p>
           <div className="link">
-            <a href="#motivation">Conheça o projeto</a>
+            <a href="#motivation">Saiba mais</a>
           </div>
         </AnimatedBanner>
       </Presentation>
@@ -76,8 +74,7 @@ export default function Home(): ReactElement {
               <div className="title">ADMINISTRADORES</div>
               <p>
                 Gerencie os recursos da plataforma. Inclua, altere ou exclua cursos, alunos,
-                professores e matrículas; Revise e aprove solicitações e Avalie e responda feedbacks
-                dos demais usuários.
+                professores e matrículas; Revise e aprove solicitações.
               </p>
             </div>
           </Card>
