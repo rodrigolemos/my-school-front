@@ -84,11 +84,11 @@ export default function CourseDetail({ course }: CourseProps): ReactElement {
           <div className="details">{course?.description}</div>
           <div className="more">
             <span className="label">
-              Período
+              Suporte
               <span>{formatPeriod(course?.period)}</span>
             </span>
             {!loadingEnrollment ? (
-              <button onClick={validateEnrollment}>Matricule-me!</button>
+              <button onClick={validateEnrollment}>Matricular-me!</button>
             ) : (
               <CircularProgress />
             )}
