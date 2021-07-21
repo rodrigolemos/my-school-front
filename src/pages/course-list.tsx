@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { GiBookPile } from 'react-icons/gi';
 import Link from 'next/link';
 import { formatDescription } from '../utils/courses';
@@ -53,7 +53,7 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
   );
 }
 
-export const getServerSideProps: GetServerSideProps<unknown> = async () => {
+export const getStaticProps: GetStaticProps<unknown> = async () => {
   try {
     const response = await api.get<CourseListProps>('/courses');
 
@@ -64,10 +64,10 @@ export const getServerSideProps: GetServerSideProps<unknown> = async () => {
     return {
       props: {
         courses
-      }
+      },
+      revalidate: 3600 * 24
     };
   } catch (err) {
-    console.log(err);
     return {
       props: {
         courses: [],

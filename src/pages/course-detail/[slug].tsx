@@ -1,5 +1,6 @@
-import React, { ReactElement, useCallback, useState, useEffect } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useRouter } from 'next/router';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { Cookies } from 'react-cookie';
 import { CircularProgress } from '@material-ui/core';
 import { IoIosArrowBack } from 'react-icons/io';
@@ -18,26 +19,16 @@ import {
 import { ICourse } from '../../interfaces/ICourse';
 import { IEnrollment } from '../../interfaces/IEnrollment';
 
-export default function CourseDetail(): ReactElement {
+interface CourseProps {
+  course: ICourse;
+}
+
+type CoursePaths = ICourse[];
+
+export default function CourseDetail({ course }: CourseProps): ReactElement {
   const router = useRouter();
-  const [course, setCourse] = useState<ICourse>({} as ICourse);
-  const [loading, setLoading] = useState<boolean>(false);
   const [loadingEnrollment, setLoadingEnrollment] = useState<boolean>(false);
   const [message, setMessage] = useState<string>();
-
-  const fetchCourseDetail = useCallback(async (): Promise<void> => {
-    setLoading(true);
-
-    if (!router.query.slug) return;
-
-    const response = await api.get<ICourse>(`/courses/${router.query.slug}`);
-
-    setLoading(false);
-
-    if (response.status !== 200) throw new Error();
-
-    setCourse(response.data[0]);
-  }, []);
 
   const validateEnrollment = async (): Promise<void> => {
     try {
@@ -75,45 +66,80 @@ export default function CourseDetail(): ReactElement {
     }
   };
 
-  useEffect(() => {
-    fetchCourseDetail();
-  }, []);
-
   return (
     <PublicLayout>
       <Section>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <>
-            <CourseInfo>
-              <div className="overlay" />
-              {message && <Toast type="success" message={message} />}
-              <BackButton onClick={() => router.push('/course-list')}>
-                <IoIosArrowBack /> Voltar
-              </BackButton>
-              <h1 className="title">{course.name}</h1>
-            </CourseInfo>
-            <CourseDescription>
-              <ul className="tags">
-                {course.tags && course.tags.map((tag, i) => <li key={i}>{tag}</li>)}
-              </ul>
-              <div className="details">{course.description}</div>
-              <div className="more">
-                <span className="label">
-                  Período
-                  <span>{formatPeriod(course.period)}</span>
-                </span>
-                {!loadingEnrollment ? (
-                  <button onClick={validateEnrollment}>Matricule-me!</button>
-                ) : (
-                  <CircularProgress />
-                )}
-              </div>
-            </CourseDescription>
-          </>
-        )}
+        <CourseInfo>
+          <div className="overlay" />
+          {message && <Toast type="success" message={message} />}
+          <BackButton onClick={() => router.push('/course-list')}>
+            <IoIosArrowBack /> Voltar
+          </BackButton>
+          <h1 className="title">{course.name}</h1>
+        </CourseInfo>
+        <CourseDescription>
+          <ul className="tags">
+            {course.tags && course.tags.map((tag, i) => <li key={i}>{tag}</li>)}
+          </ul>
+          <div className="details">{course.description}</div>
+          <div className="more">
+            <span className="label">
+              Período
+              <span>{formatPeriod(course.period)}</span>
+            </span>
+            {!loadingEnrollment ? (
+              <button onClick={validateEnrollment}>Matricule-me!</button>
+            ) : (
+              <CircularProgress />
+            )}
+          </div>
+        </CourseDescription>
       </Section>
     </PublicLayout>
   );
 }
+
+export const getStaticProps: GetStaticProps<unknown> = async (context) => {
+  try {
+    const response = await api.get<CourseProps>(`/courses/${context.params.slug}`);
+
+    if (response.status !== 200) throw new Error();
+
+    const course: CourseProps = response.data;
+
+    return {
+      props: {
+        course: course[0]
+      },
+      revalidate: 3600 * 24
+    };
+  } catch (err) {
+    return {
+      props: {
+        course: {} as CourseProps,
+        error: 'Curso não encontrado. Tente novamente mais tarde.'
+      }
+    };
+  }
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await api.get<CoursePaths>('/courses/');
+
+  if (response.status !== 200) throw new Error();
+
+  const courses: CoursePaths = response.data;
+
+  const paths = courses.map((course) => {
+    return {
+      params: {
+        slug: course.id
+      }
+    };
+  });
+
+  return {
+    paths,
+    fallback: true
+  };
+};
