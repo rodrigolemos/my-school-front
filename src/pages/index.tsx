@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { FaUsers, FaUserGraduate, FaUsersCog, FaUserTie } from 'react-icons/fa';
+import { FaUserGraduate, FaUsersCog, FaUserTie } from 'react-icons/fa';
 
 import PublicLayout from '../components/public-layout';
 import {
@@ -20,7 +20,7 @@ export default function Home(): ReactElement {
           <span>Olá, nós somos a</span>
           <h1>My School.</h1>
           <h2>Aprendemos com você como ensinar melhor.</h2>
-          <p>Uma aplicação fictícia para simular um sistema educacional.</p>
+          <p>Uma aplicação fictícia de cursos online.</p>
           <div className="link">
             <a href="#motivation">Saiba mais</a>
           </div>
@@ -32,25 +32,13 @@ export default function Home(): ReactElement {
         <ContentWrapper>
           <Card>
             <div className="image">
-              <FaUsers />
-            </div>
-            <div className="content">
-              <div className="title">VISITANTES</div>
-              <p>
-                Consulte os cursos disponíveis e as páginas de cadastro e login para ver na prática
-                o uso da stack de front-end React, Styled Components e Next.js.
-              </p>
-            </div>
-          </Card>
-          <Card>
-            <div className="image">
               <FaUserGraduate />
             </div>
             <div className="content">
-              <div className="title">ALUNOS</div>
+              <div className="title">PARA ALUNOS</div>
               <p>
-                Faça seu cadastro e matricule-se nos cursos ofertados, acompanhe a aprovação de suas
-                solicitações e assista as aulas disponíveis na plataforma!
+                Faça seu cadastro e matricule-se nos cursos ofertados, assista as aulas disponíveis
+                na plataforma e contribua para a comunidade.
               </p>
             </div>
           </Card>
@@ -59,10 +47,10 @@ export default function Home(): ReactElement {
               <FaUserTie />
             </div>
             <div className="content">
-              <div className="title">PROFESSORES</div>
+              <div className="title">PARA PROFESSORES</div>
               <p>
-                Crie aulas e quizzes, proponha temas de discussão, avalie seus alunos e colabore com
-                o crescimento da plataforma.
+                Crie aulas e questionários, proponha temas de discussão, avalie seus alunos e
+                colabore com o crescimento da plataforma.
               </p>
             </div>
           </Card>
@@ -71,7 +59,7 @@ export default function Home(): ReactElement {
               <FaUsersCog />
             </div>
             <div className="content">
-              <div className="title">ADMINISTRADORES</div>
+              <div className="title">PARA ADMINISTRADORES</div>
               <p>
                 Gerencie os recursos da plataforma. Inclua, altere ou exclua cursos, alunos,
                 professores e matrículas; Revise e aprove solicitações.
@@ -79,7 +67,7 @@ export default function Home(): ReactElement {
             </div>
           </Card>
         </ContentWrapper>
-        <SectionAdditional>De quem desenvolve para quem desenvolve.</SectionAdditional>
+        <SectionAdditional>De quem desenvolve para quem se desenvolve.</SectionAdditional>
       </Motivation>
     </PublicLayout>
   );
