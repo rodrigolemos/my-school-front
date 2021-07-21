@@ -158,7 +158,7 @@ export const ContentWrapper = styled.div`
 export const Card = styled.div`
   position: relative;
   border-radius: 7px;
-  width: 18vw;
+  width: 21vw;
   min-height: 390px;
   margin: 1.5rem;
   flex-shrink: 0;
