@@ -75,17 +75,17 @@ export default function CourseDetail({ course }: CourseProps): ReactElement {
           <BackButton onClick={() => router.push('/course-list')}>
             <IoIosArrowBack /> Voltar
           </BackButton>
-          <h1 className="title">{course.name}</h1>
+          <h1 className="title">{course?.name}</h1>
         </CourseInfo>
         <CourseDescription>
           <ul className="tags">
-            {course.tags && course.tags.map((tag, i) => <li key={i}>{tag}</li>)}
+            {course?.tags && course?.tags.map((tag, i) => <li key={i}>{tag}</li>)}
           </ul>
-          <div className="details">{course.description}</div>
+          <div className="details">{course?.description}</div>
           <div className="more">
             <span className="label">
               Período
-              <span>{formatPeriod(course.period)}</span>
+              <span>{formatPeriod(course?.period)}</span>
             </span>
             {!loadingEnrollment ? (
               <button onClick={validateEnrollment}>Matricule-me!</button>
@@ -105,11 +105,11 @@ export const getStaticProps: GetStaticProps<unknown> = async (context) => {
 
     if (response.status !== 200) throw new Error();
 
-    const course: CourseProps = response.data;
+    const course: CourseProps = response.data[0];
 
     return {
       props: {
-        course: course[0]
+        course
       },
       revalidate: 3600 * 24
     };
