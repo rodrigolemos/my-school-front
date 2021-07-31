@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps<unknown> = async () => {
       props: {
         courses
       },
-      revalidate: 3600
+      revalidate: 3600 * 24
     };
   } catch (err) {
     return {
