@@ -104,6 +104,7 @@ const Navbar: React.FC = (): ReactElement => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <HStack
+      as="nav"
       justify="center"
       minH="10vh"
       w="full"
