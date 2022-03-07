@@ -1,6 +1,5 @@
 import {
   Container,
-  ContainerProps,
   SimpleGrid,
   HStack,
   Image,
@@ -12,13 +11,7 @@ import {
   Icon
 } from '@chakra-ui/react';
 import { SiNextdotjs, SiChakraui, SiNodedotjs } from 'react-icons/si';
-import { ReactElement, RefObject } from 'react';
-
-interface FeatureProps {
-  text: string;
-  iconBg: string;
-  icon?: ReactElement;
-}
+import { FeatureProps, AppIntroductionProps } from './types';
 
 const Feature = ({ text, icon, iconBg }: FeatureProps) => {
   return (
@@ -31,13 +24,9 @@ const Feature = ({ text, icon, iconBg }: FeatureProps) => {
   );
 };
 
-type HomeFeaturesProps = {
-  linkRef: RefObject<HTMLDivElement>;
-};
-
-const HomeFeatures: React.FC<HomeFeaturesProps> = ({ linkRef }) => {
+const AppIntroduction: React.FC<AppIntroductionProps> = ({ linkRef }) => {
   return (
-    <Container maxW="full" py={16} px={0} ref={linkRef}>
+    <Container maxW="full" py={20} px={0} ref={linkRef}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Stack spacing={7}>
           <Text
@@ -86,4 +75,4 @@ const HomeFeatures: React.FC<HomeFeaturesProps> = ({ linkRef }) => {
   );
 };
 
-export default HomeFeatures;
+export default AppIntroduction;
