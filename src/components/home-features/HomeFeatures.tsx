@@ -1,5 +1,6 @@
 import {
   Container,
+  ContainerProps,
   SimpleGrid,
   HStack,
   Image,
@@ -8,11 +9,10 @@ import {
   Text,
   Stack,
   StackDivider,
-  Icon,
-  useColorModeValue
+  Icon
 } from '@chakra-ui/react';
-import { IoAnalyticsSharp, IoLogoBitcoin, IoSearchSharp } from 'react-icons/io5';
-import { ReactElement } from 'react';
+import { SiNextdotjs, SiChakraui, SiNodedotjs } from 'react-icons/si';
+import { ReactElement, RefObject } from 'react';
 
 interface FeatureProps {
   text: string;
@@ -31,11 +31,15 @@ const Feature = ({ text, icon, iconBg }: FeatureProps) => {
   );
 };
 
-const HomeFeatures: React.FC = () => {
+type HomeFeaturesProps = {
+  linkRef: RefObject<HTMLDivElement>;
+};
+
+const HomeFeatures: React.FC<HomeFeaturesProps> = ({ linkRef }) => {
   return (
-    <Container maxW="full" py={8} px={0} mb={20}>
+    <Container maxW="full" py={16} px={0} ref={linkRef}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-        <Stack spacing={4}>
+        <Stack spacing={7}>
           <Text
             textTransform="uppercase"
             color="blue.400"
@@ -47,40 +51,35 @@ const HomeFeatures: React.FC = () => {
             rounded="md">
             Nossa História
           </Text>
-          <Heading>Uma plataforma fictícia de cursos online</Heading>
-          <Text color="gray.500" fontSize="lg">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore
+          <Heading>Uma plataforma de ensino, mas quem aprende é quem a desenvolve</Heading>
+          <Text color="gray.500" fontSize="xl">
+            A My School é uma plataforma fictícia de cursos online criada com o intuito de aplicar
+            conceitos de desenvolvimento front-end e back-end, utilizando a mais moderna stack de
+            desenvolvimento web do mercado. Nada disso é real, mas bem que poderia ser, né?
           </Text>
-          <Stack
-            spacing={4}
-            divider={<StackDivider borderColor={useColorModeValue('gray.100', 'gray.700')} />}>
+          <Heading fontSize="2xl" mb={2}>
+            Stack
+          </Heading>
+          <Stack spacing={4} divider={<StackDivider borderColor="gray.100" />}>
             <Feature
-              icon={<Icon as={IoAnalyticsSharp} color={'yellow.500'} w={5} h={5} />}
-              iconBg={useColorModeValue('yellow.100', 'yellow.900')}
-              text={'Business Planning'}
+              icon={<Icon as={SiNextdotjs} color="black" w={7} h={7} />}
+              iconBg="white"
+              text="React + Next.js"
             />
             <Feature
-              icon={<Icon as={IoLogoBitcoin} color={'green.500'} w={5} h={5} />}
-              iconBg={useColorModeValue('green.100', 'green.900')}
-              text={'Financial Planning'}
+              icon={<Icon as={SiChakraui} color="teal.400" w={7} h={7} />}
+              iconBg="white"
+              text="ChakraUI"
             />
             <Feature
-              icon={<Icon as={IoSearchSharp} color={'purple.500'} w={5} h={5} />}
-              iconBg={useColorModeValue('purple.100', 'purple.900')}
-              text={'Market Analysis'}
+              icon={<Icon as={SiNodedotjs} color="green.400" w={7} h={7} />}
+              iconBg="white"
+              text="Node.js"
             />
           </Stack>
         </Stack>
         <Flex>
-          <Image
-            rounded={'md'}
-            alt={'feature image'}
-            src={
-              'https://images.unsplash.com/photo-1554200876-56c2f25224fa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-            }
-            objectFit={'cover'}
-          />
+          <Image rounded="md" alt="feature image" src="images/development.svg" objectFit="cover" />
         </Flex>
       </SimpleGrid>
     </Container>

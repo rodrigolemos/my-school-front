@@ -1,16 +1,28 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useRef } from 'react';
 import { FaUserGraduate, FaUsersCog, FaUserTie } from 'react-icons/fa';
-import { Button, Flex, Heading, Icon, SimpleGrid, SlideFade, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Icon,
+  SimpleGrid,
+  SlideFade,
+  Text,
+  VStack
+} from '@chakra-ui/react';
 import PublicLayout from '../components/public-layout';
 import HomeFeatures from '../components/home-features';
 
 type SectionProps = {
   children: ReactElement | ReactElement[];
+  id?: string;
 };
 
-const Section: React.FC<SectionProps> = ({ children }) => {
+const Section: React.FC<SectionProps> = ({ children, id }) => {
   return (
     <VStack
+      id={id}
       align="flex-start"
       justify="center"
       p={[8, 8, 0]}
@@ -43,7 +55,7 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
       <Text fontSize="2xl" fontWeight="bold">
         {title}
       </Text>
-      <Text fontSize="lg" color="gray.600">
+      <Text fontSize="xl" color="gray.600" align={['center', 'start']}>
         {text}
       </Text>
     </VStack>
@@ -51,6 +63,14 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
 };
 
 export default function Home(): ReactElement {
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const scrollToFeatures = () => {
+    featuresRef.current.scrollIntoView({
+      block: 'nearest',
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <PublicLayout>
       <Flex
@@ -65,7 +85,11 @@ export default function Home(): ReactElement {
                 <Heading fontSize={['5xl', '7xl']}>My School</Heading>
                 <Text fontSize={['2xl', '4xl']}>Compartilhe seu conhecimento com o mundo.</Text>
               </VStack>
-              <Button variant="outline" size="lg" _hover={{ color: 'orange.500', bg: 'white' }}>
+              <Button
+                onClick={scrollToFeatures}
+                variant="outline"
+                size="lg"
+                _hover={{ color: 'orange.500', bg: 'white' }}>
                 Saiba mais
               </Button>
             </VStack>
@@ -73,74 +97,28 @@ export default function Home(): ReactElement {
         </Section>
       </Flex>
       <Section>
-        <HomeFeatures />
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={12} mt={16}>
+        <HomeFeatures linkRef={featuresRef} />
+        <Flex w="full" justify="center" py={10}>
+          <Heading>Uma ideia simples</Heading>
+        </Flex>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={14}>
           <Feature
             icon={<Icon as={FaUserGraduate} w={10} h={10} />}
-            title={'Lifetime Support'}
-            text={
-              'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore...'
-            }
+            title="Para alunos"
+            text="Matricule-se nos cursos ofertados, assista as aulas disponíveis na plataforma e contribua para a comunidade nos fóruns."
           />
           <Feature
             icon={<Icon as={FaUsersCog} w={10} h={10} />}
-            title={'Lifetime Support'}
-            text={
-              'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore...'
-            }
+            title="Para professores"
+            text="Crie suas aulas com diversos recursos de imagem e vídeo, proponha temas de discussão e avalie seus alunos facilmente."
           />
           <Feature
             icon={<Icon as={FaUserTie} w={10} h={10} />}
-            title={'Lifetime Support'}
-            text={
-              'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore...'
-            }
+            title="Para monitores"
+            text="Gerencie os recursos da plataforma incluindo, alterando ou excluindo cursos, alunos, professores e matrículas."
           />
         </SimpleGrid>
       </Section>
-      {/* <Motivation>
-        <a id="motivation" className="navigation" />
-        <SectionName>Uma proposta simples</SectionName>
-        <ContentWrapper>
-          <Card>
-            <div className="image">
-              <FaUserGraduate />
-            </div>
-            <div className="content">
-              <div className="title">PARA ALUNOS</div>
-              <p>
-                Faça seu cadastro e matricule-se nos cursos ofertados, assista as aulas disponíveis
-                na plataforma e contribua para a comunidade.
-              </p>
-            </div>
-          </Card>
-          <Card>
-            <div className="image">
-              <FaUserTie />
-            </div>
-            <div className="content">
-              <div className="title">PARA PROFESSORES</div>
-              <p>
-                Crie aulas e questionários, proponha temas de discussão, avalie seus alunos e
-                colabore com o crescimento da plataforma.
-              </p>
-            </div>
-          </Card>
-          <Card>
-            <div className="image">
-              <FaUsersCog />
-            </div>
-            <div className="content">
-              <div className="title">PARA ADMINISTRADORES</div>
-              <p>
-                Gerencie os recursos da plataforma. Inclua, altere ou exclua cursos, alunos,
-                professores e matrículas; Revise e aprove solicitações.
-              </p>
-            </div>
-          </Card>
-        </ContentWrapper>
-        <SectionAdditional>De quem desenvolve para quem se desenvolve.</SectionAdditional>
-      </Motivation> */}
     </PublicLayout>
   );
 }
