@@ -11,7 +11,7 @@ const PublicLayout: React.FC<IPublicLayout> = ({ children }): ReactElement => {
   return (
     <SimpleGrid columns={1} w="full">
       <Navbar />
-      <VStack as="main" pt="10vh">
+      <VStack as="main" pt="10vh" mb={[6, 12]}>
         {children}
       </VStack>
       <Footer />
