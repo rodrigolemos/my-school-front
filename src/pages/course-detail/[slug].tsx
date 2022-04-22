@@ -2,30 +2,53 @@ import React, { ReactElement, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Cookies } from 'react-cookie';
-import { CircularProgress } from '@material-ui/core';
-import { IoIosArrowBack } from 'react-icons/io';
+import {
+  Button,
+  Container,
+  SimpleGrid,
+  HStack,
+  Image,
+  Flex,
+  Heading,
+  Text,
+  Stack,
+  StackDivider,
+  VStack,
+  Icon
+} from '@chakra-ui/react';
+import { BiDownload, BiGlobe, BiSupport } from 'react-icons/bi';
 import api from '../../services/api';
 import { checkPermission } from '../../services/permission';
-import { formatPeriod } from '../../utils/courses';
-
 import Toast from '../../components/toast';
 import PublicLayout from '../../components/public-layout';
-import {
-  Section,
-  CourseInfo,
-  CourseDescription,
-  BackButton
-} from '../../styles/pages/course-detail';
 import { ICourse } from '../../interfaces/ICourse';
 import { IEnrollment } from '../../interfaces/IEnrollment';
 
-interface CourseProps {
+type SectionProps = {
+  children: ReactElement | ReactElement[];
+  id?: string;
+};
+
+const Section: React.FC<SectionProps> = ({ children, id }) => {
+  return (
+    <VStack
+      id={id}
+      align="flex-start"
+      justify="center"
+      p={[8, 8, 12]}
+      w={{ base: 'full', md: '90%', lg: '70%' }}>
+      {children}
+    </VStack>
+  );
+};
+
+interface CourseDetailProps {
   course: ICourse;
 }
 
 type CoursePaths = ICourse[];
 
-export default function CourseDetail({ course }: CourseProps): ReactElement {
+export default function CourseDetail({ course }: CourseDetailProps): ReactElement {
   const router = useRouter();
   const [loadingEnrollment, setLoadingEnrollment] = useState<boolean>(false);
   const [message, setMessage] = useState<string>();
@@ -68,32 +91,82 @@ export default function CourseDetail({ course }: CourseProps): ReactElement {
 
   return (
     <PublicLayout>
+      {message && <Toast type="success" message={message} />}
       <Section>
-        <CourseInfo>
-          <div className="overlay" />
-          {message && <Toast type="success" message={message} />}
-          <BackButton onClick={() => router.push('/course-list')}>
-            <IoIosArrowBack /> Voltar
-          </BackButton>
-          <h1 className="title">{course?.name}</h1>
-        </CourseInfo>
-        <CourseDescription>
-          <ul className="tags">
-            {course?.tags && course?.tags.map((tag, i) => <li key={i}>{tag}</li>)}
-          </ul>
-          <div className="details">{course?.description}</div>
-          <div className="more">
-            <span className="label">
-              Suporte
-              <span>{formatPeriod(course?.period)}</span>
-            </span>
-            {!loadingEnrollment ? (
-              <button onClick={validateEnrollment}>Matricular-me!</button>
-            ) : (
-              <CircularProgress />
-            )}
-          </div>
-        </CourseDescription>
+        <Container maxW="full" py={[4, 4, 16]} px={0}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12}>
+            <Flex>
+              <Image
+                rounded="md"
+                alt="feature image"
+                src="../images/course-detail-3.svg"
+                objectFit="cover"
+              />
+            </Flex>
+            <Stack spacing={8}>
+              {course?.tags &&
+                course?.tags.map((tag, i) => (
+                  <Text
+                    key={i}
+                    textTransform="uppercase"
+                    color="blue.400"
+                    fontWeight="bold"
+                    fontSize="sm"
+                    bg="blue.50"
+                    p={2}
+                    alignSelf="flex-start"
+                    rounded="md">
+                    {tag}
+                  </Text>
+                ))}
+              <Heading>{course?.name}</Heading>
+              <Text color="gray.500" fontSize="xl">
+                {course?.description}
+              </Text>
+              <Heading fontSize="2xl" mb={2}>
+                Recursos
+              </Heading>
+              <Stack spacing={4} divider={<StackDivider borderColor="gray.100" />}>
+                <HStack align="center">
+                  <Flex w={8} h={8} align="center" justify="center" rounded="full" bg="white">
+                    <Icon as={BiGlobe} color="black" w={7} h={7} />
+                  </Flex>
+                  <Text fontWeight="bold">100% online</Text>
+                </HStack>
+                <HStack align="center">
+                  <Flex w={8} h={8} align="center" justify="center" rounded="full" bg="white">
+                    <Icon as={BiSupport} color="black" w={7} h={7} />
+                  </Flex>
+                  <Text fontWeight="bold">Suporte 24h</Text>
+                </HStack>
+                <HStack align="center">
+                  <Flex w={8} h={8} align="center" justify="center" rounded="full" bg="white">
+                    <Icon as={BiDownload} color="black" w={7} h={7} />
+                  </Flex>
+                  <Text fontWeight="bold">Material para download</Text>
+                </HStack>
+              </Stack>
+              <HStack align="center" justify="center" pt={4}>
+                <Button
+                  variant="solid"
+                  size="lg"
+                  colorScheme="orange"
+                  mr={8}
+                  onClick={validateEnrollment}
+                  isDisabled={loadingEnrollment}>
+                  Matricule-se
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  colorScheme="orange"
+                  onClick={() => router.push('/course-list')}>
+                  Voltar
+                </Button>
+              </HStack>
+            </Stack>
+          </SimpleGrid>
+        </Container>
       </Section>
     </PublicLayout>
   );
@@ -101,11 +174,11 @@ export default function CourseDetail({ course }: CourseProps): ReactElement {
 
 export const getStaticProps: GetStaticProps<unknown> = async (context) => {
   try {
-    const response = await api.get<CourseProps>(`/courses/${context.params.slug}`);
+    const response = await api.get<CourseDetailProps>(`/courses/${context.params.slug}`);
 
     if (response.status !== 200) throw new Error();
 
-    const course: CourseProps = response.data[0];
+    const course: CourseDetailProps = response.data[0];
 
     return {
       props: {
@@ -116,7 +189,7 @@ export const getStaticProps: GetStaticProps<unknown> = async (context) => {
   } catch (err) {
     return {
       props: {
-        course: {} as CourseProps,
+        course: {} as CourseDetailProps,
         error: 'Curso não encontrado. Tente novamente mais tarde.'
       }
     };
