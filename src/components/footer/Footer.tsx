@@ -39,6 +39,14 @@ const FooterSocialMedia: React.FC = (): ReactElement => {
   );
 };
 
+export const Copywright: React.FC = (): ReactElement => {
+  return (
+    <Flex align="center" justify="center">
+      <Text>&copy; 2022 Todos os direitos reservados</Text>
+    </Flex>
+  );
+};
+
 const Footer: React.FC = () => {
   return (
     <HStack
@@ -58,9 +66,7 @@ const Footer: React.FC = () => {
         <Flex align="center" justify={{ base: 'center', md: 'flex-start' }}>
           <FooterLogo />
         </Flex>
-        <Flex align="center" justify="center">
-          <Text>&copy; 2022 Todos os direitos reservados</Text>
-        </Flex>
+        <Copywright />
         <Flex align="center" justify={{ base: 'center', md: 'flex-end' }}>
           <FooterSocialMedia />
         </Flex>

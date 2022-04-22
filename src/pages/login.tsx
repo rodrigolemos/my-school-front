@@ -6,14 +6,52 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CircularProgress } from '@material-ui/core';
-import { GoMortarBoard } from 'react-icons/go';
-import { IoIosArrowBack } from 'react-icons/io';
-import { VscUnlock } from 'react-icons/vsc';
-import { Container, DesktopPanel, FormPanel, BackButton } from '../styles/pages/login';
 import { checkAuth } from '../services/auth';
 import api from '../services/api';
 import Toast from '../components/toast';
+import {
+  Avatar,
+  AvatarGroup,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Link as ChakraLink,
+  Text,
+  SimpleGrid,
+  VStack,
+  useBreakpointValue,
+  FormControl,
+  FormLabel,
+  Input,
+  SlideFade,
+  FormErrorMessage
+} from '@chakra-ui/react';
+import { NavbarLogo, NavbarLogoOrange } from '../components/navbar';
+import { Copywright } from '../components/footer';
+
+const avatars = [
+  {
+    name: 'User 1',
+    url: '../images/avatars/avatar-3.png'
+  },
+  {
+    name: 'User 2',
+    url: '../images/avatars/avatar-4.png'
+  },
+  {
+    name: 'User 3',
+    url: '../images/avatars/avatar-5.png'
+  },
+  {
+    name: 'User 4',
+    url: '../images/avatars/avatar-6.png'
+  },
+  {
+    name: 'User 5',
+    url: '../images/avatars/avatar-7.png'
+  }
+];
 
 interface IFormInput {
   email: string;
@@ -52,21 +90,15 @@ export default function Login(): ReactElement {
     } catch (error) {
       if (error.response) {
         if (error.response.status == 401) {
-          setError(
-            'Ops, não foi possível efetuar seu login. Por favor, confira suas informações e tente novamente.'
-          );
+          setError('Por favor, confira suas informações e tente novamente.');
         } else {
-          setError(
-            'Ops, não foi possível efetuar seu login. Por favor, tente novamente mais tarde.'
-          );
+          setError('Por favor, tente novamente mais tarde.');
         }
       } else {
-        setError(
-          'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
-        );
+        setError('Houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.');
       }
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -74,77 +106,123 @@ export default function Login(): ReactElement {
   }, []);
 
   return (
-    <Container>
-      <FormPanel>
-        {error && <Toast type="error" message={error} />}
-        {user && (
-          <Toast
-            type="success"
-            message="Perfil criado com sucesso. Você já pode acessar a plataforma!"
-          />
-        )}
-        {notLogged && (
-          <Toast type="warning" message="Efetue seu login para ter acesso a essa função." />
-        )}
-        <BackButton onClick={() => router.push('/')}>
-          <IoIosArrowBack /> Voltar
-        </BackButton>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>
-            <GoMortarBoard onClick={() => router.push('/')} />
-            My School
-          </h1>
-          <label>
-            E-mail
-            <input
-              type="email"
-              name="email"
-              minLength={3}
-              maxLength={50}
-              required
-              ref={register}
-              autoFocus
-            />
-            {errors.email && <p className="error">Preencha corretamente o email</p>}
-          </label>
-          <label>
-            Senha
-            <input
-              type="password"
-              name="password"
-              minLength={6}
-              maxLength={100}
-              autoComplete=""
-              required
-              ref={register}
-            />
-            {errors.password && <p className="error">Preencha corretamente a senha</p>}
-          </label>
-          {!loading ? (
-            <button>ENTRAR</button>
-          ) : (
-            <button disabled={true}>
-              <CircularProgress size={20} />
-            </button>
-          )}
-          <div className="controls">
-            <Link href="/login">Esqueci minha senha</Link>
-            <Link href="/create-profile">Criar Perfil</Link>
-          </div>
-        </form>
-      </FormPanel>
-      <DesktopPanel>
-        <div className="overlay" />
-        <div className="brand">
-          <h2>
-            <GoMortarBoard />
-            My School
-          </h2>
-          <VscUnlock className="desktop" />
-          <h3>Efetue o login para acessar a plataforma</h3>
-        </div>
-      </DesktopPanel>
-    </Container>
+    <SimpleGrid columns={{ base: 1, sm: 2 }} minH="100vh">
+      {error && <Toast type="error" message={error} />}
+      {user && (
+        <Toast
+          type="success"
+          message="Perfil criado com sucesso. Você já pode acessar a plataforma!"
+        />
+      )}
+      {notLogged && <Toast type="warning" message="Faça o login para ter acesso a essa função." />}
+      <VStack
+        justify="flex-start"
+        align="flex-start"
+        py={{ base: 8, sm: 12 }}
+        px={{ base: 4, sm: 16 }}
+        display={{ base: 'none', sm: 'flex' }}
+        h="full"
+        bg="orange.600"
+        color="white">
+        <VStack justify="space-between" align="flex-start" h="full">
+          <NavbarLogo />
+          <VStack align="flex-start" spacing={4}>
+            <Heading fontSize="6xl">Comece a estudar hoje</Heading>
+            <Text fontSize="2xl">Crie sua conta e faça parte da comunidade</Text>
+
+            <HStack spacing={4} pt={4} align="center">
+              <AvatarGroup>
+                {avatars.map((avatar) => (
+                  <Avatar
+                    key={avatar.url}
+                    src={avatar.url}
+                    size={useBreakpointValue({ base: 'md', md: 'lg' })}
+                    position="relative"
+                    zIndex={2}
+                    _before={{
+                      content: '""',
+                      width: 'full',
+                      height: 'full',
+                      rounded: 'full',
+                      transform: 'scale(1.125)',
+                      bgGradient: 'linear(to-bl, orange.400, orange.600)',
+                      position: 'absolute',
+                      zIndex: -1,
+                      top: 0,
+                      left: 0
+                    }}
+                  />
+                ))}
+              </AvatarGroup>
+              <Text fontSize="2xl">+ você!</Text>
+            </HStack>
+          </VStack>
+          <Copywright />
+        </VStack>
+      </VStack>
+      <VStack justify="center" px={{ base: 4, sm: 16 }}>
+        <SlideFade in={true} offsetX="-24px" offsetY="0px">
+          <VStack spacing={10} as="form" onSubmit={handleSubmit(onSubmit)}>
+            <Flex display={['flex', 'none']}>
+              <NavbarLogoOrange />
+            </Flex>
+            <VStack spacing={4}>
+              <Heading>Faça o login na sua conta</Heading>
+              <Text fontSize="lg" color="gray.600">
+                Ainda não tem conta?{' '}
+                <Link href="/create-profile">
+                  <ChakraLink color="orange.500">Crie aqui!</ChakraLink>
+                </Link>
+              </Text>
+            </VStack>
+            <VStack spacing={4} w="full">
+              <FormControl>
+                <FormLabel htmlFor="email">E-mail</FormLabel>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  autoFocus
+                  minLength={3}
+                  maxLength={50}
+                  required
+                  ref={register}
+                />
+                <FormErrorMessage>
+                  {errors.email && 'Preencha corretamente o e-mail'}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="password">Senha</FormLabel>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="********"
+                  minLength={6}
+                  maxLength={100}
+                  autoComplete=""
+                  required
+                  ref={register}
+                />
+                <FormErrorMessage>
+                  {errors.password && 'Preencha corretamente a senha'}
+                </FormErrorMessage>
+              </FormControl>
+            </VStack>
+            <Button
+              type="submit"
+              variant="solid"
+              colorScheme="orange"
+              w="full"
+              isDisabled={loading}>
+              Entrar
+            </Button>
+          </VStack>
+        </SlideFade>
+      </VStack>
+    </SimpleGrid>
   );
 }
 

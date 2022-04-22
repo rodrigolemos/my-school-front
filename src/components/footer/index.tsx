@@ -1,1 +1,1 @@
-export { default } from './Footer';
+export { default, Copywright } from './Footer';

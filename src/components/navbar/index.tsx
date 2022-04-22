@@ -1,1 +1,1 @@
-export { default } from './Navbar';
+export { default, NavbarLogo, NavbarLogoOrange } from './Navbar';

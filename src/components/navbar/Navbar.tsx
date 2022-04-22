@@ -45,13 +45,28 @@ const NavbarLinks: React.FC = () => {
   );
 };
 
-const NavbarLogo: React.FC = (): ReactElement => {
+export const NavbarLogo: React.FC = (): ReactElement => {
   return (
     <Link href="/">
-      <HStack alignItems="center" fontSize="3xl" cursor="pointer" _hover={navbarStyles.hover}>
+      <HStack alignItems="center" fontSize="3xl" cursor="pointer">
         <>
           <Icon as={GoMortarBoard} mr={2} />
           <Heading as="h1" fontSize="3xl">
+            My School
+          </Heading>
+        </>
+      </HStack>
+    </Link>
+  );
+};
+
+export const NavbarLogoOrange: React.FC = (): ReactElement => {
+  return (
+    <Link href="/">
+      <HStack alignItems="center" fontSize="4xl" cursor="pointer" color="orange.500">
+        <>
+          <Icon as={GoMortarBoard} mr={2} />
+          <Heading as="h1" fontSize="4xl">
             My School
           </Heading>
         </>

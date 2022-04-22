@@ -22,6 +22,11 @@ const theme = extendTheme({
           boxShadow: 'orange.500'
         }
       }
+    },
+    Input: {
+      defaultProps: {
+        focusBorderColor: 'orange.500'
+      }
     }
   }
 });

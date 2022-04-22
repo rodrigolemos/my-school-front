@@ -42,7 +42,7 @@ export default function Home(): ReactElement {
         bgGradient="linear-gradient(rgba(0, 0, 0, 0.61), rgba(0, 0, 0, 0.61)), url('images/bookshelf-1.jpg')"
         backgroundSize="cover">
         <Section>
-          <SlideFade in={true} offsetY="-24px">
+          <SlideFade in={true} offsetX="-24px" offsetY="0px">
             <VStack align="flex-start" spacing={8} color="white">
               <VStack align="flex-start" spacing={3}>
                 <Heading fontSize={['5xl', '7xl']}>My School</Heading>
