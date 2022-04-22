@@ -1,5 +1,6 @@
 import React, { ReactElement, useRef } from 'react';
 import { Button, Flex, Heading, SlideFade, Text, VStack } from '@chakra-ui/react';
+import Link from 'next/link';
 import PublicLayout from '../components/public-layout';
 import AppIntroduction from '../components/site/app-introduction';
 import AppFeatures from '../components/site/app-features';
@@ -17,7 +18,8 @@ const Section: React.FC<SectionProps> = ({ children, id }) => {
       justify="center"
       p={[8, 8, 0]}
       w={{ base: 'full', md: '90%', lg: '70%' }}
-      minH="90vh">
+      minH="90vh"
+      spacing={20}>
       {children}
     </VStack>
   );
@@ -60,6 +62,11 @@ export default function Home(): ReactElement {
       <Section>
         <AppIntroduction linkRef={featuresRef} />
         <AppFeatures />
+        <Link href="/course-list">
+          <Button variant="solid" size="lg" colorScheme="orange" alignSelf="center">
+            Conheça nossos cursos
+          </Button>
+        </Link>
       </Section>
     </PublicLayout>
   );

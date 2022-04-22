@@ -14,7 +14,16 @@ const theme = extendTheme({
     'primary.100': '#161616'
   },
   initialColorMode: 'light',
-  useSystemColorMode: false
+  useSystemColorMode: false,
+  components: {
+    Button: {
+      baseStyle: {
+        _focus: {
+          boxShadow: 'orange.500'
+        }
+      }
+    }
+  }
 });
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {

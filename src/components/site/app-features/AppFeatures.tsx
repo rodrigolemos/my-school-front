@@ -29,7 +29,7 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
 const AppFeatures: React.FC = () => {
   return (
     <>
-      <Flex w="full" justify="center" py={10}>
+      <Flex w="full" justify="center">
         <Heading>Uma ideia simples</Heading>
       </Flex>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={14}>

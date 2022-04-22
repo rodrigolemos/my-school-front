@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Cookies } from 'react-cookie';
 import {
@@ -156,13 +157,11 @@ export default function CourseDetail({ course }: CourseDetailProps): ReactElemen
                   isDisabled={loadingEnrollment}>
                   Matricule-se
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  colorScheme="orange"
-                  onClick={() => router.push('/course-list')}>
-                  Voltar
-                </Button>
+                <Link href="/course-list">
+                  <Button variant="ghost" size="lg" colorScheme="orange">
+                    Voltar
+                  </Button>
+                </Link>
               </HStack>
             </Stack>
           </SimpleGrid>
