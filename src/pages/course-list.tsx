@@ -1,14 +1,41 @@
 import React, { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
-import { GiBookPile } from 'react-icons/gi';
 import Link from 'next/link';
-import { formatDescription } from '../utils/courses';
+import {
+  Flex,
+  Heading,
+  HStack,
+  Icon,
+  Image,
+  SimpleGrid,
+  Stack,
+  Text,
+  VStack
+} from '@chakra-ui/react';
+import { GiBookPile } from 'react-icons/gi';
 import { simpleDate } from '../utils/date';
 import api from '../services/api';
 
 import PublicLayout from '../components/public-layout';
-import { Banner, Card, ContentWrapper, Presentation, Title } from '../styles/pages/course-list';
 import { ICourse } from '../interfaces/ICourse';
+
+type SectionProps = {
+  children: ReactElement | ReactElement[];
+  id?: string;
+};
+
+const Section: React.FC<SectionProps> = ({ children, id }) => {
+  return (
+    <VStack
+      id={id}
+      align="flex-start"
+      justify="center"
+      p={[8, 8, 12]}
+      w={{ base: 'full', md: '90%', lg: '70%' }}>
+      {children}
+    </VStack>
+  );
+};
 
 interface CourseListProps {
   courses: ICourse[];
@@ -18,37 +45,62 @@ interface CourseListProps {
 export default function CourseList({ error, courses }: CourseListProps): ReactElement {
   return (
     <PublicLayout>
-      <Presentation>
-        <Banner>
-          <Title>
-            <h1>Cursos</h1>
-            {error ? (
-              <h2>{error}</h2>
-            ) : (
-              <h2>Conheça os cursos disponíveis atualmente em nossa plataforma.</h2>
-            )}
-          </Title>
-          <ContentWrapper>
-            {courses.map((course: ICourse) => (
-              <Card key={course.id}>
-                <div className="title">
-                  <GiBookPile />
-                  <h3>{course.name}</h3>
-                </div>
-                <div className="content">
-                  <p>{formatDescription(course.description, 170)}</p>
-                </div>
-                <div className="footer">
-                  <span className="date">Atualizado em {simpleDate(course.updated_at)}</span>
-                  <Link href={`/course-detail/${course.id}`}>
-                    <span className="more">Saber Mais</span>
-                  </Link>
-                </div>
-              </Card>
-            ))}
-          </ContentWrapper>
-        </Banner>
-      </Presentation>
+      <Section>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12} cursor="default">
+          <Stack spacing={4} justify="center">
+            <Heading fontSize="5xl">Conheça nossos cursos</Heading>
+            <Text color="gray.500" fontSize="2xl">
+              {error ||
+                'Escolha o caminho que mais te agrada e torne-se um profissional requisitado.'}
+            </Text>
+          </Stack>
+          <Flex>
+            <Image
+              rounded="md"
+              alt="feature image"
+              src="images/course-list.svg"
+              objectFit="cover"
+            />
+          </Flex>
+        </SimpleGrid>
+      </Section>
+      <Section>
+        <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={6}>
+          {courses.map((course: ICourse) => (
+            <Link href={`/course-detail/${course.id}`} key={course.id}>
+              <HStack
+                borderColor="gray.300"
+                borderWidth="thin"
+                borderRadius="md"
+                spacing={4}
+                px={4}
+                py={6}
+                cursor="pointer"
+                _hover={{
+                  transition: 'all 0.2s ease-in-out',
+                  transform: 'translateY(-1px)',
+                  boxShadow: 'lg'
+                }}>
+                <Flex
+                  w={14}
+                  h={14}
+                  align="center"
+                  justify="center"
+                  color="white"
+                  rounded="full"
+                  bg="orange.500"
+                  shrink="0">
+                  <Icon as={GiBookPile} w={8} h={8} />
+                </Flex>
+                <Stack>
+                  <Text fontWeight="bold">{course.name}</Text>
+                  <Text fontSize="sm">Atualizado em {simpleDate(course.updated_at)}</Text>
+                </Stack>
+              </HStack>
+            </Link>
+          ))}
+        </SimpleGrid>
+      </Section>
     </PublicLayout>
   );
 }

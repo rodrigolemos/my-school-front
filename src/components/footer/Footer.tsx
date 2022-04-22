@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
       align="flex-start"
       justify="center"
       w="full"
-      minH="25vh"
+      minH="30vh"
       bg="primary.100"
       color="gray.200">
       <SimpleGrid

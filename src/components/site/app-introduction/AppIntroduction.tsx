@@ -26,8 +26,8 @@ const Feature = ({ text, icon, iconBg }: FeatureProps) => {
 
 const AppIntroduction: React.FC<AppIntroductionProps> = ({ linkRef }) => {
   return (
-    <Container maxW="full" py={[4, 4, 12]} px={0} ref={linkRef}>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+    <Container maxW="full" py={[4, 4, 16]} px={0} ref={linkRef}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12}>
         <Stack spacing={7}>
           <Text
             textTransform="uppercase"
