@@ -21,7 +21,8 @@ import {
   FormLabel,
   Input,
   SlideFade,
-  FormErrorMessage
+  FormErrorMessage,
+  useMediaQuery
 } from '@chakra-ui/react';
 import { NavbarLogo, NavbarLogoOrange } from '../components/navbar';
 import { Copywright } from '../components/footer';
@@ -46,6 +47,7 @@ export default function CreateProfile(): ReactElement {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
   const router = useRouter();
+  const [isMobile] = useMediaQuery('(max-width: 768px)');
   const { register, handleSubmit, errors } = useForm<IFormInput>({
     resolver: yupResolver(schema)
   });
@@ -154,7 +156,7 @@ export default function CreateProfile(): ReactElement {
                 name="name"
                 type="text"
                 placeholder="Seu Nome"
-                autoFocus
+                autoFocus={!isMobile}
                 minLength={3}
                 maxLength={50}
                 required
