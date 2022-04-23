@@ -30,7 +30,7 @@ import {
 import { NavbarLogo, NavbarLogoOrange } from '../components/navbar';
 import { Copywright } from '../components/footer';
 
-const avatars = [
+export const avatars = [
   {
     name: 'User 1',
     url: '../images/avatars/avatar-3.png'
@@ -210,12 +210,7 @@ export default function Login(): ReactElement {
                 </FormErrorMessage>
               </FormControl>
             </VStack>
-            <Button
-              type="submit"
-              variant="solid"
-              colorScheme="orange"
-              w="full"
-              isDisabled={loading}>
+            <Button type="submit" variant="solid" colorScheme="orange" w="full" isLoading={loading}>
               Entrar
             </Button>
           </VStack>

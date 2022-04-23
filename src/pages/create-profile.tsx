@@ -4,12 +4,31 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CircularProgress } from '@material-ui/core';
-import { GoMortarBoard } from 'react-icons/go';
-import { IoIosArrowBack, IoIosLaptop } from 'react-icons/io';
-import { Container, DesktopPanel, FormPanel, BackButton } from '../styles/pages/create-profile';
+
+import {
+  Avatar,
+  AvatarGroup,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Link as ChakraLink,
+  Text,
+  SimpleGrid,
+  VStack,
+  useBreakpointValue,
+  FormControl,
+  FormLabel,
+  Input,
+  SlideFade,
+  FormErrorMessage
+} from '@chakra-ui/react';
+import { NavbarLogo, NavbarLogoOrange } from '../components/navbar';
+import { Copywright } from '../components/footer';
+
 import api from '../services/api';
 import Toast from '../components/toast';
+import { avatars } from './login';
 
 interface IFormInput {
   name: string;
@@ -55,76 +74,129 @@ export default function CreateProfile(): ReactElement {
           'Ops, houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.'
         );
       }
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   return (
-    <Container>
-      <DesktopPanel>
-        <div className="overlay" />
-        <div className="brand">
-          <h2>
-            <GoMortarBoard />
-            My School
-          </h2>
-          <IoIosLaptop className="desktop" />
-          <h3>Crie sua conta para aproveitar o melhor da plataforma</h3>
-        </div>
-      </DesktopPanel>
-      <FormPanel>
-        {error && <Toast type="error" message={error} />}
-        <BackButton onClick={() => router.push('/')}>
-          <IoIosArrowBack /> Voltar
-        </BackButton>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>
-            <GoMortarBoard />
-            My School
-          </h1>
-          <label>
-            Nome
-            <input
-              type="text"
-              name="name"
-              minLength={3}
-              maxLength={100}
-              required
-              autoFocus
-              ref={register}
-            />
-            {errors.name && <p className="error">Preencha corretamente o nome</p>}
-          </label>
-          <label>
-            E-mail
-            <input type="email" name="email" minLength={3} maxLength={50} required ref={register} />
-            {errors.email && <p className="error">Preencha corretamente o email</p>}
-          </label>
-          <label>
-            Senha
-            <input
-              type="password"
-              name="password"
-              minLength={6}
-              maxLength={100}
-              autoComplete=""
-              required
-              ref={register}
-            />
-            {errors.password && <p className="error">Preencha corretamente a senha</p>}
-          </label>
-          {!loading ? (
-            <button>CRIAR CONTA</button>
-          ) : (
-            <button disabled={true}>
-              <CircularProgress size={20} />
-            </button>
-          )}
-          <div className="controls">
-            <Link href="/login">Efetuar Login</Link>
-          </div>
-        </form>
-      </FormPanel>
-    </Container>
+    <SimpleGrid columns={{ base: 1, sm: 2 }} minH="100vh">
+      {error && <Toast type="error" message={error} />}
+      <VStack
+        justify="flex-start"
+        align="flex-start"
+        py={{ base: 8, sm: 12 }}
+        px={{ base: 4, sm: 16 }}
+        display={{ base: 'none', sm: 'flex' }}
+        h="full"
+        bg="orange.600"
+        color="white">
+        <VStack justify="space-between" align="flex-start" h="full">
+          <NavbarLogo />
+          <VStack align="flex-start" spacing={4}>
+            <Heading fontSize="6xl">Comece a estudar hoje</Heading>
+            <Text fontSize="2xl">Crie sua conta e faça parte da comunidade</Text>
+
+            <HStack spacing={4} pt={4} align="center">
+              <AvatarGroup>
+                {avatars.map((avatar) => (
+                  <Avatar
+                    key={avatar.url}
+                    src={avatar.url}
+                    size={useBreakpointValue({ base: 'md', md: 'lg' })}
+                    position="relative"
+                    zIndex={2}
+                    _before={{
+                      content: '""',
+                      width: 'full',
+                      height: 'full',
+                      rounded: 'full',
+                      transform: 'scale(1.125)',
+                      bgGradient: 'linear(to-bl, orange.400, orange.600)',
+                      position: 'absolute',
+                      zIndex: -1,
+                      top: 0,
+                      left: 0
+                    }}
+                  />
+                ))}
+              </AvatarGroup>
+              <Text fontSize="2xl">+ você!</Text>
+            </HStack>
+          </VStack>
+          <Copywright />
+        </VStack>
+      </VStack>
+      <VStack justify="center" px={{ base: 4, sm: 16 }}>
+        <SlideFade in={true} offsetX="-24px" offsetY="0px">
+          <VStack spacing={10} as="form" onSubmit={handleSubmit(onSubmit)}>
+            <Flex display={['flex', 'none']}>
+              <NavbarLogoOrange />
+            </Flex>
+            <VStack spacing={4}>
+              <Heading>Crie sua conta, é rapidinho!</Heading>
+              <Text fontSize="lg" color="gray.600">
+                Já tem conta?{' '}
+                <Link href="/login">
+                  <ChakraLink color="orange.500">Faça seu login!</ChakraLink>
+                </Link>
+              </Text>
+            </VStack>
+            <VStack spacing={4} w="full">
+              <FormControl>
+                <FormLabel htmlFor="name">Nome</FormLabel>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Seu Nome"
+                  autoFocus
+                  minLength={3}
+                  maxLength={50}
+                  required
+                  ref={register}
+                />
+                <FormErrorMessage>{errors.name && 'Preencha corretamente o nome'}</FormErrorMessage>
+              </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="email">E-mail</FormLabel>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  minLength={3}
+                  maxLength={50}
+                  required
+                  ref={register}
+                />
+                <FormErrorMessage>
+                  {errors.email && 'Preencha corretamente o e-mail'}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="password">Senha</FormLabel>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="********"
+                  minLength={6}
+                  maxLength={100}
+                  autoComplete=""
+                  required
+                  ref={register}
+                />
+                <FormErrorMessage>
+                  {errors.password && 'Preencha corretamente a senha'}
+                </FormErrorMessage>
+              </FormControl>
+            </VStack>
+            <Button type="submit" variant="solid" colorScheme="orange" w="full" isLoading={loading}>
+              Criar Conta
+            </Button>
+          </VStack>
+        </SlideFade>
+      </VStack>
+    </SimpleGrid>
   );
 }

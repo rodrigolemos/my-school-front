@@ -55,6 +55,7 @@ export default function CourseDetail({ course }: CourseDetailProps): ReactElemen
   const [message, setMessage] = useState<string>();
 
   const validateEnrollment = async (): Promise<void> => {
+    setLoadingEnrollment(true);
     try {
       const cookies = new Cookies();
       const { id } = cookies.get('@my-school:user');
@@ -65,8 +66,8 @@ export default function CourseDetail({ course }: CourseDetailProps): ReactElemen
         setMessage(
           'Parece que você é um administrador. Não é necessário se matricular neste curso.'
         );
+        setLoadingEnrollment(false);
       } else {
-        setLoadingEnrollment(true);
         const data = {
           course_id: course.id,
           user_id: id,
@@ -80,13 +81,12 @@ export default function CourseDetail({ course }: CourseDetailProps): ReactElemen
         });
 
         if (response.status === 201) {
-          setLoadingEnrollment(false);
           router.push('/dashboard?enrollment=created');
         }
       }
     } catch (err) {
       setLoadingEnrollment(false);
-      router.push('/login?notLogged=true');
+      router.push('/login');
     }
   };
 
@@ -95,7 +95,7 @@ export default function CourseDetail({ course }: CourseDetailProps): ReactElemen
       {message && <Toast type="success" message={message} />}
       <Section>
         <Container maxW="full" py={[4, 4, 16]} px={0}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={16}>
             <Flex>
               <Image
                 rounded="md"
@@ -154,7 +154,7 @@ export default function CourseDetail({ course }: CourseDetailProps): ReactElemen
                   colorScheme="orange"
                   mr={8}
                   onClick={validateEnrollment}
-                  isDisabled={loadingEnrollment}>
+                  isLoading={loadingEnrollment}>
                   Matricule-se
                 </Button>
                 <Link href="/course-list">
