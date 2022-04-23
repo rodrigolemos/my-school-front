@@ -71,7 +71,7 @@ export default function Login(): ReactElement {
     resolver: yupResolver(schema)
   });
 
-  const { user, notLogged } = router.query;
+  const { user } = router.query;
 
   const onSubmit = useCallback(async (data: IFormInput) => {
     setLoading(true);
@@ -114,7 +114,6 @@ export default function Login(): ReactElement {
           message="Perfil criado com sucesso. Você já pode acessar a plataforma!"
         />
       )}
-      {notLogged && <Toast type="warning" message="Faça o login para ter acesso a essa função." />}
       <VStack
         justify="flex-start"
         align="flex-start"
