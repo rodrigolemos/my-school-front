@@ -159,14 +159,18 @@ export default function Login(): ReactElement {
           <Copywright />
         </VStack>
       </VStack>
-      <VStack justify="center" px={{ base: 4, sm: 16 }}>
-        <SlideFade in={true} offsetX="-24px" offsetY="0px">
-          <VStack spacing={10} as="form" onSubmit={handleSubmit(onSubmit)}>
-            <Flex display={['flex', 'none']}>
-              <NavbarLogoOrange />
-            </Flex>
+      <VStack justify="center" px={{ base: 4, sm: 20 }}>
+        <VStack
+          spacing={10}
+          as="form"
+          onSubmit={handleSubmit(onSubmit)}
+          w={{ base: '100%', lg: '50%' }}>
+          <Flex display={{ base: 'flex', sm: 'none' }}>
+            <NavbarLogoOrange />
+          </Flex>
+          <SlideFade in={true} offsetX="-24px" offsetY="0px">
             <VStack spacing={4}>
-              <Heading>Faça o login na sua conta</Heading>
+              <Heading>Faça seu login</Heading>
               <Text fontSize="lg" color="gray.600">
                 Ainda não tem conta?{' '}
                 <Link href="/create-profile">
@@ -174,47 +178,55 @@ export default function Login(): ReactElement {
                 </Link>
               </Text>
             </VStack>
-            <VStack spacing={4} w="full">
-              <FormControl>
-                <FormLabel htmlFor="email">E-mail</FormLabel>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="seu@email.com"
-                  autoFocus
-                  minLength={3}
-                  maxLength={50}
-                  required
-                  ref={register}
-                />
-                <FormErrorMessage>
-                  {errors.email && 'Preencha corretamente o e-mail'}
-                </FormErrorMessage>
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="password">Senha</FormLabel>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="********"
-                  minLength={6}
-                  maxLength={100}
-                  autoComplete=""
-                  required
-                  ref={register}
-                />
-                <FormErrorMessage>
-                  {errors.password && 'Preencha corretamente a senha'}
-                </FormErrorMessage>
-              </FormControl>
-            </VStack>
+          </SlideFade>
+          <VStack spacing={4} w="full">
+            <FormControl>
+              <FormLabel htmlFor="email">E-mail</FormLabel>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="seu@email.com"
+                autoFocus
+                minLength={3}
+                maxLength={50}
+                required
+                ref={register}
+              />
+              <FormErrorMessage>
+                {errors.email && 'Preencha corretamente o e-mail'}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="password">Senha</FormLabel>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="********"
+                minLength={6}
+                maxLength={100}
+                autoComplete=""
+                required
+                ref={register}
+              />
+              <FormErrorMessage>
+                {errors.password && 'Preencha corretamente a senha'}
+              </FormErrorMessage>
+            </FormControl>
+          </VStack>
+          <VStack spacing={4} w="full">
             <Button type="submit" variant="solid" colorScheme="orange" w="full" isLoading={loading}>
               Entrar
             </Button>
+            <Link href="/">
+              <Button variant="ghost" colorScheme="orange" w="full">
+                Voltar
+              </Button>
+            </Link>
           </VStack>
-        </SlideFade>
+        </VStack>
+        {/* </SlideFade> */}
       </VStack>
     </SimpleGrid>
   );

@@ -126,14 +126,18 @@ export default function CreateProfile(): ReactElement {
           <Copywright />
         </VStack>
       </VStack>
-      <VStack justify="center" px={{ base: 4, sm: 16 }}>
-        <SlideFade in={true} offsetX="-24px" offsetY="0px">
-          <VStack spacing={10} as="form" onSubmit={handleSubmit(onSubmit)}>
-            <Flex display={['flex', 'none']}>
-              <NavbarLogoOrange />
-            </Flex>
+      <VStack justify="center" px={{ base: 4, sm: 20 }}>
+        <VStack
+          spacing={10}
+          as="form"
+          onSubmit={handleSubmit(onSubmit)}
+          w={{ base: '100%', lg: '50%' }}>
+          <Flex display={{ base: 'flex', sm: 'none' }}>
+            <NavbarLogoOrange />
+          </Flex>
+          <SlideFade in={true} offsetX="-24px" offsetY="0px">
             <VStack spacing={4}>
-              <Heading>Crie sua conta, é rapidinho!</Heading>
+              <Heading>Crie sua conta</Heading>
               <Text fontSize="lg" color="gray.600">
                 Já tem conta?{' '}
                 <Link href="/login">
@@ -141,61 +145,68 @@ export default function CreateProfile(): ReactElement {
                 </Link>
               </Text>
             </VStack>
-            <VStack spacing={4} w="full">
-              <FormControl>
-                <FormLabel htmlFor="name">Nome</FormLabel>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Seu Nome"
-                  autoFocus
-                  minLength={3}
-                  maxLength={50}
-                  required
-                  ref={register}
-                />
-                <FormErrorMessage>{errors.name && 'Preencha corretamente o nome'}</FormErrorMessage>
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="email">E-mail</FormLabel>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="seu@email.com"
-                  minLength={3}
-                  maxLength={50}
-                  required
-                  ref={register}
-                />
-                <FormErrorMessage>
-                  {errors.email && 'Preencha corretamente o e-mail'}
-                </FormErrorMessage>
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="password">Senha</FormLabel>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="********"
-                  minLength={6}
-                  maxLength={100}
-                  autoComplete=""
-                  required
-                  ref={register}
-                />
-                <FormErrorMessage>
-                  {errors.password && 'Preencha corretamente a senha'}
-                </FormErrorMessage>
-              </FormControl>
-            </VStack>
+          </SlideFade>
+          <VStack spacing={4} w="full">
+            <FormControl>
+              <FormLabel htmlFor="name">Nome</FormLabel>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Seu Nome"
+                autoFocus
+                minLength={3}
+                maxLength={50}
+                required
+                ref={register}
+              />
+              <FormErrorMessage>{errors.name && 'Preencha corretamente o nome'}</FormErrorMessage>
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="email">E-mail</FormLabel>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="seu@email.com"
+                minLength={3}
+                maxLength={50}
+                required
+                ref={register}
+              />
+              <FormErrorMessage>
+                {errors.email && 'Preencha corretamente o e-mail'}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="password">Senha</FormLabel>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="********"
+                minLength={6}
+                maxLength={100}
+                autoComplete=""
+                required
+                ref={register}
+              />
+              <FormErrorMessage>
+                {errors.password && 'Preencha corretamente a senha'}
+              </FormErrorMessage>
+            </FormControl>
+          </VStack>
+          <VStack spacing={4} w="full">
             <Button type="submit" variant="solid" colorScheme="orange" w="full" isLoading={loading}>
               Criar Conta
             </Button>
+            <Link href="/">
+              <Button variant="ghost" colorScheme="orange" w="full">
+                Cancelar
+              </Button>
+            </Link>
           </VStack>
-        </SlideFade>
+        </VStack>
       </VStack>
     </SimpleGrid>
   );

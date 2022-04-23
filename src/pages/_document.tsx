@@ -33,6 +33,7 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <meta name="theme-color" content="#161616" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap"
