@@ -8,7 +8,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { checkAuth } from '../services/auth';
 import api from '../services/api';
-import Toast from '../components/toast';
 import {
   Avatar,
   AvatarGroup,
@@ -26,7 +25,8 @@ import {
   Input,
   SlideFade,
   FormErrorMessage,
-  useMediaQuery
+  useMediaQuery,
+  useToast
 } from '@chakra-ui/react';
 import { NavbarLogo, NavbarLogoOrange } from '../components/navbar';
 import { Copywright } from '../components/footer';
@@ -68,6 +68,7 @@ export default function Login(): ReactElement {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
   const router = useRouter();
+  const toast = useToast();
   const [isMobile] = useMediaQuery('(max-width: 768px)');
   const { register, handleSubmit, errors } = useForm<IFormInput>({
     resolver: yupResolver(schema)
@@ -107,15 +108,28 @@ export default function Login(): ReactElement {
     window.history.pushState({}, null, '/login');
   }, []);
 
+  useEffect(() => {
+    error &&
+      toast({
+        title: error,
+        status: 'error',
+        isClosable: true,
+        position: 'top-right'
+      });
+  }, [error]);
+
+  useEffect(() => {
+    user &&
+      toast({
+        title: 'Perfil criado com sucesso. Você já pode acessar a plataforma!',
+        status: 'success',
+        isClosable: true,
+        position: 'top-right'
+      });
+  }, [user]);
+
   return (
     <SimpleGrid columns={{ base: 1, sm: 2 }} minH="100vh">
-      {error && <Toast type="error" message={error} />}
-      {user && (
-        <Toast
-          type="success"
-          message="Perfil criado com sucesso. Você já pode acessar a plataforma!"
-        />
-      )}
       <VStack
         justify="flex-start"
         align="flex-start"
