@@ -60,6 +60,21 @@ export const NavbarLogo: React.FC = (): ReactElement => {
   );
 };
 
+export const NavbarLogoAuth: React.FC = (): ReactElement => {
+  return (
+    <Link href="/">
+      <HStack alignItems="center" fontSize="2xl" cursor="pointer">
+        <>
+          <Icon as={GoMortarBoard} mr={2} />
+          <Heading as="h1" fontSize="2xl">
+            My School
+          </Heading>
+        </>
+      </HStack>
+    </Link>
+  );
+};
+
 export const NavbarLogoOrange: React.FC = (): ReactElement => {
   return (
     <Link href="/">
@@ -106,7 +121,7 @@ const MobileFullNav: React.FC<MobileFullNavProps> = ({ isOpen, onToggle }): Reac
           <NavbarLogo />
         </DrawerHeader>
         <DrawerBody>
-          <VStack spacing={4} align="flex-start">
+          <VStack spacing={6} align="flex-start">
             <NavbarLinks />
           </VStack>
         </DrawerBody>
