@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import Head from 'next/head';
-import { Box, SimpleGrid, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react';
+import { SimpleGrid, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react';
 import { getServerSidePropsUser } from '../utils/server-props';
 import { IUser } from '../interfaces/IUser';
 import { SidebarWithHeader } from '../components/auth-layout';
@@ -29,13 +29,11 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
         <Flex bg="gray.200" h="92vh" p={4}>
           <VStack spacing={12} align="flex-start">
             <Heading fontSize="3xl">Tarefas</Heading>
-            <Box boxSize="md">
-              <Image
-                rounded="md"
-                alt="feature image"
-                src={`../images/${isAdmin ? 'multitasking' : 'studying'}.svg`}
-              />
-            </Box>
+            <Image
+              rounded="md"
+              alt="feature image"
+              src={`../images/${isAdmin ? 'multitasking' : 'studying'}.svg`}
+            />
           </VStack>
         </Flex>
       </SimpleGrid>
