@@ -41,40 +41,18 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
               Essa é sua área logada. Pronto(a) para sua próxima tarefa?
             </Text>
             <SimpleGrid columns={{ base: 1, lg: 2 }} w="full" h="full">
-              <VStack align="flex-start" h="full" p={{ base: 0, lg: 6 }}>
+              <VStack align="flex-start" h="full" p={{ base: 0, lg: 4 }}>
                 <Flex
-                  bg="orange.500"
+                  bg="gray.50"
                   w="full"
                   h="full"
                   borderRadius="xl"
-                  boxShadow="lg"
-                  p={{ base: 6, lg: 10 }}>
-                  <SlideFade in={true} offsetX="-24px" offsetY="0px">
-                    <VStack h="full" align="flex-start" justifyContent="space-between">
-                      <VStack spacing={4} align="flex-start">
-                        <Heading fontSize="3xl" color="white">
-                          Informação
-                        </Heading>
-                        <Heading fontSize="5xl" color="white">
-                          210
-                        </Heading>
-                      </VStack>
-                      <Box display={{ base: 'none', lg: 'block' }}>
-                        <DashboardChart />
-                      </Box>
-                      <Heading fontSize="2xl" color="white">
-                        * a definir
-                      </Heading>
-                    </VStack>
-                  </SlideFade>
-                </Flex>
-              </VStack>
-              <VStack align="flex-start" h="full" p={{ base: 0, lg: 6 }}>
-                <Flex bg="gray.50" w="full" h="full" borderRadius="xl" p={{ base: 6, lg: 10 }}>
+                  px={{ base: 0, lg: 10 }}
+                  py={{ base: 10, lg: 4 }}>
                   <SlideFade in={true} offsetX="-24px" offsetY="0px">
                     <VStack spacing={8} align="flex-start">
                       <Heading fontSize="3xl" color="primary.100">
-                        Boas vindas!
+                        Primeiro acesso
                       </Heading>
                       <SlideFade in={true} offsetX="-24px" offsetY="0px">
                         <List spacing={4} fontSize="xl">
@@ -90,6 +68,39 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
                             <ListIcon as={BiCheckCircle} color="orange.500" />
                             <ListItem>Editar perfil</ListItem>
                           </Flex>
+                        </List>
+                      </SlideFade>
+                    </VStack>
+                  </SlideFade>
+                </Flex>
+              </VStack>
+              <VStack align="flex-start" h="full" p={{ base: 0, lg: 4 }}>
+                <Flex
+                  bg="gray.50"
+                  w="full"
+                  h="full"
+                  borderRadius="xl"
+                  px={{ base: 0, lg: 10 }}
+                  py={{ base: 10, lg: 4 }}>
+                  <SlideFade in={true} offsetX="-24px" offsetY="0px">
+                    <VStack spacing={8} align="flex-start">
+                      <Heading fontSize="3xl" color="primary.100">
+                        Próximos passos
+                      </Heading>
+                      <SlideFade in={true} offsetX="-24px" offsetY="0px">
+                        <List spacing={4} fontSize="xl">
+                          <Flex alignItems="center">
+                            <ListIcon as={BiCheckCircle} color="orange.500" />
+                            <ListItem>Resolver pendências</ListItem>
+                          </Flex>
+                          <Flex alignItems="center">
+                            <ListIcon as={BiCheckCircle} color="orange.500" />
+                            <ListItem>Finalizar tarefas</ListItem>
+                          </Flex>
+                          {/* <Flex alignItems="center">
+                            <ListIcon as={BiCheckCircle} color="orange.500" />
+                            <ListItem>Editar perfil</ListItem>
+                          </Flex> */}
                         </List>
                       </SlideFade>
                     </VStack>
