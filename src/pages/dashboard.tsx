@@ -41,7 +41,7 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
               Essa é sua área logada. Pronto(a) para sua próxima tarefa?
             </Text>
             <SimpleGrid columns={{ base: 1, lg: 2 }} w="full" h="full">
-              <VStack align="flex-start" h="full" p={{ base: 4, lg: 6 }}>
+              <VStack align="flex-start" h="full" p={{ base: 0, lg: 6 }}>
                 <Flex
                   bg="orange.500"
                   w="full"
@@ -50,14 +50,16 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
                   boxShadow="lg"
                   p={{ base: 6, lg: 10 }}>
                   <SlideFade in={true} offsetX="-24px" offsetY="0px">
-                    <VStack spacing={4} align="flex-start">
-                      <Heading fontSize="3xl" color="white">
-                        Informação
-                      </Heading>
-                      <Heading fontSize="5xl" color="white">
-                        210
-                      </Heading>
-                      <Box h={{ base: 'xs', lg: 'md' }}>
+                    <VStack h="full" align="flex-start" justifyContent="space-between">
+                      <VStack spacing={4} align="flex-start">
+                        <Heading fontSize="3xl" color="white">
+                          Informação
+                        </Heading>
+                        <Heading fontSize="5xl" color="white">
+                          210
+                        </Heading>
+                      </VStack>
+                      <Box display={{ base: 'none', lg: 'block' }}>
                         <DashboardChart />
                       </Box>
                       <Heading fontSize="2xl" color="white">
@@ -67,12 +69,12 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
                   </SlideFade>
                 </Flex>
               </VStack>
-              <VStack align="flex-start" h="full" p={{ base: 4, lg: 6 }}>
+              <VStack align="flex-start" h="full" p={{ base: 0, lg: 6 }}>
                 <Flex bg="gray.50" w="full" h="full" borderRadius="xl" p={{ base: 6, lg: 10 }}>
                   <SlideFade in={true} offsetX="-24px" offsetY="0px">
                     <VStack spacing={8} align="flex-start">
                       <Heading fontSize="3xl" color="primary.100">
-                        Checklist de boas vindas
+                        Boas vindas!
                       </Heading>
                       <SlideFade in={true} offsetX="-24px" offsetY="0px">
                         <List spacing={4} fontSize="xl">
