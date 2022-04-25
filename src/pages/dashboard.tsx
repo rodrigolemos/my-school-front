@@ -1,10 +1,25 @@
 import React, { ReactElement } from 'react';
 import Head from 'next/head';
-import { SimpleGrid, Flex, Heading, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
-import { BiLineChart, BiSupport } from 'react-icons/bi';
+import {
+  Box,
+  SimpleGrid,
+  Flex,
+  Heading,
+  HStack,
+  List,
+  ListItem,
+  ListIcon,
+  Icon,
+  Image,
+  SlideFade,
+  Text,
+  VStack
+} from '@chakra-ui/react';
+import { BiCheckCircle, BiLineChart, BiSupport } from 'react-icons/bi';
 import { getServerSidePropsUser } from '../utils/server-props';
 import { IUser } from '../interfaces/IUser';
 import { SidebarWithHeader } from '../components/auth-layout';
+import { DashboardChart } from '../components/dashboard-chart';
 
 interface IDashboard {
   name: string;
@@ -20,11 +35,66 @@ export default function Dashboard({ name, isAdmin }: IDashboard): ReactElement {
       </Head>
       <SimpleGrid columns={{ base: 1, md: 2 }} templateColumns={{ base: '100%', md: '70% 30%' }}>
         <Flex bg="gray.50" minH="92vh" p={4} overflowY="auto">
-          <VStack spacing={4} align="flex-start">
+          <VStack spacing={4} align="flex-start" w="full">
             <Heading>Bem vindo novamente, {name}!</Heading>
             <Text color="gray.500" fontSize="2xl">
               Essa é sua área logada. Pronto(a) para sua próxima tarefa?
             </Text>
+            <SimpleGrid columns={{ base: 1, lg: 2 }} w="full" h="full">
+              <VStack align="flex-start" h="full" p={{ base: 4, lg: 6 }}>
+                <Flex
+                  bg="orange.500"
+                  w="full"
+                  h="full"
+                  borderRadius="xl"
+                  boxShadow="lg"
+                  p={{ base: 6, lg: 10 }}>
+                  <SlideFade in={true} offsetX="-24px" offsetY="0px">
+                    <VStack spacing={4} align="flex-start">
+                      <Heading fontSize="3xl" color="white">
+                        Informação
+                      </Heading>
+                      <Heading fontSize="5xl" color="white">
+                        210
+                      </Heading>
+                      <Box h={{ base: 'xs', lg: 'md' }}>
+                        <DashboardChart />
+                      </Box>
+                      <Heading fontSize="2xl" color="white">
+                        * a definir
+                      </Heading>
+                    </VStack>
+                  </SlideFade>
+                </Flex>
+              </VStack>
+              <VStack align="flex-start" h="full" p={{ base: 4, lg: 6 }}>
+                <Flex bg="gray.50" w="full" h="full" borderRadius="xl" p={{ base: 6, lg: 10 }}>
+                  <SlideFade in={true} offsetX="-24px" offsetY="0px">
+                    <VStack spacing={8} align="flex-start">
+                      <Heading fontSize="3xl" color="primary.100">
+                        Checklist de boas vindas
+                      </Heading>
+                      <SlideFade in={true} offsetX="-24px" offsetY="0px">
+                        <List spacing={4} fontSize="xl">
+                          <Flex alignItems="center">
+                            <ListIcon as={BiCheckCircle} color="orange.500" />
+                            <ListItem>Confirmar e-mail</ListItem>
+                          </Flex>
+                          <Flex alignItems="center">
+                            <ListIcon as={BiCheckCircle} color="orange.500" />
+                            <ListItem>Atualizar contato</ListItem>
+                          </Flex>
+                          <Flex alignItems="center">
+                            <ListIcon as={BiCheckCircle} color="orange.500" />
+                            <ListItem>Editar perfil</ListItem>
+                          </Flex>
+                        </List>
+                      </SlideFade>
+                    </VStack>
+                  </SlideFade>
+                </Flex>
+              </VStack>
+            </SimpleGrid>
           </VStack>
         </Flex>
         <Flex bg="gray.200" minH="92vh" p={4}>
