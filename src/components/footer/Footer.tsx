@@ -47,7 +47,7 @@ export const Copywright: React.FC = (): ReactElement => {
   );
 };
 
-const Footer: React.FC = () => {
+const Footer: React.FC = (): ReactElement => {
   return (
     <HStack
       as="footer"

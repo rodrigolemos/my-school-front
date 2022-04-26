@@ -1,1 +1,1 @@
-export { SidebarWithHeader } from './AuthLayout';
+export { AuthLayout } from './AuthLayout';

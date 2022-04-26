@@ -20,7 +20,9 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  MenuList
+  MenuList,
+  SimpleGrid,
+  Heading
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -35,6 +37,7 @@ import {
 import { IconType } from 'react-icons';
 import { NavbarLogoAuth } from '../navbar';
 import { useAuth } from '../../hooks/auth';
+import AuthTaskbar from '../auth-taskbar';
 
 interface LinkItemProps {
   isAdmin: boolean;
@@ -47,22 +50,18 @@ const LinkItems: Array<LinkItemProps> = [
   { isAdmin: false, href: '/', name: 'Explorar', icon: FiCompass },
   { isAdmin: false, href: '/dashboard', name: 'Home', icon: FiHome },
   { isAdmin: false, href: '/classes', name: 'Aulas', icon: FiTv },
-  { isAdmin: true, href: '/courses', name: 'Cursos', icon: FiList },
+  { isAdmin: true, href: '/courses-new', name: 'Cursos', icon: FiList },
   { isAdmin: true, href: '/users', name: 'Usuários', icon: FiUsers },
   { isAdmin: true, href: '/enrollments', name: 'Matrículas', icon: FiSettings }
 ];
 
-interface SidebarWithHeaderProps {
+interface AuthLayoutProps {
   children: ReactNode;
   userName: string;
   isAdmin: boolean;
 }
 
-export const SidebarWithHeader: React.FC<SidebarWithHeaderProps> = ({
-  children,
-  userName,
-  isAdmin
-}) => {
+export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, userName, isAdmin }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -84,7 +83,17 @@ export const SidebarWithHeader: React.FC<SidebarWithHeaderProps> = ({
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} userName={userName} isAdmin={isAdmin} />
-      <Box ml={{ base: 0, md: 60 }}>{children}</Box>
+      <Box ml={{ base: 0, md: 60 }}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} templateColumns={{ base: '100%', md: '70% 30%' }}>
+          <Flex bg="gray.50" minH="92vh" p={4} overflowY="auto">
+            <VStack spacing={4} align="flex-start" w="full">
+              <AuthGreeting name={userName} />
+              {children}
+            </VStack>
+          </Flex>
+          <AuthTaskbar isAdmin={isAdmin} />
+        </SimpleGrid>
+      </Box>
     </Box>
   );
 };
@@ -119,6 +128,21 @@ const SidebarContent = ({ onClose, isAdmin, ...rest }: SidebarProps) => {
           )
       )}
     </Box>
+  );
+};
+
+interface AuthGreetingProps {
+  name: string;
+}
+
+const AuthGreeting = ({ name }: AuthGreetingProps) => {
+  return (
+    <>
+      <Heading>Bem vindo novamente, {name}!</Heading>
+      <Text color="gray.500" fontSize="2xl">
+        Essa é sua área logada. Pronto(a) para sua próxima tarefa?
+      </Text>
+    </>
   );
 };
 
