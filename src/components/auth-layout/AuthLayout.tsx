@@ -5,6 +5,7 @@ import {
   Avatar,
   Box,
   CloseButton,
+  Divider,
   Flex,
   HStack,
   VStack,
@@ -88,6 +89,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, userName, isAd
           <Flex bg="gray.50" minH="92vh" p={4} overflowY="auto">
             <VStack spacing={4} align="flex-start" w="full">
               <AuthGreeting name={userName} />
+              <Divider />
               {children}
             </VStack>
           </Flex>
@@ -138,8 +140,8 @@ interface AuthGreetingProps {
 const AuthGreeting = ({ name }: AuthGreetingProps) => {
   return (
     <>
-      <Heading>Bem vindo novamente, {name}!</Heading>
-      <Text color="gray.500" fontSize="2xl">
+      <Heading fontSize="2xl">Bem vindo novamente, {name}!</Heading>
+      <Text color="gray.500" fontSize="xl">
         Essa é sua área logada. Pronto(a) para sua próxima tarefa?
       </Text>
     </>
