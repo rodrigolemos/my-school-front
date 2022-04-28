@@ -51,7 +51,7 @@ const LinkItems: Array<LinkItemProps> = [
   { isAdmin: false, href: '/', name: 'Explorar', icon: FiCompass },
   { isAdmin: false, href: '/dashboard', name: 'Home', icon: FiHome },
   { isAdmin: false, href: '/classes', name: 'Aulas', icon: FiTv },
-  { isAdmin: true, href: '/courses-new', name: 'Cursos', icon: FiList },
+  { isAdmin: true, href: '/courses', name: 'Cursos', icon: FiList },
   { isAdmin: true, href: '/users', name: 'Usuários', icon: FiUsers },
   { isAdmin: true, href: '/enrollments', name: 'Matrículas', icon: FiSettings }
 ];

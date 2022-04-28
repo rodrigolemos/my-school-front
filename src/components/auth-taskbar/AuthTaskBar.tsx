@@ -14,7 +14,7 @@ const AuthTaskBar: React.FC<AuthTaskBarProps> = ({ isAdmin }): ReactElement => {
         <Image
           rounded="md"
           alt="feature image"
-          src={`../images/${isAdmin ? 'multitasking' : 'studying'}.svg`}
+          src={`/images/${isAdmin ? 'multitasking' : 'studying'}.svg`}
         />
         <Flex
           p={6}
