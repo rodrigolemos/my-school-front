@@ -4,7 +4,6 @@ import { Cookies } from 'react-cookie';
 import EnrollmentDialog from '../components/enrollment-dialog';
 import api from '../services/api';
 import { formatDate } from '../utils/date';
-import { formatPeriod } from '../utils/courses';
 import { formatStatus } from '../utils/enrollments';
 import { useTheme } from '../hooks/theme';
 import { FiEdit3 } from 'react-icons/fi';
@@ -130,7 +129,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                   <TableRow>
                     <StyledTableCell>Usuário</StyledTableCell>
                     <StyledTableCell>Curso</StyledTableCell>
-                    <StyledTableCell>Período</StyledTableCell>
                     <StyledTableCell align="center">Criado em</StyledTableCell>
                     <StyledTableCell align="center">Atualizado em</StyledTableCell>
                     <StyledTableCell align="center">Status</StyledTableCell>
@@ -150,9 +148,6 @@ export default function Enrollments({ name, isAdmin }: IServerEnrollments): Reac
                       </StyledTableCell>
                       <StyledTableCell align="left" style={{ width: 200 }}>
                         {enrollment.course_id.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="left" style={{ width: 100 }}>
-                        {formatPeriod(enrollment.course_id.period)}
                       </StyledTableCell>
                       <StyledTableCell align="center" style={{ width: 200 }}>
                         {formatDate(enrollment.created_at)}

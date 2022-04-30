@@ -25,16 +25,12 @@ interface IFormInput {
   id?: string;
   name: string;
   description: string;
-  period: string;
-  positions: number;
   created_by: string;
 }
 
 const schema = yup.object().shape({
   name: yup.string().required().min(6),
-  description: yup.string().required().min(6),
-  period: yup.string().required().min(1).max(1),
-  positions: yup.number().required().positive().integer()
+  description: yup.string().required().min(6)
 });
 
 export default function CourseDialog({
@@ -181,37 +177,6 @@ export default function CourseDialog({
             as={<CustomInput label="Nome" variant="filled" required ref={register} />}
           />
           {errors.name && <p className="error">Preencha corretamente o nome</p>}
-          <FormControl variant="filled">
-            <InputLabel id="period-input">Período</InputLabel>
-            <Controller
-              name="period"
-              control={control}
-              defaultValue={courseToEdit?.period || ''}
-              as={
-                <CustomSelect
-                  customtheme={theme}
-                  labelId="period-input"
-                  id="demo-simple-select"
-                  defaultValue={courseToEdit?.period || ''}
-                  required
-                  ref={register}>
-                  <CustomMenuItem value="M">Matutino</CustomMenuItem>
-                  <CustomMenuItem value="E">Vespertino</CustomMenuItem>
-                  <CustomMenuItem value="N">Noturno</CustomMenuItem>
-                </CustomSelect>
-              }
-            />
-          </FormControl>
-          {errors.period && <p className="error">Preencha corretamente o período</p>}
-          <Controller
-            name="positions"
-            control={control}
-            defaultValue={courseToEdit?.positions || ''}
-            as={
-              <CustomInput type="number" label="Vagas" variant="filled" required ref={register} />
-            }
-          />
-          {errors.positions && <p className="error">Preencha corretamente as vagas</p>}
           <Controller
             name="description"
             control={control}
