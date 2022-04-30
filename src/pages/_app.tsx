@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ThemeContextProvider } from '../hooks/theme';
+import { Provider } from 'react-redux';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { store } from '../reducers';
 import '@fontsource/nunito-sans';
 
 const theme = extendTheme({
@@ -27,20 +28,25 @@ const theme = extendTheme({
       defaultProps: {
         focusBorderColor: 'orange.500'
       }
+    },
+    Textarea: {
+      defaultProps: {
+        focusBorderColor: 'orange.500'
+      }
     }
   }
 });
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
-    <ThemeContextProvider>
-      <ChakraProvider theme={theme}>
-        <Head>
-          <title>My School</title>
-        </Head>
+    <ChakraProvider theme={theme}>
+      <Head>
+        <title>My School</title>
+      </Head>
+      <Provider store={store}>
         <Component {...pageProps} />
-      </ChakraProvider>
-    </ThemeContextProvider>
+      </Provider>
+    </ChakraProvider>
   );
 }
 
