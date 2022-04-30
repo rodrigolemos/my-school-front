@@ -1,6 +1,8 @@
-import React, { ReactElement, useCallback, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   Flex,
@@ -18,8 +20,9 @@ import { GiBookPile } from 'react-icons/gi';
 import { getServerSidePropsUser } from '../../utils/server-props';
 import { AuthLayout } from '../../components/auth-layout';
 import { ICourse } from '../../interfaces/ICourse';
-import api from '../../services/api';
 import { simpleDate } from '../../utils/date';
+import { selectCourse } from '../../actions';
+import { fetchCourses } from './_httpRequest';
 
 interface ICourses {
   isAdmin: boolean;
@@ -28,41 +31,19 @@ interface ICourses {
 
 export default function Courses({ isAdmin, name }: ICourses): ReactElement {
   const toast = useToast();
-  const [courses, setCourses] = useState<ICourse[]>([]);
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
+  const [courses, setCourses] = useState<ICourse[]>([]);
 
-  const fetchCourses = useCallback(async (): Promise<void> => {
-    setLoading(true);
-    setError('');
-    try {
-      const response = await api.get<ICourse[]>('/courses');
-      if (response.status !== 200) throw new Error();
-
-      setCourses(response.data);
-    } catch (error) {
-      if (error.response) {
-        setError('Não foi possível listar os cursos. Por favor, tente novamente mais tarde.');
-      } else {
-        setError('Houve alguma falha em nosso servidor. Por favor, tente novamente mais tarde.');
-      }
-    }
-    setLoading(false);
-  }, []);
+  const setCourseToEdit = (course: ICourse) => {
+    dispatch(selectCourse(course));
+    router.push(`/courses/${course.id}/edit`);
+  };
 
   useEffect(() => {
-    fetchCourses();
+    fetchCourses(setLoading, setCourses, toast);
   }, []);
-
-  useEffect(() => {
-    error &&
-      toast({
-        title: error,
-        status: 'error',
-        isClosable: true,
-        position: 'top-right'
-      });
-  }, [error]);
 
   return (
     <>
@@ -99,37 +80,37 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
             ) : (
               <>
                 {courses.map((course) => (
-                  <Link href={`/courses/${course.id}/edit`} key={course.id}>
-                    <HStack
-                      borderColor="gray.300"
-                      borderWidth="thin"
-                      borderRadius="md"
-                      spacing={4}
-                      px={4}
-                      py={6}
-                      cursor="pointer"
-                      _hover={{
-                        transition: 'all 0.2s ease-in-out',
-                        transform: 'translateY(-1px)',
-                        boxShadow: 'lg'
-                      }}>
-                      <Flex
-                        w={14}
-                        h={14}
-                        align="center"
-                        justify="center"
-                        color="white"
-                        rounded="full"
-                        bg="orange.500"
-                        shrink="0">
-                        <Icon as={GiBookPile} w={8} h={8} />
-                      </Flex>
-                      <Stack>
-                        <Text fontWeight="bold">{course.name}</Text>
-                        <Text fontSize="sm">Atualizado em {simpleDate(course.updated_at)}</Text>
-                      </Stack>
-                    </HStack>
-                  </Link>
+                  <HStack
+                    key={course.id}
+                    onClick={() => setCourseToEdit(course)}
+                    borderColor="gray.300"
+                    borderWidth="thin"
+                    borderRadius="md"
+                    spacing={4}
+                    px={4}
+                    py={6}
+                    cursor="pointer"
+                    _hover={{
+                      transition: 'all 0.2s ease-in-out',
+                      transform: 'translateY(-1px)',
+                      boxShadow: 'lg'
+                    }}>
+                    <Flex
+                      w={14}
+                      h={14}
+                      align="center"
+                      justify="center"
+                      color="white"
+                      rounded="full"
+                      bg="orange.500"
+                      shrink="0">
+                      <Icon as={GiBookPile} w={8} h={8} />
+                    </Flex>
+                    <Stack>
+                      <Text fontWeight="bold">{course.name}</Text>
+                      <Text fontSize="sm">Atualizado em {simpleDate(course.updated_at)}</Text>
+                    </Stack>
+                  </HStack>
                 ))}
               </>
             )}
