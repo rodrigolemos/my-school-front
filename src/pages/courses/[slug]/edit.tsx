@@ -24,7 +24,7 @@ import { getServerSidePropsUser } from '../../../utils/server-props';
 import { AuthLayout } from '../../../components/auth-layout';
 import { ICourse } from '../../../interfaces/ICourse';
 import { ICourseInput, schema } from '../add';
-import { postCourse } from '../_httpRequest';
+import { postCourse } from '../../../services/coursesHttp';
 
 interface ICourses {
   isAdmin: boolean;

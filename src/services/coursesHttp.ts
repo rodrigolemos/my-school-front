@@ -1,9 +1,9 @@
 import { NextRouter } from 'next/router';
 import { UseToastOptions } from '@chakra-ui/react';
 import { Cookies } from 'react-cookie';
-import api from '../../services/api';
-import { ICourseInput } from './add';
-import { ICourse } from '../../interfaces/ICourse';
+import { ICourseInput } from '../pages/courses/add';
+import api from './api';
+import { ICourse } from '../interfaces/ICourse';
 
 const getCookieData = () => {
   const cookies = new Cookies();

@@ -22,7 +22,7 @@ import { AuthLayout } from '../../components/auth-layout';
 import { ICourse } from '../../interfaces/ICourse';
 import { simpleDate } from '../../utils/date';
 import { selectCourse } from '../../actions';
-import { fetchCourses } from './_httpRequest';
+import { fetchCourses } from '../../services/coursesHttp';
 
 interface ICourses {
   isAdmin: boolean;

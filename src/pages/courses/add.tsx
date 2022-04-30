@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { getServerSidePropsUser } from '../../utils/server-props';
 import { AuthLayout } from '../../components/auth-layout';
-import { postCourse } from './_httpRequest';
+import { postCourse } from '../../services/coursesHttp';
 
 export const schema = yup.object().shape({
   name: yup.string().required().min(6),
