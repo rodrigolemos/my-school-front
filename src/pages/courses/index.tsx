@@ -104,7 +104,7 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
                       rounded="full"
                       bg="orange.500"
                       shrink="0">
-                      <Icon as={getIcon(course?.icon.value)} w={8} h={8} />
+                      <Icon as={getIcon(course?.icon?.value)} w={8} h={8} />
                     </Flex>
                     <Stack>
                       <Text fontWeight="bold">{course.name}</Text>
