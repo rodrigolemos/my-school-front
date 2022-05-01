@@ -16,13 +16,13 @@ import {
   Text,
   useToast
 } from '@chakra-ui/react';
-import { GiBookPile } from 'react-icons/gi';
 import { getServerSidePropsUser } from '../../utils/server-props';
 import { AuthLayout } from '../../components/auth-layout';
 import { ICourse } from '../../interfaces/ICourse';
 import { simpleDate } from '../../utils/date';
 import { selectCourse } from '../../actions';
 import { fetchCourses } from '../../services/coursesHttp';
+import { getIcon } from '../../data/courses';
 
 interface ICourses {
   isAdmin: boolean;
@@ -104,7 +104,7 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
                       rounded="full"
                       bg="orange.500"
                       shrink="0">
-                      <Icon as={GiBookPile} w={8} h={8} />
+                      <Icon as={getIcon(course?.icon.value)} w={8} h={8} />
                     </Flex>
                     <Stack>
                       <Text fontWeight="bold">{course.name}</Text>

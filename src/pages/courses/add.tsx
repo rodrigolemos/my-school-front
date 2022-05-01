@@ -28,7 +28,6 @@ import { defaultCategories, defaultResources } from '../../data/courses';
 
 export const schema = yup.object().shape({
   name: yup.string().required().min(6),
-  icon: yup.string().required(),
   audience: yup.string(),
   knowledge: yup.string(),
   description: yup.string().required().min(6)
@@ -101,7 +100,7 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
                     <CreatableSelect
                       {...props}
                       instanceId="tags"
-                      placeholder="tecnologia, música, lifestyle"
+                      placeholder="Tecnologia, música, lifestyle"
                       isMulti
                       options={defaultCategories}
                       ref={register}
@@ -114,22 +113,27 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
               </FormControl>
               <FormControl isInvalid={!!errors.icon}>
                 <FormLabel htmlFor="icon">Ícone</FormLabel>
-                <Input
-                  id="icon"
+                <Controller
                   name="icon"
-                  placeholder="Ícone apresentado no site"
-                  variant="filled"
-                  minLength={3}
-                  maxLength={40}
-                  required
-                  ref={register}
+                  id="icon"
+                  control={control}
+                  defaultValue=""
+                  render={(props) => (
+                    <CreatableSelect
+                      {...props}
+                      instanceId="icon"
+                      placeholder="Ícone apresentado no site"
+                      options={defaultCategories}
+                      ref={register}
+                    />
+                  )}
                 />
                 <FormErrorMessage>
                   {errors.icon && 'Preencha corretamente o ícone'}
                 </FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.resources}>
-                <FormLabel htmlFor="resources">Recursos</FormLabel>
+                <FormLabel htmlFor="resources">Assuntos</FormLabel>
                 <Controller
                   name="resources"
                   id="resources"
@@ -139,7 +143,7 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
                     <CreatableSelect
                       {...props}
                       instanceId="resources"
-                      placeholder="suporte online, atualizações"
+                      placeholder="Assuntos abordados"
                       isMulti
                       options={defaultResources}
                       ref={register}

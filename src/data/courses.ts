@@ -1,18 +1,40 @@
+import { IconType } from 'react-icons';
+import {
+  BiCameraMovie,
+  BiCookie,
+  BiMovie,
+  BiHomeSmile,
+  BiMusic,
+  BiCool,
+  BiGame,
+  BiSmile,
+  BiBasketball,
+  BiFemale,
+  BiCodeAlt
+} from 'react-icons/bi';
+
 export const defaultCategories = [
-  { value: 'technology', label: 'Tecnologia' },
-  { value: 'music', label: 'Música' },
-  { value: 'life', label: 'Vida' },
-  { value: 'moda', label: 'Moda' },
-  { value: 'cook', label: 'Cozinha/Receita' },
-  { value: 'hobby', label: 'Hobby' },
-  { value: 'house', label: 'Casa' },
-  { value: 'sport', label: 'Esporte' },
-  { value: 'family', label: 'Família' }
+  { value: 'technology', label: 'Tecnologia', icon: BiCodeAlt },
+  { value: 'music', label: 'Música', icon: BiMusic },
+  { value: 'series', label: 'Série', icon: BiMovie },
+  { value: 'movie', label: 'Filme', icon: BiCameraMovie },
+  { value: 'game', label: 'Game', icon: BiGame },
+  { value: 'life', label: 'Vida', icon: BiSmile },
+  { value: 'moda', label: 'Moda', icon: BiCool },
+  { value: 'cook', label: 'Cozinha', icon: BiCookie },
+  { value: 'hobby', label: 'Hobby', icon: BiCool },
+  { value: 'house', label: 'Casa', icon: BiHomeSmile },
+  { value: 'sport', label: 'Esporte', icon: BiBasketball },
+  { value: 'family', label: 'Família', icon: BiFemale }
 ];
 
+export const getIcon = (category: string): IconType =>
+  defaultCategories.find((pcategory) => pcategory.value === category)['icon'];
+
 export const defaultResources = [
-  { value: 'support', label: 'Suporte online' },
-  { value: 'e-book', label: 'E-book' },
-  { value: 'community', label: 'Comunidade' },
-  { value: 'updates', label: 'Atualizações' }
+  { value: 'history', label: 'História' },
+  { value: 'math', label: 'Matemática' },
+  { value: 'geography', label: 'Geografia' },
+  { value: 'arts', label: 'Arte' },
+  { value: 'language', label: 'Idioma' }
 ];

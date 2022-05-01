@@ -11,6 +11,7 @@ export interface ICourse {
   created_by?: ICreatedBy;
   created_at?: Date;
   updated_at?: Date;
+  icon: SelectType;
   tags?: SelectType[];
   resources?: SelectType[];
 }

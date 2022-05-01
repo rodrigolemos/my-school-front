@@ -12,12 +12,12 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import { GiBookPile } from 'react-icons/gi';
 import { simpleDate } from '../utils/date';
 import api from '../services/api';
 
 import PublicLayout from '../components/public-layout';
 import { ICourse } from '../interfaces/ICourse';
+import { getIcon } from '../data/courses';
 
 type SectionProps = {
   children: ReactElement | ReactElement[];
@@ -90,7 +90,7 @@ export default function CourseList({ error, courses }: CourseListProps): ReactEl
                   rounded="full"
                   bg="orange.500"
                   shrink="0">
-                  <Icon as={GiBookPile} w={8} h={8} />
+                  <Icon as={getIcon(course?.icon.value)} w={8} h={8} />
                 </Flex>
                 <Stack>
                   <Text fontWeight="bold">{course.name}</Text>
