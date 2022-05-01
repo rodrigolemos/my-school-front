@@ -17,12 +17,12 @@ import {
   VStack,
   Icon
 } from '@chakra-ui/react';
-import { BiDownload, BiGlobe, BiSupport } from 'react-icons/bi';
+import { BiGlobe } from 'react-icons/bi';
 import api from '../../services/api';
 import { checkPermission } from '../../services/permission';
 import Toast from '../../components/toast';
 import PublicLayout from '../../components/public-layout';
-import { ICourse } from '../../interfaces/ICourse';
+import { ICourse, SelectType } from '../../interfaces/ICourse';
 import { IEnrollment } from '../../interfaces/IEnrollment';
 
 type SectionProps = {
@@ -105,48 +105,45 @@ export default function CourseDetail({ course }: CourseDetailProps): ReactElemen
               />
             </Flex>
             <Stack spacing={8}>
-              {course?.tags &&
-                course?.tags.map((tag, i) => (
-                  <Text
-                    key={i}
-                    textTransform="uppercase"
-                    color="blue.400"
-                    fontWeight="bold"
-                    fontSize="sm"
-                    bg="blue.50"
-                    p={2}
-                    alignSelf="flex-start"
-                    rounded="md">
-                    {tag}
-                  </Text>
-                ))}
+              {course?.tags && (
+                <HStack>
+                  {course?.tags.map((tag: SelectType) => (
+                    <Text
+                      key={tag.value}
+                      textTransform="uppercase"
+                      color="blue.400"
+                      fontWeight="bold"
+                      fontSize="sm"
+                      bg="blue.50"
+                      p={2}
+                      alignSelf="flex-start"
+                      rounded="md">
+                      {tag.label}
+                    </Text>
+                  ))}
+                </HStack>
+              )}
               <Heading>{course?.name}</Heading>
               <Text color="gray.500" fontSize="xl">
                 {course?.description}
               </Text>
-              <Heading fontSize="2xl" mb={2}>
-                Recursos
-              </Heading>
-              <Stack spacing={4} divider={<StackDivider borderColor="gray.100" />}>
-                <HStack align="center">
-                  <Flex w={8} h={8} align="center" justify="center" rounded="full" bg="white">
-                    <Icon as={BiGlobe} color="black" w={7} h={7} />
-                  </Flex>
-                  <Text fontWeight="bold">100% online</Text>
-                </HStack>
-                <HStack align="center">
-                  <Flex w={8} h={8} align="center" justify="center" rounded="full" bg="white">
-                    <Icon as={BiSupport} color="black" w={7} h={7} />
-                  </Flex>
-                  <Text fontWeight="bold">Suporte 24h</Text>
-                </HStack>
-                <HStack align="center">
-                  <Flex w={8} h={8} align="center" justify="center" rounded="full" bg="white">
-                    <Icon as={BiDownload} color="black" w={7} h={7} />
-                  </Flex>
-                  <Text fontWeight="bold">Material para download</Text>
-                </HStack>
-              </Stack>
+              {course?.resources && (
+                <>
+                  <Heading fontSize="2xl" mb={2}>
+                    Recursos
+                  </Heading>
+                  <Stack spacing={4} divider={<StackDivider borderColor="gray.100" />}>
+                    {course?.resources.map((resource: SelectType) => (
+                      <HStack align="center" key={resource.value}>
+                        <Flex w={8} h={8} align="center" justify="center" rounded="full" bg="white">
+                          <Icon as={BiGlobe} color="black" w={7} h={7} />
+                        </Flex>
+                        <Text fontWeight="bold">{resource.label}</Text>
+                      </HStack>
+                    ))}
+                  </Stack>
+                </>
+              )}
               <HStack align="center" justify="center" pt={4}>
                 <Button
                   variant="solid"

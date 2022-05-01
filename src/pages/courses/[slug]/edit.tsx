@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
@@ -22,9 +22,11 @@ import {
 import { AiOutlineWarning } from 'react-icons/ai';
 import { getServerSidePropsUser } from '../../../utils/server-props';
 import { AuthLayout } from '../../../components/auth-layout';
-import { ICourse } from '../../../interfaces/ICourse';
-import { ICourseInput, schema } from '../add';
-import { postCourse } from '../../../services/coursesHttp';
+import { ICourseInput } from '../../../interfaces/ICourse';
+import { schema } from '../add';
+import { deleteCourse, postCourse } from '../../../services/coursesHttp';
+import { defaultCategories, defaultResources } from '../../../data/courses';
+import { CreatableSelect } from 'chakra-react-select';
 
 interface ICourses {
   isAdmin: boolean;
@@ -34,8 +36,8 @@ interface ICourses {
 export default function Courses({ isAdmin, name }: ICourses): ReactElement {
   const toast = useToast();
   const router = useRouter();
-  const courseToEdit = useSelector<ICourse>((state) => state);
-  const { register, handleSubmit, errors } = useForm<ICourseInput>({
+  const courseToEdit = useSelector<ICourseInput, ICourseInput>((state) => state);
+  const { control, register, handleSubmit, errors } = useForm<ICourseInput>({
     resolver: yupResolver(schema),
     defaultValues: courseToEdit
   });
@@ -43,13 +45,18 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
 
   const onSubmit = useCallback(async (data: ICourseInput, event: FormEvent) => {
     event.preventDefault();
-    await postCourse(data, setLoading, router, toast);
+    data.id = courseToEdit.id;
+    await postCourse(data, setLoading, router, toast, 'edit');
+  }, []);
+
+  const onDelete = useCallback(async (data: ICourseInput) => {
+    await deleteCourse(data, setLoading, router, toast);
   }, []);
 
   return (
     <>
       <Head>
-        <title>My School | Cursos</title>
+        <title>My School | Editar curso</title>
       </Head>
       <AuthLayout isAdmin={isAdmin} userName={name}>
         <VStack align="flex-start" w="full" spacing={6}>
@@ -87,15 +94,21 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
               </FormControl>
               <FormControl isInvalid={!!errors.tags}>
                 <FormLabel htmlFor="tags">Categoria</FormLabel>
-                <Input
-                  id="tags"
+                <Controller
                   name="tags"
-                  placeholder="tecnologia, música, lifestyle"
-                  variant="filled"
-                  minLength={3}
-                  maxLength={200}
-                  required
-                  ref={register}
+                  id="tags"
+                  control={control}
+                  defaultValue=""
+                  render={(props) => (
+                    <CreatableSelect
+                      {...props}
+                      instanceId="tags"
+                      placeholder="tecnologia, música, lifestyle"
+                      isMulti
+                      options={defaultCategories}
+                      ref={register}
+                    />
+                  )}
                 />
                 <FormErrorMessage>
                   {errors.tags && 'Preencha corretamente a categoria'}
@@ -119,15 +132,21 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
               </FormControl>
               <FormControl isInvalid={!!errors.resources}>
                 <FormLabel htmlFor="resources">Recursos</FormLabel>
-                <Input
-                  id="resources"
+                <Controller
                   name="resources"
-                  placeholder="Suporte online, material para download"
-                  variant="filled"
-                  minLength={3}
-                  maxLength={40}
-                  required
-                  ref={register}
+                  id="resources"
+                  control={control}
+                  defaultValue=""
+                  render={(props) => (
+                    <CreatableSelect
+                      {...props}
+                      instanceId="resources"
+                      placeholder="suporte online, atualizações"
+                      isMulti
+                      options={defaultResources}
+                      ref={register}
+                    />
+                  )}
                 />
                 <FormErrorMessage>
                   {errors.resources && 'Preencha corretamente os recursos'}
@@ -197,7 +216,8 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
                   size="lg"
                   colorScheme="red"
                   isLoading={loading}
-                  leftIcon={<AiOutlineWarning />}>
+                  leftIcon={<AiOutlineWarning />}
+                  onClick={() => onDelete(courseToEdit)}>
                   Excluir
                 </Button>
               </HStack>

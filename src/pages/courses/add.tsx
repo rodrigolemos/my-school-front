@@ -2,7 +2,7 @@ import React, { FormEvent, ReactElement, useCallback, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -19,31 +19,20 @@ import {
   SimpleGrid,
   useToast
 } from '@chakra-ui/react';
+import { CreatableSelect } from 'chakra-react-select';
 import { getServerSidePropsUser } from '../../utils/server-props';
 import { AuthLayout } from '../../components/auth-layout';
 import { postCourse } from '../../services/coursesHttp';
+import { ICourseInput } from '../../interfaces/ICourse';
+import { defaultCategories, defaultResources } from '../../data/courses';
 
 export const schema = yup.object().shape({
   name: yup.string().required().min(6),
-  tags: yup.string().required(),
   icon: yup.string().required(),
-  resources: yup.string().required(),
   audience: yup.string(),
   knowledge: yup.string(),
   description: yup.string().required().min(6)
 });
-
-export interface ICourseInput {
-  id?: string;
-  name: string;
-  tags: string;
-  icon: string;
-  resources?: string;
-  audience?: string;
-  knowledge?: string;
-  description: string;
-  created_by: string;
-}
 interface ICourses {
   isAdmin: boolean;
   name: string;
@@ -52,14 +41,14 @@ interface ICourses {
 export default function Courses({ isAdmin, name }: ICourses): ReactElement {
   const toast = useToast();
   const router = useRouter();
-  const { register, handleSubmit, errors } = useForm<ICourseInput>({
+  const { control, register, handleSubmit, errors } = useForm<ICourseInput>({
     resolver: yupResolver(schema)
   });
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = useCallback(async (data: ICourseInput, event: FormEvent) => {
     event.preventDefault();
-    await postCourse(data, setLoading, router, toast);
+    await postCourse(data, setLoading, router, toast, 'add');
   }, []);
 
   return (
@@ -103,15 +92,21 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
               </FormControl>
               <FormControl isInvalid={!!errors.tags}>
                 <FormLabel htmlFor="tags">Categoria</FormLabel>
-                <Input
-                  id="tags"
+                <Controller
                   name="tags"
-                  placeholder="tecnologia, música, lifestyle"
-                  variant="filled"
-                  minLength={3}
-                  maxLength={200}
-                  required
-                  ref={register}
+                  id="tags"
+                  control={control}
+                  defaultValue=""
+                  render={(props) => (
+                    <CreatableSelect
+                      {...props}
+                      instanceId="tags"
+                      placeholder="tecnologia, música, lifestyle"
+                      isMulti
+                      options={defaultCategories}
+                      ref={register}
+                    />
+                  )}
                 />
                 <FormErrorMessage>
                   {errors.tags && 'Preencha corretamente a categoria'}
@@ -135,15 +130,21 @@ export default function Courses({ isAdmin, name }: ICourses): ReactElement {
               </FormControl>
               <FormControl isInvalid={!!errors.resources}>
                 <FormLabel htmlFor="resources">Recursos</FormLabel>
-                <Input
-                  id="resources"
+                <Controller
                   name="resources"
-                  placeholder="Suporte online, material para download"
-                  variant="filled"
-                  minLength={3}
-                  maxLength={40}
-                  required
-                  ref={register}
+                  id="resources"
+                  control={control}
+                  defaultValue=""
+                  render={(props) => (
+                    <CreatableSelect
+                      {...props}
+                      instanceId="resources"
+                      placeholder="suporte online, atualizações"
+                      isMulti
+                      options={defaultResources}
+                      ref={register}
+                    />
+                  )}
                 />
                 <FormErrorMessage>
                   {errors.resources && 'Preencha corretamente os recursos'}
